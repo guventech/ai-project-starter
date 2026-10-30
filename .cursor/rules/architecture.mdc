@@ -1,0 +1,11 @@
+---
+description: Architecture guidance for matching project files
+globs: "docs/ARCHITECTURE.md, docs/DECISIONS.md, src/**"
+alwaysApply: false
+---
+
+# Architecture
+
+Keep module boundaries explicit and dependency direction simple.
+Prefer the smallest design meeting docs/PRD.md. Record consequential tradeoffs in docs/DECISIONS.md.
+For example, keep payment-provider calls behind a service boundary rather than scattering them through UI code.

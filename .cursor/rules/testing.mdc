@@ -1,0 +1,11 @@
+---
+description: Testing guidance for matching project files
+globs: "tests/**, **/test_*.py, **/*.test.*, **/*.spec.*, .github/workflows/**"
+alwaysApply: false
+---
+
+# Testing
+
+Test observable behavior and failure paths. Keep tests deterministic and isolated from production.
+For bug fixes, reproduce the bug before fixing it and add a focused regression test when warranted.
+For example, verify rejected input produces a useful error rather than asserting a private helper was called.

@@ -1,0 +1,11 @@
+---
+description: Security guidance for matching project files
+globs: "src/**, scripts/**, .github/workflows/**, publish-to-github.*"
+alwaysApply: false
+---
+
+# Security
+
+Validate input at trust boundaries; enforce authorization on the server.
+Use least privilege, redact sensitive logs and parameterize queries. Never place credentials in source.
+Review dependency provenance and CI permissions. For example, pass SQL values as parameters instead of concatenating user input.
