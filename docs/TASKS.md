@@ -1,6 +1,6 @@
 # Project tasks
 
-- [ ] Define requirements and acceptance criteria in PRD.md.
+- [ ] Define each requirement in the PRD table with a measurable check and a verification method.
 - [ ] Review architecture and approve the implementation plan.
 - [ ] Select stack and record actual commands in QUALITY_GATES.md.
 - [ ] Implement one end-to-end user journey with tests.

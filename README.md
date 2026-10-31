@@ -22,12 +22,14 @@ Suggested first prompt:
 - .cursor/skills/: project-planning, systematic-debugging and release-check workflows.
 - .cursor/agents/: read-only architect and verifier definitions.
 - docs/: requirements, architecture, decisions, tasks, quality gates and integrations.
+- LICENSE: MIT license, copyright Guven Bircan 2026.
+- .env.example: placeholder values only. Copy it to .env for local secrets.
 - .github/workflows/ci.yml: starter validation on Linux and Windows.
 - publish-to-github.py and .sh: explicit public GitHub template publishing.
 
 ## Validate this template
 
-Requires Python 3.11 or newer; no Python packages are needed.
+Requires Python 3.12, the version used in CI. No Python packages are needed.
 
 ```sh
 python scripts/validate_starter.py

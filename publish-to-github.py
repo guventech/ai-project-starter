@@ -26,7 +26,7 @@ def main():
     # Stage only template files, never arbitrary files added beside them.
     run('git', 'add', 'AGENTS.md', 'README.md', '.cursor', '.github', 'docs', 'scripts',
         'tests', 'src', '.gitignore', '.gitattributes', '.editorconfig',
-        'publish-to-github.py', 'publish-to-github.sh')
+        'publish-to-github.py', 'publish-to-github.sh', 'LICENSE', '.env.example')
     run('git', 'commit', '-m', 'Add Cursor AI project starter')
     run('gh', 'repo', 'create', repo, '--public', '--source', '.', '--remote', 'origin', '--push')
     run('gh', 'repo', 'edit', repo, '--template')

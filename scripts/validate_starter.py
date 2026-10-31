@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys
 
-REQUIRED = ['README.md', 'AGENTS.md', 'docs/PRD.md', 'docs/ARCHITECTURE.md',
+REQUIRED = ['README.md', 'AGENTS.md', 'LICENSE', '.env.example', 'docs/PRD.md', 'docs/ARCHITECTURE.md',
             'docs/DECISIONS.md', 'docs/TASKS.md', 'docs/QUALITY_GATES.md',
             'docs/INTEGRATIONS.md', 'docs/CONFIGURATION.md',
             '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh']

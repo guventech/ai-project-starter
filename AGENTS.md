@@ -5,6 +5,8 @@
 - For nontrivial work, define acceptance criteria and propose a plan with risks and verification.
   Obtain approval before the first implementation or a material scope/architecture change.
   An already approved task authorizes routine implementation and fixes within that scope.
+- Fill the requirements table in docs/PRD.md and self-check it against the wording rules before asking for approval.
+  Do not start building while a requirement uses a banned vague word or has no verification method.
 - Keep changes small. Follow local conventions; justify new dependencies and update their lockfiles.
 - Keep secrets out of files, logs and prompts. Validate untrusted input at trust boundaries.
 - Preserve user work. Do not reset changes, publish, deploy or alter external data without authorization.
