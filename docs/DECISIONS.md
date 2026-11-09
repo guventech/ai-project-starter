@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-022: README entry paths and bounded evidence (F-07)
+
+Date: 2026-11-09. Status: accepted; authorized continuation after F-06 merge.
+Context: README mixed entry instructions with inventory, optional setup, host caveats and maintainer publishing details. Initialization now provides a defined new-project entry path.
+Options: edit the existing long sections; center the README on purpose/entry paths and link detailed guides; wait for comparative outcome evals before explaining the package.
+Decision: lead with purpose, audience and existing/new project quickstart; summarize a recorded routing trial, link upstream scope comparisons, and give a bounded verification overview. Put detailed limits in VERIFICATION.md, optional commands in OPTIONAL_SKILLS.md, migration in INSTALL and publishing in MAINTAINING. Keep brand and canonical skill guide unchanged.
+Consequences: no performance superiority or completed-app demo claim; F-02 remains pending. VERIFICATION.md contains maintainer evidence and is removed on initialization; the reusable optional guide remains. Classify that artifact and refresh baseline/plan without changing cleanup architecture or core safeguards.
+Rollback: revert this PR and regenerate the prior initialization baseline.
+Related paths: README.md, docs/VERIFICATION.md, docs/OPTIONAL_SKILLS.md, docs/INSTALL.md, docs/CONFIGURATION.md, MAINTAINING.md, scripts/project_manifest.py.
+
 ## ADR-021: Opt-in initialization of stock template copies (F-06)
 
 Date: 2026-11-09. Status: accepted; owner selected the recommended initializer and delegated routine design choices after assessment.

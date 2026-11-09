@@ -28,6 +28,10 @@ Evidence is a test name, a screenshot, or a short note.
 
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
+| READ-001 | inspection | First 40 README lines contain purpose, audience, prerequisites, existing-project install/helper command and new-copy preview/apply path. No timed reading or usability-study result is claimed. |
+| READ-002 | inspection | Calculator example links recorded Ask-mode evidence and is labeled a summary; comparison links upstream descriptions and marks fit as editorial judgment, with outcome comparisons unmeasured. |
+| READ-003 | inspection | README links VERIFICATION, OPTIONAL_SKILLS, canonical SKILLS and migration guidance. One-off inspection resolved 37 relative links/anchors and confirmed all four existing pack commands. |
+| READ-004 | test | Existing applied-copy test first caught the new overview's own PR link; adding VERIFICATION.md to the explicit removal inventory made the same test pass. Current plan has 12 resets/29 removals. |
 | INIT-001 | test | Preview fixture checks directory entries, bytes and modification times; displayed RESET/REMOVE inventory is documented in INITIALIZE.md. No backup is created by preview. |
 | INIT-002 | test | Modified/missing/extra/cache, malformed/aliased manifests, upstream fetch/push remotes and staged Git changes refuse. Symlink tests run where permitted; Windows junction refusal was observed locally. CRLF stock preview preserves bytes. |
 | INIT-003 | test | Applied-copy fixture scans retained text for own PR/CI links and prior enhancement wording; reset PRD retains wording rules; LICENSE, attribution, AGENTS and workflow text remain byte-identical. |
@@ -84,6 +88,19 @@ Evidence is a test name, a screenshot, or a short note.
 | HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
 | PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Merged via [PR #16](https://github.com/guventech/ai-project-starter/pull/16). |
 | ATTR-001 | test | `THIRD_PARTY.md` records upstream sources and classifications; installer tests expect the packaged notice and manifest digest entry; README links the notice. |
+
+## F-07 README positioning verification (2026-11-09)
+
+Scope: value/audience/entry-path rewrite and linked setup/evidence detail; retain brand and workflow behavior. The initialization inventory gains only the maintainer verification overview; the reusable optional guide remains.
+
+- `python scripts/validate_starter.py`, `python scripts/project_manifest.py --check`, `python scripts/generate_skills_guide.py --check`, and `git diff --check`: passed after baseline refresh.
+- `python -m unittest discover -s tests -v`: passed on Windows/Python 3.13.14 (56 tests, 6 host symlink skips). No new test runner or dependency.
+- Applied-copy regression: observed red on the new VERIFICATION.md retaining an own PR link, then green after classifying it for removal and refreshing the plan/baseline. Four existing safeguards remain checked in both source/project coverage.
+- One-off inspection: first-40-line criteria, 37 local links/anchors, all four optional commands, exact 12-reset/29-remove plan and existing home-path patterns passed.
+- Fresh read-only documentation review (readme_clarity_review, fork_turns none): quickstart/example/evidence claims were coherent; one accepted finding corrected install guidance that overpromised --force recovery for unreadable manifest structures. Docs now distinguish missing/incomplete/invalid-digest manifests from unparseable JSON or missing/non-object files maps. Installer behavior was not changed.
+- Comparison descriptions were checked against primary upstream README pages for Matt Pocock, Superpowers and Google EGM; Skills CLI's Node prerequisite was checked against its own README on 2026-11-09. Fit advice is editorial, not measured performance. No new outcome evaluation, exact transcript or complete-app demo is claimed.
+- Design/security gates: not applicable to prose reorganization and classification of a new maintainer-only document under the existing initialization design. No new application boundary, skill or dependency. No user reading-time study or new live Cursor trial was performed.
+- Implementation CI: [run 42667510658](https://github.com/guventech/ai-project-starter/actions/runs/42667510658) passed both Python 3.12 OS jobs for commit `c8cb629`. PR #28 includes this evidence follow-up and a regenerated baseline; both jobs remain required on its head before merge. PR #27 was reviewed in place and merged before this branch; no initializer or global upgrade was run on the source workspace.
 
 ## F-06 initialization verification (2026-11-09)
 

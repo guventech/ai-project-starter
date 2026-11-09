@@ -23,7 +23,7 @@ REMOVE = tuple(sorted((
     'docs/superpowers/specs/2026-11-09-maint-002-permission-probe-design.md',
     'docs/superpowers/plans/2026-11-09-maint-002-permission-probe.md',
     '.github/ISSUE_TEMPLATE/bug_report.md', '.github/ISSUE_TEMPLATE/feature_request.md',
-    'docs/designs/project-initialization.md', 'docs/INITIALIZE.md',
+    'docs/designs/project-initialization.md', 'docs/INITIALIZE.md', 'docs/VERIFICATION.md',
     'scripts/init_project.py', 'scripts/project_manifest.py', MANIFEST,
     *RESET.values(),
 )))

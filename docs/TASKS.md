@@ -188,6 +188,16 @@ Owner: repository maintainer. Acceptance criteria: INIT-001–INIT-005 in docs/P
 - [x] Verify clean output and all four configuration invariants under explicit --project mode.
 - [x] Run source checks, record security/review limits and submit [PR #27](https://github.com/guventech/ai-project-starter/pull/27); both OS jobs passed on the implementation commit and remain required on the PR head before merge.
 
+## Review F-07 README positioning (authorized continuation)
+
+Owner: repository maintainer. Acceptance criteria: READ-001–READ-004 in docs/PRD.md.
+
+- [x] Define measurable scope and check requirement wording.
+- [x] Lead README with purpose, audience and two quickstart paths; retain brand and canonical skill guide.
+- [x] Add a sourced bounded example/comparison, verification overview and optional-pack guide; move migration/publishing detail to its dedicated home.
+- [x] Verify initialization removes the new evidence overview; inspect relative links, anchors and claims; resolve upgrade-guidance review finding.
+- [x] Regenerate baseline, run existing checks and submit [PR #28](https://github.com/guventech/ai-project-starter/pull/28); both OS jobs passed on the implementation commit and remain required on its head before merge.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

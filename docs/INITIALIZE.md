@@ -62,6 +62,7 @@ REMOVE .github/ISSUE_TEMPLATE/bug_report.md
 REMOVE .github/ISSUE_TEMPLATE/feature_request.md
 REMOVE CURSOR_UPDATE_PROMPT.md
 REMOVE docs/INITIALIZE.md
+REMOVE docs/VERIFICATION.md
 REMOVE docs/designs/project-initialization.md
 REMOVE docs/superpowers/plans/2026-11-09-maint-002-permission-probe.md
 REMOVE docs/superpowers/specs/2026-11-09-maint-002-permission-probe-design.md

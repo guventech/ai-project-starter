@@ -26,3 +26,12 @@ Consumer behavioral rules live in `AGENTS.md`. Keep that file free of maintainer
 ## Installer package
 
 See [docs/INSTALL.md](docs/INSTALL.md) and [docs/CONFIGURATION.md](docs/CONFIGURATION.md). Forced upgrades remove obsolete renamed reference snapshots when authorized.
+
+## Publishing helpers
+
+The root publish-to-github.py/.sh helpers publish an extracted starter as a PUBLIC
+GitHub template. They require Git, GitHub CLI and Python, refuse an existing local
+Git repository and never overwrite an existing remote repository. Authenticate
+with GitHub CLI and obtain authorization before running
+`python publish-to-github.py OWNER/REPOSITORY` (or the Bash wrapper).
+Initialization removes these starter-maintainer helpers from application copies.

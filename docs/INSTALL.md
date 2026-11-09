@@ -44,9 +44,23 @@ changes to the installation.
 | Situation | Command |
 |-----------|---------|
 | Clean stock package (manifest matches managed files) | `python scripts/install_chat_command.py --upgrade` |
-| Pre-manifest install, incomplete/malformed manifest, edited managed files, or renamed skill references | `python scripts/install_chat_command.py --upgrade --force` |
+| Missing manifest, incomplete path list, invalid digest values in a readable files map, edited managed files, or renamed skill references | `python scripts/install_chat_command.py --upgrade --force` |
+| Unparseable JSON, missing files map or a files value that is not an object | Preserve the old package by moving it aside after inspection, then run a fresh install at the original destination |
 | Extra files beside the managed set | Move extras out, then upgrade; `--force` still refuses extras |
 
 `--force` requires `--upgrade`. Differing managed files are backed up beside the package before replacement. Symlink destinations are refused. Updates are not automatic; a global install does not travel with GitHub template copies.
 
-See [CONFIGURATION.md](CONFIGURATION.md) for package layout, destination overrides and verification limits. Optional upstream pack commands stay in the [README](../README.md#recommended-additional-skills).
+Force still reads an existing manifest. It cannot recover an unreadable structure;
+keep that package intact outside the destination before choosing a fresh install.
+
+## Renamed workflow references
+
+Former local names grill-me, tdd, systematic-debugging and security-audit were
+renamed to avoid collisions with optional packs. The current names and intended
+uses are in [SKILLS.md](SKILLS.md). An existing global install containing obsolete
+reference snapshots needs one `python scripts/install_chat_command.py --upgrade --force`
+after inspecting customizations; differing managed files are backed up first.
+
+See [CONFIGURATION.md](CONFIGURATION.md) for package layout and destination overrides,
+[VERIFICATION.md](VERIFICATION.md) for evidence limits and [OPTIONAL_SKILLS.md](OPTIONAL_SKILLS.md)
+for optional pack commands and prerequisites.
