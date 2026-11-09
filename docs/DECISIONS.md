@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-019: Scoped rule coverage for three sample layouts (F-10)
+
+Date: 2026-11-09. Status: accepted; bounded scope approved by the owner.
+Context: architecture/security covered src but missed root app/lib and Go cmd/internal/pkg; testing missed Go's _test.go convention. No trigger guide or layout regression existed.
+Options: extend scoped globs with examples; switch generic rules to description-based selection; make rules always apply.
+Decision: retain alwaysApply false and the existing scoped-rule contract; extend source-root globs and root Python/Go modules, add the Go test pattern, document exact triggers and adoption examples in docs/RULES.md, and test actual metadata against three temporary layouts with the existing unittest runner.
+Consequences: more source paths attach concise guidance; colocated tests can match multiple rules. Arbitrary package roots and monorepos still require adoption choices. Python Path.glob is static evidence, not proof of Cursor attachment; record bounded live probes apart. No new skills, dependencies or general glob engine.
+Rollback: revert this PR's globs, guide and regression fixture.
+Related paths: `.cursor/rules/`, docs/RULES.md, docs/CONFIGURATION.md, README.md, tests/test_starter.py, scripts/validate_starter.py, docs/QUALITY_GATES.md.
+
 ## ADR-018: Read-only installed snapshot check (F-13 slice)
 
 Date: 2026-11-09. Status: accepted; bounded slice approved by the owner.

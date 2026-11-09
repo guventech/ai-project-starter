@@ -1,6 +1,6 @@
 ---
 description: Architecture guidance for matching project files
-globs: "docs/ARCHITECTURE.md, docs/DECISIONS.md, src/**"
+globs: "docs/ARCHITECTURE.md, docs/DECISIONS.md, src/**, app/**, lib/**, cmd/**, internal/**, pkg/**, *.py, *.go"
 alwaysApply: false
 ---
 
