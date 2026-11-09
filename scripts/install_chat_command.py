@@ -6,7 +6,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOWS = ('project-planning', 'grill-me', 'design-review', 'tdd',
-             'systematic-debugging', 'security-audit', 'release-check')
+             'systematic-debugging', 'security-audit', 'release-check', 'prior-art')
 REVIEWERS = ('architect', 'verifier')
 
 

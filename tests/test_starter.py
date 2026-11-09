@@ -21,7 +21,8 @@ class StarterTests(unittest.TestCase):
 
     def test_each_required_skill_removal_detected(self):
         skills = ('project-planning', 'systematic-debugging', 'release-check',
-                  'grill-me', 'tdd', 'design-review', 'security-audit', 'project-helper')
+                  'grill-me', 'tdd', 'design-review', 'security-audit', 'project-helper',
+                  'prior-art')
         for name in skills:
             with self.subTest(skill=name):
                 path = self.root / '.cursor/skills' / name / 'SKILL.md'

@@ -30,7 +30,7 @@ def validate(root):
               ('.cursor/agents', '*.md', {'architect', 'verifier'}),
               ('.cursor/skills', '*/SKILL.md', {'project-planning', 'systematic-debugging', 'release-check',
                                                'grill-me', 'tdd', 'design-review', 'security-audit',
-                                               'project-helper'})]
+                                               'project-helper', 'prior-art'})]
     for folder, pattern, expected in groups:
         paths = list((root / folder).glob(pattern))
         names = {p.parent.name if p.name == 'SKILL.md' else p.stem for p in paths}
