@@ -113,7 +113,7 @@ Owner: repository maintainer. Acceptance criteria: ATTR-001 in docs/PRD.md.
 
 - [x] Compare overlapping local skills to upstream revisions; write THIRD_PARTY.md and ADR-012.
 - [x] Package THIRD_PARTY.md in the installer; align README and skill footers.
-- [ ] Merge through protected-branch PR after CI.
+- [x] Merge through protected-branch PR after CI ([PR #17](https://github.com/guventech/ai-project-starter/pull/17)).
 
 ## Application adoption checklist
 

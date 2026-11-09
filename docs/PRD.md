@@ -124,7 +124,7 @@ Status: merged via PR #16.
 
 ## Review remediation F-04 attribution
 
-Status: implementing after F-08; Cursor + Codex agreed sequence.
+Status: merged via PR #17.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
