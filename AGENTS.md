@@ -35,3 +35,4 @@ Read [README.md](README.md#recommended-additional-skills) for upstream reference
 - When adding a local skill, include its name in `scripts/validate_starter.py` and the removal regression test in `tests/test_starter.py`; update the README skill list and configuration smoke-check instructions.
 - Record procedure inspection apart from live Cursor execution. Keep requirements, task status and quality-gate evidence aligned with the scope being delivered.
 - When adopting the template for an application, replace the starter enhancement requirements and evidence with the project's requirements; retain relevant decisions and verification limits.
+- This repository's `main` branch requires pull requests and both starter CI jobs, including for admins. Record machine-specific installations and host verification in `docs/SETUP.md`; they do not transfer to template copies. Check the loaded source path when upstream and local skill names overlap.
