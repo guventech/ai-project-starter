@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-020: Contribution guidance and Markdown issue templates (F-14 slice)
+
+Date: 2026-11-09. Status: accepted; documentation slice approved by the owner.
+Context: the repository has a PR template and maintainer instructions but no contributor entry point or issue templates.
+Options: linked guide with Markdown prompts; validated YAML issue forms; broader community policy and repository-settings changes.
+Decision: add CONTRIBUTING.md linking existing procedures and two Markdown issue templates. Ask for synthetic or redacted reports; omit default labels, assignees and assumed private contact channels.
+Consequences: no new dependency, workflow or account setting; Markdown prompts can be edited and do not enforce fields. Security policy, code of conduct, social preview, topics and pinned content remain deferred; F-14 is only partially addressed.
+Rollback: revert this PR's guide, templates and README link.
+Related paths: CONTRIBUTING.md, `.github/ISSUE_TEMPLATE/`, README.md, docs/PRD.md, docs/TASKS.md, docs/QUALITY_GATES.md.
+
 ## ADR-019: Scoped rule coverage for three sample layouts (F-10)
 
 Date: 2026-11-09. Status: accepted; bounded scope approved by the owner.

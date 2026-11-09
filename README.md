@@ -83,6 +83,10 @@ python -m unittest discover -s tests -v
 
 These checks validate the template structure and metadata. They do not lint, build, secure or test an application. Configure actual application checks after choosing the stack; see docs/QUALITY_GATES.md.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for issue reporting, proposed changes and links to the maintainer procedures.
+
 ## Adoption and remaining setup
 
 The current PRD, completed task list and verification record describe this starter's skill enhancement. When creating an application from the template, replace those requirements and evidence with your application's scope; keep the requirement wording rules and relevant decisions.

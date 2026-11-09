@@ -28,6 +28,9 @@ Evidence is a test name, a screenshot, or a short note.
 
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
+| CONTRIB-001 | inspection | CONTRIBUTING.md links the six existing project procedures; README links CONTRIBUTING. One-off inspection resolved all 17 local links across CONTRIBUTING/README to existing paths. |
+| CONTRIB-002 | inspection | Bug-report and feature-request Markdown templates have distinct name/about metadata and title prefixes; prompts cover the specified report details. Existing scalar metadata reader accepted both blocks. |
+| CONTRIB-003 | inspection | Guide and both templates ask for synthetic/redacted public reports; none assigns labels, assignees or a private reporting channel. All three new docs passed an explicit scan using the existing home-path patterns. |
 | RULE-001 | test | test_rule_globs_cover_node_python_go_layouts checks actual metadata against three file layouts; observed nine missed-match subcases before the glob changes, then green. |
 | RULE-002 | inspection | docs/RULES.md lists exact globs, trigger/intent, sample scope, copyable per-stack examples and a versioned host-check procedure; README/CONFIGURATION link it. |
 | RULE-003 | inspection | All three rules retain alwaysApply false. SETUP.md records CLI Go positive/README control marker evidence and empty per-read attachment fields; static Node/Python results and editor/runtime limits are stated apart. |
@@ -76,6 +79,19 @@ Evidence is a test name, a screenshot, or a short note.
 | HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
 | PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Merged via [PR #16](https://github.com/guventech/ai-project-starter/pull/16). |
 | ATTR-001 | test | `THIRD_PARTY.md` records upstream sources and classifications; installer tests expect the packaged notice and manifest digest entry; README links the notice. |
+
+## F-14 contribution basics verification (2026-11-09)
+
+Scope: contributor guide, two Markdown issue templates and README entry link; remaining F-14 policies and repository/discoverability settings stay deferred.
+
+- `python scripts/validate_starter.py`: passed.
+- `python scripts/generate_skills_guide.py --check`: passed; generated guide unchanged.
+- `python -m unittest discover -s tests -v`: passed on Windows/Python 3.13.14 (42 tests, 4 host symlink skips).
+- `git diff --check`: passed.
+- One-off local inspection: 17 relative links in CONTRIBUTING/README resolved within the repository; both templates parsed with the existing scalar metadata reader, had distinct names and nonempty about/title fields, and omitted labels/assignees. All three new public docs were checked against existing HOME_PATH_PATTERNS. This extends inspection to the new docs without changing validator scan scope or adding a dependency/test harness.
+- Metadata/location inspection used the [official GitHub template guidance](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository). No issue was created and no live default-branch template chooser was verified. Markdown templates provide editable prompts, not required-field validation.
+- Design/security/test-first gates: not applicable to documentation and Markdown prompts; no executable behavior, architecture or application trust boundary changed. Author inspection is not an independent fresh-context review. Existing F-01/F-03/F-05/privacy checks were not changed.
+- PR CI: pending; both Python 3.12 OS jobs must pass before merge. No repository settings or global installations were changed.
 
 ## F-10 rule-trigger coverage verification (2026-11-09)
 

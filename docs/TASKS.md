@@ -169,6 +169,15 @@ Owner: repository maintainer. Acceptance criteria: RULE-001–RULE-003 in docs/P
 - [x] Record Go positive/README control CLI marker observations and limits; Node/Python remain static coverage.
 - [x] Run starter gates and submit [PR #25](https://github.com/guventech/ai-project-starter/pull/25); both OS CI jobs are required before merge.
 
+## Review F-14 contribution basics (approved slice)
+
+Owner: repository maintainer. Acceptance criteria: CONTRIB-001–CONTRIB-003 in docs/PRD.md. Remaining community policy, settings and discoverability work stays deferred.
+
+- [x] Record measurable requirements and wording self-check.
+- [x] Add CONTRIBUTING.md, two Markdown issue templates and README entry link.
+- [x] Inspect metadata, relative links and public-report privacy guidance.
+- [ ] Run existing starter checks and submit one PR; both OS CI jobs are required before merge.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.
