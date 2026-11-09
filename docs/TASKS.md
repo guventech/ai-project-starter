@@ -39,7 +39,7 @@ Owner: repository maintainer. Acceptance criteria: MAINT-001 in docs/PRD.md.
 - [x] Bump `actions/checkout` to `@v5` and `actions/setup-python` to `@v6` (smallest Node.js 24 majors; avoid checkout `@v6` credential-persistence change).
 - [x] Keep job names, OS matrix, Python 3.12 and workflow permissions unchanged.
 - [x] Confirm Windows and Linux CI jobs pass on the maintenance PR; update QUALITY_GATES with run [42583862239](https://github.com/guventech/ai-project-starter/actions/runs/42583862239).
-- [ ] Merge through the protected-branch PR workflow after green checks.
+- [x] Merge through the protected-branch PR workflow after green checks ([PR #5](https://github.com/guventech/ai-project-starter/pull/5)).
 
 MAINT-002 (tool-level write probe) and MAINT-003 (full design/security review target) remain queued.
 
