@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-026: Changelog consistency check without release publishing (F-15 slice)
+
+Date: 2026-11-09. Status: accepted; Cursor + Codex chose reversible changelog hygiene next.
+Context: VERSION/CHANGELOG exist (ADR-025). Remaining F-15 ideas included PR-metadata automation and avoiding docs-only status PRs.
+Options: scrape GitHub PR titles; publish Releases now; add local VERSION/CHANGELOG validation and note extraction only.
+Decision: ship dependency-free `scripts/changelog_release.py` that checks exactly one matching release heading and prints that section; enforce it from starter validation; document that noteworthy changes update CHANGELOG in the implementation PR. Defer PR scraping and GitHub Releases.
+Consequences: CI catches VERSION/CHANGELOG drift; local release notes are extractable; no external publishing state changes.
+Rollback: revert the F-15 PR.
+Related paths: scripts/changelog_release.py, scripts/validate_starter.py, CHANGELOG.md, VERSION, MAINTAINING.md, tests/test_changelog_release.py.
+
 ## ADR-025: Version metadata without published releases (F-13 slice)
 
 Date: 2026-11-09. Status: accepted; Cursor + Codex chose reversible release hygiene next.

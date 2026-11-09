@@ -39,6 +39,9 @@ Evidence is a test name, a screenshot, or a short note.
 | VER-001 | inspection | VERSION is `0.1.0`; CHANGELOG.md has a 0.1.0 section and states tagged GitHub Releases remain deferred. |
 | VER-002 | test | `test_version_reports_source_version_without_writes` and `test_version_rejects_mutating_or_check_flags`. |
 | VER-003 | test | Fresh install packages VERSION and prints `Package version:` matching `package_version()`. |
+| LOG-001 | test | `tests/test_changelog_release.py` covers success, missing, duplicate and malformed heading cases without writes. |
+| LOG-002 | test | Notes mode prints the VERSION heading and body; repository `--check` passes. |
+| LOG-003 | test | Maintainer `validate_starter` includes changelog validation; absent files are skipped for initialized copies. |
 | READ-001 | inspection | First 40 README lines contain purpose, audience, prerequisites, existing-project install/helper command and new-copy preview/apply path. No timed reading or usability-study result is claimed. |
 | READ-002 | inspection | Calculator example links recorded Ask-mode evidence and is labeled a summary; comparison links upstream descriptions and marks fit as editorial judgment, with outcome comparisons unmeasured. |
 | READ-003 | inspection | README links VERIFICATION, OPTIONAL_SKILLS, canonical SKILLS and migration guidance. One-off inspection resolved 37 relative links/anchors and confirmed all four existing pack commands. |

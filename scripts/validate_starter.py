@@ -21,7 +21,7 @@ MAINTAINER_REQUIRED = {
     'publish-to-github.py', 'publish-to-github.sh', 'scripts/init_project.py',
     'scripts/project_manifest.py', 'scripts/project-manifest.json',
     'docs/INITIALIZE.md', 'docs/designs/project-initialization.md', 'docs/VERIFICATION.md',
-    'VERSION', 'CHANGELOG.md',
+    'VERSION', 'CHANGELOG.md', 'scripts/changelog_release.py',
 }
 HOME_PATH_PATTERNS = (
     re.compile(r'(?i)C:\\Users\\'),
@@ -126,6 +126,12 @@ def validate(root, project=False):
         if result.returncode:
             detail = (result.stderr or result.stdout or 'skills guide check failed').strip()
             errors.append(f'docs/SKILLS.md: {detail}')
+    if not project:
+        try:
+            from changelog_release import validate_changelog
+        except ImportError:
+            from scripts.changelog_release import validate_changelog
+        errors.extend(validate_changelog(root))
     if not project and (root / 'scripts/project_manifest.py').is_file():
         try:
             from project_manifest import check_manifest
