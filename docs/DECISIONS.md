@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-021: Opt-in initialization of stock template copies (F-06)
+
+Date: 2026-11-09. Status: accepted; owner selected the recommended initializer and delegated routine design choices after assessment.
+Context: template copies inherit the starter's requirements, tasks and host evidence. Publishing helpers, starter regression tests and records are not application implementation.
+Options: cleanup command; maintainer folder; separate development/template repositories.
+Decision: use a preview-first --apply command, a checked stock-text baseline and individual reset/remove inventory. Keep reusable workflows, attribution and configuration checks; provide explicit --project validation without changing the default source gate. Initialize only fresh copies, with a verified sibling backup and bounded rollback.
+Consequences: no second repository, new skill or dependency; source changes require baseline regeneration. Line endings are normalized for stock comparison but backups retain original bytes. Refusal protects changed copies; interrupted processes require manual recovery and hostile concurrency is excluded. Design and fresh-review dispositions are in docs/designs/project-initialization.md. F-07 remains a separate positioning rewrite.
+Rollback: revert this PR for source; inspect and restore only appropriate files from the named sibling backup for an initialized copy.
+Related paths: scripts/init_project.py, scripts/project_manifest.py, scripts/project_templates/, tests/test_init_project.py, docs/INITIALIZE.md, scripts/validate_starter.py.
+
 ## ADR-020: Contribution guidance and Markdown issue templates (F-14 slice)
 
 Date: 2026-11-09. Status: accepted; documentation slice approved by the owner.

@@ -178,6 +178,16 @@ Owner: repository maintainer. Acceptance criteria: CONTRIB-001–CONTRIB-003 in 
 - [x] Inspect metadata, relative links and public-report privacy guidance.
 - [x] Run existing starter checks and submit [PR #26](https://github.com/guventech/ai-project-starter/pull/26); both OS CI jobs are required before merge.
 
+## Review F-06 project initialization (approved)
+
+Owner: repository maintainer. Acceptance criteria: INIT-001–INIT-005 in docs/PRD.md.
+
+- [x] Assess alternatives; record exact content policy and requirement wording.
+- [x] Complete two fresh design reviews and affected-section rereviews; resolve line-ending, cache, backup, path-alias and Git-monitor findings.
+- [x] Observe preview/apply, refusal and recovery behavior on disposable copies; preview and Git-filter red/green recorded.
+- [x] Verify clean output and all four configuration invariants under explicit --project mode.
+- [ ] Run source checks, record security/review limits and submit one PR with both OS jobs green.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

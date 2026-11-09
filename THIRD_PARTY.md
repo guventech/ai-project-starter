@@ -1,6 +1,6 @@
 # Third-party notices
 
-This starter is MIT-licensed (see `LICENSE`). Local skill and agent instruction text in this repository was compared against the upstream packages listed below on 2026-11-09. Comparison method: strip YAML frontmatter, measure character length, shared nonempty lines, and token Jaccard similarity against the installed maintainer revisions recorded in `docs/SETUP.md`. Local skill directories were later renamed in F-01; the table uses current paths.
+This starter is MIT-licensed (see `LICENSE`). Local skill and agent instruction text in this repository was compared against the upstream packages listed below on 2026-11-09. Comparison method: strip YAML frontmatter, measure character length, shared nonempty lines, and token Jaccard similarity against the pinned upstream revisions listed in this notice. The table uses current local paths and records former names for provenance. This inherited attribution is not evidence of execution in a derived application.
 
 ## Summary
 

@@ -1,5 +1,6 @@
 """Dependency-free validation of this starter's constrained metadata format."""
 from pathlib import Path
+import argparse
 import re
 import sys
 
@@ -16,6 +17,11 @@ REQUIRED = ['README.md', 'AGENTS.md', 'MAINTAINING.md', 'LICENSE', '.env.example
             '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh',
             'scripts/install_chat_command.py', 'scripts/skill_inventory.py',
             'scripts/generate_skills_guide.py']
+MAINTAINER_REQUIRED = {
+    'publish-to-github.py', 'publish-to-github.sh', 'scripts/init_project.py',
+    'scripts/project_manifest.py', 'scripts/project-manifest.json',
+    'docs/INITIALIZE.md', 'docs/designs/project-initialization.md',
+}
 HOME_PATH_PATTERNS = (
     re.compile(r'(?i)C:\\Users\\'),
     re.compile(r'(?i)C:/Users/'),
@@ -65,9 +71,12 @@ def home_path_errors(root):
     return errors
 
 
-def validate(root):
+def validate(root, project=False):
     root = Path(root)
-    errors = [f'missing {p}' for p in REQUIRED if not (root / p).is_file()]
+    required = set(REQUIRED) | MAINTAINER_REQUIRED
+    if project:
+        required -= MAINTAINER_REQUIRED
+    errors = [f'missing {p}' for p in sorted(required) if not (root / p).is_file()]
     groups = [('.cursor/rules', '*.mdc', {'architecture', 'testing', 'security'}),
               ('.cursor/agents', '*.md', {'architect', 'verifier'}),
               ('.cursor/skills', '*/SKILL.md', set(REQUIRED_SKILLS))]
@@ -116,9 +125,19 @@ def validate(root):
         if result.returncode:
             detail = (result.stderr or result.stdout or 'skills guide check failed').strip()
             errors.append(f'docs/SKILLS.md: {detail}')
+    if not project and (root / 'scripts/project_manifest.py').is_file():
+        try:
+            from project_manifest import check_manifest
+        except ImportError:
+            from scripts.project_manifest import check_manifest
+        errors.extend(check_manifest(root))
     return errors
 
 if __name__ == '__main__':
-    errors = validate(Path(__file__).resolve().parents[1])
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--project', action='store_true',
+                        help='Check reusable workflow configuration after project initialization.')
+    args = parser.parse_args()
+    errors = validate(Path(__file__).resolve().parents[1], project=args.project)
     print('\n'.join(errors) if errors else 'Starter validation passed.')
     sys.exit(bool(errors))

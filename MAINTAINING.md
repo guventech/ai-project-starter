@@ -15,6 +15,8 @@ Consumer behavioral rules live in `AGENTS.md`. Keep that file free of maintainer
 - When adopting the template for an application, replace starter enhancement requirements and evidence with the project's requirements; retain relevant decisions and verification limits.
 - Record procedure inspection apart from live Cursor execution. Keep requirements, task status and quality-gate evidence aligned with the scope being delivered.
 - Machine-specific installations and host verification belong in `docs/SETUP.md`; they do not transfer to template copies.
+- Fresh copies can use the opt-in [initialization plan](docs/INITIALIZE.md). The upstream source keeps its history; do not initialize it.
+- After changing baseline source files, run `python scripts/project_manifest.py` and inspect the inventory before committing. Default source validation checks freshness; `--project` is only for initialized application copies.
 
 ## Repository process
 

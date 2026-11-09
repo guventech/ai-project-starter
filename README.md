@@ -24,7 +24,7 @@ Install and upgrade steps live in [docs/INSTALL.md](docs/INSTALL.md). The reposi
 ## Advanced: individual workflows and template adoption
 
 1. Use this repository as a GitHub template, then open your copy in Cursor.
-2. Read AGENTS.md and fill in docs/PRD.md.
+2. Before editing the copy, preview `python scripts/init_project.py`, then use `--apply` to initialize it when the displayed list is appropriate. See [the keep/reset/remove plan](docs/INITIALIZE.md). Read AGENTS.md and fill in the new docs/PRD.md.
 3. Invoke `/project-planning`. Use `/decision-interview` for unresolved decisions and `/design-review` for a new system or material design change; the architect reviews requirements and the verifier can review with fresh context.
 4. Approve the implementation plan, then implement in small increments.
 5. Build behavior changes with `/test-first-change`, run the project checks and ask the verifier to inspect the diff against acceptance criteria. Use `/trust-boundary-audit` for sensitive boundaries and `/release-check` to assess release evidence.
