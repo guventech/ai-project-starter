@@ -4,6 +4,17 @@ description: Guides starting a new project or improving the open project through
 disable-model-invocation: true
 ---
 
+<!-- skills-meta
+use_when: Starting a new project or improving the open project from one entry point
+do_not_use_when: You already know which single specialized workflow to run and do not need routing
+needs_first: Open the target folder in Cursor
+produces: Mode choice, bounded plan or assessment, selected procedure path
+done_when: Approved plan ready or review-only findings delivered
+typical_next: project-planning or the selected specialized workflow
+weight: standard
+-->
+
+
 # Project Helper
 
 ## Start with the person

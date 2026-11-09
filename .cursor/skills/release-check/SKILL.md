@@ -4,6 +4,17 @@ description: Reviews release readiness and reports evidence. Use before proposin
 disable-model-invocation: true
 ---
 
+<!-- skills-meta
+use_when: Before proposing publication, deployment, or claiming readiness
+do_not_use_when: No release or readiness claim is being made
+needs_first: Diff/revision, PRD, quality-gate evidence
+produces: Evidence map, blockers, skipped gates, rollback readiness
+done_when: Blockers listed or readiness claim evidenced
+typical_next: Fix blockers or authorized publish/deploy
+weight: standard
+-->
+
+
 # Release Check
 
 1. Inspect the actual diff and candidate revision, docs/PRD.md, applicable decisions and docs/QUALITY_GATES.md. Link every in-scope shall requirement to evidence; a plan to run a check is not evidence.

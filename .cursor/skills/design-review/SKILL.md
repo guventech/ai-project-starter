@@ -4,6 +4,17 @@ description: Drafts a design and challenges it with fresh-context reviewers. Use
 disable-model-invocation: true
 ---
 
+<!-- skills-meta
+use_when: New system or material design change needs fresh-context review before coding
+do_not_use_when: Change is bounded under an already approved design
+needs_first: Draft design with requirements and assumptions in-document
+produces: Review findings, dispositions, human approval or unverified status
+done_when: Human approval recorded or isolation reported unverified
+typical_next: test-first-change
+weight: strict
+-->
+
+
 # Design Review
 
 ## Elephant: draft with context

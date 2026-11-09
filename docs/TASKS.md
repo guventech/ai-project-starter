@@ -121,7 +121,15 @@ Owner: repository maintainer. Acceptance criteria: COLLIDE-001 in docs/PRD.md. C
 
 - [x] Rename local skill directories and update inventory, docs, agents and workflows.
 - [x] Add colliding-name validator denylist and obsolete reference cleanup on upgrade.
-- [ ] Merge through protected-branch PR after CI; refresh global install with `--upgrade --force` when authorized.
+- [x] Merge through protected-branch PR after CI ([PR #19](https://github.com/guventech/ai-project-starter/pull/19)); refresh global install with `--upgrade --force` when authorized.
+
+## Review F-03 skill decision guide
+
+Owner: repository maintainer. Acceptance criteria: GUIDE-001 in docs/PRD.md.
+
+- [x] Add skills-meta blocks, generator, docs/SKILLS.md, and stale-guide validation.
+- [x] Replace competing skill inventories with links to the guide.
+- [ ] Merge through protected-branch PR after CI.
 
 ## Application adoption checklist
 

@@ -95,7 +95,15 @@ class StarterTests(unittest.TestCase):
         configuration = (ROOT / 'docs/CONFIGURATION.md').read_text(encoding='utf-8')
         readme = (ROOT / 'README.md').read_text(encoding='utf-8')
         agents = (ROOT / 'AGENTS.md').read_text(encoding='utf-8')
+        skills_guide = (ROOT / 'docs/SKILLS.md').read_text(encoding='utf-8')
+        self.assertIn('docs/SKILLS.md', readme)
+        self.assertIn('docs/SKILLS.md', agents)
+        self.assertIn('SKILLS.md', configuration)
         for name in REQUIRED_SKILLS:
-            self.assertIn(name, configuration, f'{name} missing from CONFIGURATION.md')
-            self.assertIn(name, readme, f'{name} missing from README.md')
-            self.assertIn(name, agents, f'{name} missing from AGENTS.md')
+            self.assertIn(f'/{name}', skills_guide, f'{name} missing from docs/SKILLS.md')
+
+    def test_skills_guide_drift_detected(self):
+        path = self.root / 'docs/SKILLS.md'
+        path.write_text(path.read_text(encoding='utf-8') + '\n<!-- drift -->\n', encoding='utf-8')
+        errors = validate(self.root)
+        self.assertTrue(any('docs/SKILLS.md' in error for error in errors), errors)

@@ -1,5 +1,25 @@
 # Decision log
 
+## ADR-015: Keep repository brand for now (F-12)
+
+Date: 2026-11-09. Status: accepted; reaffirmed by Cursor + Codex after owner uncertainty.
+Context: External review F-12 flags name collision with other "AI Project Starter" projects; owner was unsure whether to rename now.
+Options: rename the GitHub repository and package identifiers immediately; keep the current name and revisit later.
+Decision: keep `guventech/ai-project-starter` / local `cursor-optimized-starter` for now; do not rename until branding clearly blocks positioning, discovery or commercialization.
+Consequences: F-01 skill renames remain the collision fix; README and publish paths stay stable; F-12 stays deferred on the review backlog.
+Rollback: choose a distinctive name later and rename with GitHub redirects.
+Related paths: README.md, docs/SETUP.md, scripts/install_chat_command.py, publish docs.
+
+## ADR-014: Generated skill decision guide (F-03)
+
+Date: 2026-11-09. Status: accepted; next step after F-01 per Cursor + Codex agreement.
+Context: README, AGENTS and CONFIGURATION each listed skills differently without use/do-not-use guidance.
+Options: keep triple lists; hand-maintain one guide; generate a guide from per-skill metadata.
+Decision: embed `skills-meta` blocks in each SKILL.md; generate `docs/SKILLS.md` with a lifecycle diagram and decision table; fail validation when the guide is stale; replace competing inventories with links.
+Consequences: one authoritative decision page; skill metadata edits require regenerating the guide; weight fields prepare for a later Lite/Standard/Strict helper question (F-09).
+Rollback: revert the generator, guide and linking changes.
+Related paths: scripts/generate_skills_guide.py, docs/SKILLS.md, `.cursor/skills/*/SKILL.md`, scripts/validate_starter.py, README.md, AGENTS.md, docs/CONFIGURATION.md.
+
 ## ADR-013: Rename colliding local skills (F-01)
 
 Date: 2026-11-09. Status: accepted; Cursor + Codex agreed to keep the repository name and rename only colliding local skills.

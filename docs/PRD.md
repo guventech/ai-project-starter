@@ -31,7 +31,7 @@ These rows cover the starter enhancement requested in CURSOR_UPDATE_PROMPT.md. R
 | REQ-005 | The trust-boundary-audit skill shall define four audit phases with finding verification. | Distinguish supported findings from suspicions. | Reconnaissance, coverage-led hunting, fresh-agent verification and reporting each have inputs and outputs; reports include coverage gaps and finding dispositions. | inspection |
 | REQ-006 | The planning and release skills shall reference the new review workflows and their exit criteria. | Connect the lifecycle without imposing application tooling. | Planning references decision-interview and design-review; release-check requires requirement evidence, applicable review results and disclosure of skipped or missing gates. | inspection |
 | REQ-007 | Both review agents shall define read-only responsibilities for their review modes. | Preserve the author/reviewer boundary. | Architect includes requirements questioning and design review; verifier includes fresh-context design, diff and finding review with evidence and limitations; both retain readonly true. | inspection |
-| REQ-008 | The documentation shall describe the nine local skills, review gates and four external pack installation commands. | Make local workflows and optional external installations discoverable. | AGENTS.md, README.md and CONFIGURATION.md name all nine skills; README/AGENTS contain all four requested pack commands; QUALITY_GATES.md maps requirements to evidence; configuration docs state runtime verification limits. | inspection |
+| REQ-008 | The documentation shall describe the nine local skills, review gates and four external pack installation commands. | Make local workflows and optional external installations discoverable. | docs/SKILLS.md names all nine skills; README, AGENTS and CONFIGURATION link that guide; README/AGENTS contain all four requested pack commands; QUALITY_GATES.md maps requirements to evidence; configuration docs state runtime verification limits. | inspection |
 | REQ-009 | The validator shall detect removal of any required local skill. | Prevent future updates from dropping the requested workflows. | Tests remove each of the nine required skills in turn and assert a missing-skill error; inventory sources stay aligned; both configured starter check commands pass. | test |
 
 The acceptance criterion needs a measurable value or a tolerance. The verification method is test, analysis, demonstration, or inspection.
@@ -111,7 +111,7 @@ Status: HARD-001/HARD-002 merged via PR #14. HARD-003 implemented locally after 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
 | HARD-001 | Non-forced upgrades shall require a complete installer manifest with valid SHA-256 digests for every planned managed path. | Incomplete manifests could skip customization checks for omitted paths. | Incomplete path sets or non-SHA-256 digests refuse without changing installed files; clean and forced upgrades retain documented behavior. | test |
-| HARD-002 | The validator shall reject unregistered local skill directories and inventory tests shall require each required skill name in README, CONFIGURATION and AGENTS. | REQ-008/Phase A drift coverage omitted AGENTS and allowed unexpected skill folders. | An extra valid skill folder fails validation; inventory alignment covers all three docs; the nine-skill inventory passes. | test |
+| HARD-002 | The validator shall reject unregistered local skill directories and inventory tests shall require each required skill name in the canonical skill guide. | Unexpected skill folders and inventory drift weaken the template contract. | An extra valid skill folder fails validation; docs/SKILLS.md names every required skill; README, AGENTS and CONFIGURATION link the guide. | test |
 | HARD-003 | Fresh installs shall stage managed files beside the destination and promote the package only after the staged contents and manifest validate. | Direct writes can leave a partial package after an I/O failure. | Injected write or manifest failures leave no destination and no staging directory; successful install and `--upgrade` when absent promote a complete digest-matched package; occupied destinations remain unchanged. Existing in-place upgrades stay unchanged. | test |
 
 ## Review remediation F-08 privacy hygiene
@@ -132,11 +132,19 @@ Status: merged via PR #17.
 
 ## Review remediation F-01 skill rename
 
-Status: implementing after Cursor + Codex agreement to keep the repo name and rename only colliding local skills.
+Status: merged via PR #19.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
 | COLLIDE-001 | Local skills shall not use the colliding upstream names grill-me, tdd, systematic-debugging or security-audit. | Bare slash commands selected upstream packs under those names. | Required skills use decision-interview, test-first-change, hypothesis-debugging and trust-boundary-audit; the validator rejects the four colliding directory names; forced upgrades remove obsolete reference snapshots. | test |
+
+## Review remediation F-03 skill decision guide
+
+Status: implementing after F-01.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| GUIDE-001 | The starter shall publish a generated docs/SKILLS.md decision guide kept in sync with local skill metadata. | Duplicate skill lists drifted and lacked use/do-not-use guidance. | docs/SKILLS.md lists every required skill once with the required columns and a lifecycle diagram; the generator `--check` mode and validator fail when the guide is stale; README, AGENTS and CONFIGURATION link the guide instead of maintaining competing inventories. | test |
 
 ## To be resolved (TBR)
 

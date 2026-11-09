@@ -4,6 +4,17 @@ description: Diagnoses reproducible failures and verifies minimal fixes. Use for
 disable-model-invocation: true
 ---
 
+<!-- skills-meta
+use_when: A reproducible failure, failing test, or unexpected runtime behavior
+do_not_use_when: No reproduction exists yet and cannot be obtained
+needs_first: Expected vs actual behavior and smallest reproduction
+produces: Root cause, fix, verification commands/results
+done_when: Reproduction passes and temporary diagnostics removed
+typical_next: test-first-change regression or release-check
+weight: standard
+-->
+
+
 # Hypothesis Debugging
 
 1. Capture the expected and actual behavior, exact error and smallest reproduction; redact secrets.

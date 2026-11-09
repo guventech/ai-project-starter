@@ -4,6 +4,17 @@ description: Builds behavior through red-green-refactor cycles. Use for approved
 disable-model-invocation: true
 ---
 
+<!-- skills-meta
+use_when: Behavior changes that can be verified with executable checks
+do_not_use_when: Prose/metadata-only changes with no executable behavior
+needs_first: Approved requirements or plan for the slice
+produces: Red/green evidence and linked requirement evidence
+done_when: Slice green and affected regressions pass
+typical_next: release-check or next slice
+weight: standard
+-->
+
+
 # Test-First Change
 
 1. Read the approved requirements, existing tests and docs/QUALITY_GATES.md. Choose one observable behavior and the smallest end-to-end slice through its public boundary. Reuse the current test runner; if none exists, propose its setup within the approved scope before adding dependencies.
