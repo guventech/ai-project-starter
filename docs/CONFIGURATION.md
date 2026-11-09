@@ -23,7 +23,7 @@ The nine local skills are project-helper, project-planning, grill-me, prior-art,
 
 ## One-command installation
 
-Run `python scripts/install_chat_command.py` once to install the user-level `/project-helper` entry point. `--destination /path/to/project-helper` selects a different package directory for inspection/testing; its basename must remain project-helper. Without `--upgrade`, an occupied path or symlink is rejected. A filesystem error during writing can leave a partial new package; inspect that exact directory before retrying.
+Run `python scripts/install_chat_command.py` once to install the user-level `/project-helper` entry point. `--destination /path/to/project-helper` selects a different package directory for inspection/testing; its basename must remain project-helper. Without `--upgrade`, an occupied path or symlink is rejected. Fresh installs write a sibling `project-helper.staging-*` directory first and rename it into place only after the staged package validates; a failed fresh install removes that staging directory and leaves no destination.
 
 The package has one discoverable SKILL.md, the MIT license, ten adjacent reference documents (eight workflow snapshots and two reviewer role snapshots), and `.installer-manifest.json` with SHA-256 digests of the managed content files. References use `.md` filenames rather than nested SKILL.md files to avoid duplicate skill discovery. The installer rewrites the known internal workflow references for the bundled layout. No machine-specific repository path, application code, secrets, historical PRD or third-party pack is copied.
 

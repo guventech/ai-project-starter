@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import secrets
+import shutil
 import sys
 
 try:
@@ -102,19 +104,72 @@ def backup_differing_files(destination, planned):
     return backup_root if wrote else None
 
 
-def write_package_files(destination, planned):
+def write_package_files(destination, planned, fail_after=None):
     (destination / 'references').mkdir(parents=True, exist_ok=True)
     for relative, content in planned.items():
+        if fail_after == relative:
+            raise OSError(f'injected failure before writing {relative}')
         path = destination / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content, encoding='utf-8', newline='\n')
+    if fail_after == MANIFEST_NAME:
+        raise OSError(f'injected failure before writing {MANIFEST_NAME}')
     write_manifest(destination, {relative: digest_text(content) for relative, content in planned.items()})
 
 
-def install(destination, upgrade=False, force=False):
+def validate_written_package(destination, planned):
+    expected = set(managed_relative_paths(planned))
+    actual = package_file_relatives(destination)
+    if actual != expected:
+        raise ValueError(
+            'Staged package contents do not match the planned managed set: '
+            f'missing={sorted(expected - actual)} unexpected={sorted(actual - expected)}')
+    for relative, content in planned.items():
+        path = destination / relative
+        if digest_text(path.read_text(encoding='utf-8')) != digest_text(content):
+            raise ValueError(f'Staged package digest mismatch for {relative}')
+    manifest = read_manifest(destination)
+    if manifest is None:
+        raise ValueError('Staged package is missing the installer manifest')
+    if set(manifest) != set(planned):
+        raise ValueError('Staged installer manifest paths do not match planned files')
+    for relative, content in planned.items():
+        digest = manifest[relative]
+        if not is_sha256_digest(digest) or digest != digest_text(content):
+            raise ValueError(f'Staged installer manifest digest invalid for {relative}')
+
+
+def remove_tree(path):
+    if path.is_symlink() or path.is_file():
+        path.unlink()
+    elif path.exists():
+        shutil.rmtree(path)
+
+
+def install_fresh_package(destination, planned, fail_after=None):
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.exists() or destination.is_symlink():
+        raise FileExistsError(f'Destination already exists; no files replaced: {destination}')
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    staging = destination.parent / f'{destination.name}.staging-{stamp}-{secrets.token_hex(4)}'
+    try:
+        staging.mkdir(parents=False, exist_ok=False)
+        write_package_files(staging, planned, fail_after=fail_after)
+        validate_written_package(staging, planned)
+        staging.rename(destination)
+    except Exception:
+        if staging.exists() or staging.is_symlink():
+            remove_tree(staging)
+        raise
+    return destination
+
+
+def install(destination, upgrade=False, force=False, fail_after=None):
     destination = Path(destination).expanduser().absolute()
     if force and not upgrade:
         raise ValueError('--force requires --upgrade')
+    if fail_after is not None and (upgrade and destination.exists()):
+        raise ValueError('fail_after applies only to fresh package installs')
     if destination.name != 'project-helper':
         raise ValueError('Destination folder must be named project-helper for Cursor discovery.')
     # Check the lexical path before any resolution: broken links count as occupied.
@@ -125,12 +180,10 @@ def install(destination, upgrade=False, force=False):
     if not upgrade:
         if exists:
             raise FileExistsError(f'Destination already exists; no files replaced: {destination}')
-        destination.mkdir(parents=True, exist_ok=False)
-        write_package_files(destination, planned)
+        install_fresh_package(destination, planned, fail_after=fail_after)
         return destination, None, False
     if not exists:
-        destination.mkdir(parents=True, exist_ok=False)
-        write_package_files(destination, planned)
+        install_fresh_package(destination, planned, fail_after=fail_after)
         return destination, None, False
     if not destination.is_dir():
         raise FileExistsError(f'Destination exists and is not a directory: {destination}')
@@ -196,7 +249,8 @@ def main():
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f'Installation stopped: {exc}', file=sys.stderr)
         print('Existing package files were left in place when the command stopped. '
-              'If a new package is incomplete, inspect it before retrying.',
+              'Fresh installs stage beside the destination and remove that staging '
+              'directory after failure; inspect only if a staging folder remains.',
               file=sys.stderr)
         return 1
     action = 'Upgraded' if replaced else 'Installed'

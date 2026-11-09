@@ -72,6 +72,16 @@ Consequences: clean upgrades are one command; pre-Phase-B installs and incomplet
 Rollback: revert the installer/docs/test changes; leave existing user packages and any `.bak-*` folders untouched.
 Related paths: scripts/install_chat_command.py, tests/test_install_chat_command.py, README.md, AGENTS.md, docs/CONFIGURATION.md, docs/PRD.md, docs/QUALITY_GATES.md.
 
+## ADR-011: Transactional fresh project-helper installs
+
+Date: 2026-11-09. Status: accepted; next step agreed by Cursor and Codex CLI after HARD-001/002.
+Context: Fresh installs wrote directly into the destination, so an I/O failure could leave a partial package.
+Options: keep direct writes with stronger warnings; stage beside the destination then rename; stage under a temp root then copy.
+Decision: write `project-helper.staging-<stamp>-<nonce>/` beside the destination, validate managed paths and digests, then rename into `project-helper`. On failure, remove only that staging directory. Existing-package upgrades remain in place.
+Consequences: successful fresh installs appear atomically from the destination path's perspective; failure-injection tests cover mid-write and manifest failures; cross-volume rename is not required because staging shares the destination parent.
+Rollback: revert the installer/docs/test changes.
+Related paths: scripts/install_chat_command.py, tests/test_install_chat_command.py, docs/CONFIGURATION.md, docs/SETUP.md, docs/PRD.md, docs/QUALITY_GATES.md.
+
 ## ADR-010: Matched-pair permission probe for MAINT-002
 
 Date: 2026-11-09. Status: accepted; design agreed by parent and Codex CLI; demonstration completed.

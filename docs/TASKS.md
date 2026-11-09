@@ -91,6 +91,14 @@ Owner: repository maintainer. Acceptance criteria: HARD-001–HARD-002 in docs/P
 - [x] Reject unregistered `.cursor/skills` directories; assert required skill names in AGENTS.md.
 - [x] Run both starter gates and record evidence (PR when requested).
 
+## Transactional fresh install (HARD-003)
+
+Owner: repository maintainer. Acceptance criteria: HARD-003 in docs/PRD.md. Agreed with Codex CLI as the next step after PR #14.
+
+- [x] Stage fresh packages beside the destination; promote only after validation.
+- [x] Failure-injection tests for mid-write and manifest failures; upgrade-absent path uses the same fresh install.
+- [x] Run both starter gates locally; open PR when requested.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.
