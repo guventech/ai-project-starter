@@ -62,6 +62,16 @@ Consequences: eight bundled workflows ship with the installer; global installs n
 Rollback: revert the prior-art skill and helper/installer/docs changes; remove only a freshly installed package after checking for user edits.
 Related paths: .cursor/skills/prior-art/, .cursor/skills/project-helper/, .cursor/skills/project-planning/, scripts/install_chat_command.py, scripts/validate_starter.py, tests/, README.md, AGENTS.md.
 
+## ADR-009: Manifest-based project-helper upgrade with forced backups
+
+Date: 2026-11-09. Status: accepted; Phase B plan with backups approved by the user.
+Context: Global `/project-helper` installs went stale because the installer refused all occupied destinations.
+Options: document manual delete only; `--upgrade` that always overwrites managed files; manifest-checked `--upgrade` plus `--upgrade --force` with backups.
+Decision: write `.installer-manifest.json` on install; allow `--upgrade` only for symlink-free packages with no extras and manifest-matching managed files; require `--upgrade --force` for missing manifests or customized managed files; before force overwrite, copy differing managed files to a sibling `project-helper.bak-<timestamp>/` directory.
+Consequences: clean upgrades are one command; pre-Phase-B installs need one forced upgrade; extras still require manual relocation; force can replace customizations after backup.
+Rollback: revert the installer/docs/test changes; leave existing user packages and any `.bak-*` folders untouched.
+Related paths: scripts/install_chat_command.py, tests/test_install_chat_command.py, README.md, AGENTS.md, docs/CONFIGURATION.md, docs/PRD.md, docs/QUALITY_GATES.md.
+
 ## ADR-008: Single skill-inventory source for docs and tools
 
 Date: 2026-11-09. Status: accepted; Phase A integrity plan approved by the user.

@@ -23,13 +23,22 @@ The nine local skills are project-helper, project-planning, grill-me, prior-art,
 
 ## One-command installation
 
-Run `python scripts/install_chat_command.py` once to install the user-level `/project-helper` entry point. `--destination /path/to/project-helper` selects a different new package directory for inspection/testing; its basename must remain project-helper. An occupied path or symlink is rejected. A filesystem error during writing can leave a partial new package; inspect that exact directory before retrying. The installer does not remove or replace files.
+Run `python scripts/install_chat_command.py` once to install the user-level `/project-helper` entry point. `--destination /path/to/project-helper` selects a different package directory for inspection/testing; its basename must remain project-helper. Without `--upgrade`, an occupied path or symlink is rejected. A filesystem error during writing can leave a partial new package; inspect that exact directory before retrying.
 
-The package has one discoverable SKILL.md, the MIT license, and ten adjacent reference documents: eight workflow snapshots and two reviewer role snapshots. References use `.md` filenames rather than nested SKILL.md files to avoid duplicate skill discovery. The installer rewrites the known internal workflow references for the bundled layout. No machine-specific repository path, application code, secrets, historical PRD or third-party pack is copied.
+The package has one discoverable SKILL.md, the MIT license, ten adjacent reference documents (eight workflow snapshots and two reviewer role snapshots), and `.installer-manifest.json` with SHA-256 digests of the managed content files. References use `.md` filenames rather than nested SKILL.md files to avoid duplicate skill discovery. The installer rewrites the known internal workflow references for the bundled layout. No machine-specific repository path, application code, secrets, historical PRD or third-party pack is copied.
+
+### Upgrade
+
+| Situation | Command |
+|-----------|---------|
+| Clean stock package (manifest matches managed files) | `python scripts/install_chat_command.py --upgrade` |
+| Pre-manifest install, or edited managed files | `python scripts/install_chat_command.py --upgrade --force` |
+| Extra files beside the managed set (notes, scripts) | Move extras out, then upgrade; `--force` still refuses extras |
+| Customized managed files you want to keep | Copy the folder aside first; `--force` backs up differing managed files to `project-helper.bak-<timestamp>/` then overwrites them |
+
+`--force` requires `--upgrade`. Symlink destinations are always refused. Reload/start a new Cursor chat after installation or upgrade and verify `/project-helper` in the actual target workspace. Installation does not enable cloud sync or grant permission to publish, deploy or edit another project without its approved plan.
 
 The entry point resolves procedures relative to its actual attached source. Repository-local invocation uses sibling skills and `.cursor/agents`; user-level invocation uses the bundled references. Other workspaces keep their existing instructions and tests. A general fresh reviewer can read the bundled role when that workspace does not register architect/verifier by name. Unavailable host capabilities remain unverified.
-
-The installed snapshots do not update when the checkout changes. Before updating, compare any existing user edits and preserve them; the first-install command refuses to overwrite. Reload/start a new Cursor chat after installation and verify `/project-helper` in the actual target workspace. Installation does not enable cloud sync or grant permission to publish, deploy or edit another project without its approved plan.
 
 ## Review isolation and optional packs
 

@@ -1,5 +1,8 @@
 """Install the project-helper command for Cursor without third-party packages."""
 import argparse
+from datetime import datetime, timezone
+import hashlib
+import json
 from pathlib import Path
 import sys
 
@@ -11,6 +14,7 @@ except ImportError:  # pragma: no cover - package import when run via tests
 
 ROOT = Path(__file__).resolve().parents[1]
 REVIEWERS = ('architect', 'verifier')
+MANIFEST_NAME = '.installer-manifest.json'
 
 
 def reference_text(path):
@@ -21,43 +25,165 @@ def reference_text(path):
     return text
 
 
-def install(destination):
-    destination = Path(destination).expanduser().absolute()
-    # Check the lexical path before any resolution: broken links count as occupied.
-    if destination.exists() or destination.is_symlink():
-        raise FileExistsError(f'Destination already exists; no files replaced: {destination}')
-    if destination.name != 'project-helper':
-        raise ValueError('Destination folder must be named project-helper for Cursor discovery.')
-    # Read every required source before creating anything at the destination.
+def digest_text(text):
+    return hashlib.sha256(text.encode('utf-8')).hexdigest()
+
+
+def planned_files():
     files = {'SKILL.md': (ROOT / '.cursor/skills/project-helper/SKILL.md').read_text(encoding='utf-8'),
              'LICENSE': (ROOT / 'LICENSE').read_text(encoding='utf-8')}
     for name in WORKFLOWS:
         files[f'references/{name}.md'] = reference_text(ROOT / '.cursor/skills' / name / 'SKILL.md')
     for name in REVIEWERS:
         files[f'references/{name}.md'] = reference_text(ROOT / '.cursor/agents' / f'{name}.md')
-    # mkdir refuses an intervening creator as well as an existing destination.
-    destination.mkdir(parents=True, exist_ok=False)
-    (destination / 'references').mkdir()
-    for relative, content in files.items():
-        with (destination / relative).open('x', encoding='utf-8', newline='\n') as stream:
-            stream.write(content)
-    return destination
+    return files
+
+
+def managed_relative_paths(files=None):
+    files = planned_files() if files is None else files
+    return frozenset(files) | {MANIFEST_NAME}
+
+
+def write_manifest(destination, digests):
+    payload = {'files': dict(sorted(digests.items()))}
+    path = destination / MANIFEST_NAME
+    path.write_text(json.dumps(payload, indent=2) + '\n', encoding='utf-8', newline='\n')
+    return path
+
+
+def read_manifest(destination):
+    path = destination / MANIFEST_NAME
+    if not path.is_file():
+        return None
+    data = json.loads(path.read_text(encoding='utf-8'))
+    files = data.get('files')
+    if not isinstance(files, dict):
+        raise ValueError(f'Invalid installer manifest at {path}')
+    return {str(key): str(value) for key, value in files.items()}
+
+
+def installed_content_digests(destination):
+    digests = {}
+    for relative in planned_files():
+        path = destination / relative
+        if path.is_file():
+            digests[relative] = digest_text(path.read_text(encoding='utf-8'))
+    return digests
+
+
+def package_file_relatives(destination):
+    relatives = set()
+    for path in destination.rglob('*'):
+        if path.is_file():
+            relatives.add(path.relative_to(destination).as_posix())
+    return relatives
+
+
+def backup_differing_files(destination, planned):
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    backup_root = destination.parent / f'{destination.name}.bak-{stamp}'
+    wrote = False
+    for relative, content in planned.items():
+        path = destination / relative
+        if not path.is_file():
+            continue
+        current = path.read_text(encoding='utf-8')
+        if current == content:
+            continue
+        target = backup_root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(current, encoding='utf-8', newline='\n')
+        wrote = True
+    return backup_root if wrote else None
+
+
+def write_package_files(destination, planned):
+    (destination / 'references').mkdir(parents=True, exist_ok=True)
+    for relative, content in planned.items():
+        path = destination / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding='utf-8', newline='\n')
+    write_manifest(destination, {relative: digest_text(content) for relative, content in planned.items()})
+
+
+def install(destination, upgrade=False, force=False):
+    destination = Path(destination).expanduser().absolute()
+    if force and not upgrade:
+        raise ValueError('--force requires --upgrade')
+    if destination.name != 'project-helper':
+        raise ValueError('Destination folder must be named project-helper for Cursor discovery.')
+    # Check the lexical path before any resolution: broken links count as occupied.
+    if destination.is_symlink():
+        raise FileExistsError(f'Destination is a symlink; no files replaced: {destination}')
+    planned = planned_files()
+    exists = destination.exists()
+    if not upgrade:
+        if exists:
+            raise FileExistsError(f'Destination already exists; no files replaced: {destination}')
+        destination.mkdir(parents=True, exist_ok=False)
+        write_package_files(destination, planned)
+        return destination, None, False
+    if not exists:
+        destination.mkdir(parents=True, exist_ok=False)
+        write_package_files(destination, planned)
+        return destination, None, False
+    if not destination.is_dir():
+        raise FileExistsError(f'Destination exists and is not a directory: {destination}')
+    extras = sorted(package_file_relatives(destination) - managed_relative_paths(planned))
+    if extras:
+        raise FileExistsError(
+            'Destination has extra files; no files replaced: ' + ', '.join(extras))
+    manifest = read_manifest(destination)
+    if manifest is None and not force:
+        raise FileExistsError(
+            'Destination has no installer manifest; refuse upgrade without --force. '
+            'Rename/remove the folder for a fresh install, or run with --upgrade --force '
+            f'after backing up customizations: {destination}')
+    if manifest is not None and not force:
+        current = installed_content_digests(destination)
+        customized = sorted(
+            relative for relative, digest in manifest.items()
+            if current.get(relative) != digest)
+        if customized:
+            raise FileExistsError(
+                'Destination managed files do not match the installer manifest; '
+                'treat as customized and refuse upgrade without --force. '
+                'customized: ' + ', '.join(customized))
+        unexpected_manifest = sorted(set(manifest) - set(planned))
+        if unexpected_manifest:
+            raise FileExistsError(
+                'Installer manifest lists unexpected paths; no files replaced: '
+                + ', '.join(unexpected_manifest))
+    backup_root = None
+    if force:
+        backup_root = backup_differing_files(destination, planned)
+    write_package_files(destination, planned)
+    return destination, backup_root, True
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--destination', type=Path,
                         default=Path.home() / '.cursor/skills/project-helper',
-                        help='New project-helper folder (default: user-level Cursor skills).')
+                        help='project-helper folder (default: user-level Cursor skills).')
+    parser.add_argument('--upgrade', action='store_true',
+                        help='Replace a clean stock package, or install when missing.')
+    parser.add_argument('--force', action='store_true',
+                        help='With --upgrade, overwrite managed files after backing up diffs.')
     args = parser.parse_args()
     try:
-        destination = install(args.destination)
-    except (OSError, ValueError) as exc:
+        destination, backup_root, replaced = install(
+            args.destination, upgrade=args.upgrade, force=args.force)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f'Installation stopped: {exc}', file=sys.stderr)
-        print('Existing files were not replaced. If a new package is incomplete, inspect it before retrying.',
+        print('Existing package files were left in place when the command stopped. '
+              'If a new package is incomplete, inspect it before retrying.',
               file=sys.stderr)
         return 1
-    print(f'Installed /project-helper at {destination}')
+    action = 'Upgraded' if replaced else 'Installed'
+    print(f'{action} /project-helper at {destination}')
+    if backup_root is not None:
+        print(f'Backed up replaced managed files to {backup_root}')
     print('Reload Cursor or start a new chat, open a project folder, and type /project-helper.')
     return 0
 
