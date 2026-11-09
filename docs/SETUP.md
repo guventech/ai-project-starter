@@ -53,3 +53,19 @@ The Task schema states new non-resumed calls start fresh; it exposes no separate
 The editor UI, complete EGM/security audit pipelines, every upstream skill and all optional third-party tools were not exercised. A smoke check of attachment and role behavior is distinct from end-to-end workflow validation. Repeat these probes after Cursor or package updates that affect loading or delegation.
 
 Application-specific build, lint, security, browser and accessibility gates remain out of scope until an application stack and requirements exist. Installing a pack does not install its optional tools, provision services, publish issues or deploy an application.
+
+## One-command project helper
+
+The approved `/project-helper` command is installed at `~/.cursor/skills/project-helper`. It has one SKILL.md, seven workflow reference documents and two reviewer reference documents. No source checkout path or upstream package is needed at invocation time. The installed entry file matches the repository version (SHA256 `a7690dc1042b6e7411b05f896a57429c25857b20faea7742a5cbc64511bdeb7c`). Snapshots are not auto-updated.
+
+Authenticated CLI trials used isolated temporary workspaces outside this repository:
+
+- Menu: session `09b85146-9efe-4645-91f2-576844fc6a1b` invoked only `/project-helper` and returned the two-choice new/improve question.
+- New project: session `9ad7bdcf-f8ec-4c65-967d-f983c1ad746b` identified the user-level helper and `references/project-planning.md` without a source checkout dependency.
+- Existing project: session `97b9e9f2-b94e-4964-bad8-722b3b37e7cc` read a calculator fixture's own AGENTS.md, source and tests; loaded bundled `tdd.md` and `verifier.md`; and returned findings and proposed checks without edits or shell execution. A general reviewer used the bundled verifier role rather than requiring copied agent configuration. An initial overbroad readiness statement prompted a clarification in the entry instructions: distinguish actual defects from optional suggestions, and give readiness verdicts only when requested.
+- Nonempty target: session `39c899cf-4ada-4059-839e-820ee93354a0` listed the existing calculator/test/instructions files and waited for a decision to use that folder or select another. This exercised the independent review's applied clarification.
+- Concrete new-project plan: session `95aafaac-67dd-45eb-861f-60d82f0faacd` loaded bundled planning, interview and design procedures; returned requirements, assumptions, proposed paths, checks and an approval request for a stdlib todo CLI. It disclosed that goldfish design review was unverified under that no-write Ask-mode trial.
+
+After the trials, the new-project folder was still empty and the existing-project folder still contained only its three original fixture files. These trials ran in CLI Ask mode: they verify discovery, source selection and conversational boundaries, not end-to-end app implementation or host-enforced write denial. Building/applying fixes needs Cursor Agent mode and the target project's approved implementation plan. No other user project was modified.
+
+Installer validation: nine unittest methods run on Windows, with eight passing and the symlink creation case skipped because this host lacks permission to create links. Occupied destination and repeat-install tests preserved user contents. Linux PR CI runs the symlink case. A partial new installation can remain on an I/O failure; the installer reports that and never removes or replaces an existing package.

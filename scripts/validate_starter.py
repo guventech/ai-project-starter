@@ -5,7 +5,8 @@ import sys
 REQUIRED = ['README.md', 'AGENTS.md', 'LICENSE', '.env.example', 'docs/PRD.md', 'docs/ARCHITECTURE.md',
             'docs/DECISIONS.md', 'docs/TASKS.md', 'docs/QUALITY_GATES.md',
             'docs/INTEGRATIONS.md', 'docs/CONFIGURATION.md',
-            '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh']
+            '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh',
+            'scripts/install_chat_command.py']
 def metadata(path):
     text = path.read_text(encoding='utf-8')
     lines = text.splitlines()
@@ -28,7 +29,8 @@ def validate(root):
     groups = [('.cursor/rules', '*.mdc', {'architecture', 'testing', 'security'}),
               ('.cursor/agents', '*.md', {'architect', 'verifier'}),
               ('.cursor/skills', '*/SKILL.md', {'project-planning', 'systematic-debugging', 'release-check',
-                                               'grill-me', 'tdd', 'design-review', 'security-audit'})]
+                                               'grill-me', 'tdd', 'design-review', 'security-audit',
+                                               'project-helper'})]
     for folder, pattern, expected in groups:
         paths = list((root / folder).glob(pattern))
         names = {p.parent.name if p.name == 'SKILL.md' else p.stem for p in paths}

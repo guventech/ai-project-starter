@@ -19,6 +19,21 @@ Owner: repository maintainer. Acceptance criteria: SETUP-001–SETUP-003 in docs
 - [x] Install the official Agent CLI and record the editor/CLI versions.
 - [x] Complete bounded CLI attachment/path-loading and native reviewer probes after authentication; record write refusal, canary results, collisions and enforcement limits in SETUP.md.
 
+## One-command project helper (approved)
+
+Owner: repository maintainer. Acceptance criteria: CHAT-001–CHAT-006 in docs/PRD.md. Evidence: docs/SETUP.md and docs/QUALITY_GATES.md.
+
+- [x] Add the two-mode project-helper entry point and a dependency-free first-install script.
+- [x] Bundle the seven local workflows and two reviewers without duplicate skill discovery.
+- [x] Test overwrite refusal, repeat installation and required-skill removal detection.
+- [x] Install for the current Cursor user and test invocation from separate workspaces.
+- [x] Apply the independent review's nonempty-target clarification.
+- [x] Finish final CLI nonempty-target and concrete-plan probes; no fixture files changed.
+
+Publication follows the protected branch/PR workflow after CI; the final delivery reports the actual merge result.
+
+Earlier CI maintenance, tool-level permission probing and the full review target remain queued under MAINT-001–MAINT-003; this command is the user's current priority.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

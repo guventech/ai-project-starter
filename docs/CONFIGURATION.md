@@ -14,12 +14,24 @@ Skills use name/description and explicit invocation to keep ambient context smal
 Agents inherit the chosen model and set readonly true. The verifier asks its parent to run checks that write artifacts.
 AGENTS.md is the shared behavioral core; Cursor-specific files are not claimed portable to other agents.
 Static checks cannot prove Cursor discovery or runtime behavior. Open the folder in your installed Cursor,
-check all three rules and seven skills are discovered, invoke /project-planning, then ask for the architect and verifier.
+check all three rules and eight skills are discovered, invoke /project-helper or /project-planning, then ask for the architect and verifier.
 Confirm read-only behavior before relying on it. Bounded live CLI smoke results are recorded in SETUP.md; editor UI discovery and complete workflow execution are not claimed.
 
-## Review isolation and optional packs
+## Local skills
 
-The seven local skills are project-planning, grill-me, design-review, tdd, systematic-debugging, security-audit and release-check. Sibling links describe procedures a selected workflow can read; they do not change explicit invocation metadata.
+The eight local skills are project-helper, project-planning, grill-me, design-review, tdd, systematic-debugging, security-audit and release-check. Sibling links describe procedures a selected workflow can read; they do not change explicit invocation metadata.
+
+## One-command installation
+
+Run `python scripts/install_chat_command.py` once to install the user-level `/project-helper` entry point. `--destination /path/to/project-helper` selects a different new package directory for inspection/testing; its basename must remain project-helper. An occupied path or symlink is rejected. A filesystem error during writing can leave a partial new package; inspect that exact directory before retrying. The installer does not remove or replace files.
+
+The package has one discoverable SKILL.md, the MIT license, and nine adjacent reference documents: seven workflow snapshots and two reviewer role snapshots. References use `.md` filenames rather than nested SKILL.md files to avoid duplicate skill discovery. The installer rewrites the known internal workflow references for the bundled layout. No machine-specific repository path, application code, secrets, historical PRD or third-party pack is copied.
+
+The entry point resolves procedures relative to its actual attached source. Repository-local invocation uses sibling skills and `.cursor/agents`; user-level invocation uses the bundled references. Other workspaces keep their existing instructions and tests. A general fresh reviewer can read the bundled role when that workspace does not register architect/verifier by name. Unavailable host capabilities remain unverified.
+
+The installed snapshots do not update when the checkout changes. Before updating, compare any existing user edits and preserve them; the first-install command refuses to overwrite. Reload/start a new Cursor chat after installation and verify `/project-helper` in the actual target workspace. Installation does not enable cloud sync or grant permission to publish, deploy or edit another project without its approved plan.
+
+## Review isolation and optional packs
 
 For goldfish reviews, start new agents with conversation inheritance disabled and give them only the design, requirements, source references, repository constraints and a bounded question. A fresh name alone does not prove isolation. Use at least two separate reviewer contexts for design-review. Security candidates need a verifier that did not discover them. If the installed host cannot provide isolation, record the corresponding gate as unverified; do not substitute a self-review and mark it passed.
 
