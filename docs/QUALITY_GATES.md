@@ -2,7 +2,7 @@
 
 ## Starter checks (configured)
 - `python scripts/validate_starter.py`: required files and Cursor metadata.
-- `python -m unittest discover -s tests -v`: validator failure detection.
+- `python -m unittest discover -s tests -v`: validator failure detection and chat-command installation/overwrite protection.
 CI runs both on Linux and Windows using Python 3.12.
 
 ## Review gates
@@ -40,6 +40,21 @@ Evidence is a test name, a screenshot, or a short note.
 | SETUP-001 | inspection | GitHub branch-protection PUT response confirms both job names restricted to app 15368, strict checks, admin enforcement, pull requests, resolved conversations and blocked force pushes/deletion. |
 | SETUP-002 | inspection | Four user-level checkouts and source SHAs are recorded in SETUP.md. Counts: Matt 27, Addy 25, Cloudflare 1, EGM 7 canonical skills. EGM standards and Addy shared references exist; the seven project skill files have no diff. |
 | SETUP-003 | demonstration | Authenticated CLI smoke sessions recorded in SETUP.md show explicit attachment/path loading, native reviewer calls, write refusal and an absent parent canary. Three bare slash names selected upstream files; explicit local paths loaded the intended workflows. Tool-level write denial and general isolation remain unproven. |
+| MAINT-001 | test | Queued maintenance scope; the CI action upgrade has not been implemented in the project-helper delivery. |
+| MAINT-002 | demonstration | Queued maintenance scope; tool-level write denial remains unverified beyond the earlier voluntary-refusal probe. |
+| MAINT-003 | inspection | Queued maintenance scope; the target repository for full design/security review still awaits selection. |
+| CHAT-001 | demonstration | User-level `/project-helper` in an empty temporary workspace asked exactly the new/improve mode question. Explicit new/existing goals selected their modes without repeating it. Session IDs are in SETUP.md. |
+| CHAT-002 | test | Installer tests verify one discoverable SKILL.md, all seven workflow references and both reviewer references, with rewritten internal paths and no environment files. A separate workspace loaded the installed planning/TDD/verifier references. |
+| CHAT-003 | demonstration | New-project planning probe used the installed planning reference and wrote no application files; the nonempty-target guard was strengthened after independent review. Final probe evidence is recorded in SETUP.md. |
+| CHAT-004 | demonstration | Existing-project fixture review read its own AGENTS.md, calculator source and tests, used bundled TDD/verifier references and returned findings/proposed checks without changing files. This is a bounded routing trial, not a full application audit. |
+| CHAT-005 | demonstration | Existing-project routing loaded installed references/tdd.md despite an optional upstream tdd skill. Bundled references use direct paths; no second slash command or configuration copy was requested. Installer tests cover all seven reference files. |
+| CHAT-006 | test | Installer tests preserve an occupied destination and a customized command on repeat install. The symlink case is skipped when the host cannot create links; Linux CI executes that case. |
+
+## Project-helper verification
+
+The approved command is installed under `~/.cursor/skills/project-helper`. Initial tests observed the absent installer and missing project-helper validator requirement before implementation. After implementation, the validator passes and the unittest suite runs nine test methods; on this Windows host eight pass and the symlink test is skipped because link creation is unavailable. PR CI provides the cross-platform result. `git diff --check` passes.
+
+A fresh read-only reviewer inspected the entry skill, installer and tests. Its nonempty-target clarification was applied: disclose existing contents and wait for the user's decision before planning writes. The reviewer found no additional concrete installer bug. The final live fixture runs and their limits are recorded in SETUP.md. They exercise menu/routing/approval boundaries in CLI Ask mode, not autonomous application creation, editor UI behavior or OS-enforced write restrictions.
 
 ## Enhancement verification record (2026-11-09)
 

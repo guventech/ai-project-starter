@@ -3,7 +3,33 @@
 A reusable, stack-agnostic template for planning, implementing and verifying software with Cursor.
 No application framework, credentials or third-party integrations are preinstalled.
 
-## Start a project
+## One command for new and existing projects
+
+Open a folder in Cursor and type:
+
+```text
+/project-helper
+```
+
+Choose **Start a new project** or **Improve the project you have open**, then answer in normal language. The helper selects the planning, review, testing and debugging workflows for you. It presents a plan for approval before implementation. For an existing project, it starts by inspecting the project and proposing changes; you do not need to copy starter configuration into that project.
+
+Use Cursor's **Agent** chat mode when you want it to build or apply fixes. **Ask** mode can assess and plan, but cannot make those changes.
+
+Examples: `/project-helper Start a personal budgeting app` or `/project-helper Review this project's tests`. If no goal is given, the command asks which mode you want. You do not need another slash command to continue.
+
+### Install once for use in other folders
+
+From this repository, run:
+
+```sh
+python scripts/install_chat_command.py
+```
+
+Reload Cursor or start a new chat. The installer places a self-contained command in `~/.cursor/skills/project-helper`, with the local workflows and reviewer instructions bundled as reference files. It needs no Python packages and refuses to replace an existing installation. The command works without this repository's original path or the optional upstream packs. Your projects, their existing instructions and their CI remain under your control. Review/deployment capabilities still depend on the host and the project's configured checks.
+
+The repository-local command is also available when working in this starter itself. A global installation is per machine; it does not transfer through GitHub template copies. Updates are not automatic: inspect an existing package for customization before replacing it. See [configuration and verification](docs/CONFIGURATION.md).
+
+## Advanced: individual workflows and template adoption
 
 1. Use this repository as a GitHub template, then open your copy in Cursor.
 2. Read AGENTS.md and fill in docs/PRD.md.
@@ -19,16 +45,18 @@ Suggested first prompt:
 
 - AGENTS.md: concise shared operating instructions.
 - .cursor/rules/: architecture, testing and security rules scoped by file patterns.
-- .cursor/skills/: seven concise workflows for planning, interviewing, design review, TDD, debugging, security audit and release checks.
+- .cursor/skills/: the project-helper entry point plus seven focused workflows for planning, interviewing, design review, TDD, debugging, security audit and release checks.
 - .cursor/agents/: read-only architect and verifier definitions.
 - docs/: requirements, architecture, decisions, tasks, quality gates and integrations.
 - LICENSE: MIT license, copyright Guven Bircan 2026.
 - .env.example: placeholder values only. Copy it to .env for local secrets.
 - .github/workflows/ci.yml: starter validation on Linux and Windows.
 - publish-to-github.py and .sh: explicit public GitHub template publishing.
+- scripts/install_chat_command.py: one-time installation of the user-level project-helper command.
 
 ## Local skill workflow
 
+- `/project-helper`: one guided conversation for a new project or the open existing project; selects the procedures below by file path.
 - `/project-planning`: requirements, small steps, verification and approval.
 - `/grill-me`: one decision at a time until no implementation-blocking questions remain.
 - `/design-review`: draft with project context, challenge with at least two fresh-context reviewers, resolve findings and obtain human approval.
@@ -76,7 +104,7 @@ The current PRD, completed task list and verification record describe this start
 
 Before relying on the workflows in your installed Cursor version:
 
-1. Confirm discovery of all seven skills and both agents, then invoke the new skills and verify the expected procedures load.
+1. Confirm discovery of all eight skills and both agents, then invoke the new skills and verify the expected procedures load.
 2. Confirm review agents remain read-only and goldfish reviewers receive no inherited conversation. Record the Cursor version and observed results in `docs/QUALITY_GATES.md`.
 3. Check the GitHub Actions results for Python 3.12 on Windows and Linux. Configure required status checks through GitHub repository settings if you want merges gated on CI.
 4. After choosing an application stack, configure its formatting, linting, tests, build and relevant security/accessibility checks. Optional external skill packs can be installed when needed; the local workflows do not require them.

@@ -32,6 +32,16 @@ Consequences: bare slash names remain available for the upstream variants; tasks
 Rollback: retire the workaround only after retesting name resolution on the installed host; no package or application migration is needed.
 Related paths: AGENTS.md, README.md, docs/CONFIGURATION.md, docs/SETUP.md.
 
+## ADR-005: Bundle a single user-level project command
+
+Date: 2026-11-09. Status: accepted; concrete plan approved by the user.
+Context: manually copying skills and choosing workflows made both new-project setup and existing-project assessment too complicated for the user.
+Options: build a separate desktop/web app; maintain instructions for manual adoption; add one user-level chat entry point that selects the existing procedures.
+Decision: implement `/project-helper` with two modes and a dependency-free installer. Package the seven existing procedures and two reviewer roles as `.md` references beside the entry skill, rewriting their known internal paths. Keep only one discoverable SKILL.md in the global package.
+Consequences: the command runs from other workspaces without installing upstream packs or retaining the source checkout path. Installed snapshots need a deliberate update and cannot silently overwrite customizations. Host permissions, fresh reviewers and project-specific checks remain external capabilities; the command cannot guarantee them.
+Rollback: revert the entry point/installer diff; remove the installed package only after checking its resolved path and user edits. Other projects are not modified by installation.
+Related paths: .cursor/skills/project-helper/, scripts/install_chat_command.py, tests/test_install_chat_command.py, README.md, docs/CONFIGURATION.md.
+
 ## New decision template
 
 ID/title, date, status, context, options, decision, consequences, rollback and related paths.
