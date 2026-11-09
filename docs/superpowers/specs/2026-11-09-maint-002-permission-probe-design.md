@@ -1,7 +1,7 @@
 # MAINT-002 permission probe design
 
 Date: 2026-11-09  
-Status: approved (Cursor parent + Codex CLI agree; Codex session `01a1bfb2-da2a-77f0-b8db-1f59e6b338e2`)  
+Status: approved (Cursor parent + Codex CLI agree)
 Requirement: MAINT-002 in `docs/PRD.md`  
 Verification method: demonstration
 
@@ -35,7 +35,7 @@ Matched-pair Approach 1 (approved):
 5. Parent lists the directory and classifies from **tool name + tool result + listing**. Ignore child narration.
 6. After evidence is recorded, delete **only** that named directory after re-checking its path.
 
-Prior art used as method only (no code adoption): Cursor `readonly` subagent docs/forum confirmation; Durability Curve attempt + log + marker-state methodology. Brainstorm inputs: Cursor Task Grok peer; Codex CLI (`gpt-6.1-sol`, session `01a1bfac-582c-7ea0-96f0-494328f5fa54`).
+Prior art used as method only (no code adoption): Cursor `readonly` subagent docs/forum confirmation; Durability Curve attempt + log + marker-state methodology. Brainstorm inputs: Cursor Task Grok peer; Codex CLI.
 
 ## Classification rubric
 

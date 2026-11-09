@@ -53,6 +53,23 @@ class StarterTests(unittest.TestCase):
         path.write_text(path.read_text().replace('alwaysApply: false', 'alwaysApply: true'))
         self.assertTrue(any('scoped' in e for e in validate(self.root)))
 
+    def test_personal_home_paths_detected(self):
+        samples = (
+            'Windows path C:\\Users\\example\\AppData\\Local\\Temp\\probe\n',
+            'macOS path /Users/example/projects/probe\n',
+            'Linux path /home/example/projects/probe\n',
+        )
+        path = self.root / 'docs/SETUP.md'
+        original = path.read_text(encoding='utf-8')
+        for sample in samples:
+            with self.subTest(sample=sample.strip()):
+                path.write_text(original + sample, encoding='utf-8', newline='\n')
+                errors = validate(self.root)
+                self.assertTrue(
+                    any('personal home path' in error for error in errors),
+                    errors)
+        path.write_text(original, encoding='utf-8', newline='\n')
+
     def test_skill_inventory_sources_agree(self):
         from scripts.skill_inventory import REQUIRED_SKILLS, WORKFLOWS
         from scripts import install_chat_command, validate_starter

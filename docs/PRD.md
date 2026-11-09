@@ -114,6 +114,14 @@ Status: HARD-001/HARD-002 merged via PR #14. HARD-003 implemented locally after 
 | HARD-002 | The validator shall reject unregistered local skill directories and inventory tests shall require each required skill name in README, CONFIGURATION and AGENTS. | REQ-008/Phase A drift coverage omitted AGENTS and allowed unexpected skill folders. | An extra valid skill folder fails validation; inventory alignment covers all three docs; the nine-skill inventory passes. | test |
 | HARD-003 | Fresh installs shall stage managed files beside the destination and promote the package only after the staged contents and manifest validate. | Direct writes can leave a partial package after an I/O failure. | Injected write or manifest failures leave no destination and no staging directory; successful install and `--upgrade` when absent promote a complete digest-matched package; occupied destinations remain unchanged. Existing in-place upgrades stay unchanged. | test |
 
+## Review remediation F-08 privacy hygiene
+
+Status: implemented after Cursor + Codex agreement on the external review brief; PR pending.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| PRIV-001 | Public starter documentation shall omit personal home-directory paths. | Named profile paths leak maintainer identity into template copies. | README, AGENTS and docs Markdown contain no Windows, macOS or Linux personal profile path forms; the validator reports injected samples for each OS. | test |
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.

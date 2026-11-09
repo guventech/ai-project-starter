@@ -99,6 +99,14 @@ Owner: repository maintainer. Acceptance criteria: HARD-003 in docs/PRD.md. Agre
 - [x] Failure-injection tests for mid-write and manifest failures; upgrade-absent path uses the same fresh install.
 - [x] Run both starter gates locally; open PR when requested.
 
+## Review F-08 privacy hygiene
+
+Owner: repository maintainer. Acceptance criteria: PRIV-001 in docs/PRD.md.
+
+- [x] Redact personal home paths, session/agent UUIDs and reconstruction chatter from public docs.
+- [x] Add home-path validator coverage and regression tests.
+- [ ] Merge through protected-branch PR after CI.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

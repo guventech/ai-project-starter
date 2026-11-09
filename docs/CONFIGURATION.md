@@ -1,6 +1,5 @@
 # Configuration references and limitations
 
-Reconstructed on 2026-10-30 after the earlier ZIP was unavailable.
 Configuration shapes checked against official documentation:
 - Rules and AGENTS.md: https://cursor.com/docs/rules
 - Skills: https://cursor.com/docs/skills
