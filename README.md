@@ -19,21 +19,7 @@ Examples: `/project-helper Start a personal budgeting app` or `/project-helper R
 
 ### Install once for use in other folders
 
-From this repository, run:
-
-```sh
-python scripts/install_chat_command.py
-```
-
-Reload Cursor or start a new chat. The installer places a self-contained command in `~/.cursor/skills/project-helper`, with the local workflows and reviewer instructions bundled as reference files. It needs no Python packages and refuses to replace an existing installation. The command works without this repository's original path or the optional upstream packs. Your projects, their existing instructions and their CI remain under your control. Review/deployment capabilities still depend on the host and the project's configured checks.
-
-The repository-local command is also available when working in this starter itself. A global installation is per machine; it does not transfer through GitHub template copies. Updates are not automatic. For a clean stock package:
-
-```sh
-python scripts/install_chat_command.py --upgrade
-```
-
-Pre-manifest installs or customized managed files need `python scripts/install_chat_command.py --upgrade --force`, which backs up differing managed files beside the package before replacing them. Extra user files still block upgrade. See [configuration and verification](docs/CONFIGURATION.md).
+Install and upgrade steps live in [docs/INSTALL.md](docs/INSTALL.md). The repository-local command is also available when working in this starter itself. See [configuration and verification](docs/CONFIGURATION.md) for package layout and limits.
 
 ## Advanced: individual workflows and template adoption
 
@@ -49,7 +35,9 @@ Suggested first prompt:
 
 ## Included
 
-- AGENTS.md: concise shared operating instructions.
+- AGENTS.md: concise shared operating instructions for every project copy.
+- MAINTAINING.md: maintainer-only process for this starter repository.
+- docs/INSTALL.md: user-level `/project-helper` install and upgrade.
 - .cursor/rules/: architecture, testing and security rules scoped by file patterns.
 - .cursor/skills/: the project-helper entry point plus eight focused workflows for planning, interviewing, prior-art search, design review, TDD, debugging, security audit and release checks.
 - .cursor/agents/: read-only architect and verifier definitions.

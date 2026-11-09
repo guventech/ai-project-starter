@@ -8,9 +8,11 @@ try:
 except ImportError:  # pragma: no cover - package import when run via tests
     from scripts.skill_inventory import COLLIDING_UPSTREAM_NAMES, REQUIRED_SKILLS
 
-REQUIRED = ['README.md', 'AGENTS.md', 'LICENSE', '.env.example', 'docs/PRD.md', 'docs/ARCHITECTURE.md',
+REQUIRED = ['README.md', 'AGENTS.md', 'MAINTAINING.md', 'LICENSE', '.env.example',
+            'docs/PRD.md', 'docs/ARCHITECTURE.md',
             'docs/DECISIONS.md', 'docs/TASKS.md', 'docs/QUALITY_GATES.md',
             'docs/INTEGRATIONS.md', 'docs/CONFIGURATION.md', 'docs/SKILLS.md',
+            'docs/INSTALL.md',
             '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh',
             'scripts/install_chat_command.py', 'scripts/skill_inventory.py',
             'scripts/generate_skills_guide.py']
@@ -20,7 +22,14 @@ HOME_PATH_PATTERNS = (
     re.compile(r'/Users/[^/\s]+/'),
     re.compile(r'/home/[^/\s]+/'),
 )
-PUBLIC_DOC_GLOBS = ('README.md', 'AGENTS.md', 'docs/**/*.md')
+PUBLIC_DOC_GLOBS = ('README.md', 'AGENTS.md', 'MAINTAINING.md', 'docs/**/*.md')
+AGENTS_MAINTAINER_MARKERS = (
+    'Maintaining this starter',
+    'pull requests and both starter CI',
+    'COLLIDING_UPSTREAM_NAMES',
+    'npx skills add',
+    'docs/SETUP.md',
+)
 
 
 def metadata(path):
@@ -89,6 +98,15 @@ def validate(root):
             except ValueError as exc:
                 errors.append(f'{p.relative_to(root)}: {exc}')
     errors.extend(home_path_errors(root))
+    agents = root / 'AGENTS.md'
+    if agents.is_file():
+        agents_text = agents.read_text(encoding='utf-8')
+        agents_lines = agents_text.splitlines()
+        if len(agents_lines) > 50:
+            errors.append(f'AGENTS.md: too long ({len(agents_lines)} lines; max 50)')
+        for marker in AGENTS_MAINTAINER_MARKERS:
+            if marker in agents_text:
+                errors.append(f'AGENTS.md: maintainer-only content ({marker})')
     guide = root / 'scripts' / 'generate_skills_guide.py'
     if guide.is_file():
         import subprocess

@@ -31,7 +31,7 @@ These rows cover the starter enhancement requested in CURSOR_UPDATE_PROMPT.md. R
 | REQ-005 | The trust-boundary-audit skill shall define four audit phases with finding verification. | Distinguish supported findings from suspicions. | Reconnaissance, coverage-led hunting, fresh-agent verification and reporting each have inputs and outputs; reports include coverage gaps and finding dispositions. | inspection |
 | REQ-006 | The planning and release skills shall reference the new review workflows and their exit criteria. | Connect the lifecycle without imposing application tooling. | Planning references decision-interview and design-review; release-check requires requirement evidence, applicable review results and disclosure of skipped or missing gates. | inspection |
 | REQ-007 | Both review agents shall define read-only responsibilities for their review modes. | Preserve the author/reviewer boundary. | Architect includes requirements questioning and design review; verifier includes fresh-context design, diff and finding review with evidence and limitations; both retain readonly true. | inspection |
-| REQ-008 | The documentation shall describe the nine local skills, review gates and four external pack installation commands. | Make local workflows and optional external installations discoverable. | docs/SKILLS.md names all nine skills; README, AGENTS and CONFIGURATION link that guide; README/AGENTS contain all four requested pack commands; QUALITY_GATES.md maps requirements to evidence; configuration docs state runtime verification limits. | inspection |
+| REQ-008 | The documentation shall describe the nine local skills, review gates and four external pack installation commands. | Make local workflows and optional external installations discoverable. | docs/SKILLS.md names all nine skills; README, AGENTS and CONFIGURATION link that guide; README lists all four pack commands; QUALITY_GATES.md maps requirements to evidence; configuration docs state runtime verification limits. | inspection |
 | REQ-009 | The validator shall detect removal of any required local skill. | Prevent future updates from dropping the requested workflows. | Tests remove each of the nine required skills in turn and assert a missing-skill error; inventory sources stay aligned; both configured starter check commands pass. | test |
 
 The acceptance criterion needs a measurable value or a tolerance. The verification method is test, analysis, demonstration, or inspection.
@@ -140,11 +140,19 @@ Status: merged via PR #19.
 
 ## Review remediation F-03 skill decision guide
 
-Status: implementing after F-01.
+Status: merged via PR #20.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
 | GUIDE-001 | The starter shall publish a generated docs/SKILLS.md decision guide kept in sync with local skill metadata. | Duplicate skill lists drifted and lacked use/do-not-use guidance. | docs/SKILLS.md lists every required skill once with the required columns and a lifecycle diagram; the generator `--check` mode and validator fail when the guide is stale; README, AGENTS and CONFIGURATION link the guide instead of maintaining competing inventories. | test |
+
+## Review remediation F-05 consumer AGENTS split
+
+Status: implementing after F-03.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| CONSUME-001 | AGENTS.md shall contain only consumer behavioral rules and links, with maintainer and install details in separate docs. | Template copies inherited maintainer-only instructions and install ceremony. | AGENTS.md is at most 50 lines and omits maintainer markers; MAINTAINING.md and docs/INSTALL.md exist; the validator rejects maintainer content reintroduced into AGENTS.md. | test |
 
 ## To be resolved (TBR)
 

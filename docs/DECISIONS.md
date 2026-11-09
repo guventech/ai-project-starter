@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-016: Split consumer AGENTS from maintainer docs (F-05)
+
+Date: 2026-11-09. Status: accepted; next step after F-03 per Cursor + Codex agreement.
+Context: AGENTS.md mixed always-loaded consumer rules with install ceremony, optional pack commands and maintainer process that every template copy inherited.
+Options: keep a single AGENTS.md; move only maintainer notes; split into AGENTS.md, docs/INSTALL.md and MAINTAINING.md.
+Decision: keep AGENTS.md as short consumer behavioral rules plus links to docs/SKILLS.md and docs/INSTALL.md; put install/upgrade in docs/INSTALL.md; put starter-maintainer process in MAINTAINING.md; reject maintainer markers and length over 50 lines in validation.
+Consequences: template copies stay lean; pack install commands remain in README; maintainer edits no longer expand always-loaded context.
+Rollback: restore the previous AGENTS.md sections and remove the split files.
+Related paths: AGENTS.md, MAINTAINING.md, docs/INSTALL.md, README.md, docs/CONFIGURATION.md, scripts/validate_starter.py, tests/test_starter.py.
+
 ## ADR-015: Keep repository brand for now (F-12)
 
 Date: 2026-11-09. Status: accepted; reaffirmed by Cursor + Codex after owner uncertainty.

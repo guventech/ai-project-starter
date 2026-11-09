@@ -24,7 +24,7 @@ def main():
     print(f'Publishing PUBLIC template: https://github.com/{repo}', flush=True)
     run('git', 'init', '-b', 'main')
     # Stage only template files, never arbitrary files added beside them.
-    run('git', 'add', 'AGENTS.md', 'README.md', '.cursor', '.github', 'docs', 'scripts',
+    run('git', 'add', 'AGENTS.md', 'MAINTAINING.md', 'README.md', '.cursor', '.github', 'docs', 'scripts',
         'tests', 'src', '.gitignore', '.gitattributes', '.editorconfig',
         'publish-to-github.py', 'publish-to-github.sh', 'LICENSE', '.env.example')
     run('git', 'commit', '-m', 'Add Cursor AI project starter')

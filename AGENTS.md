@@ -15,26 +15,6 @@
 - Update docs when behavior or decisions change. Record material tradeoffs in docs/DECISIONS.md.
 - Finish with the outcome, verification evidence and any remaining limitations. Never invent success.
 
-## Recommended skills
+## Workflows
 
-Start with `/project-helper` for a guided new-project or existing-project conversation. It chooses the individual procedures by file path, asks one relevant question at a time, and retains approval before implementation. `python scripts/install_chat_command.py` installs this entry point once for other workspaces, with eight procedures and two reviewer roles bundled as references. Preserve the target project's instructions and files; do not import this template's historical requirements or CI into it. Update a clean stock install with `python scripts/install_chat_command.py --upgrade`; use `--upgrade --force` when a manifest is missing, managed files were edited, or renamed skill references must replace obsolete snapshots (differing managed files are backed up beside the package).
-
-Local skills in `.cursor/skills/` use explicit invocation. Choose workflows from [docs/SKILLS.md](docs/SKILLS.md). Fresh-context review requires new agents without inherited conversation; report unavailable isolation as unverified.
-
-Optional external packs (documentation only; choose skills and Cursor in the installer):
-
-```sh
-npx skills add mattpocock/skills
-npx skills add addyosmani/agent-skills
-npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit
-npx skills add google/elephant-goldfish-model
-```
-
-Read [README.md](README.md#recommended-additional-skills) for upstream references, prerequisites and full-plugin limitations before installing.
-
-## Maintaining this starter
-
-- When adding a local skill, include its name in `scripts/skill_inventory.py`, add a skills-meta block, regenerate `docs/SKILLS.md`, and update the removal regression coverage in `tests/test_starter.py`.
-- Record procedure inspection apart from live Cursor execution. Keep requirements, task status and quality-gate evidence aligned with the scope being delivered.
-- When adopting the template for an application, replace the starter enhancement requirements and evidence with the project's requirements; retain relevant decisions and verification limits.
-- This repository's `main` branch requires pull requests and both starter CI jobs, including for admins. Record machine-specific installations and host verification in `docs/SETUP.md`; they do not transfer to template copies. Do not reintroduce local skill directory names that match `COLLIDING_UPSTREAM_NAMES` in `scripts/skill_inventory.py`.
+Start with `/project-helper` for guided new-project or improve-open-project routing. Choose individual workflows from [docs/SKILLS.md](docs/SKILLS.md). Install the user-level entry point once with [docs/INSTALL.md](docs/INSTALL.md). Fresh-context review needs new agents without inherited conversation; report unavailable isolation as unverified.

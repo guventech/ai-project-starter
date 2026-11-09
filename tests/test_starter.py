@@ -99,8 +99,30 @@ class StarterTests(unittest.TestCase):
         self.assertIn('docs/SKILLS.md', readme)
         self.assertIn('docs/SKILLS.md', agents)
         self.assertIn('SKILLS.md', configuration)
+        self.assertIn('docs/INSTALL.md', agents)
+        self.assertLessEqual(len(agents.splitlines()), 50)
+        for marker in (
+            'Maintaining this starter',
+            'pull requests and both starter CI',
+            'COLLIDING_UPSTREAM_NAMES',
+            'npx skills add',
+            'docs/SETUP.md',
+        ):
+            self.assertNotIn(marker, agents)
+        maintaining = (ROOT / 'MAINTAINING.md').read_text(encoding='utf-8')
+        install = (ROOT / 'docs/INSTALL.md').read_text(encoding='utf-8')
+        self.assertIn('skill_inventory.py', maintaining)
+        self.assertIn('install_chat_command.py', install)
         for name in REQUIRED_SKILLS:
             self.assertIn(f'/{name}', skills_guide, f'{name} missing from docs/SKILLS.md')
+
+    def test_agents_maintainer_content_detected(self):
+        path = self.root / 'AGENTS.md'
+        path.write_text(
+            path.read_text(encoding='utf-8') + '\n## Maintaining this starter\n',
+            encoding='utf-8')
+        errors = validate(self.root)
+        self.assertTrue(any('maintainer-only content' in error for error in errors), errors)
 
     def test_skills_guide_drift_detected(self):
         path = self.root / 'docs/SKILLS.md'
