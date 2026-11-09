@@ -219,7 +219,7 @@ Wording self-check: each row uses shall, contains one requirement, avoids the li
 
 ## Review remediation F-07 README positioning
 
-Status: authorized continuation after F-06 merge implemented; local checks and documentation review recorded in docs/QUALITY_GATES.md. PR CI pending. Branding remains unchanged under ADR-015; F-02 comparative evaluations remain separate work.
+Status: authorized continuation implemented in [PR #28](https://github.com/guventech/ai-project-starter/pull/28); local checks, documentation review and implementation CI recorded in docs/QUALITY_GATES.md. Require green checks on the PR head before merge. Branding remains unchanged under ADR-015; F-02 comparative evaluations remain separate work.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|

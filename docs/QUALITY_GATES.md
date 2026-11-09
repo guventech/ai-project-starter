@@ -100,7 +100,7 @@ Scope: value/audience/entry-path rewrite and linked setup/evidence detail; retai
 - Fresh read-only documentation review (readme_clarity_review, fork_turns none): quickstart/example/evidence claims were coherent; one accepted finding corrected install guidance that overpromised --force recovery for unreadable manifest structures. Docs now distinguish missing/incomplete/invalid-digest manifests from unparseable JSON or missing/non-object files maps. Installer behavior was not changed.
 - Comparison descriptions were checked against primary upstream README pages for Matt Pocock, Superpowers and Google EGM; Skills CLI's Node prerequisite was checked against its own README on 2026-11-09. Fit advice is editorial, not measured performance. No new outcome evaluation, exact transcript or complete-app demo is claimed.
 - Design/security gates: not applicable to prose reorganization and classification of a new maintainer-only document under the existing initialization design. No new application boundary, skill or dependency. No user reading-time study or new live Cursor trial was performed.
-- PR CI: pending; both Python 3.12 OS jobs are required before merge. PR #27 was reviewed in place and merged before this branch; no initializer or global upgrade was run on the source workspace.
+- Implementation CI: [run 42667510658](https://github.com/guventech/ai-project-starter/actions/runs/42667510658) passed both Python 3.12 OS jobs for commit `c8cb629`. PR #28 includes this evidence follow-up and a regenerated baseline; both jobs remain required on its head before merge. PR #27 was reviewed in place and merged before this branch; no initializer or global upgrade was run on the source workspace.
 
 ## F-06 initialization verification (2026-11-09)
 

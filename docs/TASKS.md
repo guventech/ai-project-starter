@@ -196,7 +196,7 @@ Owner: repository maintainer. Acceptance criteria: READ-001–READ-004 in docs/P
 - [x] Lead README with purpose, audience and two quickstart paths; retain brand and canonical skill guide.
 - [x] Add a sourced bounded example/comparison, verification overview and optional-pack guide; move migration/publishing detail to its dedicated home.
 - [x] Verify initialization removes the new evidence overview; inspect relative links, anchors and claims; resolve upgrade-guidance review finding.
-- [ ] Regenerate baseline, run existing checks and submit one focused PR after green CI.
+- [x] Regenerate baseline, run existing checks and submit [PR #28](https://github.com/guventech/ai-project-starter/pull/28); both OS jobs passed on the implementation commit and remain required on its head before merge.
 
 ## Application adoption checklist
 
