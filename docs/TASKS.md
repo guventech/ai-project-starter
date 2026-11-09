@@ -62,6 +62,7 @@ Owner: repository maintainer. Scope: align docs/evidence with the nine-skill / e
 - [x] Align PRD, QUALITY_GATES, CONFIGURATION, SETUP and TASKS skill counts and install fingerprint evidence.
 - [x] Add `test_skill_inventory_sources_agree` with observed red (CONFIGURATION omitted prior-art) then green.
 - [x] Run both starter gates locally (validator + 10 unittests, 1 symlink skip) and record results; open PR after CI.
+- [x] Merge through protected-branch PR workflow after green checks ([PR #9](https://github.com/guventech/ai-project-starter/pull/9); CI [42589919473](https://github.com/guventech/ai-project-starter/actions/runs/42589919473)).
 
 ## Application adoption checklist
 
