@@ -183,7 +183,7 @@ Status: merged via PR #32; `--diff` and published releases remain deferred.
 
 ## Review remediation F-15 changelog consistency
 
-Status: implementing after Cursor + Codex agreement; PR-metadata generation and GitHub Releases remain deferred.
+Status: merged via PR #34; PR-metadata generation and GitHub Releases remain deferred.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
