@@ -22,5 +22,16 @@ Consequences: seven local skills work as documented procedures without upstream 
 Rollback: revert the enhancement diff; no application, dependency, storage or deployment changes require migration. Preserve unrelated user changes.
 Related paths: .cursor/skills/, .cursor/agents/, README.md, docs/CONFIGURATION.md, scripts/validate_starter.py, tests/test_starter.py.
 
+## ADR-004: Select overlapping local skills by file path
+
+Date: 2026-11-09. Status: accepted within the authorized setup verification scope.
+Context: authenticated Cursor CLI slash attachment selected optional upstream grill-me, tdd and security-audit instead of the project files. The local bodies and installed packs are both intentional.
+Options: rename local skills; rewrite upstream names; remove overlapping upstream files; select local workflows by explicit source path.
+Decision: document explicit `.cursor/skills/<name>/SKILL.md` selection for these three workflows. Keep the requested local names and complete upstream files intact. The explicit-path loading route was tested.
+Consequences: bare slash names remain available for the upstream variants; tasks using this starter's acceptance criteria must select its local paths. Runtime behavior can change with host updates, so record the loaded source when retesting.
+Rollback: retire the workaround only after retesting name resolution on the installed host; no package or application migration is needed.
+Related paths: AGENTS.md, README.md, docs/CONFIGURATION.md, docs/SETUP.md.
+
 ## New decision template
+
 ID/title, date, status, context, options, decision, consequences, rollback and related paths.

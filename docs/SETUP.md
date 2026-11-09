@@ -26,7 +26,7 @@ Packages were installed as upstream Git checkouts outside the starter. Full sour
 
 Cursor documents [recursive skill discovery](https://cursor.com/docs/skills) and [local plugin imports](https://cursor.com/docs/plugins#test-plugins-locally). Reload Cursor to discover these packages. Local plugin loading can be restricted by organization policy. This installation preserves upstream files and is not a claim that every upstream workflow has been executed in Cursor.
 
-Upstream `grill-me`, `tdd` and `security-audit` names overlap project skills. Verify the source path displayed by Cursor before invoking an overlapping name; project-file preservation does not prove runtime source selection. Use the seven local workflows for this starter's acceptance criteria. Keep the complete packages for their references and optional broader workflows.
+Upstream `grill-me`, `tdd` and `security-audit` names overlap project skills. Authenticated testing found bare slash invocation selected the upstream versions. For this starter's acceptance criteria, ask the agent to read and follow the exact `.cursor/skills/<name>/SKILL.md` path. That route loaded all three local bodies in a separate smoke test. Keep the complete packages for their references and optional broader workflows; no upstream or local skill was renamed or overwritten.
 
 Update a package only after inspecting its diff and verifying shared resources and names. Do not run an indiscriminate update over customized local skills. To undo this installation, remove only the four recorded package directories after verifying their resolved paths and checking for user edits.
 
@@ -34,7 +34,22 @@ Update a package only after inspecting its diff and verifying shared resources a
 
 - Installed editor: Cursor 3.29.9, build `306d153d51d714882ab7b1bc49649cab624e8a30`, Windows x64.
 - Installed official Agent CLI: `2026.11.05-86047df`, under `%LOCALAPPDATA%/cursor-agent`. The installer was inspected before execution; its target did not already exist.
-- `agent status`: not logged in. Runtime checks require an authenticated session. No credentials were read or copied from the editor.
-- Skill discovery/invocation, reviewer write refusal and fresh-context isolation remain unverified until an authenticated run provides evidence. Filesystem counts and metadata checks cannot prove these properties.
+- `agent status`: authenticated after the user completed the official browser login. No credentials were read or copied from the editor. Account identifiers and authentication tokens are omitted from this record.
+- The workspace was trusted for these CLI runs. Read-only skill checks used `--print --mode ask`; reviewer probes used native Task calls in a separate session. No blanket tool-approval flag was enabled.
+
+### Observed smoke results
+
+- Project planning: `/project-planning` attached the project's SKILL.md and returned its requirements-first step and approval exit condition. CLI session `98d12976-75ea-471a-b35b-90c497431d4b`.
+- Six-skill attachment check: design-review, release-check and systematic-debugging attached project files; grill-me, tdd and security-audit attached upstream files. CLI session `18a0a0f6-93a1-489e-ba1e-c4e2782a39ce`. This is an observed name collision, not a missing local file.
+- Explicit-path fallback: a read-only session read the three exact local paths and returned their distinctive local instructions. CLI session `ffd108eb-82d7-49e5-a41d-430b76269c96`. This proves path loading, not bare-slash precedence.
+- EGM: `/egm-review` attached the installed plugin's canonical review skill with its reviewer/standards references. CLI session `cc46c326-ea96-41fe-bd2f-4ab4f88c368b`. No full EGM pipeline or artifact generation was executed.
+- Custom reviewers: the Task trace shows separate non-resumed `architect` and `verifier` calls with bounded prompts and no parent-only canary in their inputs. Both refused the probe write and reported the canary absent. The parent-only canary was not placed in a file. CLI session `cb48b912-c725-4e7f-8504-7347ca3e544a`.
+- The reviewer probe file was absent and `git status --short` was empty after the runs.
+
+### Limits of the observations
+
+The Task schema states new non-resumed calls start fresh; it exposes no separate context-inheritance or read-only switch. Reviewers received standard host instructions. The canary probe supports absence of earlier parent conversation in these two calls; it is not a general proof of isolation. Both reviewers reported edit/shell tool categories, and neither attempted a prohibited operation, so behavioral refusal was observed while tool-level permission denial remains untested. Keep the read-only metadata and scoped prompts; do not treat them as an operating-system security boundary.
+
+The editor UI, complete EGM/security audit pipelines, every upstream skill and all optional third-party tools were not exercised. A smoke check of attachment and role behavior is distinct from end-to-end workflow validation. Repeat these probes after Cursor or package updates that affect loading or delegation.
 
 Application-specific build, lint, security, browser and accessibility gates remain out of scope until an application stack and requirements exist. Installing a pack does not install its optional tools, provision services, publish issues or deploy an application.

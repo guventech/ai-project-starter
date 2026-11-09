@@ -15,7 +15,7 @@ Agents inherit the chosen model and set readonly true. The verifier asks its par
 AGENTS.md is the shared behavioral core; Cursor-specific files are not claimed portable to other agents.
 Static checks cannot prove Cursor discovery or runtime behavior. Open the folder in your installed Cursor,
 check all three rules and seven skills are discovered, invoke /project-planning, then ask for the architect and verifier.
-Confirm read-only behavior before relying on it. No live Cursor invocation is claimed by this template.
+Confirm read-only behavior before relying on it. Bounded live CLI smoke results are recorded in SETUP.md; editor UI discovery and complete workflow execution are not claimed.
 
 ## Review isolation and optional packs
 
@@ -24,5 +24,9 @@ The seven local skills are project-planning, grill-me, design-review, tdd, syste
 For goldfish reviews, start new agents with conversation inheritance disabled and give them only the design, requirements, source references, repository constraints and a bounded question. A fresh name alone does not prove isolation. Use at least two separate reviewer contexts for design-review. Security candidates need a verifier that did not discover them. If the installed host cannot provide isolation, record the corresponding gate as unverified; do not substitute a self-review and mark it passed.
 
 Manual Cursor smoke check: invoke each new skill, verify the expected procedure is loaded, confirm both reviewers refuse writes, and inspect reviewer context setup for inherited chat. Record the installed Cursor version, inputs and observed results before claiming runtime support. Static validator success proves metadata shape and required files only.
+
+The authenticated CLI attached project-planning, design-review, release-check and systematic-debugging from the project, while bare grill-me, tdd and security-audit attached optional upstream files. Select those three local procedures by their explicit `.cursor/skills/<name>/SKILL.md` paths; this loading route was tested. Explicit-only skills need not appear in the ambient skill inventory, so inventory absence alone is not a discovery failure.
+
+Native Task calls with the architect and verifier names were observed. Both refused the requested write and reported no parent-only canary. The Task schema describes non-resumed calls as fresh and exposes no separate inheritance flag. Reviewers still receive standard host instructions; fresh conversation does not mean an empty system prompt. They also reported edit/shell tool categories, so this test establishes behavioral refusal, not proof of host-enforced write denial. Keep read-only metadata and scoped prompts; use host permissions when a permission boundary is required.
 
 External pack commands and source links are in [README.md](../README.md#recommended-additional-skills). References checked on 2026-11-09 include the [Skills CLI](https://github.com/vercel-labs/skills) (Node.js prerequisite and selection flags), [Addy's pack](https://github.com/addyosmani/agent-skills) (shared-reference limitations for individual installs), and [EGM setup](https://github.com/google/elephant-goldfish-model#install) (complete-plugin recommendation). The follow-up installed complete user-level checkouts, with Matt's stable engineering/productivity skills selected, to retain shared resources without adding upstream files to this template. See [SETUP.md](SETUP.md) for paths, pinned source revisions, branch protection and actual runtime status. Local procedures remain original and self-contained. This adds no application runtime dependency or stack.

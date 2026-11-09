@@ -17,7 +17,7 @@ Owner: repository maintainer. Acceptance criteria: SETUP-001–SETUP-003 in docs
 - [x] Install the four optional packs outside the starter and record source revisions.
 - [x] Configure and inspect required Windows/Linux CI checks on main.
 - [x] Install the official Agent CLI and record the editor/CLI versions.
-- [ ] Complete live skill discovery, read-only agent and fresh-context checks after CLI authentication.
+- [x] Complete bounded CLI attachment/path-loading and native reviewer probes after authentication; record write refusal, canary results, collisions and enforcement limits in SETUP.md.
 
 ## Application adoption checklist
 

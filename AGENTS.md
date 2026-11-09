@@ -19,6 +19,8 @@
 
 Local skills in `.cursor/skills/` use explicit invocation. Use `/project-planning` for requirements and approved steps, `/grill-me` to resolve open decisions, `/design-review` for a new system or material design change, `/tdd` for behavior changes, `/systematic-debugging` for failures, `/security-audit` for scoped audits or sensitive boundaries, and `/release-check` before release. Fresh-context review requires new agents without inherited conversation; report unavailable isolation as unverified.
 
+When optional packs are installed, select the starter's overlapping workflows by explicit file path: ask the agent to read and follow `.cursor/skills/grill-me/SKILL.md`, `.cursor/skills/tdd/SKILL.md` or `.cursor/skills/security-audit/SKILL.md`. In the tested CLI, those bare slash names attached upstream versions. Verify the selected source before applying a workflow.
+
 Optional external packs (documentation only; choose skills and Cursor in the installer):
 
 ```sh
