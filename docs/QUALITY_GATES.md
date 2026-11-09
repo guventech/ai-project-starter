@@ -57,7 +57,7 @@ Evidence is a test name, a screenshot, or a short note.
 
 ## Phase A inventory integrity verification
 
-Scope: shared skill inventory, doc/evidence alignment for nine skills / eight workflows, and drift regression. Observed red: `test_skill_inventory_sources_agree` failed with `prior-art missing from CONFIGURATION.md`. After the CONFIGURATION and evidence updates: `python scripts/validate_starter.py` passed on Windows; `python -m unittest discover -s tests -v` passed (10 methods, 1 symlink skip); `git diff --check` passed. PR CI evidence is added after the pull request run.
+Scope: shared skill inventory, doc/evidence alignment for nine skills / eight workflows, and drift regression. Observed red: `test_skill_inventory_sources_agree` failed with `prior-art missing from CONFIGURATION.md`. After the CONFIGURATION and evidence updates: `python scripts/validate_starter.py` passed on Windows; `python -m unittest discover -s tests -v` passed (10 methods, 1 symlink skip); `git diff --check` passed. PR CI run [42589919473](https://github.com/guventech/ai-project-starter/actions/runs/42589919473) passed both OS jobs. Merged via [PR #9](https://github.com/guventech/ai-project-starter/pull/9) (`25ca0ee`).
 
 ## Prior-art verification
 
