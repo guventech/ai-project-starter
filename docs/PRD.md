@@ -106,12 +106,13 @@ Status: merged via PR #11; maintainer global install refreshed with `--upgrade -
 
 ## Inventory and upgrade hardening (approved with Codex)
 
-Status: implemented after Cursor + Codex CLI brainstorm agreement (items 1–2; skip transactional install, PRD wording automation, and blocked MAINT-003). Local starter gates passed; PR pending request.
+Status: HARD-001/HARD-002 merged via PR #14. HARD-003 implemented locally after Codex agreement; PRD wording automation and MAINT-003 remain deferred/blocked.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
 | HARD-001 | Non-forced upgrades shall require a complete installer manifest with valid SHA-256 digests for every planned managed path. | Incomplete manifests could skip customization checks for omitted paths. | Incomplete path sets or non-SHA-256 digests refuse without changing installed files; clean and forced upgrades retain documented behavior. | test |
 | HARD-002 | The validator shall reject unregistered local skill directories and inventory tests shall require each required skill name in README, CONFIGURATION and AGENTS. | REQ-008/Phase A drift coverage omitted AGENTS and allowed unexpected skill folders. | An extra valid skill folder fails validation; inventory alignment covers all three docs; the nine-skill inventory passes. | test |
+| HARD-003 | Fresh installs shall stage managed files beside the destination and promote the package only after the staged contents and manifest validate. | Direct writes can leave a partial package after an I/O failure. | Injected write or manifest failures leave no destination and no staging directory; successful install and `--upgrade` when absent promote a complete digest-matched package; occupied destinations remain unchanged. Existing in-place upgrades stay unchanged. | test |
 
 ## To be resolved (TBR)
 

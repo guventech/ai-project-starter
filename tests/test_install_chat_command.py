@@ -144,6 +144,46 @@ class InstallCommandTests(unittest.TestCase):
         self.assertEqual(marker.read_text(encoding='utf-8'), 'keep this')
         self.assertEqual(list(self.destination.iterdir()), [marker])
 
+    def test_fresh_install_promotes_complete_package(self):
+        from scripts import install_chat_command as installer
+        destination, backup, replaced = installer.install(self.destination)
+        self.assertEqual(destination, self.destination.resolve())
+        self.assertIsNone(backup)
+        self.assertFalse(replaced)
+        planned = installer.planned_files()
+        relatives = installer.package_file_relatives(self.destination)
+        self.assertEqual(relatives, set(installer.managed_relative_paths(planned)))
+        manifest = installer.read_manifest(self.destination)
+        self.assertEqual(set(manifest), set(planned))
+        for relative, content in planned.items():
+            self.assertEqual(manifest[relative], installer.digest_text(content))
+            self.assertEqual(
+                (self.destination / relative).read_text(encoding='utf-8'), content)
+        self.assertFalse(list(self.destination.parent.glob('project-helper.staging-*')))
+
+    def test_fresh_install_write_failure_leaves_no_destination_or_staging(self):
+        from scripts import install_chat_command as installer
+        with self.assertRaises(OSError):
+            installer.install(self.destination, fail_after='SKILL.md')
+        self.assertFalse(self.destination.exists())
+        self.assertFalse(list(self.destination.parent.glob('project-helper.staging-*')))
+
+    def test_fresh_install_manifest_failure_leaves_no_destination_or_staging(self):
+        from scripts import install_chat_command as installer
+        with self.assertRaises(OSError):
+            installer.install(self.destination, fail_after=installer.MANIFEST_NAME)
+        self.assertFalse(self.destination.exists())
+        self.assertFalse(list(self.destination.parent.glob('project-helper.staging-*')))
+
+    def test_upgrade_absent_destination_installs_transactionally(self):
+        from scripts import install_chat_command as installer
+        destination, backup, replaced = installer.install(self.destination, upgrade=True)
+        self.assertEqual(destination, self.destination.resolve())
+        self.assertIsNone(backup)
+        self.assertFalse(replaced)
+        self.assertTrue((self.destination / 'SKILL.md').is_file())
+        self.assertFalse(list(self.destination.parent.glob('project-helper.staging-*')))
+
     def test_second_install_does_not_replace_modified_command(self):
         self.assertEqual(self.run_installer().returncode, 0)
         command = self.destination / 'SKILL.md'

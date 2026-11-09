@@ -60,10 +60,15 @@ Evidence is a test name, a screenshot, or a short note.
 | UPGR-004 | test | `--upgrade --force` backs up differing `SKILL.md` under `project-helper.bak-*` then restores planned content; extras and bare `--force` refuse. |
 | HARD-001 | test | `test_upgrade_refuses_incomplete_manifest` and `test_upgrade_refuses_malformed_manifest_digest` refuse without changing files; clean/force upgrade regressions remain green. |
 | HARD-002 | test | `test_unregistered_skill_detected` fails validation for an extra skill folder; `test_skill_inventory_sources_agree` requires each required skill in README, CONFIGURATION and AGENTS. |
+| HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
 
 ## Inventory and upgrade hardening verification
 
-Scope: exact-path/digest manifest checks for non-forced upgrades; reject unregistered local skills; AGENTS inventory coverage. Observed red: incomplete-manifest upgrade returned 0 and would overwrite a customized omitted path; unregistered-skill and AGENTS assertions added with the implementation. After green: `python scripts/validate_starter.py` passed; `python -m unittest discover -s tests -v` passed (21 methods, 2 symlink skips); `git diff --check` passed. PR CI not run in this session.
+Scope: exact-path/digest manifest checks for non-forced upgrades; reject unregistered local skills; AGENTS inventory coverage. Observed red: incomplete-manifest upgrade returned 0 and would overwrite a customized omitted path; unregistered-skill and AGENTS assertions added with the implementation. After green: `python scripts/validate_starter.py` passed; `python -m unittest discover -s tests -v` passed (21 methods, 2 symlink skips); `git diff --check` passed. Merged via [PR #14](https://github.com/guventech/ai-project-starter/pull/14).
+
+## Transactional fresh install verification
+
+Scope: sibling staging directory, validate-then-rename promotion for fresh installs and `--upgrade` when absent; existing in-place upgrades unchanged. Observed red: `fail_after` was rejected by `install()`. After green: `python scripts/validate_starter.py` passed; `python -m unittest discover -s tests -v` passed (25 methods, 2 symlink skips); `git diff --check` passed. PR CI pending.
 
 ## Phase B installer upgrade verification
 
