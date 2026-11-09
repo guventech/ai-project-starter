@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-017: Redact prior-art queries before search (F-16)
+
+Date: 2026-11-09. Status: accepted; bounded remediation approved by the owner.
+Context: prior-art treats remote content as untrusted and caps candidates, but did not require removal of private project details before queries leave the workspace.
+Options: retain the existing text; add a pre-query check and synthetic scenario; build a search proxy or broader evaluation harness.
+Decision: require generic public terms, inspect every outgoing query, skip when no useful public query can be formed, and reject retrieved instructions to disclose context or run commands. Add one synthetic scenario and verify bundled text through the existing installer test.
+Consequences: no new skill, dependency or runtime enforcement layer; procedure inspection and packaging checks do not establish live agent compliance. The comparative F-02 work remains deferred.
+Rollback: revert the F-16 PR; existing global snapshots stay unchanged until an authorized upgrade.
+Related paths: `.cursor/skills/prior-art/SKILL.md`, evals/prior-art-search-hygiene.md, tests/test_install_chat_command.py, docs/PRD.md, docs/TASKS.md, docs/QUALITY_GATES.md.
+
 ## ADR-016: Split consumer AGENTS from maintainer docs (F-05)
 
 Date: 2026-11-09. Status: accepted; next step after F-03 per Cursor + Codex agreement.

@@ -139,6 +139,16 @@ Owner: repository maintainer. Acceptance criteria: CONSUME-001 in docs/PRD.md. C
 - [x] Keep AGENTS.md under 50 lines with consumer rules and links only; reject maintainer markers in validation.
 - [x] Merge through protected-branch PR after CI ([PR #21](https://github.com/guventech/ai-project-starter/pull/21)).
 
+## Review F-16 prior-art search hygiene (approved)
+
+Owner: repository maintainer. Acceptance criteria: SEARCH-001–SEARCH-004 in docs/PRD.md.
+
+- [x] Record the approved scope and check requirement wording and verification methods.
+- [x] Require query redaction and confidentiality skip; retain untrusted-result, candidate-cap and adoption rules.
+- [x] Add one synthetic scenario and extend the existing installer packaging check.
+- [x] Run starter gates, inspect the diff and record actual evidence; runtime scenario remains not run.
+- [x] Submit [PR #23](https://github.com/guventech/ai-project-starter/pull/23); both protected-branch CI jobs must pass before merge.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

@@ -28,6 +28,10 @@ Evidence is a test name, a screenshot, or a short note.
 
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
+| SEARCH-001 | inspection | prior-art step 2 requires generic public terms, removal of confidential details, inspection of every outgoing query and skip when no useful public query can be formed. |
+| SEARCH-002 | inspection | prior-art steps 3–6 reject retrieved disclosure/workflow/command instructions and retain the three-candidate cap and named-candidate adoption approval. |
+| SEARCH-003 | inspection | evals/prior-art-search-hygiene.md defines synthetic confidential context, an injected result, a no-public-query variant and a pass/fail rubric; runtime execution is marked not run. |
+| SEARCH-004 | test | Existing installer test compares the complete installed prior-art reference and manifest digest with the source; local suite passes with the host symlink skips described below. |
 | REQ-001 | test | `python scripts/validate_starter.py` passes with all four new skill files and their explicit invocation metadata. |
 | REQ-002 | inspection | decision-interview steps 2–6 require one question at a time, recorded decisions, zero implementation blockers and plan approval before code. |
 | REQ-003 | inspection | test-first-change steps 2–5 require observed red for the intended reason, one behavior slice, green, refactor and regression checks. |
@@ -66,6 +70,19 @@ Evidence is a test name, a screenshot, or a short note.
 | HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
 | PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Merged via [PR #16](https://github.com/guventech/ai-project-starter/pull/16). |
 | ATTR-001 | test | `THIRD_PARTY.md` records upstream sources and classifications; installer tests expect the packaged notice and manifest digest entry; README links the notice. |
+
+## F-16 search hygiene verification (2026-11-09)
+
+Scope: query-redaction and confidentiality-skip instructions in the existing prior-art procedure, one synthetic scenario, and an extension to the existing packaging test. No new skill, dependency or runtime search layer.
+
+- `python scripts/validate_starter.py`: passed.
+- `python scripts/generate_skills_guide.py --check`: passed; metadata and generated guide unchanged.
+- `python -m unittest discover -s tests -v`: passed on Windows/Python 3.13.14 (30 tests, 2 symlink skips because host link creation is unavailable). The first sandbox run failed to access temporary fixtures; the permitted rerun reached the tests and passed. This was an environment failure, not a test-first behavior failure.
+- `git diff --check`: passed.
+- Procedure and scenario inspection: SEARCH-001–SEARCH-003 map to the text and rubric above; the installer test covers SEARCH-004. This is author inspection, not an independent fresh-context review or live Cursor execution.
+- Design gate: not applicable; bounded revision of the existing Markdown procedure and packaging check, with no new architecture. Security evidence: inspected the outgoing-query and retrieved-content instructions; live enforcement remains unverified. No completed runtime security audit is claimed.
+- Runtime scenario: not run; model/host traces and isolation evidence unavailable in this batch. Comparative F-02 evals remain deferred.
+- PR CI: [run 42630609973](https://github.com/guventech/ai-project-starter/actions/runs/42630609973) passed both Python 3.12 jobs, `Starter validation (ubuntu-latest)` and `Starter validation (windows-latest)`, for implementation commit `e1a0338`. PR #23 includes the evidence follow-up; require green checks on its head before merge. Existing global snapshots were not upgraded.
 
 ## Inventory and upgrade hardening verification
 
