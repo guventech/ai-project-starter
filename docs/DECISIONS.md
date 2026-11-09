@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-025: Version metadata without published releases (F-13 slice)
+
+Date: 2026-11-09. Status: accepted; Cursor + Codex chose reversible release hygiene next.
+Context: F-13 remaining work included VERSION/CHANGELOG, `--version`, `--diff` and GitHub Releases. Owner asked for best options without product choices.
+Options: remaining F-02 runner; F-11 multi-host packaging; full F-13 including publishing; focused VERSION/CHANGELOG/`--version` only.
+Decision: ship VERSION `0.1.0`, CHANGELOG.md (explicitly not a GitHub Release), installer `--version`, package VERSION on install/upgrade, and remove those files on template initialization. Defer `--diff`, tags and Release publication.
+Consequences: local revision identity exists for installs and docs; no external release state changes; F-15 automation can later target the changelog format.
+Rollback: revert the F-13 version-metadata PR.
+Related paths: VERSION, CHANGELOG.md, scripts/install_chat_command.py, docs/INSTALL.md, scripts/project_manifest.py, tests/test_install_chat_command.py.
+
 ## ADR-024: Process weights Lite / Standard / Strict (F-09)
 
 Date: 2026-11-09. Status: accepted; Cursor + Codex agreed next batch after partial F-02.

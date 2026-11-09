@@ -32,6 +32,10 @@ class InstallCommandTests(unittest.TestCase):
         self.assertIn('MIT License', (self.destination / 'LICENSE').read_text(encoding='utf-8'))
         self.assertTrue((self.destination / 'THIRD_PARTY.md').is_file())
         self.assertIn('Third-party notices', (self.destination / 'THIRD_PARTY.md').read_text(encoding='utf-8'))
+        from scripts.install_chat_command import package_version
+        version = package_version()
+        self.assertEqual((self.destination / 'VERSION').read_text(encoding='utf-8'), version + '\n')
+        self.assertIn(f'Package version: {version}', result.stdout)
         expected = {f'{name}.md' for name in (*WORKFLOWS, 'architect', 'verifier')}
         references = self.destination / 'references'
         self.assertEqual({p.name for p in references.iterdir()}, expected)
@@ -45,6 +49,7 @@ class InstallCommandTests(unittest.TestCase):
         manifest = json.loads((self.destination / '.installer-manifest.json').read_text(encoding='utf-8'))
         self.assertIn('SKILL.md', manifest['files'])
         self.assertIn('THIRD_PARTY.md', manifest['files'])
+        self.assertIn('VERSION', manifest['files'])
         self.assertIn('references/prior-art.md', manifest['files'])
         # This procedure has no internal paths to rewrite. Its complete text,
         # including query hygiene, must reach the installed snapshot unchanged.
@@ -134,6 +139,33 @@ class InstallCommandTests(unittest.TestCase):
         for flags in [('--upgrade',), ('--force',), ('--upgrade', '--force')]:
             with self.subTest(flags=flags):
                 self.check_without_writes(2, '--check cannot be combined', *flags)
+
+    def test_version_reports_source_version_without_writes(self):
+        from scripts.install_chat_command import package_version
+
+        def snapshot():
+            return {
+                path.relative_to(self.root).as_posix(): (
+                    path.lstat().st_mtime_ns,
+                    path.read_bytes() if path.is_file() and not path.is_symlink() else None,
+                )
+                for path in [self.root, *self.root.rglob('*')]
+            }
+
+        before = snapshot()
+        result = self.run_installer('--version')
+        self.assertEqual(snapshot(), before, 'version modified the destination parent')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout.strip(), package_version())
+        self.assertFalse(self.destination.exists())
+
+    def test_version_rejects_mutating_or_check_flags(self):
+        for flags in [('--upgrade',), ('--force',), ('--check',), ('--upgrade', '--force')]:
+            with self.subTest(flags=flags):
+                result = self.run_installer('--version', *flags)
+                self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+                self.assertIn('--version cannot be combined', result.stderr)
+                self.assertFalse(self.destination.exists())
 
     def test_check_reports_invalid_destination_and_unreadable_content(self):
         self.destination.parent.mkdir(parents=True)

@@ -17,6 +17,14 @@ except ImportError:  # pragma: no cover - package import when run via tests
 ROOT = Path(__file__).resolve().parents[1]
 REVIEWERS = ('architect', 'verifier')
 MANIFEST_NAME = '.installer-manifest.json'
+VERSION_PATH = ROOT / 'VERSION'
+
+
+def package_version():
+    text = VERSION_PATH.read_text(encoding='utf-8').strip()
+    if not text or any(character.isspace() for character in text):
+        raise ValueError(f'Invalid package version in {VERSION_PATH}')
+    return text
 
 
 def reference_text(path):
@@ -39,7 +47,8 @@ def is_sha256_digest(value):
 def planned_files():
     files = {'SKILL.md': (ROOT / '.cursor/skills/project-helper/SKILL.md').read_text(encoding='utf-8'),
              'LICENSE': (ROOT / 'LICENSE').read_text(encoding='utf-8'),
-             'THIRD_PARTY.md': (ROOT / 'THIRD_PARTY.md').read_text(encoding='utf-8')}
+             'THIRD_PARTY.md': (ROOT / 'THIRD_PARTY.md').read_text(encoding='utf-8'),
+             'VERSION': package_version() + '\n'}
     for name in WORKFLOWS:
         files[f'references/{name}.md'] = reference_text(ROOT / '.cursor/skills' / name / 'SKILL.md')
     for name in REVIEWERS:
@@ -315,7 +324,18 @@ def main():
                         help='With --upgrade, overwrite managed files after backing up diffs.')
     parser.add_argument('--check', action='store_true',
                         help='Report snapshot status against this checkout without writing files.')
+    parser.add_argument('--version', action='store_true',
+                        help='Print the package version from VERSION and exit without writing files.')
     args = parser.parse_args()
+    if args.version:
+        if args.upgrade or args.force or args.check:
+            parser.error('--version cannot be combined with --upgrade, --force or --check')
+        try:
+            print(package_version())
+        except (OSError, ValueError) as exc:
+            print(f'Version stopped: {exc}', file=sys.stderr)
+            return 2
+        return 0
     if args.check:
         if args.upgrade or args.force:
             parser.error('--check cannot be combined with --upgrade or --force')
@@ -327,6 +347,7 @@ def main():
         print(message)
         return code
     try:
+        version = package_version()
         destination, backup_root, replaced = install(
             args.destination, upgrade=args.upgrade, force=args.force)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
@@ -338,6 +359,7 @@ def main():
         return 1
     action = 'Upgraded' if replaced else 'Installed'
     print(f'{action} /project-helper at {destination}')
+    print(f'Package version: {version}')
     if backup_root is not None:
         print(f'Backed up replaced managed files to {backup_root}')
     print('Reload Cursor or start a new chat, open a project folder, and type /project-helper.')

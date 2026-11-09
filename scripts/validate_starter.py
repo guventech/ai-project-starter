@@ -21,6 +21,7 @@ MAINTAINER_REQUIRED = {
     'publish-to-github.py', 'publish-to-github.sh', 'scripts/init_project.py',
     'scripts/project_manifest.py', 'scripts/project-manifest.json',
     'docs/INITIALIZE.md', 'docs/designs/project-initialization.md', 'docs/VERIFICATION.md',
+    'VERSION', 'CHANGELOG.md',
 }
 HOME_PATH_PATTERNS = (
     re.compile(r'(?i)C:\\Users\\'),

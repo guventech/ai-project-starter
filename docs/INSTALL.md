@@ -6,7 +6,15 @@ Install once from this repository so `/project-helper` works in other folders:
 python scripts/install_chat_command.py
 ```
 
-Reload Cursor or start a new chat. The installer writes a self-contained package under `~/.cursor/skills/project-helper` (workflows and reviewer roles bundled as references). It needs no Python packages and refuses to replace an existing installation without `--upgrade`.
+Reload Cursor or start a new chat. The installer writes a self-contained package under `~/.cursor/skills/project-helper` (workflows and reviewer roles bundled as references). It needs no Python packages and refuses to replace an existing installation without `--upgrade`. Successful install and upgrade print `Package version:` from the repository `VERSION` file and ship that `VERSION` inside the package.
+
+## Package version
+
+```sh
+python scripts/install_chat_command.py --version
+```
+
+Prints the current checkout's `VERSION` and exits without writing files. It cannot be combined with `--check`, `--upgrade` or `--force`. Repository history notes live in [CHANGELOG.md](../CHANGELOG.md); tagged GitHub Releases remain deferred.
 
 ## Check an installation
 

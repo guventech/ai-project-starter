@@ -36,6 +36,9 @@ Evidence is a test name, a screenshot, or a short note.
 | WEIGHT-001 | inspection | docs/SKILLS.md Process weights section names Lite, Standard and Strict with required and skippable columns. |
 | WEIGHT-002 | inspection | project-helper Process weight section requires marker selection, one question when undetermined, Lite ceremony skips and Strict design/security retention. |
 | WEIGHT-003 | test | `tests/test_process_weight.py` maps typo and symbol-rename goals to lite and a payment-feature goal to strict. |
+| VER-001 | inspection | VERSION is `0.1.0`; CHANGELOG.md has a 0.1.0 section and states tagged GitHub Releases remain deferred. |
+| VER-002 | test | `test_version_reports_source_version_without_writes` and `test_version_rejects_mutating_or_check_flags`. |
+| VER-003 | test | Fresh install packages VERSION and prints `Package version:` matching `package_version()`. |
 | READ-001 | inspection | First 40 README lines contain purpose, audience, prerequisites, existing-project install/helper command and new-copy preview/apply path. No timed reading or usability-study result is claimed. |
 | READ-002 | inspection | Calculator example links recorded Ask-mode evidence and is labeled a summary; comparison links upstream descriptions and marks fit as editorial judgment, with outcome comparisons unmeasured. |
 | READ-003 | inspection | README links VERIFICATION, OPTIONAL_SKILLS, canonical SKILLS and migration guidance. One-off inspection resolved 37 relative links/anchors and confirmed all four existing pack commands. |

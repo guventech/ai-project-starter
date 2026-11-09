@@ -18,6 +18,7 @@ RESET_TARGETS = (
 RESET = {path: f'scripts/project_templates/{path}' for path in RESET_TARGETS}
 REMOVE = tuple(sorted((
     'CURSOR_UPDATE_PROMPT.md', 'publish-to-github.py', 'publish-to-github.sh',
+    'VERSION', 'CHANGELOG.md',
     'tests/test_starter.py', 'tests/test_install_chat_command.py', 'tests/test_init_project.py',
     'evals/prior-art-search-hygiene.md',
     'docs/superpowers/specs/2026-11-09-maint-002-permission-probe-design.md',
