@@ -41,7 +41,16 @@ Owner: repository maintainer. Acceptance criteria: MAINT-001 in docs/PRD.md.
 - [x] Confirm Windows and Linux CI jobs pass on the maintenance PR; update QUALITY_GATES with run [42583862239](https://github.com/guventech/ai-project-starter/actions/runs/42583862239).
 - [x] Merge through the protected-branch PR workflow after green checks ([PR #5](https://github.com/guventech/ai-project-starter/pull/5)).
 
-MAINT-002 (tool-level write probe) and MAINT-003 (full design/security review target) remain queued.
+## MAINT-002 tool-level write probe (Phase C)
+
+Owner: repository maintainer. Acceptance criteria: MAINT-002 in docs/PRD.md. Evidence: docs/SETUP.md and docs/QUALITY_GATES.md.
+
+- [x] Matched-pair probe in isolated temp fixture (writable `generalPurpose` control + fresh `verifier` probe).
+- [x] Classify from tool trace + marker state; label `host-denied` (permission/read-only denial; control present; probe absent).
+- [x] Record evidence in SETUP/QUALITY_GATES; update PRD status; add ADR-010.
+- [ ] Commit/PR only when requested.
+
+MAINT-003 (full design/security review target) remains queued.
 
 ## Prior-art research workflow (approved)
 
