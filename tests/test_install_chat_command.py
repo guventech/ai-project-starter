@@ -46,6 +46,12 @@ class InstallCommandTests(unittest.TestCase):
         self.assertIn('SKILL.md', manifest['files'])
         self.assertIn('THIRD_PARTY.md', manifest['files'])
         self.assertIn('references/prior-art.md', manifest['files'])
+        # This procedure has no internal paths to rewrite. Its complete text,
+        # including query hygiene, must reach the installed snapshot unchanged.
+        prior_art = (ROOT / '.cursor/skills/prior-art/SKILL.md').read_text(encoding='utf-8')
+        self.assertEqual((references / 'prior-art.md').read_text(encoding='utf-8'), prior_art)
+        from scripts.install_chat_command import digest_text
+        self.assertEqual(manifest['files']['references/prior-art.md'], digest_text(prior_art))
 
     def test_upgrade_replaces_clean_stock_package(self):
         self.assertEqual(self.run_installer().returncode, 0)

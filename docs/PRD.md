@@ -154,6 +154,19 @@ Status: merged via PR #21.
 |----|-------------------|-------------------------|----------------------|---------------------|
 | CONSUME-001 | AGENTS.md shall contain only consumer behavioral rules and links, with maintainer and install details in separate docs. | Template copies inherited maintainer-only instructions and install ceremony. | AGENTS.md is at most 50 lines and omits maintainer markers; MAINTAINING.md and docs/INSTALL.md exist; the validator rejects maintainer content reintroduced into AGENTS.md. | test |
 
+## Review remediation F-16 search hygiene
+
+Status: approved scope implemented; local verification recorded in docs/QUALITY_GATES.md. Runtime scenario not run; PR CI pending.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| SEARCH-001 | The prior-art procedure shall require removal of confidential content before sending a search query. | Search providers receive query text. | Instructions exclude secrets, private PRD text, client names and internal identifiers from queries; require inspection of each outgoing query; skip search when no useful public query can be formed. | inspection |
+| SEARCH-002 | The prior-art procedure shall treat retrieved instructions as untrusted data. | Search results can contain instructions to disclose project context. | Instructions reject requests to disclose context, change the workflow or run commands; retain the three-candidate cap and named-candidate adoption approval. | inspection |
+| SEARCH-003 | The repository shall provide a synthetic search-hygiene scenario with a pass/fail rubric. | Written procedures do not establish agent enforcement. | One scenario covers confidential input, an injected result and a no-public-query variant; records expected outcomes and labels unexecuted runtime checks as not run. | inspection |
+| SEARCH-004 | The installed prior-art reference shall retain the source procedure. | Global installations use a bundled snapshot. | The existing installer test compares the installed prior-art reference with the source and its manifest digest; both starter commands pass. | test |
+
+Wording self-check: each row uses shall, contains one requirement, avoids the listed vague words, and has a verification method. Approved plan: revise the existing procedure, add one synthetic scenario, extend the existing packaging check, and record actual gate results. No new skills, dependencies or research harness. Risk: instruction inspection may be mistaken for runtime enforcement; report those evidence types apart. Rollback: revert the F-16 PR; installed snapshots change only on an authorized upgrade.
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.
