@@ -129,6 +129,14 @@ Owner: repository maintainer. Acceptance criteria: GUIDE-001 in docs/PRD.md.
 
 - [x] Add skills-meta blocks, generator, docs/SKILLS.md, and stale-guide validation.
 - [x] Replace competing skill inventories with links to the guide.
+- [x] Merge through protected-branch PR after CI ([PR #20](https://github.com/guventech/ai-project-starter/pull/20)).
+
+## Review F-05 consumer AGENTS split
+
+Owner: repository maintainer. Acceptance criteria: CONSUME-001 in docs/PRD.md. Codex + Cursor: keep brand; finish F-03 then F-05.
+
+- [x] Move maintainer process to MAINTAINING.md and install/upgrade to docs/INSTALL.md.
+- [x] Keep AGENTS.md under 50 lines with consumer rules and links only; reject maintainer markers in validation.
 - [ ] Merge through protected-branch PR after CI.
 
 ## Application adoption checklist

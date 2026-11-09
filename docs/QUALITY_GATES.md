@@ -35,7 +35,7 @@ Evidence is a test name, a screenshot, or a short note.
 | REQ-005 | inspection | trust-boundary-audit defines inputs/outputs for four phases, a coverage ledger, fresh verification, three candidate dispositions and report fields including gaps. |
 | REQ-006 | inspection | project-planning links interviews/design review and slice exit criteria; release-check maps requirements to evidence and discloses missing, stale or skipped gates. |
 | REQ-007 | inspection | Architect questions assumptions and routes user decisions through the parent; verifier defines goldfish, diff and security modes. Both retain readonly true; starter validation passes. |
-| REQ-008 | inspection | docs/SKILLS.md names all nine skills; README/AGENTS/CONFIGURATION link it; README/AGENTS list the four pack commands; CONFIGURATION.md records host/installation limits. |
+| REQ-008 | inspection | docs/SKILLS.md names all nine skills; README/AGENTS/CONFIGURATION link it; README lists the four pack commands; CONFIGURATION.md records host/installation limits. |
 | REQ-009 | test | `test_each_required_skill_removal_detected` checks each of nine skills from `scripts/skill_inventory.py`. `test_skill_inventory_sources_agree` keeps installer, validator and CONFIGURATION/README inventories aligned. |
 | SETUP-001 | inspection | GitHub branch-protection PUT response confirms both job names restricted to app 15368, strict checks, admin enforcement, pull requests, resolved conversations and blocked force pushes/deletion. |
 | SETUP-002 | inspection | Four user-level checkouts and source SHAs are recorded in SETUP.md. Counts: Matt 27, Addy 25, Cloudflare 1, EGM 7 canonical skills. EGM standards and Addy shared references exist; the nine project skill files have no diff. |
@@ -50,6 +50,7 @@ Evidence is a test name, a screenshot, or a short note.
 | CHAT-005 | demonstration | Existing-project routing loaded a bundled workflow reference despite an optional upstream skill of the former colliding name. Bundled references use direct paths; no second slash command or configuration copy was requested. Installer tests cover all eight workflow references plus both reviewers. |
 | COLLIDE-001 | test | Local skills use decision-interview, test-first-change, hypothesis-debugging and trust-boundary-audit; validator rejects colliding upstream directory names; forced upgrade removes obsolete reference snapshots. Merged via [PR #19](https://github.com/guventech/ai-project-starter/pull/19). |
 | GUIDE-001 | test | `docs/SKILLS.md` is generated from skills-meta; `--check` and validator detect drift; README/AGENTS/CONFIGURATION link the guide. |
+| CONSUME-001 | test | `AGENTS.md` stays ≤50 lines without maintainer markers; `MAINTAINING.md` and `docs/INSTALL.md` exist; `test_agents_maintainer_content_detected` fails when maintainer content returns. |
 | CHAT-006 | test | Installer tests preserve an occupied destination and a customized command on repeat install. The symlink case is skipped when the host cannot create links; Linux CI executes that case. |
 | PRIOR-001 | test | `python scripts/validate_starter.py` requires `.cursor/skills/prior-art`; `test_each_required_skill_removal_detected` covers `prior-art`. |
 | PRIOR-002 | inspection | prior-art steps cap candidates at three, rank fit then activity/license then stars, and continue when search is unavailable. |
