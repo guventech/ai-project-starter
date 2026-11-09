@@ -61,7 +61,8 @@ Evidence is a test name, a screenshot, or a short note.
 | HARD-001 | test | `test_upgrade_refuses_incomplete_manifest` and `test_upgrade_refuses_malformed_manifest_digest` refuse without changing files; clean/force upgrade regressions remain green. |
 | HARD-002 | test | `test_unregistered_skill_detected` fails validation for an extra skill folder; `test_skill_inventory_sources_agree` requires each required skill in README, CONFIGURATION and AGENTS. |
 | HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
-| PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Local validator and unittest suite passed after redaction. |
+| PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Merged via [PR #16](https://github.com/guventech/ai-project-starter/pull/16). |
+| ATTR-001 | test | `THIRD_PARTY.md` records upstream sources and classifications; installer tests expect the packaged notice and manifest digest entry; README links the notice. |
 
 ## Inventory and upgrade hardening verification
 

@@ -16,4 +16,4 @@ disable-model-invocation: true
 Output: requirement/slice, observed red failure, green result, refactor result and remaining checks.
 Exit: each implemented slice has observed red/green evidence and affected regressions pass; missing checks remain explicit.
 
-Inspiration: [Matt Pocock's skills](https://github.com/mattpocock/skills). This is an original, reduced workflow for this starter.
+Inspiration: [Matt Pocock's skills](https://github.com/mattpocock/skills). Independently written reduced workflow; see THIRD_PARTY.md.

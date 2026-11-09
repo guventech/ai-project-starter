@@ -28,4 +28,4 @@ Resolve findings in the document, recording accepted/rejected/deferred dispositi
 Output: design path/revision, reviewer scopes and isolation method, findings/dispositions, verification plan and approval status.
 Exit: both fresh reviews completed, zero unresolved implementation blockers, and human approval recorded. Missing reviewer execution keeps the gate unverified.
 
-Inspiration: [Google's Elephant-Goldfish Model](https://github.com/google/elephant-goldfish-model). This original workflow does not bundle or reproduce the full plugin.
+Inspiration: [Google's Elephant-Goldfish Model](https://github.com/google/elephant-goldfish-model). Independently written workflow that does not bundle or reproduce the full plugin. See THIRD_PARTY.md.

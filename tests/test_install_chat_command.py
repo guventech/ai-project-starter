@@ -30,6 +30,8 @@ class InstallCommandTests(unittest.TestCase):
         self.assertEqual(list(self.destination.rglob('SKILL.md')),
                          [self.destination / 'SKILL.md'])
         self.assertIn('MIT License', (self.destination / 'LICENSE').read_text(encoding='utf-8'))
+        self.assertTrue((self.destination / 'THIRD_PARTY.md').is_file())
+        self.assertIn('Third-party notices', (self.destination / 'THIRD_PARTY.md').read_text(encoding='utf-8'))
         expected = {f'{name}.md' for name in (*WORKFLOWS, 'architect', 'verifier')}
         references = self.destination / 'references'
         self.assertEqual({p.name for p in references.iterdir()}, expected)
@@ -42,6 +44,7 @@ class InstallCommandTests(unittest.TestCase):
         self.assertFalse(list(self.destination.rglob('.env*')))
         manifest = json.loads((self.destination / '.installer-manifest.json').read_text(encoding='utf-8'))
         self.assertIn('SKILL.md', manifest['files'])
+        self.assertIn('THIRD_PARTY.md', manifest['files'])
         self.assertIn('references/prior-art.md', manifest['files'])
 
     def test_upgrade_replaces_clean_stock_package(self):

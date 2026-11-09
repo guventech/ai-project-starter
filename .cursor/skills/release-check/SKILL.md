@@ -16,4 +16,4 @@ Example: For a database change, verify compatibility with both old and new appli
 Output: ready/blocked, findings with paths, actual results, limitations and rollback readiness.
 Exit: every applicable required gate has current evidence, no release blockers remain, and accepted residual risks have an owner. Template validation alone cannot establish application release readiness.
 
-Lifecycle inspiration: [Addy Osmani's agent skills](https://github.com/addyosmani/agent-skills). This is an original, reduced workflow for this starter.
+Lifecycle inspiration: [Addy Osmani's agent skills](https://github.com/addyosmani/agent-skills). Independently written reduced workflow; see THIRD_PARTY.md.

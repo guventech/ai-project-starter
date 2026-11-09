@@ -28,4 +28,4 @@ Input: ledger and verified dispositions. Report scope/revision, checks executed,
 
 Exit: every scoped surface has a recorded status, every candidate has a disposition, and each confirmed finding has independent verification. Missing coverage or verification remains visible and blocks a claim of completed audit coverage. Fixes require implementation authorization and retesting through the affected boundary.
 
-Inspiration: [Cloudflare's security audit skill](https://github.com/cloudflare/security-audit-skill). This original four-phase workflow omits the full pack's schemas, harness and validators; it does not claim equivalent coverage.
+Inspiration: [Cloudflare's security audit skill](https://github.com/cloudflare/security-audit-skill). Independently written four-phase workflow that omits the full pack's schemas, harness and validators; it does not claim equivalent coverage. See THIRD_PARTY.md.

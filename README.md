@@ -78,7 +78,7 @@ If you install the optional packs, bare `/grill-me`, `/tdd` and `/security-audit
 
 ## Recommended Additional Skills
 
-These local files are original, reduced workflows informed by the packs below; they do not vendor the full packs or provide their complete tooling. Optional installation commands:
+These local files are independently written, reduced workflows informed by ideas from the packs below; they do not vendor the full packs or provide their complete tooling. Attribution and comparison results are in [THIRD_PARTY.md](THIRD_PARTY.md). Optional installation commands:
 
 ```sh
 npx skills add mattpocock/skills

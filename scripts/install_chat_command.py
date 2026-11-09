@@ -38,7 +38,8 @@ def is_sha256_digest(value):
 
 def planned_files():
     files = {'SKILL.md': (ROOT / '.cursor/skills/project-helper/SKILL.md').read_text(encoding='utf-8'),
-             'LICENSE': (ROOT / 'LICENSE').read_text(encoding='utf-8')}
+             'LICENSE': (ROOT / 'LICENSE').read_text(encoding='utf-8'),
+             'THIRD_PARTY.md': (ROOT / 'THIRD_PARTY.md').read_text(encoding='utf-8')}
     for name in WORKFLOWS:
         files[f'references/{name}.md'] = reference_text(ROOT / '.cursor/skills' / name / 'SKILL.md')
     for name in REVIEWERS:
