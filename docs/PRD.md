@@ -244,6 +244,18 @@ Status: owner approved F-02 as the next batch; reference and first eight attempt
 
 Wording self-check: each shall row contains one requirement, avoids listed vague words and has a verification method. Authorized plan: define/preregister method and rubric, obtain fresh design reviews, build the worked example and typed-action/container harness with focused tests, run one pair per scenario, inspect/verify artifacts, then submit one PR after source checks and both CI jobs. Limits: native Windows sandbox unavailable; global Cursor configuration stays unchanged; results apply to the controlled protocol and selected model, not the full IDE or bare system prompt.
 
+## Review remediation F-09 process weights
+
+Status: implementing after Cursor + Codex agreement on main tip through PR #29.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| WEIGHT-001 | The starter shall define Lite, Standard and Strict process weights in docs/SKILLS.md with required and skippable gates. | Small edits inherited full planning ceremony. | docs/SKILLS.md contains a Process weights section naming Lite, Standard and Strict with required and skippable columns. | inspection |
+| WEIGHT-002 | The project-helper skill shall select a process weight from the stated goal when markers match, and ask one weight question only when the goal does not determine the weight. | Users need automatic ceremony reduction without a long questionnaire. | project-helper instructions require marker-based selection, one question when undetermined, Lite skipping PRD/design-review ceremony, and Strict retaining design/security gates when triggered. | inspection |
+| WEIGHT-003 | The repository shall classify a typo or symbol-rename goal as Lite and a payment-feature goal as Strict through an executable check. | Weight selection must be regression-tested without claiming live IDE routing. | `infer_process_weight` returns lite for typo and symbol-rename goals and strict for a payment-feature goal. | test |
+
+Wording self-check: each shall row is one requirement, avoids the listed vague words, and has a measurable criterion plus verification method. Approved scope: document weights in the generated skill guide, teach project-helper the selection rules, add `scripts/process_weight.py` with unit tests, run starter gates, and submit one PR. No new workflow skill, dependency, branding change or F-02 runner work. Risk: keyword markers can mis-classify; keep an ask-once fallback when undetermined and prefer Strict when Strict markers are present.
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.

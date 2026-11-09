@@ -23,7 +23,17 @@ The user needs one entry point, not a list of skills. If their message does not 
 
 After that, ask one relevant question at a time. Explain decisions in plain language. Do not ask the user to invoke another slash command, copy configuration, install extra skill packs or understand agent roles. Continue the conversation after each answer; carry out the approved work and its checks instead of stopping at a plan.
 
-Inspection, relevant questions and preparing a proposed plan are already authorized by this command; do not add approval gates merely to read a procedure or outline requirements. Obtain approval of the concrete implementation plan before edits. Respect narrower user requests such as review-only or no writes.
+### Process weight
+
+Select **Lite**, **Standard** or **Strict** from the stated goal before planning ceremony. Prefer the deterministic markers in `scripts/process_weight.py` when that file is available in the open project; otherwise apply the same marker rules below. Ask one weight question only when the goal does not determine the weight. If the user already named a weight, keep it unless the goal clearly requires Strict.
+
+- **Strict** when the goal mentions payments, billing, checkout, authentication, authorization, OAuth, passwords, secrets, credentials, API keys, force-push, destructive operations, wiping data, or deleting production data.
+- **Lite** when the goal is a typo/spelling fix, renaming a function/method/variable/symbol/identifier/file, docs-only or documentation-only edits, a CI config bump, comment-only edits, or whitespace cleanup, and no Strict marker applies.
+- **Standard** when markers do not determine Lite or Strict, or when the user chooses Standard.
+
+Under **Lite**, skip PRD fill/approval ceremony, prior-art, decision-interview and design-review; still inspect the target, keep changes small, run applicable project checks and report results. Under **Standard**, keep the default workflow in this skill. Under **Strict**, obtain plan approval before edits; use design-review for material design changes and trust-boundary-audit when sensitive boundaries are in scope.
+
+Inspection, relevant questions and preparing a proposed plan are already authorized by this command; do not add approval gates merely to read a procedure or outline requirements. Obtain approval of the concrete implementation plan before edits unless the selected weight is Lite. Respect narrower user requests such as review-only or no writes.
 
 ## Locate your procedures
 
@@ -35,8 +45,8 @@ Read the target project's own instructions before its source. Those instructions
 
 ## Start a new project
 
-1. Ask what the person wants to build if not given. Confirm the target folder; default to the open folder only after checking its contents. Treat a folder containing files other than version-control/editor metadata as nonempty. If nonempty, describe the existing contents and ask whether to use this folder or choose a separate folder; wait for that informed decision before writing planning notes or application files. An earlier "build here" request made before inspection does not settle this choice. Never erase files or switch into improvement mode without an explicit decision from the user.
-2. Unless the user skips research, run prior-art for the stated goal before locking a stack or implementation plan. Keep the memo capped; do not clone or copy a candidate without explicit approval of that candidate.
+1. Ask what the person wants to build if not given. Confirm the target folder; default to the open folder only after checking its contents. Treat a folder containing files other than version-control/editor metadata as nonempty. If nonempty, describe the existing contents and ask whether to use this folder or choose a separate folder; wait for that informed decision before writing planning notes or application files. An earlier "build here" request made before inspection does not settle this choice. Never erase files or switch into improvement mode without an explicit decision from the user. Select the process weight from the build goal (new projects are rarely Lite; ask once when undetermined).
+2. Unless the weight is Lite or the user skips research, run prior-art for the stated goal before locking a stack or implementation plan. Keep the memo capped; do not clone or copy a candidate without explicit approval of that candidate.
 3. Use project-planning and, for unresolved decisions, decision-interview. Gather the audience, main journey, constraints and measurable success. Recommend a stack only after these are understood, using prior-art findings when present. Requirements/design notes may be drafted for review; do not install dependencies, scaffold application code or create external repositories before plan approval.
 4. Use design-review for a new system or material design choice. Invoke fresh reviewers with the architect/verifier instructions. If the host has no named reviewer, give a fresh general reviewer the resolved role file and relevant procedure path. Report missing fresh-context capability as unverified; never claim self-review is independent.
 5. Present a short concrete plan: what will be built, target folder, acceptance criteria, key risks and checks. Obtain approval. Existing approval covers routine work within the same scope.
@@ -44,11 +54,11 @@ Read the target project's own instructions before its source. Those instructions
 
 ## Improve the open project
 
-1. Confirm the current workspace is the intended project. Read its instructions, relevant docs, source, test configuration, CI and working-tree state. Ask which problem or goal matters if it was not given; offer a general assessment if the user wants one.
-2. Unless the user skips research, run prior-art when the goal is not clearly tiny (typo, docs-only, CI/config bump, or single-file fix). Keep the memo capped; do not clone or copy a candidate without explicit approval of that candidate.
-3. Start with a read-only assessment scoped to that goal. Use design-review for design questions, trust-boundary-audit for a scoped security assessment, hypothesis-debugging for a reproducible failure, and release-check for readiness. Track evidence and unverified claims; distinguish defects against actual requirements from optional improvements and unanswered contract questions. Give a release-readiness verdict only when requested; missing starter-specific document names alone do not make another project defective. Do not change application files or run state-changing commands during assessment. Read-only commands can still require host permission.
-4. Explain the main findings and propose a bounded improvement plan with measurable acceptance criteria and checks. Preserve the project's stack, conventions and uncommitted work. Do not replace its AGENTS.md, application CI or documentation with this starter's files.
-5. Obtain approval before edits, then implement the approved scope using the relevant procedures, run its checks and verify the resulting diff. Report what changed, actual results and remaining limitations. Do not merge, push, publish or deploy unless authorized for that project.
+1. Confirm the current workspace is the intended project. Read its instructions, relevant docs, source, test configuration, CI and working-tree state. Ask which problem or goal matters if it was not given; offer a general assessment if the user wants one. Select the process weight from that goal (or ask once when undetermined).
+2. Unless the weight is Lite or the user skips research, run prior-art when the goal is not clearly tiny (typo, docs-only, CI/config bump, or single-file fix). Keep the memo capped; do not clone or copy a candidate without explicit approval of that candidate.
+3. Start with a read-only assessment scoped to that goal. Use design-review for design questions when weight is not Lite, trust-boundary-audit for a scoped security assessment or Strict boundary work, hypothesis-debugging for a reproducible failure, and release-check for readiness. Track evidence and unverified claims; distinguish defects against actual requirements from optional improvements and unanswered contract questions. Give a release-readiness verdict only when requested; missing starter-specific document names alone do not make another project defective. Do not change application files or run state-changing commands during assessment. Read-only commands can still require host permission.
+4. Explain the main findings and propose a bounded improvement plan with measurable acceptance criteria and checks. Preserve the project's stack, conventions and uncommitted work. Do not replace its AGENTS.md, application CI or documentation with this starter's files. For Lite, the plan may be a one-line intended edit plus checks.
+5. Obtain approval before edits unless the selected weight is Lite, then implement the approved (or Lite) scope using the relevant procedures, run its checks and verify the resulting diff. Report what changed, actual results and remaining limitations. Do not merge, push, publish or deploy unless authorized for that project.
 
 ## Finish
 

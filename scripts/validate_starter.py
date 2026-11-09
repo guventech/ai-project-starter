@@ -16,7 +16,7 @@ REQUIRED = ['README.md', 'AGENTS.md', 'MAINTAINING.md', 'LICENSE', '.env.example
             'docs/INSTALL.md', 'docs/RULES.md',
             '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh',
             'scripts/install_chat_command.py', 'scripts/skill_inventory.py',
-            'scripts/generate_skills_guide.py']
+            'scripts/generate_skills_guide.py', 'scripts/process_weight.py']
 MAINTAINER_REQUIRED = {
     'publish-to-github.py', 'publish-to-github.sh', 'scripts/init_project.py',
     'scripts/project_manifest.py', 'scripts/project-manifest.json',
