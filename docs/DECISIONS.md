@@ -42,6 +42,16 @@ Consequences: the command runs from other workspaces without installing upstream
 Rollback: revert the entry point/installer diff; remove the installed package only after checking its resolved path and user edits. Other projects are not modified by installation.
 Related paths: .cursor/skills/project-helper/, scripts/install_chat_command.py, tests/test_install_chat_command.py, README.md, docs/CONFIGURATION.md.
 
+## ADR-006: Prefer checkout v5 for the Node.js 24 CI bump
+
+Date: 2026-11-09. Status: accepted; maintenance plan approved by the user.
+Context: MAINT-001 requires Node.js 24 action releases. Both `actions/checkout@v5` and `@v6` run on Node.js 24; `@v6` also changes credential persistence.
+Options: bump only to the minimum Node.js 24 majors; jump checkout to `@v6` with setup-python `@v6`; pin exact patch tags.
+Decision: use `actions/checkout@v5` and `actions/setup-python@v6`, keep floating major tags, and verify both OS jobs on a PR before merge.
+Consequences: clears the Node.js 20 deprecation path with less behavioral change than checkout `@v6`. Future checkout `@v6` adoption stays a separate decision.
+Rollback: revert the workflow/docs commit on the maintenance branch or close the PR.
+Related paths: .github/workflows/ci.yml, docs/PRD.md, docs/QUALITY_GATES.md, docs/TASKS.md.
+
 ## New decision template
 
 ID/title, date, status, context, options, decision, consequences, rollback and related paths.

@@ -50,7 +50,7 @@ Setup risks: upstream names can overlap project skills; full-package resources m
 
 ## Proposed maintenance follow-up
 
-Status: requirements prepared; concrete implementation plan awaits approval under AGENTS.md. The user requested CI action updates, a full design/security review and a tool-level permission probe. The target for the full reviews is pending user selection; CI maintenance and the isolated probe concern this starter.
+Status: MAINT-001 implemented on PR #5 (`checkout@v5` + `setup-python@v6`); awaiting merge. MAINT-002 and MAINT-003 remain queued. The target for the full reviews is pending user selection.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|

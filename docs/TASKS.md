@@ -32,7 +32,16 @@ Owner: repository maintainer. Acceptance criteria: CHAT-001–CHAT-006 in docs/P
 
 Publication follows the protected branch/PR workflow after CI; the final delivery reports the actual merge result.
 
-Earlier CI maintenance, tool-level permission probing and the full review target remain queued under MAINT-001–MAINT-003; this command is the user's current priority.
+## CI Node.js 24 action upgrade (MAINT-001)
+
+Owner: repository maintainer. Acceptance criteria: MAINT-001 in docs/PRD.md.
+
+- [x] Bump `actions/checkout` to `@v5` and `actions/setup-python` to `@v6` (smallest Node.js 24 majors; avoid checkout `@v6` credential-persistence change).
+- [x] Keep job names, OS matrix, Python 3.12 and workflow permissions unchanged.
+- [x] Confirm Windows and Linux CI jobs pass on the maintenance PR; update QUALITY_GATES with run [42583862239](https://github.com/guventech/ai-project-starter/actions/runs/42583862239).
+- [ ] Merge through the protected-branch PR workflow after green checks.
+
+MAINT-002 (tool-level write probe) and MAINT-003 (full design/security review target) remain queued.
 
 ## Application adoption checklist
 
