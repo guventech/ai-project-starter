@@ -82,7 +82,7 @@ Scope: query-redaction and confidentiality-skip instructions in the existing pri
 - Procedure and scenario inspection: SEARCH-001–SEARCH-003 map to the text and rubric above; the installer test covers SEARCH-004. This is author inspection, not an independent fresh-context review or live Cursor execution.
 - Design gate: not applicable; bounded revision of the existing Markdown procedure and packaging check, with no new architecture. Security evidence: inspected the outgoing-query and retrieved-content instructions; live enforcement remains unverified. No completed runtime security audit is claimed.
 - Runtime scenario: not run; model/host traces and isolation evidence unavailable in this batch. Comparative F-02 evals remain deferred.
-- PR CI: pending; both Python 3.12 OS jobs must pass before merge. Existing global snapshots were not upgraded.
+- PR CI: [run 42630609973](https://github.com/guventech/ai-project-starter/actions/runs/42630609973) passed both Python 3.12 jobs, `Starter validation (ubuntu-latest)` and `Starter validation (windows-latest)`, for implementation commit `e1a0338`. PR #23 includes the evidence follow-up; require green checks on its head before merge. Existing global snapshots were not upgraded.
 
 ## Inventory and upgrade hardening verification
 

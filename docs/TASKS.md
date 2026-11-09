@@ -147,7 +147,7 @@ Owner: repository maintainer. Acceptance criteria: SEARCH-001–SEARCH-004 in do
 - [x] Require query redaction and confidentiality skip; retain untrusted-result, candidate-cap and adoption rules.
 - [x] Add one synthetic scenario and extend the existing installer packaging check.
 - [x] Run starter gates, inspect the diff and record actual evidence; runtime scenario remains not run.
-- [ ] Submit one PR; both protected-branch CI jobs must pass before merge.
+- [x] Submit [PR #23](https://github.com/guventech/ai-project-starter/pull/23); both protected-branch CI jobs must pass before merge.
 
 ## Application adoption checklist
 

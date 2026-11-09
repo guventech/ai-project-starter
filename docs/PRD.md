@@ -156,7 +156,7 @@ Status: merged via PR #21.
 
 ## Review remediation F-16 search hygiene
 
-Status: approved scope implemented; local verification recorded in docs/QUALITY_GATES.md. Runtime scenario not run; PR CI pending.
+Status: approved scope implemented in [PR #23](https://github.com/guventech/ai-project-starter/pull/23); local verification and implementation-commit CI recorded in docs/QUALITY_GATES.md. Runtime scenario not run; require green checks on the PR head before merge.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
