@@ -18,7 +18,7 @@ Confirm read-only behavior before relying on it. Bounded live CLI smoke results 
 
 ## Local skills
 
-The nine local skills are project-helper, project-planning, decision-interview, prior-art, design-review, test-first-change, hypothesis-debugging, trust-boundary-audit and release-check. Sibling links describe procedures a selected workflow can read; they do not change explicit invocation metadata.
+The nine required local skills and their use/do-not-use guidance are listed in [SKILLS.md](SKILLS.md). Sibling links describe procedures a selected workflow can read; they do not change explicit invocation metadata. Regenerate that guide with `python scripts/generate_skills_guide.py` after editing skill metadata.
 
 ## One-command installation
 

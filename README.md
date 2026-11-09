@@ -62,17 +62,7 @@ Suggested first prompt:
 
 ## Local skill workflow
 
-- `/project-helper`: one guided conversation for a new project or the open existing project; selects the procedures below by file path.
-- `/project-planning`: requirements, small steps, verification and approval.
-- `/decision-interview`: one decision at a time until no implementation-blocking questions remain.
-- `/prior-art`: capped GitHub/web search for existing solutions; rank fit before popularity; adopt only with explicit candidate approval.
-- `/design-review`: draft with project context, challenge with at least two fresh-context reviewers, resolve findings and obtain human approval.
-- `/test-first-change`: observe a failing behavior test, implement one vertical slice, then refactor after green.
-- `/hypothesis-debugging`: reproduce, test a hypothesis and verify a focused fix.
-- `/trust-boundary-audit`: map boundaries, track coverage, hunt, verify findings with fresh agents and report dispositions.
-- `/release-check`: map requirements to current evidence and report release blockers, skipped gates and rollback readiness.
-
-Skills require explicit invocation to keep ambient context small. A selected planning or review workflow can read the relevant sibling procedure; this does not make other skills ambient. Review agents remain read-only. Fresh-context isolation is a host capability, not a guarantee supplied by a Markdown file. See [configuration limits](docs/CONFIGURATION.md) and [quality gates](docs/QUALITY_GATES.md).
+Start with `/project-helper` for routing. The canonical use/do-not-use table, lifecycle map and weights live in [docs/SKILLS.md](docs/SKILLS.md). Skills require explicit invocation to keep ambient context small. Review agents remain read-only. Fresh-context isolation is a host capability, not a guarantee supplied by a Markdown file. See [configuration limits](docs/CONFIGURATION.md) and [quality gates](docs/QUALITY_GATES.md).
 
 Former local names `grill-me`, `tdd`, `systematic-debugging` and `security-audit` were renamed so bare slash commands no longer collide with optional upstream packs. Existing global installs need `python scripts/install_chat_command.py --upgrade --force` once to drop obsolete reference snapshots.
 

@@ -10,9 +10,10 @@ except ImportError:  # pragma: no cover - package import when run via tests
 
 REQUIRED = ['README.md', 'AGENTS.md', 'LICENSE', '.env.example', 'docs/PRD.md', 'docs/ARCHITECTURE.md',
             'docs/DECISIONS.md', 'docs/TASKS.md', 'docs/QUALITY_GATES.md',
-            'docs/INTEGRATIONS.md', 'docs/CONFIGURATION.md',
+            'docs/INTEGRATIONS.md', 'docs/CONFIGURATION.md', 'docs/SKILLS.md',
             '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh',
-            'scripts/install_chat_command.py', 'scripts/skill_inventory.py']
+            'scripts/install_chat_command.py', 'scripts/skill_inventory.py',
+            'scripts/generate_skills_guide.py']
 HOME_PATH_PATTERNS = (
     re.compile(r'(?i)C:\\Users\\'),
     re.compile(r'(?i)C:/Users/'),
@@ -88,6 +89,15 @@ def validate(root):
             except ValueError as exc:
                 errors.append(f'{p.relative_to(root)}: {exc}')
     errors.extend(home_path_errors(root))
+    guide = root / 'scripts' / 'generate_skills_guide.py'
+    if guide.is_file():
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(guide), '--check'],
+            cwd=root, capture_output=True, text=True, check=False)
+        if result.returncode:
+            detail = (result.stderr or result.stdout or 'skills guide check failed').strip()
+            errors.append(f'docs/SKILLS.md: {detail}')
     return errors
 
 if __name__ == '__main__':

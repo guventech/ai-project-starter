@@ -4,6 +4,17 @@ description: Searches GitHub and the public web for existing solutions before pl
 disable-model-invocation: true
 ---
 
+<!-- skills-meta
+use_when: Starting a project or a non-tiny improvement that may reuse existing work
+do_not_use_when: User skipped research, or the goal is a tiny typo/docs/CI/single-file fix
+needs_first: One-sentence goal
+produces: Capped fit-ranked candidate memo
+done_when: Memo delivered or search unavailability disclosed
+typical_next: project-planning
+weight: light
+-->
+
+
 # Prior Art
 
 1. Confirm the goal in one sentence. If the user asks to skip research, record that and exit without searching.

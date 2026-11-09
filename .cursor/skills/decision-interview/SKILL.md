@@ -4,6 +4,17 @@ description: Interviews the user to resolve requirements and design decisions be
 disable-model-invocation: true
 ---
 
+<!-- skills-meta
+use_when: Unresolved decisions block planning or implementation
+do_not_use_when: Requirements are already settled or the user asked not to interview
+needs_first: Facts gathered from the repository
+produces: Recorded decisions, exclusions, remaining blockers
+done_when: Zero implementation blockers remain for the agreed scope
+typical_next: project-planning
+weight: standard
+-->
+
+
 # Decision Interview
 
 1. Read relevant code, docs/PRD.md and existing decisions first. Separate facts, assumptions and unanswered decisions; do not ask the user for facts the repository supplies.

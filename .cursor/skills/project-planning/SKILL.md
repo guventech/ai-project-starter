@@ -4,6 +4,17 @@ description: Plans new projects and material changes. Use when defining requirem
 disable-model-invocation: true
 ---
 
+<!-- skills-meta
+use_when: Defining requirements, architecture choices, or an implementation plan
+do_not_use_when: The change is a typo, docs-only edit, or already has an approved plan for the same scope
+needs_first: PRD wording rules understood; repository context available
+produces: Requirements table, steps, risks, verification, approval request
+done_when: Plan approved or blockers recorded
+typical_next: decision-interview if blockers remain; else design-review or test-first-change
+weight: standard
+-->
+
+
 # Project Planning
 
 1. Read relevant code and docs/PRD.md. Identify users, constraints and measurable acceptance criteria. Fill the requirements table and self-check it against the wording rules before asking for approval.
