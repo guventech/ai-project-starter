@@ -149,6 +149,16 @@ Owner: repository maintainer. Acceptance criteria: SEARCH-001–SEARCH-004 in do
 - [x] Run starter gates, inspect the diff and record actual evidence; runtime scenario remains not run.
 - [x] Submit [PR #23](https://github.com/guventech/ai-project-starter/pull/23); both protected-branch CI jobs must pass before merge.
 
+## Review F-13 read-only installer check (approved slice)
+
+Owner: repository maintainer. Acceptance criteria: CHECK-001–CHECK-003 in docs/PRD.md. Remaining F-13 versioning, release and --diff scope is deferred.
+
+- [x] Record requirements, exit-code decisions and wording self-check.
+- [x] Observe focused red/green checks for status reporting and manifest validation.
+- [x] Add --check, no-write fixture assertions and install documentation.
+- [x] Run starter gates and record actual evidence.
+- [ ] Submit one focused PR; require both OS CI jobs before merge.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

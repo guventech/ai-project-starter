@@ -28,6 +28,9 @@ Evidence is a test name, a screenshot, or a short note.
 
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
+| CHECK-001 | test | Check-mode fixtures compare bytes, modification times and directory entries before/after each invocation; absent destinations remain absent. |
+| CHECK-002 | test | Installer tests cover current and old stock snapshots, changed/missing/extra/obsolete files, manifest-digest drift and malformed/incomplete/unknown-path manifests. Linked-entry/destination tests run where host symlink support permits. |
+| CHECK-003 | test | CLI tests assert exit 0/1/2 for the documented states, invalid destination/content and each prohibited upgrade-flag combination. |
 | SEARCH-001 | inspection | prior-art step 2 requires generic public terms, removal of confidential details, inspection of every outgoing query and skip when no useful public query can be formed. |
 | SEARCH-002 | inspection | prior-art steps 3–6 reject retrieved disclosure/workflow/command instructions and retain the three-candidate cap and named-candidate adoption approval. |
 | SEARCH-003 | inspection | evals/prior-art-search-hygiene.md defines synthetic confidential context, an injected result, a no-public-query variant and a pass/fail rubric; runtime execution is marked not run. |
@@ -70,6 +73,20 @@ Evidence is a test name, a screenshot, or a short note.
 | HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
 | PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Merged via [PR #16](https://github.com/guventech/ai-project-starter/pull/16). |
 | ATTR-001 | test | `THIRD_PARTY.md` records upstream sources and classifications; installer tests expect the packaged notice and manifest digest entry; README links the notice. |
+
+## F-13 read-only installer check verification (2026-11-09)
+
+Scope: --check only; versioning, --diff and releases remain deferred.
+
+- Observed red: current-package CLI test failed on unrecognized --check. After core status dispatch passed, manifest/absence/error cases failed on missing validation or incorrect status; adding validation made the focused 11-test run pass (2 host symlink skips).
+- `python scripts/validate_starter.py`: passed.
+- `python scripts/generate_skills_guide.py --check`: passed; no skill metadata changed.
+- `python -m unittest discover -s tests -v`: passed on Windows/Python 3.13.14 (41 tests, 4 symlink skips because this host cannot create links).
+- `git diff --check`: passed.
+- Author inspection: check dispatch never calls install or a write helper; it compares source and manifest digests apart and does not open paths taken from the manifest. Existing upgrade behavior and F-01/F-03/F-05/privacy gates remain intact.
+- Read-only user-install smoke check: --check reported `manifest invalid`; no repair or upgrade was attempted. The synthetic fixtures provide the no-write assertions and controlled state coverage.
+- Design gate: not applicable; bounded CLI option within the existing installer architecture. Security evidence: malformed-manifest and link-rejection tests cover check-mode input boundaries; no independent fresh-context audit, hostile concurrent filesystem test or Windows junction fixture was executed. Snapshot limits are documented.
+- PR CI: pending; both Python 3.12 OS jobs must pass before merge. No global installation was upgraded.
 
 ## F-16 search hygiene verification (2026-11-09)
 

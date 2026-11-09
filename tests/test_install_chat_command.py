@@ -65,6 +65,105 @@ class InstallCommandTests(unittest.TestCase):
         self.assertEqual(skill.read_text(encoding='utf-8'), expected)
         self.assertNotIn('# stale marker', skill.read_text(encoding='utf-8'))
 
+    def check_without_writes(self, expected_code, expected_message, *extra_args):
+        def snapshot():
+            return {
+                path.relative_to(self.root).as_posix(): (
+                    path.lstat().st_mtime_ns,
+                    path.read_bytes() if path.is_file() and not path.is_symlink() else None,
+                )
+                for path in [self.root, *self.root.rglob('*')]
+            }
+        before = snapshot()
+        result = self.run_installer('--check', *extra_args)
+        self.assertEqual(snapshot(), before, 'check modified the installation or its parent')
+        self.assertEqual(result.returncode, expected_code, result.stdout + result.stderr)
+        self.assertIn(expected_message, result.stdout + result.stderr)
+
+    def test_check_reports_current_package_without_writes(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        self.check_without_writes(0, 'up to date')
+
+    def test_check_reports_changed_missing_extra_and_obsolete_files(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        (self.destination / 'SKILL.md').write_text('edited', encoding='utf-8')
+        (self.destination / 'LICENSE').unlink()
+        (self.destination / 'notes.txt').write_text('keep', encoding='utf-8')
+        (self.destination / 'references/grill-me.md').write_text('old', encoding='utf-8')
+        self.check_without_writes(1, '4 files differ')
+
+    def test_check_reports_old_stock_snapshot_as_drift(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        from scripts import install_chat_command as installer
+        (self.destination / 'SKILL.md').write_text('old stock', encoding='utf-8')
+        installer.write_manifest(self.destination, installer.installed_content_digests(self.destination))
+        self.check_without_writes(1, '1 files differ')
+
+    def test_check_reports_absent_installation_without_creating_it(self):
+        self.check_without_writes(1, 'not installed')
+
+    def test_check_reports_missing_manifest_without_writes(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        (self.destination / '.installer-manifest.json').unlink()
+        self.check_without_writes(1, 'manifest missing')
+
+    def test_check_rejects_invalid_manifests_without_writes(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        path = self.destination / '.installer-manifest.json'
+        original = json.loads(path.read_text(encoding='utf-8'))
+        invalid = [
+            '{', 'null', '[]', '{"files": []}',
+            json.dumps({'files': {}}),
+            json.dumps({'files': {**original['files'], 'SKILL.md': 'invalid'}}),
+            json.dumps({'files': {**original['files'], '../../outside': 'a' * 64}}),
+        ]
+        for content in invalid:
+            with self.subTest(content=content):
+                path.write_text(content, encoding='utf-8')
+                self.check_without_writes(2, 'manifest invalid')
+
+    def test_check_detects_manifest_digest_drift(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        path = self.destination / '.installer-manifest.json'
+        manifest = json.loads(path.read_text(encoding='utf-8'))
+        manifest['files']['SKILL.md'] = '0' * 64
+        path.write_text(json.dumps(manifest), encoding='utf-8')
+        self.check_without_writes(1, '1 files differ')
+
+    def test_check_rejects_upgrade_flags_without_writes(self):
+        for flags in [('--upgrade',), ('--force',), ('--upgrade', '--force')]:
+            with self.subTest(flags=flags):
+                self.check_without_writes(2, '--check cannot be combined', *flags)
+
+    def test_check_reports_invalid_destination_and_unreadable_content(self):
+        self.destination.parent.mkdir(parents=True)
+        self.destination.write_text('not a directory', encoding='utf-8')
+        self.check_without_writes(2, 'not a directory')
+        self.destination.unlink()
+        self.assertEqual(self.run_installer().returncode, 0)
+        (self.destination / 'SKILL.md').write_bytes(b'\xff')
+        self.check_without_writes(2, 'Check stopped:')
+
+    def test_check_rejects_linked_entries(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        target = self.root / 'outside.txt'
+        target.write_text('outside', encoding='utf-8')
+        link = self.destination / 'linked.txt'
+        try:
+            link.symlink_to(target)
+        except OSError:
+            self.skipTest('Creating symlinks is not permitted on this host')
+        self.check_without_writes(2, 'linked entry')
+
+    def test_check_rejects_symlink_destination(self):
+        self.destination.parent.mkdir(parents=True)
+        target = self.root / 'absent-target'
+        try:
+            self.destination.symlink_to(target, target_is_directory=True)
+        except OSError:
+            self.skipTest('Creating symlinks is not permitted on this host')
+        self.check_without_writes(2, 'linked destination')
+
     def test_upgrade_refuses_extra_files(self):
         self.assertEqual(self.run_installer().returncode, 0)
         (self.destination / 'user-notes.txt').write_text('keep', encoding='utf-8')

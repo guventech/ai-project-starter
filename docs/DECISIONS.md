@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-018: Read-only installed snapshot check (F-13 slice)
+
+Date: 2026-11-09. Status: accepted; bounded slice approved by the owner.
+Context: global installations are snapshots; upgrade refusal cannot tell users whether installed content matches the current checkout without attempting an upgrade.
+Options: add a read-only check; implement versioning, releases and diff output together; leave inspection manual.
+Decision: add --check with exit 0 for up to date, 1 for drift or absent installation/manifest, and 2 for invalid manifests, destinations, arguments or read errors. Compare current-source content and installed-manifest digests apart; count each differing file path once. Reject linked destinations/entries and never use manifest keys as filesystem paths. Reject upgrade flags in check mode.
+Consequences: no network lookup, installation writes, new dependency or skill. A stock older snapshot can report drift; missing/invalid manifests take precedence. The manifest checks accidental integrity, not authenticity; concurrent filesystem changes remain outside the snapshot guarantee. Versioning, --diff and releases remain deferred.
+Rollback: revert this slice's PR; installations are unchanged by check mode.
+Related paths: scripts/install_chat_command.py, tests/test_install_chat_command.py, docs/INSTALL.md, docs/PRD.md, docs/TASKS.md, docs/QUALITY_GATES.md.
+
 ## ADR-017: Redact prior-art queries before search (F-16)
 
 Date: 2026-11-09. Status: accepted; bounded remediation approved by the owner.
