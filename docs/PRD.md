@@ -167,6 +167,18 @@ Status: approved scope implemented in [PR #23](https://github.com/guventech/ai-p
 
 Wording self-check: each row uses shall, contains one requirement, avoids the listed vague words, and has a verification method. Approved plan: revise the existing procedure, add one synthetic scenario, extend the existing packaging check, and record actual gate results. No new skills, dependencies or research harness. Risk: instruction inspection may be mistaken for runtime enforcement; report those evidence types apart. Rollback: revert the F-16 PR; installed snapshots change only on an authorized upgrade.
 
+## Review remediation F-13 read-only installer check
+
+Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-project-starter/pull/24); local verification and implementation-commit CI recorded in docs/QUALITY_GATES.md. Require green checks on the PR head before merge. Versioning, releases and --diff remain deferred.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| CHECK-001 | The installer shall report installed package status through --check without writing files. | Users need to inspect snapshots before choosing an upgrade. | Reports up to date, N files differ, not installed, manifest missing or manifest invalid; tests compare file bytes, modification times and directory entries before and after each check. | test |
+| CHECK-002 | The check shall compare installed files with the current checkout and validate the installed manifest. | A manifest matching an older snapshot does not mean the snapshot matches the current source. | Changed, missing, extra and obsolete files count as differences; a stock older snapshot reports drift; malformed or incomplete manifests and linked entries are rejected. | test |
+| CHECK-003 | The check command shall return documented exit codes. | Scripts need to distinguish drift from errors. | Exit 0 means up to date; exit 1 means drift, absent installation or absent manifest; exit 2 means invalid manifest, unsupported destination, read error or invalid arguments; --check with --upgrade or --force exits 2 without writes. | test |
+
+Wording self-check: each shall row has one requirement, a measurable acceptance criterion and a test method; none uses the listed vague words. Approved plan: add check dispatch, fixture-based red/green tests and install documentation, then run both starter gates and PR CI. Risk: confusing manifest integrity with current-source freshness; test those comparisons apart. The manifest detects accidental edits, not tampering. No new dependencies or skills. Rollback: revert this slice's PR; check mode does not change installations.
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.

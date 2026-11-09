@@ -249,6 +249,61 @@ def install(destination, upgrade=False, force=False, fail_after=None):
     return destination, backup_root, True
 
 
+def check_package(destination):
+    """Compare a snapshot with this checkout without changing the destination."""
+    destination = Path(destination).expanduser().absolute()
+    if destination.name != 'project-helper':
+        raise ValueError('Destination folder must be named project-helper for Cursor discovery.')
+    if destination.is_symlink() or destination.is_junction():
+        raise ValueError('linked destination')
+    if not destination.exists():
+        return 1, 'not installed'
+    if not destination.is_dir():
+        raise ValueError('Destination is not a directory')
+
+    # Inspect entries before opening content. Never use manifest keys as paths,
+    # and do not follow links or junctions out of the package.
+    actual = set()
+    pending = [destination]
+    while pending:
+        for path in pending.pop().iterdir():
+            if path.is_symlink() or path.is_junction():
+                raise ValueError('linked entry in installation')
+            if path.is_dir():
+                pending.append(path)
+            elif path.is_file():
+                actual.add(path.relative_to(destination).as_posix())
+            else:
+                raise ValueError('Unsupported entry in installation')
+
+    planned = planned_files()
+    if MANIFEST_NAME not in actual:
+        if (destination / MANIFEST_NAME).exists():
+            return 2, 'manifest invalid'
+        return 1, 'manifest missing'
+    try:
+        data = json.loads((destination / MANIFEST_NAME).read_text(encoding='utf-8'))
+    except (ValueError, UnicodeError):
+        return 2, 'manifest invalid'
+    manifest = data.get('files') if isinstance(data, dict) else None
+    if (not isinstance(manifest, dict)
+            or not set(planned).issubset(manifest)
+            or set(manifest) - set(planned) - OBSOLETE_REFERENCE_PATHS
+            or any(not isinstance(digest, str) or not is_sha256_digest(digest)
+                   for digest in manifest.values())):
+        return 2, 'manifest invalid'
+    current = installed_content_digests(destination)
+    actual.discard(MANIFEST_NAME)
+    different = (set(planned) ^ actual) | {
+        relative for relative, content in planned.items()
+        if (current.get(relative) != digest_text(content)
+            or current.get(relative) != manifest[relative].lower())
+    }
+    if different:
+        return 1, f'{len(different)} files differ'
+    return 0, 'up to date'
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--destination', type=Path,
@@ -258,7 +313,19 @@ def main():
                         help='Replace a clean stock package, or install when missing.')
     parser.add_argument('--force', action='store_true',
                         help='With --upgrade, overwrite managed files after backing up diffs.')
+    parser.add_argument('--check', action='store_true',
+                        help='Report snapshot status against this checkout without writing files.')
     args = parser.parse_args()
+    if args.check:
+        if args.upgrade or args.force:
+            parser.error('--check cannot be combined with --upgrade or --force')
+        try:
+            code, message = check_package(args.destination)
+        except (OSError, ValueError) as exc:
+            print(f'Check stopped: {exc}', file=sys.stderr)
+            return 2
+        print(message)
+        return code
     try:
         destination, backup_root, replaced = install(
             args.destination, upgrade=args.upgrade, force=args.force)
