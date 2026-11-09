@@ -81,7 +81,7 @@ Risks and verification: the host must discover user-level skills after a reload;
 
 ## Prior-art research workflow
 
-Status: implemented on feature branch; awaiting PR CI and merge. Hybrid trigger, fit-first ranking, adopt-only-with-candidate-approval, and chat-plus-conditional-docs recording were decided with the user.
+Status: merged via PR #7. Hybrid trigger, fit-first ranking, adopt-only-with-candidate-approval, and chat-plus-conditional-docs recording were decided with the user.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
