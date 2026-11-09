@@ -133,6 +133,7 @@ REMOVE examples/todo_cli/README.md
 REMOVE examples/todo_cli/todo.py
 REMOVE publish-to-github.py
 REMOVE publish-to-github.sh
+REMOVE scripts/changelog_release.py
 REMOVE scripts/init_project.py
 REMOVE scripts/project-manifest.json
 REMOVE scripts/project_manifest.py
@@ -148,6 +149,7 @@ REMOVE scripts/project_templates/docs/QUALITY_GATES.md
 REMOVE scripts/project_templates/docs/RULES.md
 REMOVE scripts/project_templates/docs/SETUP.md
 REMOVE scripts/project_templates/docs/TASKS.md
+REMOVE tests/test_changelog_release.py
 REMOVE tests/test_init_project.py
 REMOVE tests/test_install_chat_command.py
 REMOVE tests/test_starter.py

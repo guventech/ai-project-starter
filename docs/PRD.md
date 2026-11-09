@@ -181,6 +181,18 @@ Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-p
 
 Status: merged via PR #32; `--diff` and published releases remain deferred.
 
+## Review remediation F-15 changelog consistency
+
+Status: implementing after Cursor + Codex agreement; PR-metadata generation and GitHub Releases remain deferred.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| LOG-001 | The repository shall validate that VERSION matches exactly one CHANGELOG.md release heading. | Readers and installers need a single current release section. | `scripts/changelog_release.py --check` exits 0 for the stock files and exits non-zero for missing, duplicate or malformed matching sections without writing files. | test |
+| LOG-002 | The repository shall print the CHANGELOG notes for the VERSION release without writing files. | Release notes need a local extraction path before any GitHub Release work. | Running the script without `--check` prints the matching heading and body for VERSION. | test |
+| LOG-003 | Starter validation shall enforce VERSION/CHANGELOG consistency for the maintainer tree. | Drift between VERSION and CHANGELOG should fail CI. | `validate_starter` reports changelog errors when the section is missing; initialized `--project` copies without those files still pass. | test |
+
+Wording self-check: each shall row is one requirement, avoids the listed vague words, and has a measurable criterion plus verification method. Approved scope: add the read-only script, wire it into validation, document implementation-PR changelog updates, add tests and regenerate the initialization baseline. Risk: Keep-a-Changelog variants can be rejected; keep the heading grammar narrow and documented.
+
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
 | VER-001 | The repository shall publish a VERSION file and CHANGELOG.md that identify the current starter package revision. | Installers and readers need a local revision marker without implying a GitHub Release. | VERSION contains `0.1.0`; CHANGELOG.md records the 0.1.0 entry and states that tagged releases remain deferred. | inspection |

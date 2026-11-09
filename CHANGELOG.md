@@ -14,6 +14,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Consumer/maintainer doc split (`AGENTS.md`, `docs/INSTALL.md`, `MAINTAINING.md`).
 - Third-party attribution notice and installer packaging of `THIRD_PARTY.md`.
 - Installer `--check` read-only snapshot status and `--version` reporting from `VERSION`.
+- Changelog/VERSION consistency check and release-note extraction (`scripts/changelog_release.py`).
 - Opt-in project initialization for clean template copies.
 - Contribution basics (`CONTRIBUTING.md` and issue templates).
 - Bounded workflow evidence artifacts under `examples/` and `evals/` (comparative outcomes remain open).

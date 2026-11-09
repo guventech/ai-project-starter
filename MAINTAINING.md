@@ -22,6 +22,7 @@ Consumer behavioral rules live in `AGENTS.md`. Keep that file free of maintainer
 
 - This repository's `main` branch requires pull requests and both starter CI jobs, including for admins.
 - Commit identity policy and release hygiene notes stay here or in release docs, not in consumer `AGENTS.md`.
+- Record noteworthy starter changes in `CHANGELOG.md` in the same implementation PR that ships them. Prefer that over evidence-only follow-up PRs. Keep `VERSION` aligned with exactly one matching `## [version]` section; check with `python scripts/changelog_release.py --check` and print notes with `python scripts/changelog_release.py`.
 
 ## Installer package
 
