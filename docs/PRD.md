@@ -7,7 +7,7 @@ Status: approved starter enhancement implemented; requirement evidence is record
 - Goals and measurable success: seven local skills, two read-only reviewers and documented review gates, with both starter check commands passing.
 - Constraints: retain a stack-agnostic template, existing Cursor metadata conventions and dependency-free validation. Keep secrets out of review inputs and reports.
 - Functional requirements and acceptance criteria: see the table below.
-- Out of scope: application code, stack selection, note-taking integration, installing external packs, publishing and deployment.
+- Out of scope: application code, stack selection, note-taking integration and application deployment. Follow-up authorization covers optional pack installation, repository protection and documentation commits.
 - Assumptions: local workflows are concise original instructions informed by the linked packs, not vendored copies. Fresh-context reviews require host support; unavailable review execution must be reported as unverified.
 
 ## Requirement wording
@@ -35,6 +35,18 @@ These rows cover the starter enhancement requested in CURSOR_UPDATE_PROMPT.md. R
 | REQ-009 | The validator shall detect removal of any required local skill. | Prevent future updates from dropping the requested workflows. | Tests remove each of the seven required skills in turn and assert a missing-skill error; both configured starter check commands pass. | test |
 
 The acceptance criterion needs a measurable value or a tolerance. The verification method is test, analysis, demonstration, or inspection.
+
+## Authorized setup follow-up
+
+The user requested all remaining checks and optional installations after the enhancement was pushed. Keep external packages in user-level Cursor directories to preserve the template's seven local skills and stack-agnostic scope. Do not configure application tooling before a stack is selected.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| SETUP-001 | The main branch shall require the Windows and Linux starter CI checks before merging changes. | Both Python 3.12 jobs passed for commit 8391565. | GitHub settings show both exact job names as required, strict status checks, and no force pushes or branch deletion. | inspection |
+| SETUP-002 | The setup shall install the four optional upstream packs outside this repository. | Keep shared resources intact and preserve the seven local skills. | Each pack has a recorded source revision and installed path; EGM retains agents and document standards; no local skill is overwritten. | inspection |
+| SETUP-003 | The verification record shall distinguish observed Cursor execution from unavailable checks. | CLI authentication and host capabilities can block runtime evidence. | Record installed editor/CLI versions, login status and results for skill discovery, read-only agents and fresh-context review; any missing result stays unverified. | demonstration |
+
+Setup risks: upstream names can overlap project skills; full-package resources must remain beside their skills; live execution requires Cursor authentication. Rollback removes only the added user-level package directories and the new branch-protection configuration after checking current state. Existing user configuration remains untouched.
 
 ## To be resolved (TBR)
 

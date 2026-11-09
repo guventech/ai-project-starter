@@ -55,7 +55,7 @@ npx skills add google/elephant-goldfish-model
 - [Cloudflare's security audit skill](https://github.com/cloudflare/security-audit-skill): a larger audit workflow with coverage ledgers, independent verification and report validators.
 - [Google's Elephant-Goldfish Model](https://github.com/google/elephant-goldfish-model): context-rich drafting and fresh-context design review. Upstream recommends the complete plugin so reviewer prompts and document standards are available; a skills-only install does not establish full-plugin compatibility.
 
-The [Skills CLI](https://github.com/vercel-labs/skills) requires Node.js 22.20 or later at the time of this update. Node.js is optional for this template; its checks use only Python. Run installation from your project, choose Cursor and select skills; add `--list` to browse or `--skill <name> --agent cursor` to select a skill and agent. Inspect proposed changes before accepting an overwrite: names such as `grill-me`, `tdd` and `security-audit` overlap this starter. Retain one intended implementation per name and review the resulting diff. External packs can require shared references, tools or subagent capabilities; follow their upstream setup instructions. No pack installation or live CLI compatibility test is part of this update. Note-taking packs are outside this starter's scope.
+The [Skills CLI](https://github.com/vercel-labs/skills) requires Node.js 22.20 or later at the time of this update. Node.js is optional for this template; its checks use only Python. Run installation from your project, choose Cursor and select skills; add `--list` to browse or `--skill <name> --agent cursor` to select a skill and agent. Inspect proposed changes before accepting an overwrite: names such as `grill-me`, `tdd` and `security-audit` overlap this starter. Retain one intended implementation per name and review the resulting diff. External packs can require shared references, tools or subagent capabilities; follow their upstream setup instructions. The maintainer's optional packages were installed outside the repository; see [the setup record](docs/SETUP.md) for paths, revisions and runtime limits. Note-taking packs are outside this starter's scope.
 
 ## Validate this template
 
@@ -79,7 +79,7 @@ Before relying on the workflows in your installed Cursor version:
 3. Check the GitHub Actions results for Python 3.12 on Windows and Linux. Configure required status checks through GitHub repository settings if you want merges gated on CI.
 4. After choosing an application stack, configure its formatting, linting, tests, build and relevant security/accessibility checks. Optional external skill packs can be installed when needed; the local workflows do not require them.
 
-Local enhancement checks passed on Windows with Python 3.13.14. Live Cursor execution and external-pack installation have not been tested. See [the verification record](docs/QUALITY_GATES.md#enhancement-verification-record-2026-11-09) for the exact scope and limitations.
+Local enhancement checks passed on Windows with Python 3.13.14; GitHub CI passed on Windows and Linux with Python 3.12. This repository now requires both CI jobs through `main` branch protection. Optional packs are installed on the maintainer's machine, and live Cursor execution awaits CLI sign-in. These machine settings are not bundled into template copies. See [the setup record](docs/SETUP.md) and [verification record](docs/QUALITY_GATES.md#enhancement-verification-record-2026-11-09) for evidence and limitations.
 
 ## Publish an extracted copy
 
