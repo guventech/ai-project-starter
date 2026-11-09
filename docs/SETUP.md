@@ -32,28 +32,28 @@ Update a package only after inspecting its diff and verifying shared resources a
 
 ## Cursor runtime verification
 
-- Installed editor: Cursor 3.29.9, build `306d153d51d714882ab7b1bc49649cab624e8a30`, Windows x64.
+- Installed editor: Cursor 3.29.9 on Windows x64.
 - Installed official Agent CLI: `2026.11.05-86047df`, under `%LOCALAPPDATA%/cursor-agent`. The installer was inspected before execution; its target did not already exist.
 - `agent status`: authenticated after the user completed the official browser login. No credentials were read or copied from the editor. Account identifiers and authentication tokens are omitted from this record.
 - The workspace was trusted for these CLI runs. Read-only skill checks used `--print --mode ask`; reviewer probes used native Task calls in a separate session. No blanket tool-approval flag was enabled.
 
 ### Observed smoke results
 
-- Project planning: `/project-planning` attached the project's SKILL.md and returned its requirements-first step and approval exit condition. CLI session `98d12976-75ea-471a-b35b-90c497431d4b`.
-- Six-skill attachment check: design-review, release-check and systematic-debugging attached project files; grill-me, tdd and security-audit attached upstream files. CLI session `18a0a0f6-93a1-489e-ba1e-c4e2782a39ce`. This is an observed name collision, not a missing local file.
-- Explicit-path fallback: a read-only session read the three exact local paths and returned their distinctive local instructions. CLI session `ffd108eb-82d7-49e5-a41d-430b76269c96`. This proves path loading, not bare-slash precedence.
-- EGM: `/egm-review` attached the installed plugin's canonical review skill with its reviewer/standards references. CLI session `cc46c326-ea96-41fe-bd2f-4ab4f88c368b`. No full EGM pipeline or artifact generation was executed.
-- Custom reviewers: the Task trace shows separate non-resumed `architect` and `verifier` calls with bounded prompts and no parent-only canary in their inputs. Both refused the probe write and reported the canary absent. The parent-only canary was not placed in a file. CLI session `cb48b912-c725-4e7f-8504-7347ca3e544a`.
+- Project planning: `/project-planning` attached the project's SKILL.md and returned its requirements-first step and approval exit condition.
+- Six-skill attachment check: design-review, release-check and systematic-debugging attached project files; grill-me, tdd and security-audit attached upstream files. This is an observed name collision, not a missing local file.
+- Explicit-path fallback: a read-only session read the three exact local paths and returned their distinctive local instructions. This proves path loading, not bare-slash precedence.
+- EGM: `/egm-review` attached the installed plugin's canonical review skill with its reviewer/standards references. No full EGM pipeline or artifact generation was executed.
+- Custom reviewers: the Task trace shows separate non-resumed `architect` and `verifier` calls with bounded prompts and no parent-only canary in their inputs. Both refused the probe write and reported the canary absent. The parent-only canary was not placed in a file.
 - The reviewer probe file was absent and `git status --short` was empty after the runs.
 
 ### MAINT-002 matched-pair write probe (2026-11-09)
 
-Isolated fixture: `C:\Users\guven\AppData\Local\Temp\maint-002-20261109104726` (no git remotes). Nonce payload `MAINT002-20261109104726`. Spec: `docs/superpowers/specs/2026-11-09-maint-002-permission-probe-design.md`.
+Isolated fixture: a uniquely named directory under the host temp folder (no git remotes). Spec: `docs/superpowers/specs/2026-11-09-maint-002-permission-probe-design.md`.
 
-| Role | Agent | Agent id | Write attempt | Host result | Marker |
-|------|-------|----------|---------------|-------------|--------|
-| Control | `generalPurpose` | `6cc95764-39f3-41a6-8d93-1c876664d738` | Write tool called | success | `control-20261109104726.txt` present (24 bytes, expected contents) |
-| Probe | `verifier` (readonly) | `bc21ba24-37ae-40c1-9a4b-a0134bc58981` | Write tool called | denied: "You are in ask mode and cannot run non read-only tools..." | `probe-20261109104726.txt` absent |
+| Role | Agent | Write attempt | Host result | Marker |
+|------|-------|---------------|-------------|--------|
+| Control | `generalPurpose` | Write tool called | success | control marker present with expected contents |
+| Probe | `verifier` (readonly) | Write tool called | denied: ask mode / non-read-only tools | probe marker absent |
 
 Classification: **`host-denied`**. Parent listing after both Tasks showed only the control file. Repo tree was not used as the write target. Fixture directory removed after evidence capture.
 
@@ -61,7 +61,7 @@ Limits: this demonstrates tool-level denial for one fresh local `verifier` Task 
 
 ### Limits of the observations
 
-The Task schema states new non-resumed calls start fresh; it exposes no separate context-inheritance or read-only switch. Reviewers received standard host instructions. The canary probe supports absence of earlier parent conversation in these two calls; it is not a general proof of isolation. The earlier custom-reviewer smoke (session `cb48b912-c725-4e7f-8504-7347ca3e544a`) observed behavioral refusal without a Write attempt. The MAINT-002 matched-pair probe above separately recorded a Write attempt with a permission/read-only host denial for `verifier` while the control Write succeeded. Keep the read-only metadata and scoped prompts; do not treat them as an operating-system security boundary.
+The Task schema states new non-resumed calls start fresh; it exposes no separate context-inheritance or read-only switch. Reviewers received standard host instructions. The canary probe supports absence of earlier parent conversation in these two calls; it is not a general proof of isolation. The earlier custom-reviewer smoke observed behavioral refusal without a Write attempt. The MAINT-002 matched-pair probe above separately recorded a Write attempt with a permission/read-only host denial for `verifier` while the control Write succeeded. Keep the read-only metadata and scoped prompts; do not treat them as an operating-system security boundary.
 
 The editor UI, complete EGM/security audit pipelines, every upstream skill and all optional third-party tools were not exercised. A smoke check of attachment and role behavior is distinct from end-to-end workflow validation. Repeat these probes after Cursor or package updates that affect loading or delegation.
 
@@ -73,11 +73,11 @@ The approved `/project-helper` command is installed at `~/.cursor/skills/project
 
 Authenticated CLI trials used isolated temporary workspaces outside this repository:
 
-- Menu: session `09b85146-9efe-4645-91f2-576844fc6a1b` invoked only `/project-helper` and returned the two-choice new/improve question.
-- New project: session `9ad7bdcf-f8ec-4c65-967d-f983c1ad746b` identified the user-level helper and `references/project-planning.md` without a source checkout dependency.
-- Existing project: session `97b9e9f2-b94e-4964-bad8-722b3b37e7cc` read a calculator fixture's own AGENTS.md, source and tests; loaded bundled `tdd.md` and `verifier.md`; and returned findings and proposed checks without edits or shell execution. A general reviewer used the bundled verifier role rather than requiring copied agent configuration. An initial overbroad readiness statement prompted a clarification in the entry instructions: distinguish actual defects from optional suggestions, and give readiness verdicts only when requested.
-- Nonempty target: session `39c899cf-4ada-4059-839e-820ee93354a0` listed the existing calculator/test/instructions files and waited for a decision to use that folder or select another. This exercised the independent review's applied clarification.
-- Concrete new-project plan: session `95aafaac-67dd-45eb-861f-60d82f0faacd` loaded bundled planning, interview and design procedures; returned requirements, assumptions, proposed paths, checks and an approval request for a stdlib todo CLI. It disclosed that goldfish design review was unverified under that no-write Ask-mode trial.
+- Menu: invoked only `/project-helper` and returned the two-choice new/improve question.
+- New project: identified the user-level helper and `references/project-planning.md` without a source checkout dependency.
+- Existing project: read a calculator fixture's own AGENTS.md, source and tests; loaded bundled `tdd.md` and `verifier.md`; and returned findings and proposed checks without edits or shell execution. A general reviewer used the bundled verifier role rather than requiring copied agent configuration. An initial overbroad readiness statement prompted a clarification in the entry instructions: distinguish actual defects from optional suggestions, and give readiness verdicts only when requested.
+- Nonempty target: listed the existing calculator/test/instructions files and waited for a decision to use that folder or select another. This exercised the independent review's applied clarification.
+- Concrete new-project plan: loaded bundled planning, interview and design procedures; returned requirements, assumptions, proposed paths, checks and an approval request for a stdlib todo CLI. It disclosed that goldfish design review was unverified under that no-write Ask-mode trial.
 
 After the trials, the new-project folder was still empty and the existing-project folder still contained only its three original fixture files. These trials ran in CLI Ask mode: they verify discovery, source selection and conversational boundaries, not end-to-end app implementation or host-enforced write denial. Building/applying fixes needs Cursor Agent mode and the target project's approved implementation plan. No other user project was modified.
 

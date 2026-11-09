@@ -1,5 +1,6 @@
 """Dependency-free validation of this starter's constrained metadata format."""
 from pathlib import Path
+import re
 import sys
 
 try:
@@ -12,6 +13,15 @@ REQUIRED = ['README.md', 'AGENTS.md', 'LICENSE', '.env.example', 'docs/PRD.md', 
             'docs/INTEGRATIONS.md', 'docs/CONFIGURATION.md',
             '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh',
             'scripts/install_chat_command.py', 'scripts/skill_inventory.py']
+HOME_PATH_PATTERNS = (
+    re.compile(r'(?i)C:\\Users\\'),
+    re.compile(r'(?i)C:/Users/'),
+    re.compile(r'/Users/[^/\s]+/'),
+    re.compile(r'/home/[^/\s]+/'),
+)
+PUBLIC_DOC_GLOBS = ('README.md', 'AGENTS.md', 'docs/**/*.md')
+
+
 def metadata(path):
     text = path.read_text(encoding='utf-8')
     lines = text.splitlines()
@@ -27,6 +37,23 @@ def metadata(path):
     if not '\n'.join(lines[end + 1:]).strip():
         raise ValueError('missing instructions')
     return data
+
+
+def public_doc_paths(root):
+    paths = []
+    for pattern in PUBLIC_DOC_GLOBS:
+        paths.extend(path for path in root.glob(pattern) if path.is_file())
+    return sorted({path.resolve(): path for path in paths}.values(), key=lambda path: path.as_posix())
+
+
+def home_path_errors(root):
+    errors = []
+    for path in public_doc_paths(root):
+        text = path.read_text(encoding='utf-8')
+        if any(pattern.search(text) for pattern in HOME_PATH_PATTERNS):
+            errors.append(f'{path.relative_to(root).as_posix()}: personal home path')
+    return errors
+
 
 def validate(root):
     root = Path(root)
@@ -57,6 +84,7 @@ def validate(root):
                     raise ValueError('review agents must be read-only')
             except ValueError as exc:
                 errors.append(f'{p.relative_to(root)}: {exc}')
+    errors.extend(home_path_errors(root))
     return errors
 
 if __name__ == '__main__':
