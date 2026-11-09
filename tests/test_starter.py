@@ -31,6 +31,18 @@ class StarterTests(unittest.TestCase):
                 finally:
                     path.write_bytes(content)
 
+    def test_unregistered_skill_detected(self):
+        path = self.root / '.cursor/skills/unregistered-skill/SKILL.md'
+        path.parent.mkdir()
+        path.write_text(
+            '---\nname: unregistered-skill\ndescription: Extra skill.\n'
+            'disable-model-invocation: true\n---\n\n# Unregistered\n',
+            encoding='utf-8', newline='\n')
+        errors = validate(self.root)
+        self.assertTrue(
+            any('unexpected .cursor/skills/unregistered-skill' in error for error in errors),
+            errors)
+
     def test_writable_reviewer_detected(self):
         path = self.root / '.cursor/agents/verifier.md'
         path.write_text(path.read_text().replace('readonly: true', 'readonly: false'))
@@ -50,6 +62,8 @@ class StarterTests(unittest.TestCase):
         self.assertEqual(validate_starter.REQUIRED_SKILLS, set(REQUIRED_SKILLS))
         configuration = (ROOT / 'docs/CONFIGURATION.md').read_text(encoding='utf-8')
         readme = (ROOT / 'README.md').read_text(encoding='utf-8')
+        agents = (ROOT / 'AGENTS.md').read_text(encoding='utf-8')
         for name in REQUIRED_SKILLS:
             self.assertIn(name, configuration, f'{name} missing from CONFIGURATION.md')
             self.assertIn(name, readme, f'{name} missing from README.md')
+            self.assertIn(name, agents, f'{name} missing from AGENTS.md')

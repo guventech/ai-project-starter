@@ -81,6 +81,33 @@ class InstallCommandTests(unittest.TestCase):
         self.assertIn('manifest', result.stderr.lower())
         self.assertIn('--force', result.stderr)
 
+    def test_upgrade_refuses_incomplete_manifest(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        from scripts import install_chat_command as installer
+        skill = self.destination / 'SKILL.md'
+        original = skill.read_text(encoding='utf-8')
+        skill.write_text(original + '\n# customized outside incomplete manifest\n', encoding='utf-8')
+        digests = installer.installed_content_digests(self.destination)
+        digests.pop('SKILL.md')
+        installer.write_manifest(self.destination, digests)
+        result = self.run_installer('--upgrade')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('incomplete', result.stderr.lower())
+        self.assertIn('# customized outside incomplete manifest', skill.read_text(encoding='utf-8'))
+
+    def test_upgrade_refuses_malformed_manifest_digest(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        from scripts import install_chat_command as installer
+        digests = installer.installed_content_digests(self.destination)
+        digests['SKILL.md'] = 'not-a-sha256'
+        installer.write_manifest(self.destination, digests)
+        skill = self.destination / 'SKILL.md'
+        original = skill.read_text(encoding='utf-8')
+        result = self.run_installer('--upgrade')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('digest', result.stderr.lower())
+        self.assertEqual(skill.read_text(encoding='utf-8'), original)
+
     def test_upgrade_force_backs_up_and_overwrites_customization(self):
         self.assertEqual(self.run_installer().returncode, 0)
         from scripts import install_chat_command as installer

@@ -29,6 +29,11 @@ def digest_text(text):
     return hashlib.sha256(text.encode('utf-8')).hexdigest()
 
 
+def is_sha256_digest(value):
+    return isinstance(value, str) and len(value) == 64 and all(
+        character in '0123456789abcdefABCDEF' for character in value)
+
+
 def planned_files():
     files = {'SKILL.md': (ROOT / '.cursor/skills/project-helper/SKILL.md').read_text(encoding='utf-8'),
              'LICENSE': (ROOT / 'LICENSE').read_text(encoding='utf-8')}
@@ -140,6 +145,25 @@ def install(destination, upgrade=False, force=False):
             'Rename/remove the folder for a fresh install, or run with --upgrade --force '
             f'after backing up customizations: {destination}')
     if manifest is not None and not force:
+        planned_paths = set(planned)
+        manifest_paths = set(manifest)
+        missing_manifest = sorted(planned_paths - manifest_paths)
+        if missing_manifest:
+            raise FileExistsError(
+                'Installer manifest is incomplete; no files replaced. '
+                'missing: ' + ', '.join(missing_manifest))
+        unexpected_manifest = sorted(manifest_paths - planned_paths)
+        if unexpected_manifest:
+            raise FileExistsError(
+                'Installer manifest lists unexpected paths; no files replaced: '
+                + ', '.join(unexpected_manifest))
+        malformed_digests = sorted(
+            relative for relative, digest in manifest.items()
+            if not is_sha256_digest(digest))
+        if malformed_digests:
+            raise FileExistsError(
+                'Installer manifest has invalid SHA-256 digests; no files replaced: '
+                + ', '.join(malformed_digests))
         current = installed_content_digests(destination)
         customized = sorted(
             relative for relative, digest in manifest.items()
@@ -149,11 +173,6 @@ def install(destination, upgrade=False, force=False):
                 'Destination managed files do not match the installer manifest; '
                 'treat as customized and refuse upgrade without --force. '
                 'customized: ' + ', '.join(customized))
-        unexpected_manifest = sorted(set(manifest) - set(planned))
-        if unexpected_manifest:
-            raise FileExistsError(
-                'Installer manifest lists unexpected paths; no files replaced: '
-                + ', '.join(unexpected_manifest))
     backup_root = None
     if force:
         backup_root = backup_differing_files(destination, planned)

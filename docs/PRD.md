@@ -101,8 +101,17 @@ Status: merged via PR #11; maintainer global install refreshed with `--upgrade -
 |----|-------------------|-------------------------|----------------------|---------------------|
 | UPGR-001 | A successful install shall write an installer manifest of managed-file digests. | Detect stock packages without trusting hand inspection. | `.installer-manifest.json` lists SHA-256 digests for every managed content path after install. | test |
 | UPGR-002 | Default install shall refuse an occupied destination. | Preserve CHAT-006. | Occupied path or symlink exits non-zero without changing contents. | test |
-| UPGR-003 | `--upgrade` shall replace a clean stock package or install when missing. | Allow updates without manual delete. | Manifest-matching packages are replaced from the repo; missing destinations are installed; extras, customized managed files, missing manifests and symlinks refuse without `--force`. | test |
+| UPGR-003 | `--upgrade` shall replace a clean stock package or install when missing. | Allow updates without manual delete. | Manifest-matching packages are replaced from the repo; missing destinations are installed; extras, customized managed files, missing/incomplete/malformed manifests and symlinks refuse without `--force`. | test |
 | UPGR-004 | `--upgrade --force` shall back up differing managed files then overwrite managed content when no extras exist. | Limit data loss while unblocking pre-manifest and customized packages. | Differing managed files appear under `project-helper.bak-<timestamp>/`; extras and bare `--force` still refuse. | test |
+
+## Inventory and upgrade hardening (approved with Codex)
+
+Status: implemented after Cursor + Codex CLI brainstorm agreement (items 1–2; skip transactional install, PRD wording automation, and blocked MAINT-003). Local starter gates passed; PR pending request.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| HARD-001 | Non-forced upgrades shall require a complete installer manifest with valid SHA-256 digests for every planned managed path. | Incomplete manifests could skip customization checks for omitted paths. | Incomplete path sets or non-SHA-256 digests refuse without changing installed files; clean and forced upgrades retain documented behavior. | test |
+| HARD-002 | The validator shall reject unregistered local skill directories and inventory tests shall require each required skill name in README, CONFIGURATION and AGENTS. | REQ-008/Phase A drift coverage omitted AGENTS and allowed unexpected skill folders. | An extra valid skill folder fails validation; inventory alignment covers all three docs; the nine-skill inventory passes. | test |
 
 ## To be resolved (TBR)
 
