@@ -193,7 +193,7 @@ Wording self-check: one shall requirement per row; listed vague words absent; ea
 
 ## Review remediation F-14 contribution basics
 
-Status: approved documentation slice implemented; local inspection and checks recorded in docs/QUALITY_GATES.md; PR CI pending. Security policy, code of conduct, repository settings, social preview and pinned content remain deferred.
+Status: approved documentation slice implemented in [PR #26](https://github.com/guventech/ai-project-starter/pull/26); local inspection and implementation-commit CI recorded in docs/QUALITY_GATES.md. Require green checks on the PR head before merge. Security policy, code of conduct, repository settings, social preview and pinned content remain deferred.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|

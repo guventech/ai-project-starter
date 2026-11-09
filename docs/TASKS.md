@@ -176,7 +176,7 @@ Owner: repository maintainer. Acceptance criteria: CONTRIB-001–CONTRIB-003 in 
 - [x] Record measurable requirements and wording self-check.
 - [x] Add CONTRIBUTING.md, two Markdown issue templates and README entry link.
 - [x] Inspect metadata, relative links and public-report privacy guidance.
-- [ ] Run existing starter checks and submit one PR; both OS CI jobs are required before merge.
+- [x] Run existing starter checks and submit [PR #26](https://github.com/guventech/ai-project-starter/pull/26); both OS CI jobs are required before merge.
 
 ## Application adoption checklist
 

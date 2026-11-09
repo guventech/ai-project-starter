@@ -91,7 +91,7 @@ Scope: contributor guide, two Markdown issue templates and README entry link; re
 - One-off local inspection: 17 relative links in CONTRIBUTING/README resolved within the repository; both templates parsed with the existing scalar metadata reader, had distinct names and nonempty about/title fields, and omitted labels/assignees. All three new public docs were checked against existing HOME_PATH_PATTERNS. This extends inspection to the new docs without changing validator scan scope or adding a dependency/test harness.
 - Metadata/location inspection used the [official GitHub template guidance](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository). No issue was created and no live default-branch template chooser was verified. Markdown templates provide editable prompts, not required-field validation.
 - Design/security/test-first gates: not applicable to documentation and Markdown prompts; no executable behavior, architecture or application trust boundary changed. Author inspection is not an independent fresh-context review. Existing F-01/F-03/F-05/privacy checks were not changed.
-- PR CI: pending; both Python 3.12 OS jobs must pass before merge. No repository settings or global installations were changed.
+- PR CI: [run 42637969555](https://github.com/guventech/ai-project-starter/actions/runs/42637969555) passed both Python 3.12 jobs, `Starter validation (ubuntu-latest)` and `Starter validation (windows-latest)`, for implementation commit `0ed9131`. PR #26 includes this evidence follow-up; require green checks on its head before merge. No repository settings or global installations were changed.
 
 ## F-10 rule-trigger coverage verification (2026-11-09)
 
