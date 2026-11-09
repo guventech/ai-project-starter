@@ -181,7 +181,7 @@ Wording self-check: each shall row has one requirement, a measurable acceptance 
 
 ## Review remediation F-10 rule-trigger coverage
 
-Status: approved scope implemented; static and bounded CLI probe evidence recorded in docs/QUALITY_GATES.md and docs/SETUP.md. PR CI pending.
+Status: approved scope implemented in [PR #25](https://github.com/guventech/ai-project-starter/pull/25); static, bounded CLI probe and corrected implementation CI evidence recorded in docs/QUALITY_GATES.md and docs/SETUP.md. Require green checks on the PR head before merge.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|

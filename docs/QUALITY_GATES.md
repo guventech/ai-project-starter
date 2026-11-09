@@ -90,7 +90,7 @@ Scope: existing three rule globs, one layout regression test, trigger/adoption d
 - Live CLI probe: Windows Agent CLI `2026.11.05-86047df`; Go source/test session returned all three fixture-only rule markers, fresh README-only control returned none. Tool traces showed only sample-file Reads, no explicit rule reads or writes. This supports implicit rule inclusion in that fixture; per-read attachment arrays were empty. SETUP.md records method and limits without personal paths or session IDs.
 - Static matching uses Python Path.glob, not Cursor's glob engine. No live Node/Python session, editor UI attachment check, universal engine-parity test or rule-enforcement claim.
 - Design/security gates: not applicable to this bounded path-scope revision; no new architecture, credential use, application trust boundary or rule-body security behavior. This is author verification, not an independent fresh-context audit.
-- PR CI: pending; both Python 3.12 OS jobs must pass before merge. Global installations were not changed.
+- Corrected implementation CI: [run 42636385652](https://github.com/guventech/ai-project-starter/actions/runs/42636385652) passed both Python 3.12 jobs, `Starter validation (ubuntu-latest)` and `Starter validation (windows-latest)`, for commit `9d69289`. PR #25 includes this evidence follow-up; require green checks on its head before merge. Global installations were not changed.
 
 ## F-13 read-only installer check verification (2026-11-09)
 
