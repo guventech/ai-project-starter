@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-012: Third-party attribution audit (F-04)
+
+Date: 2026-11-09. Status: accepted; Cursor + Codex review remediation plan.
+Context: External review F-04 asked whether "original, reduced workflows" claims were backed by a visible comparison and notice file.
+Options: leave README claims unchanged; vendor upstream text with notices; audit and publish a notice without vendoring.
+Decision: compare each overlapping local skill against the maintainer-installed upstream revision; classify use as idea, structure or text; publish `THIRD_PARTY.md`; ship that notice with the project-helper installer package; replace unsupported blanket "original" wording with "independently written" where the audit supports it.
+Consequences: provenance is documented; no substantial upstream text was found to redistribute; name collisions remain documented under ADR-004 until an approved rename (F-01). Cache paths used for the obra/superpowers comparison are machine-local evidence only.
+Rollback: revert the notice, installer packaging and wording changes.
+Related paths: THIRD_PARTY.md, README.md, scripts/install_chat_command.py, docs/SETUP.md revisions, `.cursor/skills/*/SKILL.md` footers.
+
 ## ADR-001: Keep the starter stack-agnostic
 Status: accepted for the template.
 Context: projects have different runtime, UI and storage needs.

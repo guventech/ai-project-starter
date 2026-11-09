@@ -8,7 +8,7 @@ Status: approved starter enhancement implemented; requirement evidence is record
 - Constraints: retain a stack-agnostic template, existing Cursor metadata conventions and dependency-free validation. Keep secrets out of review inputs and reports.
 - Functional requirements and acceptance criteria: see the table below.
 - Out of scope: application code, stack selection, note-taking integration and application deployment. Follow-up authorization covers optional pack installation, repository protection and documentation commits.
-- Assumptions: local workflows are concise original instructions informed by the linked packs, not vendored copies. Fresh-context reviews require host support; unavailable review execution must be reported as unverified.
+- Assumptions: local workflows are independently written instructions informed by the linked packs, not vendored copies. Fresh-context reviews require host support; unavailable review execution must be reported as unverified.
 
 ## Requirement wording
 
@@ -116,11 +116,19 @@ Status: HARD-001/HARD-002 merged via PR #14. HARD-003 implemented locally after 
 
 ## Review remediation F-08 privacy hygiene
 
-Status: implemented after Cursor + Codex agreement on the external review brief; PR pending.
+Status: merged via PR #16.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
 | PRIV-001 | Public starter documentation shall omit personal home-directory paths. | Named profile paths leak maintainer identity into template copies. | README, AGENTS and docs Markdown contain no Windows, macOS or Linux personal profile path forms; the validator reports injected samples for each OS. | test |
+
+## Review remediation F-04 attribution
+
+Status: implementing after F-08; Cursor + Codex agreed sequence.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| ATTR-001 | The starter shall publish a third-party notice that records upstream sources, licences and the audited use classification for local skills. | Readers need provenance for overlapping skill names and inspiration claims. | `THIRD_PARTY.md` exists; the installer packages and digests it; README and skill footers match the audit language; an ADR records the comparison method and results. | test |
 
 ## To be resolved (TBR)
 

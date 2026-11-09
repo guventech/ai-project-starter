@@ -13,3 +13,5 @@ disable-model-invocation: true
 5. Run the reproduction and adjacent checks. Remove temporary diagnostics.
 Output: root cause, evidence, fix, commands/results and any unresolved uncertainty.
 Example: Reproduce a timezone offset error with a fixed timestamp before changing date conversion.
+
+Inspiration: [obra/superpowers](https://github.com/obra/superpowers) systematic-debugging. Independently written reduced workflow; see THIRD_PARTY.md.

@@ -16,4 +16,4 @@ disable-model-invocation: true
 Output: decisions, requirement IDs, explicit exclusions, remaining blockers and approval status.
 Example: For a booking flow, resolve timezone ownership and competing reservations before discussing storage.
 
-Inspiration: [Matt Pocock's skills](https://github.com/mattpocock/skills). This is an original, reduced workflow for this starter.
+Inspiration: [Matt Pocock's skills](https://github.com/mattpocock/skills). Independently written reduced workflow; see THIRD_PARTY.md.

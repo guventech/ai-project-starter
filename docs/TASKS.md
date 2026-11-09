@@ -105,6 +105,14 @@ Owner: repository maintainer. Acceptance criteria: PRIV-001 in docs/PRD.md.
 
 - [x] Redact personal home paths, session/agent UUIDs and reconstruction chatter from public docs.
 - [x] Add home-path validator coverage and regression tests.
+- [x] Merge through protected-branch PR after CI ([PR #16](https://github.com/guventech/ai-project-starter/pull/16)).
+
+## Review F-04 attribution
+
+Owner: repository maintainer. Acceptance criteria: ATTR-001 in docs/PRD.md.
+
+- [x] Compare overlapping local skills to upstream revisions; write THIRD_PARTY.md and ADR-012.
+- [x] Package THIRD_PARTY.md in the installer; align README and skill footers.
 - [ ] Merge through protected-branch PR after CI.
 
 ## Application adoption checklist
