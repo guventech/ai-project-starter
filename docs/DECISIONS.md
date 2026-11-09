@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-013: Rename colliding local skills (F-01)
+
+Date: 2026-11-09. Status: accepted; Cursor + Codex agreed to keep the repository name and rename only colliding local skills.
+Context: Optional packs installed for inspiration caused bare `/grill-me`, `/tdd`, `/security-audit` and `/systematic-debugging` to load upstream files. ADR-004 documented an explicit-path workaround.
+Options: keep path workaround; brand-prefix all skills; rename only colliding skills to functional names.
+Decision: rename to `decision-interview`, `test-first-change`, `trust-boundary-audit` and `hypothesis-debugging`; deny the old names in the validator; treat obsolete installer reference paths as migratable and remove them on upgrade (rename migration requires `--upgrade --force` when the old manifest lacks the new paths).
+Consequences: bare local slash names no longer collide with the four optional upstream skills; global installs need one forced upgrade; ADR-004 path workaround is historical for pre-rename evidence.
+Rollback: revert the rename commit/PR and reinstall the previous package snapshot if needed.
+Related paths: `.cursor/skills/`, `scripts/skill_inventory.py`, `scripts/install_chat_command.py`, `scripts/validate_starter.py`, README.md, AGENTS.md, docs/, THIRD_PARTY.md.
+
 ## ADR-012: Third-party attribution audit (F-04)
 
 Date: 2026-11-09. Status: accepted; Cursor + Codex review remediation plan.

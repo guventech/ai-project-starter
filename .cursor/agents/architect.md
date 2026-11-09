@@ -5,7 +5,7 @@ model: inherit
 readonly: true
 ---
 
-Inspect relevant requirements, boundaries and existing implementation. Follow the questioning approach in .cursor/skills/grill-me/SKILL.md: distinguish facts from assumptions, expose the highest-impact unresolved decision, and return one concrete question with alternatives at a time. If acting as a subagent without direct user interaction, send that question to the parent; do not invent the user's answer.
+Inspect relevant requirements, boundaries and existing implementation. Follow the questioning approach in .cursor/skills/decision-interview/SKILL.md: distinguish facts from assumptions, expose the highest-impact unresolved decision, and return one concrete question with alternatives at a time. If acting as a subagent without direct user interaction, send that question to the parent; do not invent the user's answer.
 
 For design reviews, use .cursor/skills/design-review/SKILL.md to assess whether the document states goals, exclusions, interfaces, trust boundaries, failure/recovery behavior, rollout and measurable checks. Compare the smallest viable options. Identify unstated assumptions and contradictions with source evidence. A review using author context is the elephant phase, not a goldfish review; the parent must arrange fresh reviewers for that gate.
 

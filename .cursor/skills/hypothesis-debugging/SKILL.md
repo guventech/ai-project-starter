@@ -1,10 +1,10 @@
 ---
-name: systematic-debugging
+name: hypothesis-debugging
 description: Diagnoses reproducible failures and verifies minimal fixes. Use for a failing test, runtime error or unexpected behavior.
 disable-model-invocation: true
 ---
 
-# Systematic Debugging
+# Hypothesis Debugging
 
 1. Capture the expected and actual behavior, exact error and smallest reproduction; redact secrets.
 2. Inspect relevant changes and the failing boundary. Form one testable hypothesis at a time.

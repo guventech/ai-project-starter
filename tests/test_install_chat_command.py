@@ -124,6 +124,15 @@ class InstallCommandTests(unittest.TestCase):
         self.assertEqual(len(backups), 1)
         self.assertEqual((backups[0] / 'SKILL.md').read_text(encoding='utf-8'), 'user customization')
 
+    def test_upgrade_force_removes_obsolete_renamed_references(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        obsolete = self.destination / 'references/grill-me.md'
+        obsolete.write_text('obsolete snapshot', encoding='utf-8', newline='\n')
+        result = self.run_installer('--upgrade', '--force')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse(obsolete.exists())
+        self.assertTrue((self.destination / 'references/decision-interview.md').is_file())
+
     def test_upgrade_force_still_refuses_extra_files(self):
         self.assertEqual(self.run_installer().returncode, 0)
         (self.destination / 'user-notes.txt').write_text('keep', encoding='utf-8')

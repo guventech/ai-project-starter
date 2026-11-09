@@ -4,9 +4,9 @@ import re
 import sys
 
 try:
-    from skill_inventory import REQUIRED_SKILLS
+    from skill_inventory import COLLIDING_UPSTREAM_NAMES, REQUIRED_SKILLS
 except ImportError:  # pragma: no cover - package import when run via tests
-    from scripts.skill_inventory import REQUIRED_SKILLS
+    from scripts.skill_inventory import COLLIDING_UPSTREAM_NAMES, REQUIRED_SKILLS
 
 REQUIRED = ['README.md', 'AGENTS.md', 'LICENSE', '.env.example', 'docs/PRD.md', 'docs/ARCHITECTURE.md',
             'docs/DECISIONS.md', 'docs/TASKS.md', 'docs/QUALITY_GATES.md',
@@ -67,6 +67,9 @@ def validate(root):
         errors.extend(f'missing {folder}/{n}' for n in sorted(expected - names))
         if folder == '.cursor/skills':
             errors.extend(f'unexpected {folder}/{n}' for n in sorted(names - expected))
+            collisions = sorted(names & COLLIDING_UPSTREAM_NAMES)
+            errors.extend(
+                f'colliding upstream skill name .cursor/skills/{n}' for n in collisions)
         for p in paths:
             try:
                 data = metadata(p)

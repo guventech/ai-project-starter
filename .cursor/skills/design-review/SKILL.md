@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 ## Elephant: draft with context
 
-Read relevant code, docs/PRD.md and prior decisions. Resolve blocking requirements using grill-me style questioning. Draft the design in docs/ARCHITECTURE.md (or a named design document for a larger change): goals, exclusions, requirement IDs, alternatives, interfaces, data flow, trust boundaries, failure/recovery behavior, rollout/rollback, risks and verification. Put essential assumptions in the document so a reviewer needs no chat history.
+Read relevant code, docs/PRD.md and prior decisions. Resolve blocking requirements using decision-interview style questioning. Draft the design in docs/ARCHITECTURE.md (or a named design document for a larger change): goals, exclusions, requirement IDs, alternatives, interfaces, data flow, trust boundaries, failure/recovery behavior, rollout/rollback, risks and verification. Put essential assumptions in the document so a reviewer needs no chat history.
 
 ## Goldfish: review without the conversation
 

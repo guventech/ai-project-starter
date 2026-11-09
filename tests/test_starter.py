@@ -43,6 +43,21 @@ class StarterTests(unittest.TestCase):
             any('unexpected .cursor/skills/unregistered-skill' in error for error in errors),
             errors)
 
+    def test_colliding_upstream_skill_name_detected(self):
+        from scripts.skill_inventory import COLLIDING_UPSTREAM_NAMES
+        path = self.root / '.cursor/skills/grill-me/SKILL.md'
+        path.parent.mkdir()
+        path.write_text(
+            '---\nname: grill-me\ndescription: Colliding name.\n'
+            'disable-model-invocation: true\n---\n\n# Colliding\n',
+            encoding='utf-8', newline='\n')
+        errors = validate(self.root)
+        self.assertIn('grill-me', COLLIDING_UPSTREAM_NAMES)
+        self.assertTrue(
+            any('colliding upstream skill name .cursor/skills/grill-me' in error
+                for error in errors),
+            errors)
+
     def test_writable_reviewer_detected(self):
         path = self.root / '.cursor/agents/verifier.md'
         path.write_text(path.read_text().replace('readonly: true', 'readonly: false'))

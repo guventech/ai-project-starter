@@ -24,12 +24,12 @@ These rows cover the starter enhancement requested in CURSOR_UPDATE_PROMPT.md. R
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
-| REQ-001 | The starter shall include grill-me, tdd, design-review and security-audit skills. | Add the four workflows named in the update prompt. | All four folders contain a SKILL.md with matching name, description and explicit invocation metadata. | test |
-| REQ-002 | The grill-me skill shall require resolution of implementation-blocking questions before coding. | Turn assumptions into decisions and measurable criteria. | Instructions cover one-question-at-a-time interviews, decision recording and an exit condition with zero unresolved implementation blockers. | inspection |
-| REQ-003 | The tdd skill shall prescribe a red-green-refactor cycle for each behavior slice. | Verify behavior before expanding implementation. | Instructions require observing a failing test for the intended reason, implementing one slice, rerunning tests and refactoring after green. | inspection |
+| REQ-001 | The starter shall include decision-interview, test-first-change, design-review and trust-boundary-audit skills. | Add the four workflows named in the update prompt, using collision-free local names. | All four folders contain a SKILL.md with matching name, description and explicit invocation metadata. | test |
+| REQ-002 | The decision-interview skill shall require resolution of implementation-blocking questions before coding. | Turn assumptions into decisions and measurable criteria. | Instructions cover one-question-at-a-time interviews, decision recording and an exit condition with zero unresolved implementation blockers. | inspection |
+| REQ-003 | The test-first-change skill shall prescribe a red-green-refactor cycle for each behavior slice. | Verify behavior before expanding implementation. | Instructions require observing a failing test for the intended reason, implementing one slice, rerunning tests and refactoring after green. | inspection |
 | REQ-004 | The design-review skill shall require design drafting, fresh-context review and human approval before implementation. | Expose assumptions absent from the design document. | Instructions define both phases, at least two bounded fresh reviewers, finding resolution and an unverified outcome when fresh contexts are unavailable. | inspection |
-| REQ-005 | The security-audit skill shall define four audit phases with finding verification. | Distinguish supported findings from suspicions. | Reconnaissance, coverage-led hunting, fresh-agent verification and reporting each have inputs and outputs; reports include coverage gaps and finding dispositions. | inspection |
-| REQ-006 | The planning and release skills shall reference the new review workflows and their exit criteria. | Connect the lifecycle without imposing application tooling. | Planning references grill-me and design-review; release-check requires requirement evidence, applicable review results and disclosure of skipped or missing gates. | inspection |
+| REQ-005 | The trust-boundary-audit skill shall define four audit phases with finding verification. | Distinguish supported findings from suspicions. | Reconnaissance, coverage-led hunting, fresh-agent verification and reporting each have inputs and outputs; reports include coverage gaps and finding dispositions. | inspection |
+| REQ-006 | The planning and release skills shall reference the new review workflows and their exit criteria. | Connect the lifecycle without imposing application tooling. | Planning references decision-interview and design-review; release-check requires requirement evidence, applicable review results and disclosure of skipped or missing gates. | inspection |
 | REQ-007 | Both review agents shall define read-only responsibilities for their review modes. | Preserve the author/reviewer boundary. | Architect includes requirements questioning and design review; verifier includes fresh-context design, diff and finding review with evidence and limitations; both retain readonly true. | inspection |
 | REQ-008 | The documentation shall describe the nine local skills, review gates and four external pack installation commands. | Make local workflows and optional external installations discoverable. | AGENTS.md, README.md and CONFIGURATION.md name all nine skills; README/AGENTS contain all four requested pack commands; QUALITY_GATES.md maps requirements to evidence; configuration docs state runtime verification limits. | inspection |
 | REQ-009 | The validator shall detect removal of any required local skill. | Prevent future updates from dropping the requested workflows. | Tests remove each of the nine required skills in turn and assert a missing-skill error; inventory sources stay aligned; both configured starter check commands pass. | test |
@@ -129,6 +129,14 @@ Status: merged via PR #17.
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
 | ATTR-001 | The starter shall publish a third-party notice that records upstream sources, licences and the audited use classification for local skills. | Readers need provenance for overlapping skill names and inspiration claims. | `THIRD_PARTY.md` exists; the installer packages and digests it; README and skill footers match the audit language; an ADR records the comparison method and results. | test |
+
+## Review remediation F-01 skill rename
+
+Status: implementing after Cursor + Codex agreement to keep the repo name and rename only colliding local skills.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| COLLIDE-001 | Local skills shall not use the colliding upstream names grill-me, tdd, systematic-debugging or security-audit. | Bare slash commands selected upstream packs under those names. | Required skills use decision-interview, test-first-change, hypothesis-debugging and trust-boundary-audit; the validator rejects the four colliding directory names; forced upgrades remove obsolete reference snapshots. | test |
 
 ## To be resolved (TBR)
 
