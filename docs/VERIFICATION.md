@@ -66,9 +66,12 @@ settings, account configuration and branch protections do not transfer with a co
 ## Outcome evidence
 
 No controlled comparison currently establishes better software, fewer defects or
-faster delivery than a bare prompt. F-02's worked application example and paired
-evaluations remain pending. The existing synthetic prior-art scenario is a test
-specification marked not run, not a comparative result.
+faster delivery than a bare prompt. F-02 now has a worked application example and
+eight recorded paired attempts: seven protocol failures and one accepted finish.
+The [evidence report](EVIDENCE.md) separates final-artifact checks from protocol
+completion. Live trials are blocked pending complete native CLI isolation; useful
+comparative outcome evidence remains open. The synthetic prior-art scenario is
+still a test specification marked not run, not a comparative result.
 
 Treat upstream feature descriptions in the README comparison as scope descriptions,
 and its fit recommendations as editorial judgments. The comparison is not a ranking

@@ -24,9 +24,17 @@ REMOVE = tuple(sorted((
     'docs/superpowers/plans/2026-11-09-maint-002-permission-probe.md',
     '.github/ISSUE_TEMPLATE/bug_report.md', '.github/ISSUE_TEMPLATE/feature_request.md',
     'docs/designs/project-initialization.md', 'docs/INITIALIZE.md', 'docs/VERIFICATION.md',
+    'docs/designs/workflow-evidence.md', 'docs/EVIDENCE.md',
+    'tests/test_todo_example.py', 'tests/test_workflow_eval.py',
     'scripts/init_project.py', 'scripts/project_manifest.py', MANIFEST,
     *RESET.values(),
 )))
+MAINTAINER_PREFIXES = ('examples/', 'evals/')
+
+
+def removal_paths(paths):
+    # Classify the checked inventory, never recurse/delete a directory at apply time.
+    return sorted(set(REMOVE) | {path for path in paths if path.startswith(MAINTAINER_PREFIXES)})
 
 
 def valid_path(value):
@@ -61,8 +69,7 @@ def read_manifest(root):
     data = json.loads((root / MANIFEST).read_text(encoding='utf-8'), object_pairs_hook=unique_object)
     if (not isinstance(data, dict) or set(data) != {'version', 'files', 'reset', 'remove'}
             or type(data['version']) is not int or data['version'] != 1
-            or not isinstance(data['files'], dict) or data['reset'] != RESET
-            or data['remove'] != list(REMOVE)):
+            or not isinstance(data['files'], dict) or data['reset'] != RESET):
         raise ValueError('Invalid initialization manifest')
     paths = list(data['files'])
     if (MANIFEST.casefold() in {path.casefold() for path in paths}
@@ -72,6 +79,8 @@ def read_manifest(root):
         valid_path(path)
         if not isinstance(digest, str) or not re.fullmatch('[0-9a-f]{64}', digest):
             raise ValueError('Invalid manifest digest')
+    if data['remove'] != removal_paths(paths):
+        raise ValueError('Invalid removal inventory')
     required = set(RESET) | set(RESET.values()) | (set(REMOVE) - {MANIFEST})
     if not required <= set(paths):
         raise ValueError('Incomplete initialization manifest')
@@ -91,8 +100,9 @@ def inventory(root):
 
 
 def generate(root):
-    return {'version': 1, 'files': {path: text_digest(root / path) for path in inventory(root)},
-            'reset': RESET, 'remove': list(REMOVE)}
+    paths = inventory(root)
+    return {'version': 1, 'files': {path: text_digest(root / path) for path in paths},
+            'reset': RESET, 'remove': removal_paths(paths)}
 
 
 def check_manifest(root):

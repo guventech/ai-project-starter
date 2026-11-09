@@ -1,5 +1,16 @@
 # Decision log
 
+## ADR-023: Controlled, isolated workflow evidence (F-02)
+
+Date: 2026-11-09. Status: accepted within owner-authorized F-02 continuation.
+Context: recorded routing/loading checks do not establish implementation outcomes. Native CLI sandbox is unavailable on this Windows host; a cwd-mismatched permission pilot did not block a synthetic outside write.
+Options: native writable CLI trials; provision a separate authenticated Linux agent host; use the existing CLI as a deny-all/read-only proposal engine with a shared typed-action controller and isolated Python containers.
+Decision: select the controlled protocol, one authored stdlib reference and four paired trials. Pin Composer 2.5 and the execution image digest; alternate arm order; freeze inputs before scoring and retain failures. Match process cwd/workspace, verify native tool denial before scoring, and run candidate Python only in disposable containers without network/mounts/credentials. Keep grading expectations and authority in the host parent, never candidate-written tests or pass records.
+Consequences: exploratory guidance comparison only, with global ambient configuration and an artificial tool interface; no proof of native IDE behavior, human approval, general benefit or significance. Use pinned installed Node entry point because the Windows launcher drops stdin. Publish declared visible artifacts after inspection; quarantine reasoning/native payloads. Source CI uses offline tests only. Checked examples/evals inventory expands into individual initializer removals; backup/refusal/core guards remain unchanged. No new skill, dependency, workflow weight, branding or account setting.
+Post-run disposition: seven protocol failures and one accepted finish do not provide useful paired outcome evidence. Complete native-tool isolation remains unverified, including search. Block future --run and direct trial calls; retain the exact frozen inputs as JSON data and all observed outcomes. Container-only pilot/offline checks remain available. A different authenticated execution host or native-tool disabling requires a new reviewed method; no credential transfer or new host was authorized or performed.
+Rollback: revert the PR; remove only owned ephemeral resources after ID/label or resolved temporary-root checks. Never silently replace failed trials with reruns.
+Related paths: docs/designs/workflow-evidence.md, docs/EVIDENCE.md, examples/todo_cli/, evals/, tests/test_todo_example.py, tests/test_workflow_eval.py, scripts/project_manifest.py.
+
 ## ADR-022: README entry paths and bounded evidence (F-07)
 
 Date: 2026-11-09. Status: accepted; authorized continuation after F-06 merge.

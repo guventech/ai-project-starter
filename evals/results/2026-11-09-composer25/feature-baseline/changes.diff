@@ -1,0 +1,9 @@
+--- initial/todo.py
++++ final/todo.py
+@@ -11 +11,2 @@
+-    sub.add_parser('list')
++    list_parser = sub.add_parser('list')
++    list_parser.add_argument('--pending', action='store_true')
+@@ -27,0 +29,2 @@
++                if a.pending and r['done']:
++                    continue

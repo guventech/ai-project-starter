@@ -198,6 +198,20 @@ Owner: repository maintainer. Acceptance criteria: READ-001–READ-004 in docs/P
 - [x] Verify initialization removes the new evidence overview; inspect relative links, anchors and claims; resolve upgrade-guidance review finding.
 - [x] Regenerate baseline, run existing checks and submit [PR #28](https://github.com/guventech/ai-project-starter/pull/28); both OS jobs passed on the implementation commit and remain required on its head before merge.
 
+## Review F-02 worked reference and controlled evidence (authorized continuation)
+
+Owner: repository maintainer. Acceptance criteria: EVAL-001–EVAL-005 in docs/PRD.md.
+
+- [x] Define measurable requirements, frozen cases/protocol/rubric and execution limits.
+- [x] Complete two fresh design reviews and affected-section reviews; resolve grading authority, publication, parser and transport findings.
+- [x] Build the stdlib reference with observed red/green and fresh read-only verification; six CLI checks pass.
+- [x] Verify native read/shell denial, JSON transport, isolated public-test execution and rejection of forged grade records in unscored readiness.
+- [x] Attempt four paired trials once each; retain seven failures and one accepted finish; inspect final artifacts and frozen-input hashes.
+- [x] Block further live trials because complete native isolation and useful protocol compatibility were not established; no outcome-based reruns.
+- [ ] Establish an isolated/disabled-native-tool runner under a new reviewed method before claiming useful comparative outcomes (remaining F-02).
+- [x] Publish bounded conclusions, classify 90 individual removals and pass local source gates (71 tests; six host symlink skips).
+- [ ] Submit one focused PR; both protected CI jobs must pass before merge.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

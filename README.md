@@ -49,6 +49,11 @@ This summarizes the [recorded CLI Ask-mode trial](docs/SETUP.md#one-command-proj
 not a verbatim transcript or an end-to-end application demo. Agent mode and an
 approved target-project plan are needed to apply changes.
 
+For an implemented stdlib task CLI with requirements, observed test-first slices
+and verification limits, see the [worked example and evaluation evidence](docs/EVIDENCE.md).
+The controlled comparison uses a separate action protocol; its failures and
+limitations belong in the report, not a claim of general workflow superiority.
+
 ## How it compares
 
 These are differences in packaging and workflow scope, based on the linked

@@ -28,6 +28,11 @@ Evidence is a test name, a screenshot, or a short note.
 
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
+| EVAL-001 | test | Authored todo CLI has requirements/plan/delegated authority, three observed red/green slices, six executable CLI boundary tests and fresh read-only verifier findings/dispositions in examples/todo_cli/README.md. Educational scope only. |
+| EVAL-002 | demonstration | Eight frozen paired attempts retained: seven protocol failures and one accepted finish. Two final baseline artifacts pass all named checks, but useful comparative outcome evidence remains open; no superiority or general quality claim. |
+| EVAL-003 | inspection | Published actions/results/final files/diffs, seven allowlisted visible-failure supplements and exact inputs.json hashes inspected by f02_results_review and f02_release_review. No private home paths, session IDs, reasoning or native payload bodies observed in that tree. |
+| EVAL-004 | test | Inspected no-network/no-mount/nonroot/read-only-root container pilot passed; parent-owned grader rejected forged pass records. Native Read/Shell denial was observed, but complete native isolation is unverified, including search. Live --run/direct trial guards now refuse before result/model/Docker effects; offline parser/ownership/output/timeout tests pass. |
+| EVAL-005 | inspection | EVIDENCE/VERIFICATION/README distinguish artifact checks, protocol failures and native-host/general claims. All checked examples/evals expand to individual initializer removals; no skills, weights or global account configuration changed. F-02 remains partial. |
 | READ-001 | inspection | First 40 README lines contain purpose, audience, prerequisites, existing-project install/helper command and new-copy preview/apply path. No timed reading or usability-study result is claimed. |
 | READ-002 | inspection | Calculator example links recorded Ask-mode evidence and is labeled a summary; comparison links upstream descriptions and marks fit as editorial judgment, with outcome comparisons unmeasured. |
 | READ-003 | inspection | README links VERIFICATION, OPTIONAL_SKILLS, canonical SKILLS and migration guidance. One-off inspection resolved 37 relative links/anchors and confirmed all four existing pack commands. |
@@ -88,6 +93,54 @@ Evidence is a test name, a screenshot, or a short note.
 | HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
 | PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Merged via [PR #16](https://github.com/guventech/ai-project-starter/pull/16). |
 | ATTR-001 | test | `THIRD_PARTY.md` records upstream sources and classifications; installer tests expect the packaged notice and manifest digest entry; README links the notice. |
+
+## F-02 partial evidence verification (2026-11-09)
+
+Scope: authored reference, recorded exploratory attempts, blocked live model entry
+points and initializer hygiene. Useful comparative outcomes are still missing;
+this is not a readiness claim for the native workflow or an application release.
+
+- Full local configured suite: 71 tests in 104.725 seconds on Windows/Python
+  3.13.14; passed with six host symlink skips. Windows junction refusal passed.
+  Applied-copy checks covered all 90 individual removals, exact backup/rollback
+  bytes and preservation of the four source/project configuration safeguards.
+- Source validation, project-manifest --check, skills-guide --check and
+  git diff --check passed. Final evidence-only doc/baseline refresh receives the
+  same source checks; both OS/Python 3.12 PR CI jobs remain required before merge.
+- Observed red/green: add/list stub exit 2 -> green; missing done command -> green;
+  missing pending filter -> green; five invalid action inputs were initially
+  accepted -> rejected; initializer omitted five new evidence paths -> complete
+  individual inventory. Additional boundary tests passed when added; no invented
+  red result is claimed for them.
+- Fresh reviews used fork_turns none: methodology and execution design, grading
+  provenance rereview, implementation audit/independent candidate verification,
+  pre-score, reference, initializer, result publication and release scope. Accepted
+  findings fixed terminal-result/type validation, joined-response bounds, partial
+  quarantine, process descendant ownership and grading authority. Final guard/hash
+  review found no blocker to the explicitly partial source PR.
+- Live demonstration: fixed Composer 2.5/CLI 2026.11.05-86047df and pinned Python
+  3.12 image; eight attempts, 13 model calls, zero reviews. Frozen hashes verified
+  before archiving, and a regression checks all six archived input hashes. No
+  outcome-based retries. Readiness is distinct from the scored outcomes.
+- Post-run search control used only an owned synthetic canary. Success without
+  sentinel disclosure established neither outside content access nor denial.
+  Native isolation therefore remains unverified; the live guards prevent further
+  runs. No credentials were read/copied, new authenticated host provisioned or
+  global helper package upgraded. No containers with the evaluation owner label
+  remained after cleanup inspection.
+
+Security coverage: model JSON -> typed action and publication allowlist reviewed
+and tested; proposal paths -> container execution/limits and parent-owned grading
+reviewed with bounded pilots; process/container ownership reviewed/tested; exact
+initializer cleanup covered by existing refusal/backup/rollback tests. Native
+host isolation is blocked/unverified, not passed. Docker/CLI internals, hostile
+concurrency and provider revision identity remain outside these checks. Static
+parser candidates were independently confirmed and fixed; no unresolved source
+finding remains in the shippable offline/blocked-live scope. This is bounded
+coverage, not proof that all vulnerabilities are absent.
+
+Rollback: revert the PR. Historical failed results remain evidence; do not silently
+rerun/replace them. No deployed application, user package or account needs rollback.
 
 ## F-07 README positioning verification (2026-11-09)
 

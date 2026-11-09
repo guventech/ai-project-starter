@@ -1,0 +1,9 @@
+{
+  "read": "tool-denied",
+  "shell": "tool-denied",
+  "json_transport": "passed",
+  "container_public_test": "passed",
+  "forged_grade_records": "rejected",
+  "scored": false,
+  "policy_sha256": "39eef593a80bfd451c1a9b772259c9f1bde8eaa544952b677daf30aa6467c555"
+}

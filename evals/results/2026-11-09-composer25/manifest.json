@@ -1,0 +1,56 @@
+{
+  "source_revision": "eabda89d8ca8d98ace50b1422383b2c8a1de24ea",
+  "requested_model": "composer-2.5",
+  "image": "python@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b",
+  "cli_version": "2026.11.05-86047df",
+  "docker_version": "29.7.2",
+  "hashes": {
+    "workflow_runner.py": "f41589b99ca7b1eb2a40d831c1ad857fddc69d0f0002806c0d04982df744af28",
+    "workflow_cases.py": "50cb8edbf4fbc35a43a8c70347ae9a3473b67e6884dcc055adccb27ccf993d9f",
+    "README.md": "c7bc6a17bcb9b7ad5e21054ddadba8f383278e0191d8eeed308c750d315dbc1b"
+  },
+  "treatment_sha256": "0a49a31e19cde676171af7732675f5e0d369bd202e532b8f8ade85361e623183",
+  "protocol_sha256": "fc752d3843e770fd7d4b793f96eab0e05a835afd350c96baf6ee4f888045c034",
+  "review_sha256": "19b3598ffc48abc40a7e554db7f35364896f1865e832c0701428ff228c3127b1",
+  "max_actions": 20,
+  "model_timeout_seconds": 180,
+  "test_timeout_seconds": 10,
+  "platform": "win32",
+  "host_python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "docker_platform": "linux x86_64",
+  "order": [
+    [
+      "bug",
+      "baseline"
+    ],
+    [
+      "bug",
+      "starter"
+    ],
+    [
+      "feature",
+      "starter"
+    ],
+    [
+      "feature",
+      "baseline"
+    ],
+    [
+      "risky",
+      "baseline"
+    ],
+    [
+      "risky",
+      "starter"
+    ],
+    [
+      "ambiguous",
+      "starter"
+    ],
+    [
+      "ambiguous",
+      "baseline"
+    ]
+  ],
+  "utc_started": "2026-11-09T19:02:01Z"
+}

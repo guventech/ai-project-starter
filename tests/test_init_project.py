@@ -48,6 +48,14 @@ class InitProjectTests(unittest.TestCase):
         self.assertEqual(self.snapshot(), before)
         self.assertEqual(list(self.root.parent.glob('application.init-backup-*')), [])
 
+    def test_evaluation_records_are_classified_for_individual_removal(self):
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        from project_manifest import inventory
+        manifest = json.loads((ROOT / 'scripts/project-manifest.json').read_text(encoding='utf-8'))
+        artifacts = {path for path in inventory(ROOT) if path.startswith(('examples/', 'evals/'))}
+        self.assertTrue(artifacts)
+        self.assertEqual(artifacts - set(manifest['remove']), set())
+
     def assert_refuses_without_writes(self, *args):
         before = self.snapshot()
         result = self.run_init(*args)

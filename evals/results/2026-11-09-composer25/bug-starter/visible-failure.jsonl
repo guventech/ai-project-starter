@@ -1,0 +1,1 @@
+{"turn": 1, "assistant_text": "Reading the supplied files to confirm how `done` resolves IDs before changing behavior.\n\n{\"action\":\"read\",\"paths\":[\"todo.py\",\"test_todo.py\"]}", "native_tool_types": ["readToolCall"], "native_payloads_published": false}

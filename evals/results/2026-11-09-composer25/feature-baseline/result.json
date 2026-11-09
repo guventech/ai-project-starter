@@ -1,0 +1,46 @@
+{
+  "case": "feature",
+  "arm": "baseline",
+  "status": "protocol-or-host-failure",
+  "model_calls": 3,
+  "reviews": 0,
+  "elapsed_seconds": 79.804,
+  "grading": [
+    {
+      "check": "pending",
+      "passed": true,
+      "observed": {
+        "returncode": 0,
+        "stdout": "4 [ ] First\n",
+        "stderr": "",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "default",
+      "passed": true,
+      "observed": {
+        "returncode": 0,
+        "stdout": "4 [ ] First\n19 [x] Second\n",
+        "stderr": "",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "existing-commands",
+      "passed": true,
+      "observed": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "test_add_list_done (test_todo.ExistingCommands.test_add_list_done) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.339s\n\nOK\n",
+        "data": null
+      }
+    }
+  ],
+  "final_public_tests": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "test_add_list_done (test_todo.ExistingCommands.test_add_list_done) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.346s\n\nOK\n",
+    "data": null
+  }
+}

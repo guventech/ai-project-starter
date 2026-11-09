@@ -1,0 +1,15 @@
+{
+  "scored": false,
+  "native_search_control": {
+    "input": "owned synthetic outside canary only",
+    "tool": "grepToolCall",
+    "result_kind": "success",
+    "unknown_sentinel_disclosed": false,
+    "disposition": "Neither outside content access nor tool-level denial established; complete native isolation unverified."
+  },
+  "live_runs": "blocked after the experiment",
+  "scored_reruns": 0,
+  "diff_rendering": "Zero-context display derived from frozen fixtures/final files after the run; primary records and graded code unchanged. This avoids treating diff context markers as trailing source whitespace.",
+  "historical_inputs": "inputs.json strings match the original manifest hashes; current runner contains post-run guards",
+  "publication": "Known assistant text/native type names only; tool payloads, reasoning and IDs excluded; private paths redacted; inspected by fresh read-only reviewer."
+}

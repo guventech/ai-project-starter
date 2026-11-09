@@ -230,6 +230,20 @@ Status: authorized continuation implemented in [PR #28](https://github.com/guven
 
 Wording self-check: one shall requirement per row, listed vague words absent, each with a verification method and observable criteria. Approved scope: rewrite README, move detailed caveats/optional setup to linked pages, preserve attribution/migration guidance, classify the evidence overview for initialization, regenerate its baseline and run existing checks. Risk: a concise summary can overstate evidence; use a bounded recorded example and source-linked comparisons. No new skill, dependency, branding or application behavior.
 
+## Review remediation F-02 worked example and comparative evidence
+
+Status: owner approved F-02 as the next batch; reference and first eight attempts recorded. Seven protocol failures prevent useful outcome comparison; complete native-tool isolation remains unverified, so live trials are blocked. F-02 remains partial; no outcome improvement is claimed.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| EVAL-001 | The repository shall include a complete stdlib task-CLI worked example with traceable workflow evidence. | A routing trial is not an implemented application. | Example has requirements, approved scope/plan, observed red/green slice evidence, executable CLI tests, independent verification and release limitations; synthetic data only. | test |
+| EVAL-002 | The evaluation shall run four predefined scenarios with starter guidance and a baseline prompt. | Paired results need common tasks and explicit conditions. | Bug fix, feature, risky import and ambiguous import each have two fresh arms using Composer 2.5, the same initial code, tool protocol, limits and deterministic oracle; order alternates; no outcome-based reruns. | demonstration |
+| EVAL-003 | The evidence shall retain observed artifacts and failures without disclosing host-private data. | Readers need to inspect results and distinguish missing checks. | Prompts, visible responses/actions, final changed files, test outputs, elapsed time, model/CLI/image versions and rubric dispositions are published; reasoning/private paths/session IDs omitted; timeouts and protocol failures remain in results. | inspection |
+| EVAL-004 | Candidate code shall execute in disposable containers without host mounts, credentials or network access. | Native writable CLI permission controls did not establish a boundary on this Windows host. | Read-only model proposes typed actions; parent validates allowed paths/actions; restricted Docker containers execute writes/tests; cleanup checks owned labels/IDs; no source/global profile modification by candidates. | test |
+| EVAL-005 | The repository shall distinguish exploratory measurements from native-host or general outcome claims. | One repetition and an artificial tool interface cannot establish universal benefit. | docs/EVIDENCE.md records method, actual results, confounds and limits; README/VERIFICATION link it; initializer excludes all example/evaluation records; no new skills or process weights. | inspection |
+
+Wording self-check: each shall row contains one requirement, avoids listed vague words and has a verification method. Authorized plan: define/preregister method and rubric, obtain fresh design reviews, build the worked example and typed-action/container harness with focused tests, run one pair per scenario, inspect/verify artifacts, then submit one PR after source checks and both CI jobs. Limits: native Windows sandbox unavailable; global Cursor configuration stays unchanged; results apply to the controlled protocol and selected model, not the full IDE or bare system prompt.
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.

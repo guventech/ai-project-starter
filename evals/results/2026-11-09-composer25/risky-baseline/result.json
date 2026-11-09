@@ -1,0 +1,146 @@
+{
+  "case": "risky",
+  "arm": "baseline",
+  "status": "finished",
+  "model_calls": 3,
+  "reviews": 0,
+  "elapsed_seconds": 95.37,
+  "grading": [
+    {
+      "check": "valid-append",
+      "passed": true,
+      "observed": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "data": "[\n  {\n    \"id\": 4,\n    \"text\": \"First\",\n    \"done\": false\n  },\n  {\n    \"id\": 19,\n    \"text\": \"Second\",\n    \"done\": true\n  },\n  {\n    \"id\": 23,\n    \"text\": \"Third\",\n    \"done\": false\n  }\n]\n"
+      }
+    },
+    {
+      "check": "existing-duplicate",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Duplicate ID\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "incoming-duplicate",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Duplicate ID\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "bad-json",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "not-list",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Invalid import data\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "bool-id",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Invalid id\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "zero-id",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Invalid id\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "fractional-id",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Invalid id\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "blank-text",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Invalid text\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "extra-key",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Invalid task\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "bad-done",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Invalid done\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "late-invalid",
+      "passed": true,
+      "observed": {
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "Error: Invalid task\n",
+        "data": "[{\"id\":4,\"text\":\"First\",\"done\":false},{\"id\":19,\"text\":\"Second\",\"done\":true}]\n"
+      }
+    },
+    {
+      "check": "existing-commands",
+      "passed": true,
+      "observed": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "test_add_list_done (test_todo.ExistingCommands.test_add_list_done) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.355s\n\nOK\n",
+        "data": null
+      }
+    }
+  ],
+  "final_public_tests": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "test_add_list_done (test_todo.ExistingCommands.test_add_list_done) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.364s\n\nOK\n",
+    "data": null
+  }
+}
