@@ -219,7 +219,7 @@ Owner: repository maintainer. Acceptance criteria: WEIGHT-001–WEIGHT-003 in do
 - [x] Record measurable requirements and wording self-check.
 - [x] Define Lite/Standard/Strict in the generated skill guide; update project-helper selection rules.
 - [x] Add `scripts/process_weight.py` with typo/rename → Lite and payment → Strict checks.
-- [ ] Run starter gates and submit a protected-branch PR; both OS CI jobs must pass before merge.
+- [x] Run starter gates and merge protected-branch PR after both OS CI jobs ([PR #30](https://github.com/guventech/ai-project-starter/pull/30)).
 
 ## Application adoption checklist
 
