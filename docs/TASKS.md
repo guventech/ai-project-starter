@@ -157,7 +157,7 @@ Owner: repository maintainer. Acceptance criteria: CHECK-001–CHECK-003 in docs
 - [x] Observe focused red/green checks for status reporting and manifest validation.
 - [x] Add --check, no-write fixture assertions and install documentation.
 - [x] Run starter gates and record actual evidence.
-- [ ] Submit one focused PR; require both OS CI jobs before merge.
+- [x] Submit [PR #24](https://github.com/guventech/ai-project-starter/pull/24); require both OS CI jobs before merge.
 
 ## Application adoption checklist
 

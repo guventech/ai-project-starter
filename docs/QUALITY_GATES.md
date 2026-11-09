@@ -86,7 +86,7 @@ Scope: --check only; versioning, --diff and releases remain deferred.
 - Author inspection: check dispatch never calls install or a write helper; it compares source and manifest digests apart and does not open paths taken from the manifest. Existing upgrade behavior and F-01/F-03/F-05/privacy gates remain intact.
 - Read-only user-install smoke check: --check reported `manifest invalid`; no repair or upgrade was attempted. The synthetic fixtures provide the no-write assertions and controlled state coverage.
 - Design gate: not applicable; bounded CLI option within the existing installer architecture. Security evidence: malformed-manifest and link-rejection tests cover check-mode input boundaries; no independent fresh-context audit, hostile concurrent filesystem test or Windows junction fixture was executed. Snapshot limits are documented.
-- PR CI: pending; both Python 3.12 OS jobs must pass before merge. No global installation was upgraded.
+- PR CI: [run 42632489560](https://github.com/guventech/ai-project-starter/actions/runs/42632489560) passed both Python 3.12 jobs, `Starter validation (ubuntu-latest)` and `Starter validation (windows-latest)`, for implementation commit `d3476d0`. PR #24 includes this evidence follow-up; require green checks on its head before merge. No global installation was upgraded.
 
 ## F-16 search hygiene verification (2026-11-09)
 

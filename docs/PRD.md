@@ -169,7 +169,7 @@ Wording self-check: each row uses shall, contains one requirement, avoids the li
 
 ## Review remediation F-13 read-only installer check
 
-Status: approved slice implemented; local verification recorded in docs/QUALITY_GATES.md; PR CI pending. Versioning, releases and --diff remain deferred.
+Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-project-starter/pull/24); local verification and implementation-commit CI recorded in docs/QUALITY_GATES.md. Require green checks on the PR head before merge. Versioning, releases and --diff remain deferred.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
