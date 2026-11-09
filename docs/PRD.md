@@ -1,6 +1,6 @@
 # Product requirements
 
-Status: approved starter enhancement implemented; requirement evidence is recorded in docs/QUALITY_GATES.md. Live Cursor execution remains untested.
+Status: approved starter enhancement implemented; requirement evidence is recorded in docs/QUALITY_GATES.md. Bounded authenticated Cursor CLI smoke checks are complete; full workflow execution and tool-level permission enforcement remain outside that evidence.
 
 - Problem and target users: Cursor users need planning, test-first development and review workflows beyond the three starter skills.
 - Primary user journey: clarify requirements, draft and review a design, approve implementation, build in tested slices, then verify release evidence.

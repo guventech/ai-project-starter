@@ -39,6 +39,8 @@ Suggested first prompt:
 
 Skills require explicit invocation to keep ambient context small. A selected planning or review workflow can read the relevant sibling procedure; this does not make other skills ambient. Review agents remain read-only. Fresh-context isolation is a host capability, not a guarantee supplied by a Markdown file. See [configuration limits](docs/CONFIGURATION.md) and [quality gates](docs/QUALITY_GATES.md).
 
+If you install the optional packs, bare `/grill-me`, `/tdd` and `/security-audit` can select upstream versions. This happened in the tested Cursor CLI. To select the starter's workflow, use an explicit instruction such as: `Read and follow .cursor/skills/tdd/SKILL.md for this task.` Explicit-path loading was verified for all three overlapping skills; their local names and upstream packages remain unchanged.
+
 ## Recommended Additional Skills
 
 These local files are original, reduced workflows informed by the packs below; they do not vendor the full packs or provide their complete tooling. Optional installation commands:
@@ -79,7 +81,7 @@ Before relying on the workflows in your installed Cursor version:
 3. Check the GitHub Actions results for Python 3.12 on Windows and Linux. Configure required status checks through GitHub repository settings if you want merges gated on CI.
 4. After choosing an application stack, configure its formatting, linting, tests, build and relevant security/accessibility checks. Optional external skill packs can be installed when needed; the local workflows do not require them.
 
-Local enhancement checks passed on Windows with Python 3.13.14; GitHub CI passed on Windows and Linux with Python 3.12. This repository now requires both CI jobs through `main` branch protection. Optional packs are installed on the maintainer's machine, and live Cursor execution awaits CLI sign-in. These machine settings are not bundled into template copies. See [the setup record](docs/SETUP.md) and [verification record](docs/QUALITY_GATES.md#enhancement-verification-record-2026-11-09) for evidence and limitations.
+Local enhancement checks passed on Windows with Python 3.13.14; GitHub CI passed on Windows and Linux with Python 3.12. This repository requires both CI jobs through `main` branch protection. Authenticated Cursor CLI smoke checks verified skill attachment/loading, custom reviewer invocation, write refusal and a parent-context canary probe. These bounded observations do not establish tool-level write enforcement, universal context isolation or complete upstream workflow execution. Optional packs and machine settings are not bundled into template copies. See [the setup record](docs/SETUP.md) and [verification record](docs/QUALITY_GATES.md#enhancement-verification-record-2026-11-09) for evidence and limitations.
 
 ## Publish an extracted copy
 
