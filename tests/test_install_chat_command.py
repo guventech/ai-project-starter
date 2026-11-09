@@ -147,7 +147,7 @@ class InstallCommandTests(unittest.TestCase):
     def test_fresh_install_promotes_complete_package(self):
         from scripts import install_chat_command as installer
         destination, backup, replaced = installer.install(self.destination)
-        self.assertEqual(destination, self.destination.resolve())
+        self.assertTrue(destination.samefile(self.destination))
         self.assertIsNone(backup)
         self.assertFalse(replaced)
         planned = installer.planned_files()
@@ -178,7 +178,7 @@ class InstallCommandTests(unittest.TestCase):
     def test_upgrade_absent_destination_installs_transactionally(self):
         from scripts import install_chat_command as installer
         destination, backup, replaced = installer.install(self.destination, upgrade=True)
-        self.assertEqual(destination, self.destination.resolve())
+        self.assertTrue(destination.samefile(self.destination))
         self.assertIsNone(backup)
         self.assertFalse(replaced)
         self.assertTrue((self.destination / 'SKILL.md').is_file())
