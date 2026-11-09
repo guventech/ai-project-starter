@@ -219,7 +219,7 @@ Owner: repository maintainer. Acceptance criteria: LOG-001–LOG-003 in docs/PRD
 - [x] Record measurable requirements and wording self-check.
 - [x] Add `scripts/changelog_release.py` with `--check`/notes extraction and failure cases.
 - [x] Wire the check into starter validation; document implementation-PR changelog updates.
-- [ ] Run starter gates and merge a protected-branch PR after both OS CI jobs.
+- [x] Run starter gates and merge protected-branch PR after both OS CI jobs ([PR #34](https://github.com/guventech/ai-project-starter/pull/34)).
 
 ## Review F-13 version metadata (authorized continuation)
 
