@@ -219,7 +219,7 @@ Owner: repository maintainer. Acceptance criteria: VER-001–VER-003 in docs/PRD
 - [x] Record measurable requirements and wording self-check.
 - [x] Add VERSION `0.1.0`, CHANGELOG.md and installer `--version` / package-version printing.
 - [x] Package VERSION in the installer; remove VERSION/CHANGELOG on initialization.
-- [ ] Run starter gates and merge a protected-branch PR after both OS CI jobs.
+- [x] Run starter gates and merge protected-branch PR after both OS CI jobs ([PR #32](https://github.com/guventech/ai-project-starter/pull/32)).
 
 ## Review F-09 process weights (authorized continuation)
 

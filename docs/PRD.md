@@ -179,7 +179,7 @@ Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-p
 
 ## Review remediation F-13 version metadata slice
 
-Status: implementing after Cursor + Codex agreement; `--diff` and published releases remain deferred.
+Status: merged via PR #32; `--diff` and published releases remain deferred.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
