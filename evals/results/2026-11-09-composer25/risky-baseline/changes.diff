@@ -1,0 +1,40 @@
+--- initial/todo.py
++++ final/todo.py
+@@ -4,0 +5,16 @@
++
++
++def _validate_task(obj):
++    if not isinstance(obj, dict) or set(obj.keys()) != {'id', 'text', 'done'}:
++        raise ValueError('Invalid task')
++    task_id = obj['id']
++    if type(task_id) is not int or task_id <= 0:
++        raise ValueError('Invalid id')
++    text = obj['text']
++    if not isinstance(text, str) or not text.strip():
++        raise ValueError('Invalid text')
++    done = obj['done']
++    if type(done) is not bool:
++        raise ValueError('Invalid done')
++    return {'id': task_id, 'text': text.strip(), 'done': done}
++
+@@ -31,3 +47,17 @@
+-            for r in json.loads(a.source.read_text()):
+-                records.append(r)
+-                a.data.write_text(json.dumps(records))
++            incoming = json.loads(a.source.read_text())
++            if not isinstance(incoming, list):
++                raise ValueError('Invalid import data')
++            validated = []
++            seen_incoming = set()
++            for item in incoming:
++                task = _validate_task(item)
++                if task['id'] in seen_incoming:
++                    raise ValueError('Duplicate ID')
++                seen_incoming.add(task['id'])
++                validated.append(task)
++            existing_ids = {r['id'] for r in records}
++            for task in validated:
++                if task['id'] in existing_ids:
++                    raise ValueError('Duplicate ID')
++                existing_ids.add(task['id'])
++            records.extend(validated)

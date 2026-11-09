@@ -43,6 +43,9 @@ unconfigured. No previous host observations or application successes are copied.
 
 Reset resources live at `scripts/project_templates/<reset-target>` and are
 reviewable text. The following inventory is also printed by preview:
+All checked files under examples/ and evals/ are maintainer evidence. The baseline
+expands those paths into individual REMOVE entries; apply does not discover new
+files or recursively delete those directories. Edited evidence still causes refusal.
 
 <!-- initialization-plan -->
 ```text
@@ -61,12 +64,71 @@ RESET docs/TASKS.md
 REMOVE .github/ISSUE_TEMPLATE/bug_report.md
 REMOVE .github/ISSUE_TEMPLATE/feature_request.md
 REMOVE CURSOR_UPDATE_PROMPT.md
+REMOVE docs/EVIDENCE.md
 REMOVE docs/INITIALIZE.md
 REMOVE docs/VERIFICATION.md
 REMOVE docs/designs/project-initialization.md
+REMOVE docs/designs/workflow-evidence.md
 REMOVE docs/superpowers/plans/2026-11-09-maint-002-permission-probe.md
 REMOVE docs/superpowers/specs/2026-11-09-maint-002-permission-probe-design.md
+REMOVE evals/README.md
 REMOVE evals/prior-art-search-hygiene.md
+REMOVE evals/results/2026-11-09-composer25/ambiguous-baseline/actions.jsonl
+REMOVE evals/results/2026-11-09-composer25/ambiguous-baseline/changes.diff
+REMOVE evals/results/2026-11-09-composer25/ambiguous-baseline/final/test_todo.py
+REMOVE evals/results/2026-11-09-composer25/ambiguous-baseline/final/todo.py
+REMOVE evals/results/2026-11-09-composer25/ambiguous-baseline/result.json
+REMOVE evals/results/2026-11-09-composer25/ambiguous-baseline/visible-failure.jsonl
+REMOVE evals/results/2026-11-09-composer25/ambiguous-starter/actions.jsonl
+REMOVE evals/results/2026-11-09-composer25/ambiguous-starter/changes.diff
+REMOVE evals/results/2026-11-09-composer25/ambiguous-starter/final/test_todo.py
+REMOVE evals/results/2026-11-09-composer25/ambiguous-starter/final/todo.py
+REMOVE evals/results/2026-11-09-composer25/ambiguous-starter/result.json
+REMOVE evals/results/2026-11-09-composer25/ambiguous-starter/visible-failure.jsonl
+REMOVE evals/results/2026-11-09-composer25/bug-baseline/actions.jsonl
+REMOVE evals/results/2026-11-09-composer25/bug-baseline/changes.diff
+REMOVE evals/results/2026-11-09-composer25/bug-baseline/final/test_todo.py
+REMOVE evals/results/2026-11-09-composer25/bug-baseline/final/todo.py
+REMOVE evals/results/2026-11-09-composer25/bug-baseline/result.json
+REMOVE evals/results/2026-11-09-composer25/bug-baseline/visible-failure.jsonl
+REMOVE evals/results/2026-11-09-composer25/bug-starter/actions.jsonl
+REMOVE evals/results/2026-11-09-composer25/bug-starter/changes.diff
+REMOVE evals/results/2026-11-09-composer25/bug-starter/final/test_todo.py
+REMOVE evals/results/2026-11-09-composer25/bug-starter/final/todo.py
+REMOVE evals/results/2026-11-09-composer25/bug-starter/result.json
+REMOVE evals/results/2026-11-09-composer25/bug-starter/visible-failure.jsonl
+REMOVE evals/results/2026-11-09-composer25/completed.txt
+REMOVE evals/results/2026-11-09-composer25/feature-baseline/actions.jsonl
+REMOVE evals/results/2026-11-09-composer25/feature-baseline/changes.diff
+REMOVE evals/results/2026-11-09-composer25/feature-baseline/final/test_todo.py
+REMOVE evals/results/2026-11-09-composer25/feature-baseline/final/todo.py
+REMOVE evals/results/2026-11-09-composer25/feature-baseline/result.json
+REMOVE evals/results/2026-11-09-composer25/feature-baseline/visible-failure.jsonl
+REMOVE evals/results/2026-11-09-composer25/feature-starter/actions.jsonl
+REMOVE evals/results/2026-11-09-composer25/feature-starter/changes.diff
+REMOVE evals/results/2026-11-09-composer25/feature-starter/final/test_todo.py
+REMOVE evals/results/2026-11-09-composer25/feature-starter/final/todo.py
+REMOVE evals/results/2026-11-09-composer25/feature-starter/result.json
+REMOVE evals/results/2026-11-09-composer25/feature-starter/visible-failure.jsonl
+REMOVE evals/results/2026-11-09-composer25/inputs.json
+REMOVE evals/results/2026-11-09-composer25/manifest.json
+REMOVE evals/results/2026-11-09-composer25/post-run-controls.json
+REMOVE evals/results/2026-11-09-composer25/readiness.json
+REMOVE evals/results/2026-11-09-composer25/risky-baseline/actions.jsonl
+REMOVE evals/results/2026-11-09-composer25/risky-baseline/changes.diff
+REMOVE evals/results/2026-11-09-composer25/risky-baseline/final/test_todo.py
+REMOVE evals/results/2026-11-09-composer25/risky-baseline/final/todo.py
+REMOVE evals/results/2026-11-09-composer25/risky-baseline/result.json
+REMOVE evals/results/2026-11-09-composer25/risky-starter/actions.jsonl
+REMOVE evals/results/2026-11-09-composer25/risky-starter/changes.diff
+REMOVE evals/results/2026-11-09-composer25/risky-starter/final/test_todo.py
+REMOVE evals/results/2026-11-09-composer25/risky-starter/final/todo.py
+REMOVE evals/results/2026-11-09-composer25/risky-starter/result.json
+REMOVE evals/results/2026-11-09-composer25/risky-starter/visible-failure.jsonl
+REMOVE evals/workflow_cases.py
+REMOVE evals/workflow_runner.py
+REMOVE examples/todo_cli/README.md
+REMOVE examples/todo_cli/todo.py
 REMOVE publish-to-github.py
 REMOVE publish-to-github.sh
 REMOVE scripts/init_project.py
@@ -87,6 +149,8 @@ REMOVE scripts/project_templates/docs/TASKS.md
 REMOVE tests/test_init_project.py
 REMOVE tests/test_install_chat_command.py
 REMOVE tests/test_starter.py
+REMOVE tests/test_todo_example.py
+REMOVE tests/test_workflow_eval.py
 ```
 <!-- end-initialization-plan -->
 
