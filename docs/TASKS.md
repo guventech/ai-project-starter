@@ -61,7 +61,8 @@ Owner: repository maintainer. Acceptance criteria: UPGR-001–UPGR-004 in docs/P
 - [x] Add manifest write, `--upgrade`, `--force` (with upgrade only), and pre-force managed-file backups.
 - [x] Cover refuse/upgrade/force/backup behaviors in installer tests.
 - [x] Update README/AGENTS/CONFIGURATION and quality-gate evidence; run starter gates locally (validator + 18 unittests, 2 symlink skips).
-- [ ] Open PR after CI.
+- [x] Merge through protected-branch PR workflow after green checks ([PR #11](https://github.com/guventech/ai-project-starter/pull/11); CI [42592357225](https://github.com/guventech/ai-project-starter/actions/runs/42592357225)).
+- [x] Refresh the maintainer global install with `--upgrade --force` and confirm the installer manifest is present.
 
 ## Phase A skill-inventory integrity (approved)
 

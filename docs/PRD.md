@@ -95,7 +95,7 @@ Design review for this change: not applicable; extends existing Markdown skill a
 
 ## Phase B installer upgrade (approved)
 
-Status: implemented locally; pending PR CI merge evidence.
+Status: merged via PR #11; maintainer global install refreshed with `--upgrade --force`.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|

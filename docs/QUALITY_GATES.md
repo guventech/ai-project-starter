@@ -61,7 +61,7 @@ Evidence is a test name, a screenshot, or a short note.
 
 ## Phase B installer upgrade verification
 
-Scope: manifest-based `--upgrade` / `--upgrade --force` with sibling backups. Observed red: installer tests failed on unrecognized `--upgrade`/`--force` before implementation. After implementation: `python scripts/validate_starter.py` passed on Windows; `python -m unittest discover -s tests -v` passed (18 methods, 2 symlink skips); `git diff --check` passed. PR CI evidence is added after the pull request run.
+Scope: manifest-based `--upgrade` / `--upgrade --force` with sibling backups. Observed red: installer tests failed on unrecognized `--upgrade`/`--force` before implementation. After implementation: `python scripts/validate_starter.py` passed on Windows; `python -m unittest discover -s tests -v` passed (18 methods, 2 symlink skips); `git diff --check` passed. PR CI run [42592357225](https://github.com/guventech/ai-project-starter/actions/runs/42592357225) passed both OS jobs. Merged via [PR #11](https://github.com/guventech/ai-project-starter/pull/11) (`02600a2`). Maintainer global package upgraded with `--upgrade --force`; `.installer-manifest.json` is present at `~/.cursor/skills/project-helper`.
 
 ## Phase A inventory integrity verification
 
