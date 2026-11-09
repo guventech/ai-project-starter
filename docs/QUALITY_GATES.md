@@ -28,6 +28,11 @@ Evidence is a test name, a screenshot, or a short note.
 
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
+| INIT-001 | test | Preview fixture checks directory entries, bytes and modification times; displayed RESET/REMOVE inventory is documented in INITIALIZE.md. No backup is created by preview. |
+| INIT-002 | test | Modified/missing/extra/cache, malformed/aliased manifests, upstream fetch/push remotes and staged Git changes refuse. Symlink tests run where permitted; Windows junction refusal was observed locally. CRLF stock preview preserves bytes. |
+| INIT-003 | test | Applied-copy fixture scans retained text for own PR/CI links and prior enhancement wording; reset PRD retains wording rules; LICENSE, attribution, AGENTS and workflow text remain byte-identical. |
+| INIT-004 | test | Applied copy passes --project validation. Mutating its denylist, generated guide, AGENTS or privacy inputs causes rejection. Default source mode additionally checks required maintainer assets and baseline freshness. |
+| INIT-005 | test | Exact originals match the sibling backup, including CRLF bytes. Corrupt/injected-failure backups cause no target changes; early replacement and late removal failures restore all target file bytes. Process interruption and rollback-disk failure remain documented limits. |
 | CONTRIB-001 | inspection | CONTRIBUTING.md links the six existing project procedures; README links CONTRIBUTING. One-off inspection resolved all 17 local links across CONTRIBUTING/README to existing paths. |
 | CONTRIB-002 | inspection | Bug-report and feature-request Markdown templates have distinct name/about metadata and title prefixes; prompts cover the specified report details. Existing scalar metadata reader accepted both blocks. |
 | CONTRIB-003 | inspection | Guide and both templates ask for synthetic/redacted public reports; none assigns labels, assignees or a private reporting channel. All three new docs passed an explicit scan using the existing home-path patterns. |
@@ -79,6 +84,27 @@ Evidence is a test name, a screenshot, or a short note.
 | HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
 | PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Merged via [PR #16](https://github.com/guventech/ai-project-starter/pull/16). |
 | ATTR-001 | test | `THIRD_PARTY.md` records upstream sources and classifications; installer tests expect the packaged notice and manifest digest entry; README links the notice. |
+
+## F-06 initialization verification (2026-11-09)
+
+Scope: opt-in cleanup of stock copies; no initializer was applied to the upstream working tree, no global installation changed, and no application was published.
+
+- Design gate: two fresh requirements/technical contexts and affected-section rereviews used fork_turns none. Findings on line endings, caches, backup verification, Windows aliases and Git monitor side effects were accepted and resolved; details and context names are in docs/designs/project-initialization.md. The owner's approval selected the initializer and delegated routine design choices; no material change to that choice was made.
+- Observed red/green: preview test first failed because init_project.py was absent, then passed. Independent implementation review found a Git clean-filter execution path during status inspection; a disposable pass-through filter wrote its marker in the failing regression. Replacing status with cached index/HEAD metadata made that same regression pass.
+- Final local full suite: `python -m unittest discover -s tests -v` passed on Windows/Python 3.13.14 (56 tests, 6 host symlink skips); the Windows-junction refusal case passed. An earlier 55-test suite also passed before that case was added.
+- `python scripts/validate_starter.py`, `python scripts/project_manifest.py --check`, `python scripts/generate_skills_guide.py --check`, and `git diff --check`: passed after baseline regeneration. Source-document updates require regenerating the baseline before committing.
+- One-off inspection matched INITIALIZE.md to all 12 reset and 28 remove paths, and resolved 21 documentation/resource links to retained outputs.
+- Disposable copies: preview/apply, no-write refusal, normalized CRLF stock hashes, exact-byte backup verification, corrupt backup, early/late rollback, upstream fetch/push remotes, staged changes, monitor/filter nonexecution, clean records and the four --project invariants were exercised. No live Cursor application workflow is implied by these fixtures.
+
+Scoped security coverage:
+
+- Manifest/path boundary: reviewed schema, duplicate keys, normalized text hashing, traversal/drive/ADS/device/case aliases, symlinks/ancestors and junction rejection; hostile concurrent path replacement is excluded.
+- Filesystem mutation: reviewed individual-file allowlist, checked sibling boundary, byte-complete backup, atomic per-file writes and ordinary-error restoration. Power loss, killed processes and disk errors during rollback require manual recovery and remain untested limits.
+- Git metadata/helpers: reviewed monitor suppression, cached-only index/HEAD comparison, disabled external diff/text conversion and partial-clone refusal. Fixture monitor/filter calls stayed inert after the correction. No network command is used by initialization.
+- INIT-SEC-001: confirmed pre-fix Git status could execute a configured clean filter during preview; parent reproduction observed the marker. Fixed current: status is no longer used. A separate fresh read-only verifier (init_security_verification, fork_turns none) checked reachability and correction against source and parent-run red/green evidence; it did not run fixtures itself. No other confirmed finding was reported in this bounded review.
+- Validation/profile boundary: reviewed explicit --project selection; default source requirements and all four existing invariants are retained. No application authentication/production surface exists in this command.
+
+Implementation CI: [run 42646464439](https://github.com/guventech/ai-project-starter/actions/runs/42646464439) passed both Python 3.12 jobs, `Starter validation (ubuntu-latest)` and `Starter validation (windows-latest)`, for commit `f15c605`. PR #27 includes this evidence follow-up and a regenerated baseline; both jobs remain required on its head before merge. This is a bounded initializer review, not a claim of host isolation or protection against all filesystem/configuration attacks.
 
 ## F-14 contribution basics verification (2026-11-09)
 

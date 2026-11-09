@@ -203,6 +203,20 @@ Status: approved documentation slice implemented in [PR #26](https://github.com/
 
 Wording self-check: each row uses shall, has one requirement, avoids the listed vague words and has an inspection method. Approved plan: add a short linked guide and two Markdown templates, inspect metadata/links/privacy wording, run existing starter checks, and submit one PR. Risk: template prompts are editable guidance, not enforced form validation; document that limit. No new skills, dependencies, workflow or repository settings. Rollback: revert this PR.
 
+## Review remediation F-06 project initialization
+
+Status: owner-approved initializer implemented in [PR #27](https://github.com/guventech/ai-project-starter/pull/27) after fresh design reviews and rereviews; local evidence, scoped security verification and implementation CI are recorded in docs/QUALITY_GATES.md. Require green checks on the PR head before merge. README positioning remains F-07 scope.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| INIT-001 | Initialization shall show an explicit reset/remove plan before changing a template copy. | A preview makes cleanup reviewable. | Default invocation writes nothing; --apply is required for mutation; docs list every reset/remove target and kept categories. | test |
+| INIT-002 | Initialization shall refuse a copy that differs from the shipped baseline. | Cleanup must not overwrite application work. | Content changes other than line-ending conversion, missing/extra files (including bytecode caches), linked paths, invalid manifests, dirty Git worktrees and the upstream repository remote cause refusal before writes; controlled repeats refuse. | test |
+| INIT-003 | Initialization shall replace starter project records with unfilled application records. | New projects must not inherit requirements or verification evidence from this starter. | Disposable-copy scan finds no own PR links, CI run IDs, personal paths or starter-enhancement requirements outside version-control metadata; attribution and licence remain. | test |
+| INIT-004 | Initialized projects shall retain the workflow validation invariants. | Cleanup must preserve the established safeguards. | Explicit --project validation checks colliding skill names, generated-guide freshness, consumer-only AGENTS rules and privacy; default source validation retains maintainer requirements and baseline checks. | test |
+| INIT-005 | A failed initialization shall retain recovery data for the affected stock files. | Filesystem errors can interrupt replacement or removal. | Backup bytes match every affected original before mutation; injected backup failure leaves the target unchanged; replacement/removal failures restore originals; documentation describes process-interruption recovery and excludes concurrent filesystem attacks. | test |
+
+Wording self-check: each row uses shall, contains one requirement, avoids the listed vague words and has an executable or inspection method. Approved plan: assess scope, obtain two fresh read-only design reviews, implement preview/apply and baseline guard in tested slices, retain core validation through explicit project mode, verify disposable copies and failure recovery, then submit one focused PR. Risks: changed snapshots must refuse; interrupted processes need manual recovery from the sibling backup; no application stack or Git history rewrite is authorized. No new skills or dependencies.
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.
