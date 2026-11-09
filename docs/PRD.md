@@ -179,6 +179,18 @@ Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-p
 
 Wording self-check: each shall row has one requirement, a measurable acceptance criterion and a test method; none uses the listed vague words. Approved plan: add check dispatch, fixture-based red/green tests and install documentation, then run both starter gates and PR CI. Risk: confusing manifest integrity with current-source freshness; test those comparisons apart. The manifest detects accidental edits, not tampering. No new dependencies or skills. Rollback: revert this slice's PR; check mode does not change installations.
 
+## Review remediation F-10 rule-trigger coverage
+
+Status: approved scope implemented in [PR #25](https://github.com/guventech/ai-project-starter/pull/25); static, bounded CLI probe and corrected implementation CI evidence recorded in docs/QUALITY_GATES.md and docs/SETUP.md. Require green checks on the PR head before merge.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| RULE-001 | The scoped rules shall cover the documented Node, Python and Go sample layouts. | Existing source globs miss app/lib and Go cmd/internal/pkg layouts; testing omits Go test names. | Existing unittest runner checks architecture/security matches for each layout's source files, testing matches for its tests, shared documentation/CI triggers, and an unrelated README exclusion. | test |
+| RULE-002 | The repository shall document each rule's globs, trigger and intent. | Consumers need to adapt rule scope to their layout. | docs/RULES.md lists all three rules, copyable Node/Python/Go glob examples and a versioned live-attachment check procedure; README and CONFIGURATION link it. | inspection |
+| RULE-003 | Rule verification shall distinguish static path matching from observed host attachment. | Python glob results cannot establish Cursor execution. | Evidence records static command results and live probe results or an unverified outcome; all three rules retain alwaysApply false. | inspection |
+
+Wording self-check: one shall requirement per row; listed vague words absent; each row has a measurable criterion and a verification method. Approved plan: add layout regression fixtures, extend the existing globs, document triggers, run starter checks and attempt a bounded read-only host probe if available, then submit one PR. Risks: extra source matches increase attached context; retain explicit path scope and disclose unsupported layouts and glob-engine differences. No new skills, dependencies or application stack. Rollback: revert the F-10 PR.
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.

@@ -28,6 +28,9 @@ Evidence is a test name, a screenshot, or a short note.
 
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
+| RULE-001 | test | test_rule_globs_cover_node_python_go_layouts checks actual metadata against three file layouts; observed nine missed-match subcases before the glob changes, then green. |
+| RULE-002 | inspection | docs/RULES.md lists exact globs, trigger/intent, sample scope, copyable per-stack examples and a versioned host-check procedure; README/CONFIGURATION link it. |
+| RULE-003 | inspection | All three rules retain alwaysApply false. SETUP.md records CLI Go positive/README control marker evidence and empty per-read attachment fields; static Node/Python results and editor/runtime limits are stated apart. |
 | CHECK-001 | test | Check-mode fixtures compare bytes, modification times and directory entries before/after each invocation; absent destinations remain absent. |
 | CHECK-002 | test | Installer tests cover current and old stock snapshots, changed/missing/extra/obsolete files, manifest-digest drift and malformed/incomplete/unknown-path manifests. Linked-entry/destination tests run where host symlink support permits. |
 | CHECK-003 | test | CLI tests assert exit 0/1/2 for the documented states, invalid destination/content and each prohibited upgrade-flag combination. |
@@ -73,6 +76,21 @@ Evidence is a test name, a screenshot, or a short note.
 | HARD-003 | test | Fresh install stages then promotes a digest-matched package; injected `SKILL.md` and manifest write failures leave no destination and no `project-helper.staging-*`; `--upgrade` with an absent destination uses the same path; occupied destinations stay unchanged. |
 | PRIV-001 | test | Public docs omit personal home paths; `test_personal_home_paths_detected` fails validation for Windows, macOS and Linux sample paths. Merged via [PR #16](https://github.com/guventech/ai-project-starter/pull/16). |
 | ATTR-001 | test | `THIRD_PARTY.md` records upstream sources and classifications; installer tests expect the packaged notice and manifest digest entry; README links the notice. |
+
+## F-10 rule-trigger coverage verification (2026-11-09)
+
+Scope: existing three rule globs, one layout regression test, trigger/adoption documentation and a bounded host probe. No new skills or dependencies.
+
+- Observed red: layout regression failed nine subcases for Node app/lib, root Python/Go source, Go source directories and Go test filenames. After adding scoped roots and the Go test pattern, the same test passed.
+- Initial PR CI [42636153183](https://github.com/guventech/ai-project-starter/actions/runs/42636153183) failed the layout fixture on Ubuntu/Python 3.12; Windows was cancelled by matrix fail-fast. Python 3.12 enumerates only directories for a trailing **, unlike local Python 3.13. The test now expands a trailing /** to /**/* for file enumeration; required matches and shipped rule globs are unchanged. The focused local rerun passed; corrected Python 3.12 CI remains required.
+- `python scripts/validate_starter.py`: passed; docs/RULES.md is a required document. Existing F-01/F-03/F-05/privacy checks are retained.
+- `python scripts/generate_skills_guide.py --check`: passed; generated guide unchanged.
+- `python -m unittest discover -s tests -v`: passed on Windows/Python 3.13.14 (42 tests, 4 host symlink skips).
+- `git diff --check`: passed.
+- Live CLI probe: Windows Agent CLI `2026.11.05-86047df`; Go source/test session returned all three fixture-only rule markers, fresh README-only control returned none. Tool traces showed only sample-file Reads, no explicit rule reads or writes. This supports implicit rule inclusion in that fixture; per-read attachment arrays were empty. SETUP.md records method and limits without personal paths or session IDs.
+- Static matching uses Python Path.glob, not Cursor's glob engine. No live Node/Python session, editor UI attachment check, universal engine-parity test or rule-enforcement claim.
+- Design/security gates: not applicable to this bounded path-scope revision; no new architecture, credential use, application trust boundary or rule-body security behavior. This is author verification, not an independent fresh-context audit.
+- Corrected implementation CI: [run 42636385652](https://github.com/guventech/ai-project-starter/actions/runs/42636385652) passed both Python 3.12 jobs, `Starter validation (ubuntu-latest)` and `Starter validation (windows-latest)`, for commit `9d69289`. PR #25 includes this evidence follow-up; require green checks on its head before merge. Global installations were not changed.
 
 ## F-13 read-only installer check verification (2026-11-09)
 

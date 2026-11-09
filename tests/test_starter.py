@@ -68,6 +68,68 @@ class StarterTests(unittest.TestCase):
         path.write_text(path.read_text().replace('alwaysApply: false', 'alwaysApply: true'))
         self.assertTrue(any('scoped' in e for e in validate(self.root)))
 
+    def test_rule_globs_cover_node_python_go_layouts(self):
+        from scripts.validate_starter import metadata
+
+        # Exercise the actual metadata against files on disk. pathlib globbing
+        # checks these sample scopes; it is not Cursor's attachment engine.
+        layouts = {
+            'node': {
+                'src/index.ts': {'architecture', 'security'},
+                'app/page.tsx': {'architecture', 'security'},
+                'lib/auth/session.ts': {'architecture', 'security'},
+                'tests/page.test.ts': {'testing'},
+                'page.spec.ts': {'testing'},
+            },
+            'python': {
+                'src/sample/service.py': {'architecture', 'security'},
+                'main.py': {'architecture', 'security'},
+                'tests/test_service.py': {'testing'},
+                'test_service.py': {'testing'},
+            },
+            'go': {
+                'main.go': {'architecture', 'security'},
+                'cmd/example/main.go': {'architecture', 'security'},
+                'internal/auth/session.go': {'architecture', 'security'},
+                'pkg/client/client.go': {'architecture', 'security'},
+                'internal/auth/session_test.go': {'testing'},
+                'main_test.go': {'testing'},
+            },
+        }
+        shared = {
+            'docs/ARCHITECTURE.md': {'architecture'},
+            'docs/DECISIONS.md': {'architecture'},
+            '.github/workflows/ci.yml': {'testing', 'security'},
+            'scripts/check.py': {'security'},
+        }
+        for layout, files in layouts.items():
+            root = self.root / 'rule-layouts' / layout
+            expected = {**files, **shared, 'README.md': set()}
+            for relative in expected:
+                path = root / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text('fixture\n', encoding='utf-8')
+            matches = {relative: set() for relative in expected}
+            for name in ('architecture', 'testing', 'security'):
+                data = metadata(self.root / '.cursor/rules' / f'{name}.mdc')
+                self.assertEqual(data['alwaysApply'], 'false')
+                for pattern in data['globs'].split(','):
+                    pattern = pattern.strip()
+                    # Python 3.12's trailing ** yields directories only; append
+                    # * so recursive file scopes behave the same on 3.12/3.13.
+                    if pattern.endswith('/**'):
+                        pattern += '/*'
+                    for path in root.glob(pattern):
+                        relative = path.relative_to(root).as_posix()
+                        if relative in matches:
+                            matches[relative].add(name)
+            for relative, required in expected.items():
+                with self.subTest(layout=layout, path=relative):
+                    if required:
+                        self.assertTrue(required <= matches[relative], matches[relative])
+                    else:
+                        self.assertEqual(matches[relative], set())
+
     def test_personal_home_paths_detected(self):
         samples = (
             'Windows path C:\\Users\\example\\AppData\\Local\\Temp\\probe\n',

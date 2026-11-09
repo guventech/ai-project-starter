@@ -38,7 +38,7 @@ Suggested first prompt:
 - AGENTS.md: concise shared operating instructions for every project copy.
 - MAINTAINING.md: maintainer-only process for this starter repository.
 - docs/INSTALL.md: user-level `/project-helper` install and upgrade.
-- .cursor/rules/: architecture, testing and security rules scoped by file patterns.
+- .cursor/rules/: architecture, testing and security rules scoped by file patterns; [triggers and layout coverage](docs/RULES.md).
 - .cursor/skills/: the project-helper entry point plus eight focused workflows for planning, interviewing, prior-art search, design review, TDD, debugging, security audit and release checks.
 - .cursor/agents/: read-only architect and verifier definitions.
 - docs/: requirements, architecture, decisions, tasks, quality gates and integrations.

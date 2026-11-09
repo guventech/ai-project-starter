@@ -67,6 +67,15 @@ The editor UI, complete EGM/security audit pipelines, every upstream skill and a
 
 Application-specific build, lint, security, browser and accessibility gates remain out of scope until an application stack and requirements exist. Installing a pack does not install its optional tools, provision services, publish issues or deploy an application.
 
+### F-10 scoped-rule probe (2026-11-09)
+
+Host: Windows, official Agent CLI `2026.11.05-86047df`, using `--print --mode ask --output-format stream-json` in an isolated synthetic temp workspace. Rule revision: the F-10 globs listed in docs/RULES.md. Each copied rule body had a distinct random response marker appended for the fixture only; shipped rule bodies were unchanged. Markers appeared only in rule copies, not in prompts or source files. The workspace was trusted for these probes; no blanket tool-approval option was enabled.
+
+- Positive session named `cmd/example/main.go` and `cmd/example/main_test.go`. The trace showed only two Read calls for those source/test files; no explicit rule reads, shell, search, MCP or edit calls. The reply contained all three rule markers.
+- A separate fresh session named only `README.md`. Its trace showed one Read call for that file and the reply contained no markers.
+- Inference: the positive/control difference supports implicit inclusion of architecture, testing and security for the Go sample in this CLI. Per-read `relatedCursorRulePaths` and `relatedCursorRules` were empty, so this is controlled behavioral evidence rather than a direct attachment-field report.
+- Limits: Node/Python samples have static scope coverage, not separate live sessions. Editor UI attachment, universal glob parity and rule enforcement remain unverified. The probes used temporary copies and did not upgrade any global installation. Fixture cleanup checked the resolved temp parent and named prefix before deletion. Session IDs, marker values and personal paths are omitted.
+
 ## One-command project helper
 
 The approved `/project-helper` command is installed at `~/.cursor/skills/project-helper`. It has one SKILL.md, eight workflow reference documents and two reviewer reference documents (ten reference files total). No source checkout path or upstream package is needed at invocation time. The installed entry file matches the repository version (SHA256 `419b1b802763e54475b1ac4c0db50744f7fce01efaefe694b6939012a452c091`). Snapshots are not auto-updated.

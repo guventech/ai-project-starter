@@ -8,7 +8,7 @@ Configuration shapes checked against official documentation:
 - Publishing: https://cli.github.com/manual/gh_repo_create
 - Template flag: https://cli.github.com/manual/gh_repo_edit
 
-Rules use description, comma-separated globs and alwaysApply false. Adjust globs when adopting a different layout.
+Rules use description, comma-separated globs and alwaysApply false. See [RULES.md](RULES.md) for all three triggers, Node/Python/Go sample coverage, scope examples and live-attachment checks. Adjust globs when adopting a different layout.
 Skills use name/description and explicit invocation to keep ambient context small.
 Agents inherit the chosen model and set readonly true. The verifier asks its parent to run checks that write artifacts.
 AGENTS.md is the shared behavioral core; Cursor-specific files are not claimed portable to other agents.

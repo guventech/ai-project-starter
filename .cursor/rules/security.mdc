@@ -1,6 +1,6 @@
 ---
 description: Security guidance for matching project files
-globs: "src/**, scripts/**, .github/workflows/**, publish-to-github.*"
+globs: "src/**, app/**, lib/**, cmd/**, internal/**, pkg/**, *.py, *.go, scripts/**, .github/workflows/**, publish-to-github.*"
 alwaysApply: false
 ---
 

@@ -159,6 +159,16 @@ Owner: repository maintainer. Acceptance criteria: CHECK-001–CHECK-003 in docs
 - [x] Run starter gates and record actual evidence.
 - [x] Submit [PR #24](https://github.com/guventech/ai-project-starter/pull/24); require both OS CI jobs before merge.
 
+## Review F-10 rule-trigger coverage (approved)
+
+Owner: repository maintainer. Acceptance criteria: RULE-001–RULE-003 in docs/PRD.md.
+
+- [x] Record scope, measurable requirements and wording self-check.
+- [x] Observe red/green layout coverage; extend scoped source and Go test globs.
+- [x] Add docs/RULES.md with inventory, adaptation examples and attachment procedure; link README/CONFIGURATION.
+- [x] Record Go positive/README control CLI marker observations and limits; Node/Python remain static coverage.
+- [x] Run starter gates and submit [PR #25](https://github.com/guventech/ai-project-starter/pull/25); both OS CI jobs are required before merge.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.
