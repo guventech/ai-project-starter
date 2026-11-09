@@ -2,11 +2,16 @@
 from pathlib import Path
 import sys
 
+try:
+    from skill_inventory import REQUIRED_SKILLS
+except ImportError:  # pragma: no cover - package import when run via tests
+    from scripts.skill_inventory import REQUIRED_SKILLS
+
 REQUIRED = ['README.md', 'AGENTS.md', 'LICENSE', '.env.example', 'docs/PRD.md', 'docs/ARCHITECTURE.md',
             'docs/DECISIONS.md', 'docs/TASKS.md', 'docs/QUALITY_GATES.md',
             'docs/INTEGRATIONS.md', 'docs/CONFIGURATION.md',
             '.github/workflows/ci.yml', 'publish-to-github.py', 'publish-to-github.sh',
-            'scripts/install_chat_command.py']
+            'scripts/install_chat_command.py', 'scripts/skill_inventory.py']
 def metadata(path):
     text = path.read_text(encoding='utf-8')
     lines = text.splitlines()
@@ -28,9 +33,7 @@ def validate(root):
     errors = [f'missing {p}' for p in REQUIRED if not (root / p).is_file()]
     groups = [('.cursor/rules', '*.mdc', {'architecture', 'testing', 'security'}),
               ('.cursor/agents', '*.md', {'architect', 'verifier'}),
-              ('.cursor/skills', '*/SKILL.md', {'project-planning', 'systematic-debugging', 'release-check',
-                                               'grill-me', 'tdd', 'design-review', 'security-audit',
-                                               'project-helper', 'prior-art'})]
+              ('.cursor/skills', '*/SKILL.md', set(REQUIRED_SKILLS))]
     for folder, pattern, expected in groups:
         paths = list((root / folder).glob(pattern))
         names = {p.parent.name if p.name == 'SKILL.md' else p.stem for p in paths}

@@ -14,12 +14,12 @@ Skills use name/description and explicit invocation to keep ambient context smal
 Agents inherit the chosen model and set readonly true. The verifier asks its parent to run checks that write artifacts.
 AGENTS.md is the shared behavioral core; Cursor-specific files are not claimed portable to other agents.
 Static checks cannot prove Cursor discovery or runtime behavior. Open the folder in your installed Cursor,
-check all three rules and eight skills are discovered, invoke /project-helper or /project-planning, then ask for the architect and verifier.
+check all three rules and nine skills are discovered, invoke /project-helper or /project-planning, then ask for the architect and verifier.
 Confirm read-only behavior before relying on it. Bounded live CLI smoke results are recorded in SETUP.md; editor UI discovery and complete workflow execution are not claimed.
 
 ## Local skills
 
-The eight local skills are project-helper, project-planning, grill-me, design-review, tdd, systematic-debugging, security-audit and release-check. Sibling links describe procedures a selected workflow can read; they do not change explicit invocation metadata.
+The nine local skills are project-helper, project-planning, grill-me, prior-art, design-review, tdd, systematic-debugging, security-audit and release-check. Sibling links describe procedures a selected workflow can read; they do not change explicit invocation metadata.
 
 ## One-command installation
 

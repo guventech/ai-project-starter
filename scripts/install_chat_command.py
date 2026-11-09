@@ -3,10 +3,13 @@ import argparse
 from pathlib import Path
 import sys
 
+try:
+    from skill_inventory import WORKFLOWS
+except ImportError:  # pragma: no cover - package import when run via tests
+    from scripts.skill_inventory import WORKFLOWS
+
 
 ROOT = Path(__file__).resolve().parents[1]
-WORKFLOWS = ('project-planning', 'grill-me', 'design-review', 'tdd',
-             'systematic-debugging', 'security-audit', 'release-check', 'prior-art')
 REVIEWERS = ('architect', 'verifier')
 
 

@@ -24,7 +24,7 @@ Owner: repository maintainer. Acceptance criteria: SETUP-001–SETUP-003 in docs
 Owner: repository maintainer. Acceptance criteria: CHAT-001–CHAT-006 in docs/PRD.md. Evidence: docs/SETUP.md and docs/QUALITY_GATES.md.
 
 - [x] Add the two-mode project-helper entry point and a dependency-free first-install script.
-- [x] Bundle the seven local workflows and two reviewers without duplicate skill discovery.
+- [x] Bundle the local workflows and two reviewers without duplicate skill discovery (eight workflows after prior-art).
 - [x] Test overwrite refusal, repeat installation and required-skill removal detection.
 - [x] Install for the current Cursor user and test invocation from separate workspaces.
 - [x] Apply the independent review's nonempty-target clarification.
@@ -53,6 +53,15 @@ Owner: repository maintainer. Acceptance criteria: PRIOR-001–PRIOR-005 in docs
 - [x] Run local starter checks (validator + unittest); PR CI passed both OS jobs ([42586480260](https://github.com/guventech/ai-project-starter/actions/runs/42586480260)).
 - [x] Independent read-only review of the skill/helper text (PRIOR IDs passed; isolation unverified); merged via [PR #7](https://github.com/guventech/ai-project-starter/pull/7).
 - [x] Document that existing `~/.cursor/skills/project-helper` installs must be removed/renamed before reinstall to receive `prior-art` (AGENTS.md).
+
+## Phase A skill-inventory integrity (approved)
+
+Owner: repository maintainer. Scope: align docs/evidence with the nine-skill / eight-workflow inventory; add drift regression coverage.
+
+- [x] Introduce `scripts/skill_inventory.py` as the shared WORKFLOWS / REQUIRED_SKILLS source for validator, installer and tests.
+- [x] Align PRD, QUALITY_GATES, CONFIGURATION, SETUP and TASKS skill counts and install fingerprint evidence.
+- [x] Add `test_skill_inventory_sources_agree` with observed red (CONFIGURATION omitted prior-art) then green.
+- [x] Run both starter gates locally (validator + 10 unittests, 1 symlink skip) and record results; open PR after CI.
 
 ## Application adoption checklist
 
