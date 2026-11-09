@@ -137,7 +137,7 @@ Owner: repository maintainer. Acceptance criteria: CONSUME-001 in docs/PRD.md. C
 
 - [x] Move maintainer process to MAINTAINING.md and install/upgrade to docs/INSTALL.md.
 - [x] Keep AGENTS.md under 50 lines with consumer rules and links only; reject maintainer markers in validation.
-- [ ] Merge through protected-branch PR after CI.
+- [x] Merge through protected-branch PR after CI ([PR #21](https://github.com/guventech/ai-project-starter/pull/21)).
 
 ## Application adoption checklist
 

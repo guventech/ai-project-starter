@@ -148,7 +148,7 @@ Status: merged via PR #20.
 
 ## Review remediation F-05 consumer AGENTS split
 
-Status: implementing after F-03.
+Status: merged via PR #21.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
