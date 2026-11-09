@@ -52,6 +52,16 @@ Consequences: clears the Node.js 20 deprecation path with less behavioral change
 Rollback: revert the workflow/docs commit on the maintenance branch or close the PR.
 Related paths: .github/workflows/ci.yml, docs/PRD.md, docs/QUALITY_GATES.md, docs/TASKS.md.
 
+## ADR-007: Add hybrid prior-art research before planning
+
+Date: 2026-11-09. Status: accepted; concrete plan approved by the user.
+Context: Users want GitHub/web prior art for new projects and substantial improvements without burning tokens on tiny fixes or adopting a repo because it has many stars.
+Options: always-on search; opt-in only; hybrid trigger with a dedicated skill invoked by project-helper.
+Decision: add `/prior-art`, invoke it from `/project-helper` by path, run always for new projects and for non-tiny improve goals, rank fit then activity/license then stars, adopt only after explicit candidate approval, and persist docs only when a candidate is adopted or seriously considered.
+Consequences: eight bundled workflows ship with the installer; global installs need a manual reinstall to receive the new reference; missing search tools leave the gate unverified and planning continues.
+Rollback: revert the prior-art skill and helper/installer/docs changes; remove only a freshly installed package after checking for user edits.
+Related paths: .cursor/skills/prior-art/, .cursor/skills/project-helper/, .cursor/skills/project-planning/, scripts/install_chat_command.py, scripts/validate_starter.py, tests/, README.md, AGENTS.md.
+
 ## New decision template
 
 ID/title, date, status, context, options, decision, consequences, rollback and related paths.

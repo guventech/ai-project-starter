@@ -43,6 +43,17 @@ Owner: repository maintainer. Acceptance criteria: MAINT-001 in docs/PRD.md.
 
 MAINT-002 (tool-level write probe) and MAINT-003 (full design/security review target) remain queued.
 
+## Prior-art research workflow (approved)
+
+Owner: repository maintainer. Acceptance criteria: PRIOR-001–PRIOR-005 in docs/PRD.md.
+
+- [x] Add `.cursor/skills/prior-art/SKILL.md` with capped search, fit-first ranking and adopt approval rules.
+- [x] Wire hybrid invocation into project-helper and a planning pointer; bundle via installer/validator/tests.
+- [x] Update README, AGENTS, PRD, DECISIONS, CONFIGURATION and quality-gate evidence rows.
+- [x] Run local starter checks (validator + unittest); PR CI on Windows and Linux pending merge gate.
+- [x] Independent read-only review of the skill/helper text (PRIOR IDs passed; isolation unverified); merge through protected PR workflow pending.
+- [x] Document that existing `~/.cursor/skills/project-helper` installs must be removed/renamed before reinstall to receive `prior-art` (AGENTS.md).
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

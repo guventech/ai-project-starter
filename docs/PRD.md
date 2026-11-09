@@ -4,7 +4,7 @@ Status: approved starter enhancement implemented; requirement evidence is record
 
 - Problem and target users: Cursor users need planning, test-first development and review workflows beyond the three starter skills.
 - Primary user journey: clarify requirements, draft and review a design, approve implementation, build in tested slices, then verify release evidence.
-- Goals and measurable success: eight local skills, two read-only reviewers and documented review gates, with both starter check commands passing.
+- Goals and measurable success: nine local skills (project-helper plus eight workflows), two read-only reviewers and documented review gates, with both starter check commands passing.
 - Constraints: retain a stack-agnostic template, existing Cursor metadata conventions and dependency-free validation. Keep secrets out of review inputs and reports.
 - Functional requirements and acceptance criteria: see the table below.
 - Out of scope: application code, stack selection, note-taking integration and application deployment. Follow-up authorization covers optional pack installation, repository protection and documentation commits.
@@ -69,7 +69,7 @@ User experience: open a folder in Cursor and type `/project-helper`. The assista
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
 | CHAT-001 | The project-helper command shall offer new-project and existing-project modes. | One entry point serves both use cases. | Invoking the command without a goal asks one mode question with two choices; an explicit goal selects its matching mode without repeating the question. | demonstration |
-| CHAT-002 | The installed command shall include the local procedures and reviewer instructions it needs. | Other projects should not need manual file copying or this repository's absolute path. | A dependency-free installer packages seven workflow files and two reviewer definitions with the entry skill; the installed command loads these files from another workspace. | test |
+| CHAT-002 | The installed command shall include the local procedures and reviewer instructions it needs. | Other projects should not need manual file copying or this repository's absolute path. | A dependency-free installer packages eight workflow files and two reviewer definitions with the entry skill; the installed command loads these files from another workspace. | test |
 | CHAT-003 | New-project mode shall obtain an approved plan before implementation. | Project goals and target directory must be resolved before building. | The assistant gathers the idea and target folder, records measurable criteria, presents a plan, and writes no application code before approval; nonempty target folders require an explicit decision to use them. | demonstration |
 | CHAT-004 | Existing-project mode shall inspect the open project's instructions and checks before proposing edits. | Existing conventions and user changes must be preserved. | Initial review reports findings and evidence without changing application files; implementation follows approval of a bounded plan. | demonstration |
 | CHAT-005 | The command shall select bundled workflows by file path. | Upstream slash names have known collisions. | Installed-mode probes load the bundled paths for overlapping names and require no second slash command from the user. | demonstration |
@@ -78,6 +78,20 @@ User experience: open a folder in Cursor and type `/project-helper`. The assista
 Implementation plan: add the project-helper entry skill; add a one-time Python installer that bundles the existing workflows and reviewers without dependencies or machine-specific paths; extend starter validation and installer tests; simplify README/AGENTS guidance; install into the user's Cursor skill directory; run isolated new/existing-mode CLI probes and both starter gates; commit through a pull request after CI. No standalone website, desktop window, application framework, automatic deployment or upstream skill rename is part of this change.
 
 Risks and verification: the host must discover user-level skills after a reload; test invocation outside this repository. Keep new-project probes in temporary folders and existing-project probes read-only. Missing subagent capabilities or checks remain explicit limitations. Rollback removes only the added command package after checking for user edits, and reverts its repository diff.
+
+## Prior-art research workflow
+
+Status: implemented on feature branch; awaiting PR CI and merge. Hybrid trigger, fit-first ranking, adopt-only-with-candidate-approval, and chat-plus-conditional-docs recording were decided with the user.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| PRIOR-001 | The starter shall include a prior-art skill with explicit invocation. | Reuse existing public work before inventing. | `.cursor/skills/prior-art/SKILL.md` exists with matching name, description and `disable-model-invocation: true`. | test |
+| PRIOR-002 | The prior-art skill shall produce a capped candidate memo ranked by fit before popularity. | Stars alone mislead; token cost stays bounded. | Instructions require at most three candidates, rank fit then activity/license then stars, and continue when search is unavailable. | inspection |
+| PRIOR-003 | The project-helper shall invoke prior-art under hybrid rules with an explicit skip path. | Always-on wastes tokens on tiny fixes; new work benefits from research. | New-project mode runs prior-art unless skipped; improve mode skips only tiny goals or an explicit skip; selection uses the local skill path. | inspection |
+| PRIOR-004 | The workflows shall require explicit approval of a named candidate before cloning or copying third-party code into the target. | Plan approval must not silently import remote code. | prior-art and project-helper forbid clone/copy/vendor without explicit candidate approval. | inspection |
+| PRIOR-005 | The validator and installer shall treat prior-art as a required bundled workflow. | Prevent silent loss of the research step. | Removal of prior-art fails validation; installer packages `references/prior-art.md`; docs list the skill. | test |
+
+Design review for this change: not applicable; extends existing Markdown skill architecture with no new runtime trust boundary. Independent read-only review of the skill text is recorded before merge. Risks: unavailable search tools, over-triggering on improve-mode, stale global installs that omit the new reference. Rollback reverts the feature branch or PR.
 
 ## To be resolved (TBR)
 

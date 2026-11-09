@@ -44,11 +44,22 @@ Evidence is a test name, a screenshot, or a short note.
 | MAINT-002 | demonstration | Queued maintenance scope; tool-level write denial remains unverified beyond the earlier voluntary-refusal probe. |
 | MAINT-003 | inspection | Queued maintenance scope; the target repository for full design/security review still awaits selection. |
 | CHAT-001 | demonstration | User-level `/project-helper` in an empty temporary workspace asked exactly the new/improve mode question. Explicit new/existing goals selected their modes without repeating it. Session IDs are in SETUP.md. |
-| CHAT-002 | test | Installer tests verify one discoverable SKILL.md, all seven workflow references and both reviewer references, with rewritten internal paths and no environment files. A separate workspace loaded the installed planning/TDD/verifier references. |
+| CHAT-002 | test | Installer tests verify one discoverable SKILL.md, all eight workflow references and both reviewer references, with rewritten internal paths and no environment files. A separate workspace loaded the installed planning/TDD/verifier references. |
 | CHAT-003 | demonstration | New-project planning probe used the installed planning reference and wrote no application files; the nonempty-target guard was strengthened after independent review. Final probe evidence is recorded in SETUP.md. |
 | CHAT-004 | demonstration | Existing-project fixture review read its own AGENTS.md, calculator source and tests, used bundled TDD/verifier references and returned findings/proposed checks without changing files. This is a bounded routing trial, not a full application audit. |
 | CHAT-005 | demonstration | Existing-project routing loaded installed references/tdd.md despite an optional upstream tdd skill. Bundled references use direct paths; no second slash command or configuration copy was requested. Installer tests cover all seven reference files. |
 | CHAT-006 | test | Installer tests preserve an occupied destination and a customized command on repeat install. The symlink case is skipped when the host cannot create links; Linux CI executes that case. |
+| PRIOR-001 | test | `python scripts/validate_starter.py` requires `.cursor/skills/prior-art`; `test_each_required_skill_removal_detected` covers `prior-art`. |
+| PRIOR-002 | inspection | prior-art steps cap candidates at three, rank fit then activity/license then stars, and continue when search is unavailable. |
+| PRIOR-003 | inspection | project-helper new-project step 2 and improve step 2 encode the hybrid trigger and skip path; workflow list includes prior-art for path selection. |
+| PRIOR-004 | inspection | prior-art step 5 and project-helper prior-art steps forbid clone/copy without explicit candidate approval. |
+| PRIOR-005 | test | Installer `WORKFLOWS` includes `prior-art`; installer tests expect `references/prior-art.md`; README/AGENTS list `/prior-art`. |
+
+## Prior-art verification
+
+Local Windows checks after implementation: `python scripts/validate_starter.py` passed; `python -m unittest discover -s tests -v` passed (9 methods, 1 symlink skip). `git diff --check` passed.
+
+Independent read-only verifier review (fresh Task, no inherited conversation claimed by the parent; host isolation remains unverified) marked PRIOR-001–PRIOR-005 pass against the skill, helper, planning pointer, validator and installer sources. One non-blocking wording gap was fixed: project-planning now restates the clone/copy approval rule. Live Cursor attachment of `/prior-art` and a reinstall of the global project-helper package were not executed in this delivery.
 
 ## Project-helper verification
 

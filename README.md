@@ -45,7 +45,7 @@ Suggested first prompt:
 
 - AGENTS.md: concise shared operating instructions.
 - .cursor/rules/: architecture, testing and security rules scoped by file patterns.
-- .cursor/skills/: the project-helper entry point plus seven focused workflows for planning, interviewing, design review, TDD, debugging, security audit and release checks.
+- .cursor/skills/: the project-helper entry point plus eight focused workflows for planning, interviewing, prior-art search, design review, TDD, debugging, security audit and release checks.
 - .cursor/agents/: read-only architect and verifier definitions.
 - docs/: requirements, architecture, decisions, tasks, quality gates and integrations.
 - LICENSE: MIT license, copyright Guven Bircan 2026.
@@ -59,6 +59,7 @@ Suggested first prompt:
 - `/project-helper`: one guided conversation for a new project or the open existing project; selects the procedures below by file path.
 - `/project-planning`: requirements, small steps, verification and approval.
 - `/grill-me`: one decision at a time until no implementation-blocking questions remain.
+- `/prior-art`: capped GitHub/web search for existing solutions; rank fit before popularity; adopt only with explicit candidate approval.
 - `/design-review`: draft with project context, challenge with at least two fresh-context reviewers, resolve findings and obtain human approval.
 - `/tdd`: observe a failing behavior test, implement one vertical slice, then refactor after green.
 - `/systematic-debugging`: reproduce, test a hypothesis and verify a focused fix.
@@ -104,7 +105,7 @@ The current PRD, completed task list and verification record describe this start
 
 Before relying on the workflows in your installed Cursor version:
 
-1. Confirm discovery of all eight skills and both agents, then invoke the new skills and verify the expected procedures load.
+1. Confirm discovery of all nine skills and both agents, then invoke the new skills and verify the expected procedures load.
 2. Confirm review agents remain read-only and goldfish reviewers receive no inherited conversation. Record the Cursor version and observed results in `docs/QUALITY_GATES.md`.
 3. Check the GitHub Actions results for Python 3.12 on Windows and Linux. Configure required status checks through GitHub repository settings if you want merges gated on CI.
 4. After choosing an application stack, configure its formatting, linting, tests, build and relevant security/accessibility checks. Optional external skill packs can be installed when needed; the local workflows do not require them.
