@@ -246,7 +246,7 @@ Wording self-check: each shall row contains one requirement, avoids listed vague
 
 ## Review remediation F-09 process weights
 
-Status: implementing after Cursor + Codex agreement on main tip through PR #29.
+Status: merged via PR #30.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
