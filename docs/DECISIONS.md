@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-024: Process weights Lite / Standard / Strict (F-09)
+
+Date: 2026-11-09. Status: accepted; Cursor + Codex agreed next batch after partial F-02.
+Context: Full planning and design ceremony was applied even to typos; skill-meta already carried light/standard/strict hints without helper behavior.
+Options: leave ceremony unchanged; ask weight every time; infer from goal markers and ask once when undetermined.
+Decision: document Lite/Standard/Strict gates in `docs/SKILLS.md`; teach `/project-helper` to infer from shared markers in `scripts/process_weight.py`, ask one question only when undetermined, skip PRD/design ceremony under Lite, and keep Strict design/security gates when triggered.
+Consequences: trivial edits move faster; sensitive goals escalate; keyword markers can mis-classify so undetermined goals still ask once; no new skills or dependencies.
+Rollback: revert the F-09 PR and restore prior project-helper/guide notes.
+Related paths: `.cursor/skills/project-helper/SKILL.md`, `scripts/process_weight.py`, `scripts/generate_skills_guide.py`, `docs/SKILLS.md`, `tests/test_process_weight.py`.
+
 ## ADR-023: Controlled, isolated workflow evidence (F-02)
 
 Date: 2026-11-09. Status: accepted within owner-authorized F-02 continuation.

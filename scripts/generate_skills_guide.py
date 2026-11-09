@@ -124,10 +124,21 @@ def render(skills):
         )
     lines.extend([
         '',
+        '## Process weights',
+        '',
+        '`/project-helper` selects **Lite**, **Standard** or **Strict** from the stated goal when',
+        'markers match. Ask one weight question only when the goal does not determine the weight.',
+        'Skill-table `weight` values (`light` / `standard` / `strict`) remain per-skill ceremony hints.',
+        '',
+        '| Process weight | Use when | Required | Skippable when this weight applies |',
+        '|---|---|---|---|',
+        '| **Lite** | Typo, symbol/file rename, docs-only, CI config bump, comment-only or whitespace | Inspect the target, apply the change, run the project checks that still apply, report results | PRD fill and approval ceremony, prior-art, decision-interview, design-review |',
+        '| **Standard** | Normal features and the default helper path when markers do not force Lite or Strict | Current project-helper workflow, including plan approval before nontrivial edits | None of the default gates without an explicit recorded reason |',
+        '| **Strict** | Payments, authentication, secrets/credentials, or destructive operations | Plan approval before edits; design-review for material design changes; trust-boundary-audit when sensitive boundaries are in scope | Cannot skip design-review or trust-boundary-audit when those triggers apply |',
+        '',
         '## Notes',
         '',
-        '- Weights are guidance for ceremony: `light` for tiny edits, `standard` for normal features,',
-        '  `strict` for high-risk or sensitive work. `/project-helper` may ask which weight to use later.',
+        '- Deterministic goal markers live in `scripts/process_weight.py` and are mirrored in `/project-helper`.',
         '- Fresh-context isolation for design and security verification is a host capability; report unverified when unavailable.',
         '',
     ])

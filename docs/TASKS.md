@@ -212,6 +212,15 @@ Owner: repository maintainer. Acceptance criteria: EVAL-001–EVAL-005 in docs/P
 - [x] Publish bounded conclusions, classify 90 individual removals and pass local source gates (71 tests; six host symlink skips).
 - [x] Submit [PR #29](https://github.com/guventech/ai-project-starter/pull/29) for this partial evidence slice; both protected CI jobs are required before merge. Useful comparative outcomes remain open above.
 
+## Review F-09 process weights (authorized continuation)
+
+Owner: repository maintainer. Acceptance criteria: WEIGHT-001–WEIGHT-003 in docs/PRD.md. Cursor + Codex: implement after F-02 partial merge; defer remaining F-02 runner.
+
+- [x] Record measurable requirements and wording self-check.
+- [x] Define Lite/Standard/Strict in the generated skill guide; update project-helper selection rules.
+- [x] Add `scripts/process_weight.py` with typo/rename → Lite and payment → Strict checks.
+- [ ] Run starter gates and submit a protected-branch PR; both OS CI jobs must pass before merge.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.
