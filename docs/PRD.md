@@ -93,6 +93,17 @@ Status: merged via PR #7. Hybrid trigger, fit-first ranking, adopt-only-with-can
 
 Design review for this change: not applicable; extends existing Markdown skill architecture with no new runtime trust boundary. Independent read-only review of the skill text is recorded before merge. Risks: unavailable search tools, over-triggering on improve-mode, stale global installs that omit the new reference. Rollback reverts the feature branch or PR.
 
+## Phase B installer upgrade (approved)
+
+Status: implemented locally; pending PR CI merge evidence.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| UPGR-001 | A successful install shall write an installer manifest of managed-file digests. | Detect stock packages without trusting hand inspection. | `.installer-manifest.json` lists SHA-256 digests for every managed content path after install. | test |
+| UPGR-002 | Default install shall refuse an occupied destination. | Preserve CHAT-006. | Occupied path or symlink exits non-zero without changing contents. | test |
+| UPGR-003 | `--upgrade` shall replace a clean stock package or install when missing. | Allow updates without manual delete. | Manifest-matching packages are replaced from the repo; missing destinations are installed; extras, customized managed files, missing manifests and symlinks refuse without `--force`. | test |
+| UPGR-004 | `--upgrade --force` shall back up differing managed files then overwrite managed content when no extras exist. | Limit data loss while unblocking pre-manifest and customized packages. | Differing managed files appear under `project-helper.bak-<timestamp>/`; extras and bare `--force` still refuse. | test |
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.

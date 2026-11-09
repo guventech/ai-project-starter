@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import subprocess
 import sys
 import tempfile
@@ -18,9 +19,9 @@ class InstallCommandTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.destination = self.root / 'skills/project-helper'
 
-    def run_installer(self):
+    def run_installer(self, *extra_args):
         return subprocess.run(
-            [sys.executable, str(INSTALLER), '--destination', str(self.destination)],
+            [sys.executable, str(INSTALLER), '--destination', str(self.destination), *extra_args],
             capture_output=True, text=True, check=False)
 
     def test_installs_self_contained_command_without_duplicate_skill_discovery(self):
@@ -39,6 +40,72 @@ class InstallCommandTests(unittest.TestCase):
             self.assertNotIn('.cursor/skills/', content)
         self.assertIn('/project-helper', result.stdout)
         self.assertFalse(list(self.destination.rglob('.env*')))
+        manifest = json.loads((self.destination / '.installer-manifest.json').read_text(encoding='utf-8'))
+        self.assertIn('SKILL.md', manifest['files'])
+        self.assertIn('references/prior-art.md', manifest['files'])
+
+    def test_upgrade_replaces_clean_stock_package(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        from scripts import install_chat_command as installer
+        skill = self.destination / 'SKILL.md'
+        expected = installer.planned_files()['SKILL.md']
+        skill.write_text(expected + '\n# stale marker\n', encoding='utf-8')
+        installer.write_manifest(self.destination, installer.installed_content_digests(self.destination))
+        result = self.run_installer('--upgrade')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(skill.read_text(encoding='utf-8'), expected)
+        self.assertNotIn('# stale marker', skill.read_text(encoding='utf-8'))
+
+    def test_upgrade_refuses_extra_files(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        (self.destination / 'user-notes.txt').write_text('keep', encoding='utf-8')
+        result = self.run_installer('--upgrade')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('extra files', result.stderr.lower())
+        self.assertEqual((self.destination / 'user-notes.txt').read_text(encoding='utf-8'), 'keep')
+
+    def test_upgrade_refuses_customized_managed_file(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        skill = self.destination / 'SKILL.md'
+        skill.write_text('user customization', encoding='utf-8')
+        result = self.run_installer('--upgrade')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('customized', result.stderr.lower())
+        self.assertEqual(skill.read_text(encoding='utf-8'), 'user customization')
+
+    def test_upgrade_refuses_missing_manifest(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        (self.destination / '.installer-manifest.json').unlink()
+        result = self.run_installer('--upgrade')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('manifest', result.stderr.lower())
+        self.assertIn('--force', result.stderr)
+
+    def test_upgrade_force_backs_up_and_overwrites_customization(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        from scripts import install_chat_command as installer
+        skill = self.destination / 'SKILL.md'
+        expected = installer.planned_files()['SKILL.md']
+        skill.write_text('user customization', encoding='utf-8')
+        result = self.run_installer('--upgrade', '--force')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(skill.read_text(encoding='utf-8'), expected)
+        backups = list(self.destination.parent.glob('project-helper.bak-*'))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual((backups[0] / 'SKILL.md').read_text(encoding='utf-8'), 'user customization')
+
+    def test_upgrade_force_still_refuses_extra_files(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        (self.destination / 'user-notes.txt').write_text('keep', encoding='utf-8')
+        result = self.run_installer('--upgrade', '--force')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('extra files', result.stderr.lower())
+        self.assertEqual((self.destination / 'user-notes.txt').read_text(encoding='utf-8'), 'keep')
+
+    def test_force_without_upgrade_is_rejected(self):
+        result = self.run_installer('--force')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('--upgrade', result.stderr)
 
     def test_existing_destination_and_user_content_are_preserved(self):
         self.destination.mkdir(parents=True)
@@ -66,5 +133,17 @@ class InstallCommandTests(unittest.TestCase):
         except OSError:
             self.skipTest('Creating symlinks is not permitted on this host')
         result = self.run_installer()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(list(target.iterdir()), [])
+
+    def test_upgrade_refuses_symlink_destination(self):
+        target = self.root / 'unrelated'
+        target.mkdir()
+        self.destination.parent.mkdir()
+        try:
+            self.destination.symlink_to(target, target_is_directory=True)
+        except OSError:
+            self.skipTest('Creating symlinks is not permitted on this host')
+        result = self.run_installer('--upgrade')
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(list(target.iterdir()), [])

@@ -27,7 +27,13 @@ python scripts/install_chat_command.py
 
 Reload Cursor or start a new chat. The installer places a self-contained command in `~/.cursor/skills/project-helper`, with the local workflows and reviewer instructions bundled as reference files. It needs no Python packages and refuses to replace an existing installation. The command works without this repository's original path or the optional upstream packs. Your projects, their existing instructions and their CI remain under your control. Review/deployment capabilities still depend on the host and the project's configured checks.
 
-The repository-local command is also available when working in this starter itself. A global installation is per machine; it does not transfer through GitHub template copies. Updates are not automatic: inspect an existing package for customization before replacing it. See [configuration and verification](docs/CONFIGURATION.md).
+The repository-local command is also available when working in this starter itself. A global installation is per machine; it does not transfer through GitHub template copies. Updates are not automatic. For a clean stock package:
+
+```sh
+python scripts/install_chat_command.py --upgrade
+```
+
+Pre-manifest installs or customized managed files need `python scripts/install_chat_command.py --upgrade --force`, which backs up differing managed files beside the package before replacing them. Extra user files still block upgrade. See [configuration and verification](docs/CONFIGURATION.md).
 
 ## Advanced: individual workflows and template adoption
 

@@ -54,6 +54,14 @@ Evidence is a test name, a screenshot, or a short note.
 | PRIOR-003 | inspection | project-helper new-project step 2 and improve step 2 encode the hybrid trigger and skip path; workflow list includes prior-art for path selection. |
 | PRIOR-004 | inspection | prior-art step 5 and project-helper prior-art steps forbid clone/copy without explicit candidate approval. |
 | PRIOR-005 | test | Installer `WORKFLOWS` includes `prior-art`; installer tests expect `references/prior-art.md`; README/AGENTS list `/prior-art`. |
+| UPGR-001 | test | Fresh install writes `.installer-manifest.json` with digests for managed content paths including `references/prior-art.md`. |
+| UPGR-002 | test | Occupied destination and modified-command cases still refuse default install without changing user content. |
+| UPGR-003 | test | `--upgrade` replaces a manifest-matching stock package; refuses extras, customized managed files, missing manifests and (when links work) symlinks. |
+| UPGR-004 | test | `--upgrade --force` backs up differing `SKILL.md` under `project-helper.bak-*` then restores planned content; extras and bare `--force` refuse. |
+
+## Phase B installer upgrade verification
+
+Scope: manifest-based `--upgrade` / `--upgrade --force` with sibling backups. Observed red: installer tests failed on unrecognized `--upgrade`/`--force` before implementation. After implementation: `python scripts/validate_starter.py` passed on Windows; `python -m unittest discover -s tests -v` passed (18 methods, 2 symlink skips); `git diff --check` passed. PR CI evidence is added after the pull request run.
 
 ## Phase A inventory integrity verification
 

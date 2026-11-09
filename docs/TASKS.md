@@ -54,6 +54,15 @@ Owner: repository maintainer. Acceptance criteria: PRIOR-001–PRIOR-005 in docs
 - [x] Independent read-only review of the skill/helper text (PRIOR IDs passed; isolation unverified); merged via [PR #7](https://github.com/guventech/ai-project-starter/pull/7).
 - [x] Document that existing `~/.cursor/skills/project-helper` installs must be removed/renamed before reinstall to receive `prior-art` (AGENTS.md).
 
+## Phase B installer upgrade (approved)
+
+Owner: repository maintainer. Acceptance criteria: UPGR-001–UPGR-004 in docs/PRD.md.
+
+- [x] Add manifest write, `--upgrade`, `--force` (with upgrade only), and pre-force managed-file backups.
+- [x] Cover refuse/upgrade/force/backup behaviors in installer tests.
+- [x] Update README/AGENTS/CONFIGURATION and quality-gate evidence; run starter gates locally (validator + 18 unittests, 2 symlink skips).
+- [ ] Open PR after CI.
+
 ## Phase A skill-inventory integrity (approved)
 
 Owner: repository maintainer. Scope: align docs/evidence with the nine-skill / eight-workflow inventory; add drift regression coverage.
