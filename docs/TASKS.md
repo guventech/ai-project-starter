@@ -50,7 +50,7 @@ Owner: repository maintainer. Acceptance criteria: PRIOR-001–PRIOR-005 in docs
 - [x] Add `.cursor/skills/prior-art/SKILL.md` with capped search, fit-first ranking and adopt approval rules.
 - [x] Wire hybrid invocation into project-helper and a planning pointer; bundle via installer/validator/tests.
 - [x] Update README, AGENTS, PRD, DECISIONS, CONFIGURATION and quality-gate evidence rows.
-- [x] Run local starter checks (validator + unittest); PR CI on Windows and Linux pending merge gate.
+- [x] Run local starter checks (validator + unittest); PR CI passed both OS jobs ([42586480260](https://github.com/guventech/ai-project-starter/actions/runs/42586480260)).
 - [x] Independent read-only review of the skill/helper text (PRIOR IDs passed; isolation unverified); merge through protected PR workflow pending.
 - [x] Document that existing `~/.cursor/skills/project-helper` installs must be removed/renamed before reinstall to receive `prior-art` (AGENTS.md).
 

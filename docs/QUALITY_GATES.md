@@ -57,7 +57,7 @@ Evidence is a test name, a screenshot, or a short note.
 
 ## Prior-art verification
 
-Local Windows checks after implementation: `python scripts/validate_starter.py` passed; `python -m unittest discover -s tests -v` passed (9 methods, 1 symlink skip). `git diff --check` passed.
+Local Windows checks after implementation: `python scripts/validate_starter.py` passed; `python -m unittest discover -s tests -v` passed (9 methods, 1 symlink skip). `git diff --check` passed. PR CI run [42586480260](https://github.com/guventech/ai-project-starter/actions/runs/42586480260) passed both OS jobs.
 
 Independent read-only verifier review (fresh Task, no inherited conversation claimed by the parent; host isolation remains unverified) marked PRIOR-001–PRIOR-005 pass against the skill, helper, planning pointer, validator and installer sources. One non-blocking wording gap was fixed: project-planning now restates the clone/copy approval rule. Live Cursor attachment of `/prior-art` and a reinstall of the global project-helper package were not executed in this delivery.
 
