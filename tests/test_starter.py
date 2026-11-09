@@ -114,7 +114,12 @@ class StarterTests(unittest.TestCase):
                 data = metadata(self.root / '.cursor/rules' / f'{name}.mdc')
                 self.assertEqual(data['alwaysApply'], 'false')
                 for pattern in data['globs'].split(','):
-                    for path in root.glob(pattern.strip()):
+                    pattern = pattern.strip()
+                    # Python 3.12's trailing ** yields directories only; append
+                    # * so recursive file scopes behave the same on 3.12/3.13.
+                    if pattern.endswith('/**'):
+                        pattern += '/*'
+                    for path in root.glob(pattern):
                         relative = path.relative_to(root).as_posix()
                         if relative in matches:
                             matches[relative].add(name)

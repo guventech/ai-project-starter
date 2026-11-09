@@ -22,7 +22,8 @@ match all three rules. Root Python/Go test files can do the same. Unrelated root
 ## Tested sample layouts
 
 The unittest `test_rule_globs_cover_node_python_go_layouts` writes sample files
-and evaluates the actual rule metadata with Python `Path.glob`. Its expectations
+and evaluates the actual rule metadata with Python `Path.glob`, expanding a
+trailing `/**` to `/**/*` to enumerate files on both Python 3.12 and 3.13. Its expectations
 cover source files for architecture/security and test files for testing:
 
 - Node: `src/index.ts`, `app/page.tsx`, `lib/auth/session.ts`,

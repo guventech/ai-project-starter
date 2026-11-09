@@ -167,7 +167,7 @@ Owner: repository maintainer. Acceptance criteria: RULE-001–RULE-003 in docs/P
 - [x] Observe red/green layout coverage; extend scoped source and Go test globs.
 - [x] Add docs/RULES.md with inventory, adaptation examples and attachment procedure; link README/CONFIGURATION.
 - [x] Record Go positive/README control CLI marker observations and limits; Node/Python remain static coverage.
-- [ ] Run starter gates and submit one focused PR with both OS CI jobs required.
+- [x] Run starter gates and submit [PR #25](https://github.com/guventech/ai-project-starter/pull/25); both OS CI jobs are required before merge.
 
 ## Application adoption checklist
 

@@ -82,6 +82,7 @@ Evidence is a test name, a screenshot, or a short note.
 Scope: existing three rule globs, one layout regression test, trigger/adoption documentation and a bounded host probe. No new skills or dependencies.
 
 - Observed red: layout regression failed nine subcases for Node app/lib, root Python/Go source, Go source directories and Go test filenames. After adding scoped roots and the Go test pattern, the same test passed.
+- Initial PR CI [42636153183](https://github.com/guventech/ai-project-starter/actions/runs/42636153183) failed the layout fixture on Ubuntu/Python 3.12; Windows was cancelled by matrix fail-fast. Python 3.12 enumerates only directories for a trailing **, unlike local Python 3.13. The test now expands a trailing /** to /**/* for file enumeration; required matches and shipped rule globs are unchanged. The focused local rerun passed; corrected Python 3.12 CI remains required.
 - `python scripts/validate_starter.py`: passed; docs/RULES.md is a required document. Existing F-01/F-03/F-05/privacy checks are retained.
 - `python scripts/generate_skills_guide.py --check`: passed; generated guide unchanged.
 - `python -m unittest discover -s tests -v`: passed on Windows/Python 3.13.14 (42 tests, 4 host symlink skips).
