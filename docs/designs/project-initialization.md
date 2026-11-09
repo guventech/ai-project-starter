@@ -48,7 +48,8 @@ Remove individual stock files, never arbitrary directory trees:
 - evals/prior-art-search-hygiene.md and the two existing docs/superpowers records.
 - CONTRIBUTING issue templates under .github/ISSUE_TEMPLATE/ (upstream-specific
   reporting prompts); the generic PR template remains.
-- docs/designs/project-initialization.md, docs/INITIALIZE.md,
+- docs/designs/project-initialization.md, docs/INITIALIZE.md, docs/VERIFICATION.md
+  (the maintainer evidence overview added in F-07),
   scripts/init_project.py, scripts/project_manifest.py,
   scripts/project-manifest.json and each reset resource under
   scripts/project_templates/<target-path>. Resource mapping determines the

@@ -1,115 +1,95 @@
 # Cursor AI Project Starter
 
-A reusable, stack-agnostic template for planning, implementing and verifying software with Cursor.
-No application framework, credentials or third-party integrations are preinstalled.
+Plan a change, agree on the scope, then build with tests and recorded checks.
+This Cursor template combines `/project-helper`, eight focused workflows and configuration validation.
+Use a fresh template copy for a new project, or install the helper for an existing one.
 
-## One command for new and existing projects
+For Cursor users who want requirements, implementation approval and review evidence
+in one workflow. Bring your own application framework and checks. Choose a
+framework starter when you need prebuilt application code.
 
-Open a folder in Cursor and type:
+## Quickstart
+
+Requires Cursor and Python 3.12+; CI uses Python 3.12. Optional external packs are
+not needed for the local workflows.
+
+**Already have a project?** From a checkout of this repository, install once:
+
+```sh
+python scripts/install_chat_command.py
+```
+
+Reload Cursor, open your actual project in **Agent** chat mode, and type:
 
 ```text
-/project-helper
+/project-helper Review this project's tests
 ```
 
-Choose **Start a new project** or **Improve the project you have open**, then answer in normal language. The helper selects the planning, review, testing and debugging workflows for you. It presents a plan for approval before implementation. For an existing project, it starts by inspecting the project and proposing changes; you do not need to copy starter configuration into that project.
+The helper reads that project's instructions and proposes a plan before edits.
+Install/upgrade details and snapshot checks: [docs/INSTALL.md](docs/INSTALL.md).
 
-Use Cursor's **Agent** chat mode when you want it to build or apply fixes. **Ask** mode can assess and plan, but cannot make those changes.
+**Starting a new project?** Use this repository as a GitHub template. Before editing
+the copy, preview `python scripts/init_project.py`; review the list before choosing
+`python scripts/init_project.py --apply`. Git-backed copies require Git 2.36+.
+The [initialization guide](docs/INITIALIZE.md) explains refusal checks and backups.
+Then open the initialized copy in Cursor and use `/project-helper` with your goal.
 
-Examples: `/project-helper Start a personal budgeting app` or `/project-helper Review this project's tests`. If no goal is given, the command asks which mode you want. You do not need another slash command to continue.
+## A recorded routing example
 
-### Install once for use in other folders
+An isolated calculator-fixture review produced this sequence:
 
-Install and upgrade steps live in [docs/INSTALL.md](docs/INSTALL.md). The repository-local command is also available when working in this starter itself. See [configuration and verification](docs/CONFIGURATION.md) for package layout and limits.
-
-## Advanced: individual workflows and template adoption
-
-1. Use this repository as a GitHub template, then open your copy in Cursor.
-2. Before editing the copy, preview `python scripts/init_project.py`, then use `--apply` to initialize it when the displayed list is appropriate. See [the keep/reset/remove plan](docs/INITIALIZE.md). Read AGENTS.md and fill in the new docs/PRD.md.
-3. Invoke `/project-planning`. Use `/decision-interview` for unresolved decisions and `/design-review` for a new system or material design change; the architect reviews requirements and the verifier can review with fresh context.
-4. Approve the implementation plan, then implement in small increments.
-5. Build behavior changes with `/test-first-change`, run the project checks and ask the verifier to inspect the diff against acceptance criteria. Use `/trust-boundary-audit` for sensitive boundaries and `/release-check` to assess release evidence.
-
-Suggested first prompt:
-
-> Read AGENTS.md and docs/PRD.md. Use /project-planning and the architect subagent to define requirements, propose a suitable stack, identify risks and plan real application quality gates. Present the plan for approval before writing application code.
-
-## Included
-
-- AGENTS.md: concise shared operating instructions for every project copy.
-- MAINTAINING.md: maintainer-only process for this starter repository.
-- docs/INSTALL.md: user-level `/project-helper` install and upgrade.
-- .cursor/rules/: architecture, testing and security rules scoped by file patterns; [triggers and layout coverage](docs/RULES.md).
-- .cursor/skills/: the project-helper entry point plus eight focused workflows for planning, interviewing, prior-art search, design review, TDD, debugging, security audit and release checks.
-- .cursor/agents/: read-only architect and verifier definitions.
-- docs/: requirements, architecture, decisions, tasks, quality gates and integrations.
-- LICENSE: MIT license, copyright Guven Bircan 2026.
-- .env.example: placeholder values only. Copy it to .env for local secrets.
-- .github/workflows/ci.yml: starter validation on Linux and Windows.
-- publish-to-github.py and .sh: explicit public GitHub template publishing.
-- scripts/install_chat_command.py: one-time installation of the user-level project-helper command.
-
-## Local skill workflow
-
-Start with `/project-helper` for routing. The canonical use/do-not-use table, lifecycle map and weights live in [docs/SKILLS.md](docs/SKILLS.md). Skills require explicit invocation to keep ambient context small. Review agents remain read-only. Fresh-context isolation is a host capability, not a guarantee supplied by a Markdown file. See [configuration limits](docs/CONFIGURATION.md) and [quality gates](docs/QUALITY_GATES.md).
-
-Former local names `grill-me`, `tdd`, `systematic-debugging` and `security-audit` were renamed so bare slash commands no longer collide with optional upstream packs. Existing global installs need `python scripts/install_chat_command.py --upgrade --force` once to drop obsolete reference snapshots.
-
-## Recommended Additional Skills
-
-These local files are independently written, reduced workflows informed by ideas from the packs below; they do not vendor the full packs or provide their complete tooling. Attribution and comparison results are in [THIRD_PARTY.md](THIRD_PARTY.md). Optional installation commands:
-
-```sh
-npx skills add mattpocock/skills
-npx skills add addyosmani/agent-skills
-npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit
-npx skills add google/elephant-goldfish-model
+```text
+Task: review an existing project's code and tests
+Read: that project's AGENTS.md, calculator source and tests
+Selected: bundled test-first and verifier procedures
+Returned: findings and proposed checks; no edits
 ```
 
-- [Matt Pocock's skills](https://github.com/mattpocock/skills): requirements interviews, specifications, TDD and rigorous code reviews.
-- [Addy Osmani's agent skills](https://github.com/addyosmani/agent-skills): development lifecycle workflows with phase exit criteria.
-- [Cloudflare's security audit skill](https://github.com/cloudflare/security-audit-skill): a larger audit workflow with coverage ledgers, independent verification and report validators.
-- [Google's Elephant-Goldfish Model](https://github.com/google/elephant-goldfish-model): context-rich drafting and fresh-context design review. Upstream recommends the complete plugin so reviewer prompts and document standards are available; a skills-only install does not establish full-plugin compatibility.
+This summarizes the [recorded CLI Ask-mode trial](docs/SETUP.md#one-command-project-helper),
+not a verbatim transcript or an end-to-end application demo. Agent mode and an
+approved target-project plan are needed to apply changes.
 
-The [Skills CLI](https://github.com/vercel-labs/skills) requires Node.js 22.20 or later at the time of this update. Node.js is optional for this template; its checks use only Python. Run installation from your project, choose Cursor and select skills; add `--list` to browse or `--skill <name> --agent cursor` to select a skill and agent. Inspect proposed changes before accepting an overwrite. Upstream packs may still use names such as `grill-me`, `tdd` and `security-audit`; this starter's local counterparts use distinct names listed above. External packs can require shared references, tools or subagent capabilities; follow their upstream setup instructions. The maintainer's optional packages were installed outside the repository; see [the setup record](docs/SETUP.md) for paths, revisions and runtime limits. Note-taking packs are outside this starter's scope.
+## How it compares
 
-## Validate this template
+These are differences in packaging and workflow scope, based on the linked
+upstream descriptions. They are not comparative performance results.
 
-Requires Python 3.12, the version used in CI. No Python packages are needed.
+| Project | Focus | When to consider it |
+|---------|-------|---------------------|
+| This starter | Cursor template, one new/improve entry point, bundled snapshots and configuration checks | You want a small project workflow with an installer and clean-copy initialization. |
+| [Matt Pocock's skills](https://github.com/mattpocock/skills) | A collection of engineering skills | You want to select individual procedures from that collection. |
+| [Superpowers](https://github.com/obra/superpowers#how-it-works) | A composable development methodology with automatic skill triggering and harness-specific installation | You want to adopt that methodology and its integrations. |
+| [Google EGM](https://github.com/google/elephant-goldfish-model#how-it-works) | Context-rich specification drafting and fresh-context review | You want its specification/review workflow with the complete plugin resources. |
 
-```sh
-python scripts/validate_starter.py
-python -m unittest discover -s tests -v
-```
+Fit guidance is an editorial judgment. Outcome comparisons with a plain prompt
+remain unmeasured. Local procedures are independently written, reduced workflows;
+sources and comparison classifications are in [THIRD_PARTY.md](THIRD_PARTY.md).
 
-These checks validate the template structure and metadata. They do not lint, build, secure or test an application. Configure actual application checks after choosing the stack; see docs/QUALITY_GATES.md.
+## Choose a workflow
 
-## Contributing
+Start with `/project-helper`, or use the generated [skill decision guide](docs/SKILLS.md)
+for use/do-not-use conditions, prerequisites and exit criteria. [Rule triggers](docs/RULES.md)
+describe the default file scopes. Host-specific setup is covered in [configuration](docs/CONFIGURATION.md).
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for issue reporting, proposed changes and links to the maintainer procedures.
+## Verification at a glance
 
-## Adoption and remaining setup
+| Verified in bounded checks | Not established | How to check the details |
+|----------------------------|-----------------|--------------------------|
+| Starter metadata, installer behavior and initializer recovery fixtures on Windows/Linux CI | Application quality or release readiness | [Quality gates and commands](docs/QUALITY_GATES.md) |
+| Recorded CLI routing/loading trials and a Go rule-marker probe | General editor UI behavior, universal context isolation or complete workflow execution | [Verification scope](docs/VERIFICATION.md) and [host observations](docs/SETUP.md) |
+| Read-only reviewer refusal and one matched-pair host-denied Write observation | OS-level isolation across hosts | [Verification limits](docs/VERIFICATION.md) |
+| No comparative outcome claim | Better results or faster delivery than a bare prompt | [Evidence gaps](docs/VERIFICATION.md#outcome-evidence) |
 
-The current PRD, completed task list and verification record describe this starter's skill enhancement. When creating an application from the template, replace those requirements and evidence with your application's scope; keep the requirement wording rules and relevant decisions.
+## Recommended additional skills
 
-Before relying on the workflows in your installed Cursor version:
+Optional packs, installation commands, prerequisites and full-plugin limits are in
+[docs/OPTIONAL_SKILLS.md](docs/OPTIONAL_SKILLS.md). The local workflows work without them.
+Existing global installs with former skill names have a [migration note](docs/INSTALL.md#renamed-workflow-references).
 
-1. Confirm discovery of all nine skills and both agents, then invoke the new skills and verify the expected procedures load.
-2. Confirm review agents remain read-only and goldfish reviewers receive no inherited conversation. Record the Cursor version and observed results in `docs/QUALITY_GATES.md`.
-3. Check the GitHub Actions results for Python 3.12 on Windows and Linux. Configure required status checks through GitHub repository settings if you want merges gated on CI.
-4. After choosing an application stack, configure its formatting, linting, tests, build and relevant security/accessibility checks. Optional external skill packs can be installed when needed; the local workflows do not require them.
+## Contribute or maintain
 
-Local enhancement checks passed on Windows with Python 3.13.14; GitHub CI passed on Windows and Linux with Python 3.12. This repository requires both CI jobs through `main` branch protection. Authenticated Cursor CLI smoke checks verified skill attachment/loading, custom reviewer invocation, write refusal and a parent-context canary probe. A later MAINT-002 matched-pair probe recorded host denial of a `verifier` Write attempt while a writable control Write succeeded. These bounded observations do not establish OS-level isolation, universal context isolation or complete upstream workflow execution. Optional packs and machine settings are not bundled into template copies. See [the setup record](docs/SETUP.md) and [verification record](docs/QUALITY_GATES.md#enhancement-verification-record-2026-11-09) for evidence and limitations.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for reporting and PR guidance, and
+[MAINTAINING.md](MAINTAINING.md) for source validation, baseline updates and publishing helpers.
+The checks validate workflow configuration; select application checks after choosing a stack.
 
-## Publish an extracted copy
-
-Install Git, GitHub CLI and Python. Sign in using `gh auth login`, then run:
-
-```sh
-python publish-to-github.py guventech/ai-project-starter
-```
-
-This creates a PUBLIC repository, pushes the starter, and enables its template setting.
-It refuses existing Git repositories to avoid publishing unrelated work. An existing remote repository is never overwritten.
-On Git Bash, macOS or Linux, `bash publish-to-github.sh guventech/ai-project-starter` is equivalent.
-
-See docs/CONFIGURATION.md for documentation references and runtime verification limits.
+MIT licensed — [LICENSE](LICENSE). Upstream attribution: [THIRD_PARTY.md](THIRD_PARTY.md).

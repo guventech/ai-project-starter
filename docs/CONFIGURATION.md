@@ -31,7 +31,8 @@ The package has one discoverable SKILL.md, the MIT license, ten adjacent referen
 | Situation | Command |
 |-----------|---------|
 | Clean stock package (manifest matches managed files exactly) | `python scripts/install_chat_command.py --upgrade` |
-| Pre-manifest install, incomplete/malformed manifest, edited managed files, or renamed skill references | `python scripts/install_chat_command.py --upgrade --force` |
+| Missing manifest, incomplete path list, invalid digests in a readable files map, edited managed files, or renamed references | `python scripts/install_chat_command.py --upgrade --force` |
+| Unparseable JSON or missing/non-object files map | Preserve the package outside the destination after inspection, then fresh-install; force still reads the manifest |
 | Extra files beside the managed set (notes, scripts) | Move extras out, then upgrade; `--force` still refuses extras |
 | Customized managed files you want to keep | Copy the folder aside first; `--force` backs up differing managed files to `project-helper.bak-<timestamp>/` then overwrites them |
 
@@ -49,4 +50,8 @@ Earlier authenticated CLI attachment selected upstream grill-me, tdd and securit
 
 Native Task calls with the architect and verifier names were observed. Both refused the requested write and reported no parent-only canary. The Task schema describes non-resumed calls as fresh and exposes no separate inheritance flag. Reviewers still receive standard host instructions; fresh conversation does not mean an empty system prompt. The earlier smoke established behavioral refusal. A later matched-pair MAINT-002 probe recorded a `verifier` Write attempt that the host denied (ask mode / non-read-only tools) while a `generalPurpose` control Write succeeded in the same temp fixture; see SETUP.md. Keep read-only metadata and scoped prompts; do not treat them as an operating-system security boundary.
 
-External pack commands and source links are in [README.md](../README.md#recommended-additional-skills). References checked on 2026-11-09 include the [Skills CLI](https://github.com/vercel-labs/skills) (Node.js prerequisite and selection flags), [Addy's pack](https://github.com/addyosmani/agent-skills) (shared-reference limitations for individual installs), and [EGM setup](https://github.com/google/elephant-goldfish-model#install) (complete-plugin recommendation). The follow-up installed complete user-level checkouts, with Matt's stable engineering/productivity skills selected, to retain shared resources without adding upstream files to this template. See [SETUP.md](SETUP.md) for paths, pinned source revisions, branch protection and actual runtime status. Local procedures remain independently written and self-contained. This adds no application runtime dependency or stack.
+External pack commands, prerequisites and source links are in [OPTIONAL_SKILLS.md](OPTIONAL_SKILLS.md).
+The starter's verification summary and limits are in [VERIFICATION.md](VERIFICATION.md).
+See [SETUP.md](SETUP.md) for pinned installed revisions and actual host observations.
+Local procedures remain independently written and self-contained; optional packs
+add no required application runtime dependency or stack.
