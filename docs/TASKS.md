@@ -212,6 +212,15 @@ Owner: repository maintainer. Acceptance criteria: EVAL-001–EVAL-005 in docs/P
 - [x] Publish bounded conclusions, classify 90 individual removals and pass local source gates (71 tests; six host symlink skips).
 - [x] Submit [PR #29](https://github.com/guventech/ai-project-starter/pull/29) for this partial evidence slice; both protected CI jobs are required before merge. Useful comparative outcomes remain open above.
 
+## Review F-13 version metadata (authorized continuation)
+
+Owner: repository maintainer. Acceptance criteria: VER-001–VER-003 in docs/PRD.md. Cursor + Codex: prefer reversible release hygiene; defer `--diff`/releases and F-02/F-11/F-12.
+
+- [x] Record measurable requirements and wording self-check.
+- [x] Add VERSION `0.1.0`, CHANGELOG.md and installer `--version` / package-version printing.
+- [x] Package VERSION in the installer; remove VERSION/CHANGELOG on initialization.
+- [ ] Run starter gates and merge a protected-branch PR after both OS CI jobs.
+
 ## Review F-09 process weights (authorized continuation)
 
 Owner: repository maintainer. Acceptance criteria: WEIGHT-001–WEIGHT-003 in docs/PRD.md. Cursor + Codex: implement after F-02 partial merge; defer remaining F-02 runner.
