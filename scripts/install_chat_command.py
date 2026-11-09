@@ -9,9 +9,9 @@ import shutil
 import sys
 
 try:
-    from skill_inventory import WORKFLOWS
+    from skill_inventory import OBSOLETE_REFERENCE_PATHS, WORKFLOWS
 except ImportError:  # pragma: no cover - package import when run via tests
-    from scripts.skill_inventory import WORKFLOWS
+    from scripts.skill_inventory import OBSOLETE_REFERENCE_PATHS, WORKFLOWS
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -147,6 +147,16 @@ def remove_tree(path):
         shutil.rmtree(path)
 
 
+def remove_obsolete_reference_files(destination):
+    removed = []
+    for relative in sorted(OBSOLETE_REFERENCE_PATHS):
+        path = destination / relative
+        if path.is_file():
+            path.unlink()
+            removed.append(relative)
+    return removed
+
+
 def install_fresh_package(destination, planned, fail_after=None):
     destination.parent.mkdir(parents=True, exist_ok=True)
     if destination.exists() or destination.is_symlink():
@@ -188,7 +198,10 @@ def install(destination, upgrade=False, force=False, fail_after=None):
         return destination, None, False
     if not destination.is_dir():
         raise FileExistsError(f'Destination exists and is not a directory: {destination}')
-    extras = sorted(package_file_relatives(destination) - managed_relative_paths(planned))
+    extras = sorted(
+        package_file_relatives(destination)
+        - managed_relative_paths(planned)
+        - OBSOLETE_REFERENCE_PATHS)
     if extras:
         raise FileExistsError(
             'Destination has extra files; no files replaced: ' + ', '.join(extras))
@@ -200,12 +213,13 @@ def install(destination, upgrade=False, force=False, fail_after=None):
             f'after backing up customizations: {destination}')
     if manifest is not None and not force:
         planned_paths = set(planned)
-        manifest_paths = set(manifest)
-        missing_manifest = sorted(planned_paths - manifest_paths)
+        manifest_paths = set(manifest) - OBSOLETE_REFERENCE_PATHS
+        missing_manifest = sorted(planned_paths - set(manifest))
         if missing_manifest:
             raise FileExistsError(
                 'Installer manifest is incomplete; no files replaced. '
-                'missing: ' + ', '.join(missing_manifest))
+                'missing: ' + ', '.join(missing_manifest)
+                + '. Renamed skill references need --upgrade --force.')
         unexpected_manifest = sorted(manifest_paths - planned_paths)
         if unexpected_manifest:
             raise FileExistsError(
@@ -213,7 +227,7 @@ def install(destination, upgrade=False, force=False, fail_after=None):
                 + ', '.join(unexpected_manifest))
         malformed_digests = sorted(
             relative for relative, digest in manifest.items()
-            if not is_sha256_digest(digest))
+            if relative not in OBSOLETE_REFERENCE_PATHS and not is_sha256_digest(digest))
         if malformed_digests:
             raise FileExistsError(
                 'Installer manifest has invalid SHA-256 digests; no files replaced: '
@@ -221,7 +235,7 @@ def install(destination, upgrade=False, force=False, fail_after=None):
         current = installed_content_digests(destination)
         customized = sorted(
             relative for relative, digest in manifest.items()
-            if current.get(relative) != digest)
+            if relative not in OBSOLETE_REFERENCE_PATHS and current.get(relative) != digest)
         if customized:
             raise FileExistsError(
                 'Destination managed files do not match the installer manifest; '
@@ -231,6 +245,7 @@ def install(destination, upgrade=False, force=False, fail_after=None):
     if force:
         backup_root = backup_differing_files(destination, planned)
     write_package_files(destination, planned)
+    remove_obsolete_reference_files(destination)
     return destination, backup_root, True
 
 

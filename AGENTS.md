@@ -17,11 +17,9 @@
 
 ## Recommended skills
 
-Start with `/project-helper` for a guided new-project or existing-project conversation. It chooses the individual procedures by file path, asks one relevant question at a time, and retains approval before implementation. `python scripts/install_chat_command.py` installs this entry point once for other workspaces, with eight procedures and two reviewer roles bundled as references. Preserve the target project's instructions and files; do not import this template's historical requirements or CI into it. Update a clean stock install with `python scripts/install_chat_command.py --upgrade`; use `--upgrade --force` only when a manifest is missing or managed files were edited (differing managed files are backed up beside the package).
+Start with `/project-helper` for a guided new-project or existing-project conversation. It chooses the individual procedures by file path, asks one relevant question at a time, and retains approval before implementation. `python scripts/install_chat_command.py` installs this entry point once for other workspaces, with eight procedures and two reviewer roles bundled as references. Preserve the target project's instructions and files; do not import this template's historical requirements or CI into it. Update a clean stock install with `python scripts/install_chat_command.py --upgrade`; use `--upgrade --force` when a manifest is missing, managed files were edited, or renamed skill references must replace obsolete snapshots (differing managed files are backed up beside the package).
 
-Local skills in `.cursor/skills/` use explicit invocation. Use `/project-planning` for requirements and approved steps, `/grill-me` to resolve open decisions, `/prior-art` to search existing GitHub/web solutions before planning, `/design-review` for a new system or material design change, `/tdd` for behavior changes, `/systematic-debugging` for failures, `/security-audit` for scoped audits or sensitive boundaries, and `/release-check` before release. Fresh-context review requires new agents without inherited conversation; report unavailable isolation as unverified.
-
-When optional packs are installed, select the starter's overlapping workflows by explicit file path: ask the agent to read and follow `.cursor/skills/grill-me/SKILL.md`, `.cursor/skills/tdd/SKILL.md` or `.cursor/skills/security-audit/SKILL.md`. In the tested CLI, those bare slash names attached upstream versions. Verify the selected source before applying a workflow.
+Local skills in `.cursor/skills/` use explicit invocation. Use `/project-planning` for requirements and approved steps, `/decision-interview` to resolve open decisions, `/prior-art` to search existing GitHub/web solutions before planning, `/design-review` for a new system or material design change, `/test-first-change` for behavior changes, `/hypothesis-debugging` for failures, `/trust-boundary-audit` for scoped audits or sensitive boundaries, and `/release-check` before release. Fresh-context review requires new agents without inherited conversation; report unavailable isolation as unverified.
 
 Optional external packs (documentation only; choose skills and Cursor in the installer):
 
@@ -32,11 +30,11 @@ npx skills add https://github.com/cloudflare/security-audit-skill --skill securi
 npx skills add google/elephant-goldfish-model
 ```
 
-Read [README.md](README.md#recommended-additional-skills) for upstream references, prerequisites, name collisions and full-plugin limitations before installing.
+Read [README.md](README.md#recommended-additional-skills) for upstream references, prerequisites and full-plugin limitations before installing.
 
 ## Maintaining this starter
 
 - When adding a local skill, include its name in `scripts/validate_starter.py` and the removal regression test in `tests/test_starter.py`; update the README skill list and configuration smoke-check instructions.
 - Record procedure inspection apart from live Cursor execution. Keep requirements, task status and quality-gate evidence aligned with the scope being delivered.
 - When adopting the template for an application, replace the starter enhancement requirements and evidence with the project's requirements; retain relevant decisions and verification limits.
-- This repository's `main` branch requires pull requests and both starter CI jobs, including for admins. Record machine-specific installations and host verification in `docs/SETUP.md`; they do not transfer to template copies. Check the loaded source path when upstream and local skill names overlap.
+- This repository's `main` branch requires pull requests and both starter CI jobs, including for admins. Record machine-specific installations and host verification in `docs/SETUP.md`; they do not transfer to template copies. Do not reintroduce local skill directory names that match `COLLIDING_UPSTREAM_NAMES` in `scripts/skill_inventory.py`.

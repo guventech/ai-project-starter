@@ -1,10 +1,10 @@
 ---
-name: grill-me
-description: Interviews the user to resolve requirements and design decisions before implementation. Use for an underspecified plan or an explicit grilling session.
+name: decision-interview
+description: Interviews the user to resolve requirements and design decisions before implementation. Use for an underspecified plan or an explicit decision interview.
 disable-model-invocation: true
 ---
 
-# Grill Me
+# Decision Interview
 
 1. Read relevant code, docs/PRD.md and existing decisions first. Separate facts, assumptions and unanswered decisions; do not ask the user for facts the repository supplies.
 2. Ask one question at a time, starting with the decision that blocks the most others. Give concrete alternatives, a recommendation and the consequence of each choice. Wait for the answer before following its branch.

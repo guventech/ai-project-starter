@@ -18,7 +18,7 @@ Confirm read-only behavior before relying on it. Bounded live CLI smoke results 
 
 ## Local skills
 
-The nine local skills are project-helper, project-planning, grill-me, prior-art, design-review, tdd, systematic-debugging, security-audit and release-check. Sibling links describe procedures a selected workflow can read; they do not change explicit invocation metadata.
+The nine local skills are project-helper, project-planning, decision-interview, prior-art, design-review, test-first-change, hypothesis-debugging, trust-boundary-audit and release-check. Sibling links describe procedures a selected workflow can read; they do not change explicit invocation metadata.
 
 ## One-command installation
 
@@ -31,7 +31,7 @@ The package has one discoverable SKILL.md, the MIT license, ten adjacent referen
 | Situation | Command |
 |-----------|---------|
 | Clean stock package (manifest matches managed files exactly) | `python scripts/install_chat_command.py --upgrade` |
-| Pre-manifest install, incomplete/malformed manifest, or edited managed files | `python scripts/install_chat_command.py --upgrade --force` |
+| Pre-manifest install, incomplete/malformed manifest, edited managed files, or renamed skill references | `python scripts/install_chat_command.py --upgrade --force` |
 | Extra files beside the managed set (notes, scripts) | Move extras out, then upgrade; `--force` still refuses extras |
 | Customized managed files you want to keep | Copy the folder aside first; `--force` backs up differing managed files to `project-helper.bak-<timestamp>/` then overwrites them |
 
@@ -45,8 +45,8 @@ For goldfish reviews, start new agents with conversation inheritance disabled an
 
 Manual Cursor smoke check: invoke each new skill, verify the expected procedure is loaded, confirm both reviewers refuse writes, and inspect reviewer context setup for inherited chat. Record the installed Cursor version, inputs and observed results before claiming runtime support. Static validator success proves metadata shape and required files only.
 
-The authenticated CLI attached project-planning, design-review, release-check and systematic-debugging from the project, while bare grill-me, tdd and security-audit attached optional upstream files. Select those three local procedures by their explicit `.cursor/skills/<name>/SKILL.md` paths; this loading route was tested. Explicit-only skills need not appear in the ambient skill inventory, so inventory absence alone is not a discovery failure.
+Earlier authenticated CLI attachment selected upstream grill-me, tdd and security-audit while this starter used those local names. Local skills were renamed in F-01; optional packs may still install under the upstream names. Explicit-only skills need not appear in the ambient skill inventory, so inventory absence alone is not a discovery failure.
 
 Native Task calls with the architect and verifier names were observed. Both refused the requested write and reported no parent-only canary. The Task schema describes non-resumed calls as fresh and exposes no separate inheritance flag. Reviewers still receive standard host instructions; fresh conversation does not mean an empty system prompt. The earlier smoke established behavioral refusal. A later matched-pair MAINT-002 probe recorded a `verifier` Write attempt that the host denied (ask mode / non-read-only tools) while a `generalPurpose` control Write succeeded in the same temp fixture; see SETUP.md. Keep read-only metadata and scoped prompts; do not treat them as an operating-system security boundary.
 
-External pack commands and source links are in [README.md](../README.md#recommended-additional-skills). References checked on 2026-11-09 include the [Skills CLI](https://github.com/vercel-labs/skills) (Node.js prerequisite and selection flags), [Addy's pack](https://github.com/addyosmani/agent-skills) (shared-reference limitations for individual installs), and [EGM setup](https://github.com/google/elephant-goldfish-model#install) (complete-plugin recommendation). The follow-up installed complete user-level checkouts, with Matt's stable engineering/productivity skills selected, to retain shared resources without adding upstream files to this template. See [SETUP.md](SETUP.md) for paths, pinned source revisions, branch protection and actual runtime status. Local procedures remain original and self-contained. This adds no application runtime dependency or stack.
+External pack commands and source links are in [README.md](../README.md#recommended-additional-skills). References checked on 2026-11-09 include the [Skills CLI](https://github.com/vercel-labs/skills) (Node.js prerequisite and selection flags), [Addy's pack](https://github.com/addyosmani/agent-skills) (shared-reference limitations for individual installs), and [EGM setup](https://github.com/google/elephant-goldfish-model#install) (complete-plugin recommendation). The follow-up installed complete user-level checkouts, with Matt's stable engineering/productivity skills selected, to retain shared resources without adding upstream files to this template. See [SETUP.md](SETUP.md) for paths, pinned source revisions, branch protection and actual runtime status. Local procedures remain independently written and self-contained. This adds no application runtime dependency or stack.

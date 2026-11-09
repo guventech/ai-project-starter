@@ -1,10 +1,10 @@
 ---
-name: tdd
+name: test-first-change
 description: Builds behavior through red-green-refactor cycles. Use for approved features or bug fixes with executable behavior checks.
 disable-model-invocation: true
 ---
 
-# TDD
+# Test-First Change
 
 1. Read the approved requirements, existing tests and docs/QUALITY_GATES.md. Choose one observable behavior and the smallest end-to-end slice through its public boundary. Reuse the current test runner; if none exists, propose its setup within the approved scope before adding dependencies.
 2. Red: write one test expressing that behavior, including a boundary or failure case when relevant. Run it and observe failure for the intended missing behavior. Fix setup, import or syntax failures before treating the test as red. A passing test does not demonstrate a missing behavior.

@@ -39,9 +39,9 @@ Pre-manifest installs or customized managed files need `python scripts/install_c
 
 1. Use this repository as a GitHub template, then open your copy in Cursor.
 2. Read AGENTS.md and fill in docs/PRD.md.
-3. Invoke `/project-planning`. Use `/grill-me` for unresolved decisions and `/design-review` for a new system or material design change; the architect reviews requirements and the verifier can review with fresh context.
+3. Invoke `/project-planning`. Use `/decision-interview` for unresolved decisions and `/design-review` for a new system or material design change; the architect reviews requirements and the verifier can review with fresh context.
 4. Approve the implementation plan, then implement in small increments.
-5. Build behavior changes with `/tdd`, run the project checks and ask the verifier to inspect the diff against acceptance criteria. Use `/security-audit` for sensitive boundaries and `/release-check` to assess release evidence.
+5. Build behavior changes with `/test-first-change`, run the project checks and ask the verifier to inspect the diff against acceptance criteria. Use `/trust-boundary-audit` for sensitive boundaries and `/release-check` to assess release evidence.
 
 Suggested first prompt:
 
@@ -64,17 +64,17 @@ Suggested first prompt:
 
 - `/project-helper`: one guided conversation for a new project or the open existing project; selects the procedures below by file path.
 - `/project-planning`: requirements, small steps, verification and approval.
-- `/grill-me`: one decision at a time until no implementation-blocking questions remain.
+- `/decision-interview`: one decision at a time until no implementation-blocking questions remain.
 - `/prior-art`: capped GitHub/web search for existing solutions; rank fit before popularity; adopt only with explicit candidate approval.
 - `/design-review`: draft with project context, challenge with at least two fresh-context reviewers, resolve findings and obtain human approval.
-- `/tdd`: observe a failing behavior test, implement one vertical slice, then refactor after green.
-- `/systematic-debugging`: reproduce, test a hypothesis and verify a focused fix.
-- `/security-audit`: map boundaries, track coverage, hunt, verify findings with fresh agents and report dispositions.
+- `/test-first-change`: observe a failing behavior test, implement one vertical slice, then refactor after green.
+- `/hypothesis-debugging`: reproduce, test a hypothesis and verify a focused fix.
+- `/trust-boundary-audit`: map boundaries, track coverage, hunt, verify findings with fresh agents and report dispositions.
 - `/release-check`: map requirements to current evidence and report release blockers, skipped gates and rollback readiness.
 
 Skills require explicit invocation to keep ambient context small. A selected planning or review workflow can read the relevant sibling procedure; this does not make other skills ambient. Review agents remain read-only. Fresh-context isolation is a host capability, not a guarantee supplied by a Markdown file. See [configuration limits](docs/CONFIGURATION.md) and [quality gates](docs/QUALITY_GATES.md).
 
-If you install the optional packs, bare `/grill-me`, `/tdd` and `/security-audit` can select upstream versions. This happened in the tested Cursor CLI. To select the starter's workflow, use an explicit instruction such as: `Read and follow .cursor/skills/tdd/SKILL.md for this task.` Explicit-path loading was verified for all three overlapping skills; their local names and upstream packages remain unchanged.
+Former local names `grill-me`, `tdd`, `systematic-debugging` and `security-audit` were renamed so bare slash commands no longer collide with optional upstream packs. Existing global installs need `python scripts/install_chat_command.py --upgrade --force` once to drop obsolete reference snapshots.
 
 ## Recommended Additional Skills
 
@@ -92,7 +92,7 @@ npx skills add google/elephant-goldfish-model
 - [Cloudflare's security audit skill](https://github.com/cloudflare/security-audit-skill): a larger audit workflow with coverage ledgers, independent verification and report validators.
 - [Google's Elephant-Goldfish Model](https://github.com/google/elephant-goldfish-model): context-rich drafting and fresh-context design review. Upstream recommends the complete plugin so reviewer prompts and document standards are available; a skills-only install does not establish full-plugin compatibility.
 
-The [Skills CLI](https://github.com/vercel-labs/skills) requires Node.js 22.20 or later at the time of this update. Node.js is optional for this template; its checks use only Python. Run installation from your project, choose Cursor and select skills; add `--list` to browse or `--skill <name> --agent cursor` to select a skill and agent. Inspect proposed changes before accepting an overwrite: names such as `grill-me`, `tdd` and `security-audit` overlap this starter. Retain one intended implementation per name and review the resulting diff. External packs can require shared references, tools or subagent capabilities; follow their upstream setup instructions. The maintainer's optional packages were installed outside the repository; see [the setup record](docs/SETUP.md) for paths, revisions and runtime limits. Note-taking packs are outside this starter's scope.
+The [Skills CLI](https://github.com/vercel-labs/skills) requires Node.js 22.20 or later at the time of this update. Node.js is optional for this template; its checks use only Python. Run installation from your project, choose Cursor and select skills; add `--list` to browse or `--skill <name> --agent cursor` to select a skill and agent. Inspect proposed changes before accepting an overwrite. Upstream packs may still use names such as `grill-me`, `tdd` and `security-audit`; this starter's local counterparts use distinct names listed above. External packs can require shared references, tools or subagent capabilities; follow their upstream setup instructions. The maintainer's optional packages were installed outside the repository; see [the setup record](docs/SETUP.md) for paths, revisions and runtime limits. Note-taking packs are outside this starter's scope.
 
 ## Validate this template
 

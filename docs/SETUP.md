@@ -26,7 +26,7 @@ Packages were installed as upstream Git checkouts outside the starter. Full sour
 
 Cursor documents [recursive skill discovery](https://cursor.com/docs/skills) and [local plugin imports](https://cursor.com/docs/plugins#test-plugins-locally). Reload Cursor to discover these packages. Local plugin loading can be restricted by organization policy. This installation preserves upstream files and is not a claim that every upstream workflow has been executed in Cursor.
 
-Upstream `grill-me`, `tdd` and `security-audit` names overlap project skills. Authenticated testing found bare slash invocation selected the upstream versions. For this starter's acceptance criteria, ask the agent to read and follow the exact `.cursor/skills/<name>/SKILL.md` path. That route loaded all three local bodies in a separate smoke test. Keep the complete packages for their references and optional broader workflows; no upstream or local skill was renamed or overwritten.
+Earlier authenticated testing found bare `/grill-me`, `/tdd` and `/security-audit` selecting upstream packs while this starter still used those local names. F-01 renamed the local skills to `decision-interview`, `test-first-change`, `hypothesis-debugging` and `trust-boundary-audit` so bare slash commands no longer collide. Keep the optional packs for their references and broader workflows; refresh a global project-helper install with `--upgrade --force` after pulling this change.
 
 Update a package only after inspecting its diff and verifying shared resources and names. Do not run an indiscriminate update over customized local skills. To undo this installation, remove only the four recorded package directories after verifying their resolved paths and checking for user edits.
 
@@ -40,8 +40,8 @@ Update a package only after inspecting its diff and verifying shared resources a
 ### Observed smoke results
 
 - Project planning: `/project-planning` attached the project's SKILL.md and returned its requirements-first step and approval exit condition.
-- Six-skill attachment check: design-review, release-check and systematic-debugging attached project files; grill-me, tdd and security-audit attached upstream files. This is an observed name collision, not a missing local file.
-- Explicit-path fallback: a read-only session read the three exact local paths and returned their distinctive local instructions. This proves path loading, not bare-slash precedence.
+- Six-skill attachment check (pre-rename): design-review, release-check and systematic-debugging attached project files; grill-me, tdd and security-audit attached upstream files. That collision motivated the F-01 rename.
+- Explicit-path fallback (pre-rename): a read-only session read the three exact local paths and returned their distinctive local instructions.
 - EGM: `/egm-review` attached the installed plugin's canonical review skill with its reviewer/standards references. No full EGM pipeline or artifact generation was executed.
 - Custom reviewers: the Task trace shows separate non-resumed `architect` and `verifier` calls with bounded prompts and no parent-only canary in their inputs. Both refused the probe write and reported the canary absent. The parent-only canary was not placed in a file.
 - The reviewer probe file was absent and `git status --short` was empty after the runs.

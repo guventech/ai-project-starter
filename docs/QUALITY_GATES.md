@@ -7,10 +7,10 @@ CI runs both on Linux and Windows using Python 3.12.
 
 ## Review gates
 
-- Requirements/planning: before nontrivial implementation, fill docs/PRD.md, check requirement wording and verification methods, resolve blocking questions with `/grill-me` when needed, and obtain approval of the concrete plan. Existing approval covers unchanged scope.
+- Requirements/planning: before nontrivial implementation, fill docs/PRD.md, check requirement wording and verification methods, resolve blocking questions with `/decision-interview` when needed, and obtain approval of the concrete plan. Existing approval covers unchanged scope.
 - Design: use `/design-review` for a new system or material design change. Record the design revision, at least two fresh reviewer contexts and scopes, finding dispositions and human approval. No inherited conversation is allowed for goldfish reviewers. If the host cannot provide fresh contexts, the gate is unverified. A bounded change under an approved design can record this gate as not applicable with a reason.
-- Behavior: use `/tdd` for executable behavior changes. Record the intended red failure, green result and affected regression results for each slice. Documentation changes use inspection and template validation rather than artificial behavior tests.
-- Security: use `/security-audit` for a requested audit or sensitive trust-boundary changes. Record reconnaissance, a coverage ledger, hunting evidence, independent candidate verification and a structured report. Every candidate needs a disposition. Missing verification remains needs-validation; missing coverage remains visible. Record non-applicability for changes without security-boundary effects.
+- Behavior: use `/test-first-change` for executable behavior changes. Record the intended red failure, green result and affected regression results for each slice. Documentation changes use inspection and template validation rather than artificial behavior tests.
+- Security: use `/trust-boundary-audit` for a requested audit or sensitive trust-boundary changes. Record reconnaissance, a coverage ledger, hunting evidence, independent candidate verification and a structured report. Every candidate needs a disposition. Missing verification remains needs-validation; missing coverage remains visible. Record non-applicability for changes without security-boundary effects.
 - Release: `/release-check` requires current requirement evidence, applicable design/security results, configured check results, remaining risks and rollback readiness. Skipped or unavailable required gates block readiness. Passing starter checks alone does not authorize an application release, publication or deployment.
 
 ## Application checks (not configured)
@@ -29,10 +29,10 @@ Evidence is a test name, a screenshot, or a short note.
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
 | REQ-001 | test | `python scripts/validate_starter.py` passes with all four new skill files and their explicit invocation metadata. |
-| REQ-002 | inspection | grill-me steps 2–6 require one question at a time, recorded decisions, zero implementation blockers and plan approval before code. |
-| REQ-003 | inspection | tdd steps 2–5 require observed red for the intended reason, one behavior slice, green, refactor and regression checks. |
+| REQ-002 | inspection | decision-interview steps 2–6 require one question at a time, recorded decisions, zero implementation blockers and plan approval before code. |
+| REQ-003 | inspection | test-first-change steps 2–5 require observed red for the intended reason, one behavior slice, green, refactor and regression checks. |
 | REQ-004 | inspection | design-review defines elephant drafting, two isolated goldfish scopes, finding resolution and human approval; unavailable contexts keep review unverified. Skill attachment and two fresh Task probes were observed; the full design workflow was not executed. |
-| REQ-005 | inspection | security-audit defines inputs/outputs for four phases, a coverage ledger, fresh verification, three candidate dispositions and report fields including gaps. Explicit local-path loading was observed; the full audit was not executed. |
+| REQ-005 | inspection | trust-boundary-audit defines inputs/outputs for four phases, a coverage ledger, fresh verification, three candidate dispositions and report fields including gaps. |
 | REQ-006 | inspection | project-planning links interviews/design review and slice exit criteria; release-check maps requirements to evidence and discloses missing, stale or skipped gates. |
 | REQ-007 | inspection | Architect questions assumptions and routes user decisions through the parent; verifier defines goldfish, diff and security modes. Both retain readonly true; starter validation passes. |
 | REQ-008 | inspection | README.md, AGENTS.md and CONFIGURATION.md name all nine skills; README/AGENTS list the four pack commands; CONFIGURATION.md records host/installation limits. |
@@ -47,7 +47,8 @@ Evidence is a test name, a screenshot, or a short note.
 | CHAT-002 | test | Installer tests verify one discoverable SKILL.md, all eight workflow references and both reviewer references, with rewritten internal paths and no environment files. A separate workspace loaded the installed planning/TDD/verifier references. |
 | CHAT-003 | demonstration | New-project planning probe used the installed planning reference and wrote no application files; the nonempty-target guard was strengthened after independent review. Final probe evidence is recorded in SETUP.md. |
 | CHAT-004 | demonstration | Existing-project fixture review read its own AGENTS.md, calculator source and tests, used bundled TDD/verifier references and returned findings/proposed checks without changing files. This is a bounded routing trial, not a full application audit. |
-| CHAT-005 | demonstration | Existing-project routing loaded installed references/tdd.md despite an optional upstream tdd skill. Bundled references use direct paths; no second slash command or configuration copy was requested. Installer tests cover all eight workflow references plus both reviewers. |
+| CHAT-005 | demonstration | Existing-project routing loaded a bundled workflow reference despite an optional upstream skill of the former colliding name. Bundled references use direct paths; no second slash command or configuration copy was requested. Installer tests cover all eight workflow references plus both reviewers. |
+| COLLIDE-001 | test | Local skills use decision-interview, test-first-change, hypothesis-debugging and trust-boundary-audit; validator rejects colliding upstream directory names; forced upgrade removes obsolete reference snapshots. |
 | CHAT-006 | test | Installer tests preserve an occupied destination and a customized command on repeat install. The symlink case is skipped when the host cannot create links; Linux CI executes that case. |
 | PRIOR-001 | test | `python scripts/validate_starter.py` requires `.cursor/skills/prior-art`; `test_each_required_skill_removal_detected` covers `prior-art`. |
 | PRIOR-002 | inspection | prior-art steps cap candidates at three, rank fit then activity/license then stars, and continue when search is unavailable. |

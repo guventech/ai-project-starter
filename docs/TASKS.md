@@ -115,6 +115,14 @@ Owner: repository maintainer. Acceptance criteria: ATTR-001 in docs/PRD.md.
 - [x] Package THIRD_PARTY.md in the installer; align README and skill footers.
 - [x] Merge through protected-branch PR after CI ([PR #17](https://github.com/guventech/ai-project-starter/pull/17)).
 
+## Review F-01 skill rename
+
+Owner: repository maintainer. Acceptance criteria: COLLIDE-001 in docs/PRD.md. Codex + Cursor: keep repo name; rename four colliding skills.
+
+- [x] Rename local skill directories and update inventory, docs, agents and workflows.
+- [x] Add colliding-name validator denylist and obsolete reference cleanup on upgrade.
+- [ ] Merge through protected-branch PR after CI; refresh global install with `--upgrade --force` when authorized.
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.
