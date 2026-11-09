@@ -191,6 +191,18 @@ Status: approved scope implemented in [PR #25](https://github.com/guventech/ai-p
 
 Wording self-check: one shall requirement per row; listed vague words absent; each row has a measurable criterion and a verification method. Approved plan: add layout regression fixtures, extend the existing globs, document triggers, run starter checks and attempt a bounded read-only host probe if available, then submit one PR. Risks: extra source matches increase attached context; retain explicit path scope and disclose unsupported layouts and glob-engine differences. No new skills, dependencies or application stack. Rollback: revert the F-10 PR.
 
+## Review remediation F-14 contribution basics
+
+Status: approved documentation slice implemented in [PR #26](https://github.com/guventech/ai-project-starter/pull/26); local inspection and implementation-commit CI recorded in docs/QUALITY_GATES.md. Require green checks on the PR head before merge. Security policy, code of conduct, repository settings, social preview and pinned content remain deferred.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| CONTRIB-001 | The repository shall provide a contributor entry point that links the existing project procedures. | Contributors need reporting and PR guidance without a second maintainer policy. | CONTRIBUTING.md links AGENTS, MAINTAINING, INSTALL, SKILLS, QUALITY_GATES and the PR template; README links CONTRIBUTING; all relative targets exist. | inspection |
+| CONTRIB-002 | The repository shall provide bug-report and feature-request issue templates. | Reports need reproduction details or a concrete proposed outcome. | Two Markdown templates have distinct name/about metadata; bug reports request revision, host versions, steps, expected/actual results and optional redacted evidence; feature requests ask for problem, outcome and alternatives. | inspection |
+| CONTRIB-003 | Contribution guidance shall ask reporters to exclude confidential content from public reports. | Logs and example project text can disclose private information. | Guide and both templates request synthetic or redacted details and omit assumed private reporting channels, labels and assignees. | inspection |
+
+Wording self-check: each row uses shall, has one requirement, avoids the listed vague words and has an inspection method. Approved plan: add a short linked guide and two Markdown templates, inspect metadata/links/privacy wording, run existing starter checks, and submit one PR. Risk: template prompts are editable guidance, not enforced form validation; document that limit. No new skills, dependencies, workflow or repository settings. Rollback: revert this PR.
+
 ## To be resolved (TBR)
 
 Mark an unknown value as TBR with a best estimate, an owner, and a due date. Use that instead of a blank TBD.
