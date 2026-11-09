@@ -210,7 +210,7 @@ Owner: repository maintainer. Acceptance criteria: EVAL-001–EVAL-005 in docs/P
 - [x] Block further live trials because complete native isolation and useful protocol compatibility were not established; no outcome-based reruns.
 - [ ] Establish an isolated/disabled-native-tool runner under a new reviewed method before claiming useful comparative outcomes (remaining F-02).
 - [x] Publish bounded conclusions, classify 90 individual removals and pass local source gates (71 tests; six host symlink skips).
-- [ ] Submit one focused PR; both protected CI jobs must pass before merge.
+- [x] Submit [PR #29](https://github.com/guventech/ai-project-starter/pull/29) for this partial evidence slice; both protected CI jobs are required before merge. Useful comparative outcomes remain open above.
 
 ## Application adoption checklist
 
