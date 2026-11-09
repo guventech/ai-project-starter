@@ -72,6 +72,16 @@ Consequences: clean upgrades are one command; pre-Phase-B installs need one forc
 Rollback: revert the installer/docs/test changes; leave existing user packages and any `.bak-*` folders untouched.
 Related paths: scripts/install_chat_command.py, tests/test_install_chat_command.py, README.md, AGENTS.md, docs/CONFIGURATION.md, docs/PRD.md, docs/QUALITY_GATES.md.
 
+## ADR-010: Matched-pair permission probe for MAINT-002
+
+Date: 2026-11-09. Status: accepted; design agreed by parent and Codex CLI; demonstration completed.
+Context: Earlier reviewer probes refused writes without a tool attempt, so behavioral refusal was confused with host denial.
+Options: verifier-only forced Write; matched writable control plus readonly verifier; add sandbox/permissions deny rules.
+Decision: use an isolated temp fixture with a `generalPurpose` control Write and a fresh `verifier` Write to distinct nonce files; classify from tool name, tool result and listing; require a permission/read-only denial plus successful control for `host-denied`.
+Consequences: MAINT-002 can record host-denied evidence when the host blocks the attempted Write; missing or ambiguous denial stays unverified; control is not a perfect twin of verifier.
+Rollback: revert docs/evidence only; no product code changed. Discard only the named temp fixture directory after path check.
+Related paths: docs/superpowers/specs/2026-11-09-maint-002-permission-probe-design.md, docs/SETUP.md, docs/QUALITY_GATES.md, docs/PRD.md, docs/TASKS.md.
+
 ## ADR-008: Single skill-inventory source for docs and tools
 
 Date: 2026-11-09. Status: accepted; Phase A integrity plan approved by the user.

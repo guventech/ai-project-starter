@@ -1,6 +1,6 @@
 # Product requirements
 
-Status: approved starter enhancement implemented; requirement evidence is recorded in docs/QUALITY_GATES.md. Bounded authenticated Cursor CLI smoke checks are complete; full workflow execution and tool-level permission enforcement remain outside that evidence.
+Status: approved starter enhancement implemented; requirement evidence is recorded in docs/QUALITY_GATES.md. Bounded authenticated Cursor CLI smoke checks are complete; MAINT-002 recorded a matched-pair host-denied Write for `verifier`. Full workflow execution and OS-level isolation remain outside that evidence.
 
 - Problem and target users: Cursor users need planning, test-first development and review workflows beyond the three starter skills.
 - Primary user journey: clarify requirements, draft and review a design, approve implementation, build in tested slices, then verify release evidence.
@@ -50,7 +50,7 @@ Setup risks: upstream names can overlap project skills; full-package resources m
 
 ## Proposed maintenance follow-up
 
-Status: MAINT-001 merged via PR #5 (`checkout@v5` + `setup-python@v6`). MAINT-002 and MAINT-003 remain queued. The target for the full reviews is pending user selection.
+Status: MAINT-001 merged via PR #5 (`checkout@v5` + `setup-python@v6`). MAINT-002 demonstration recorded (`host-denied` matched-pair probe). MAINT-003 remains queued; the target for the full reviews is pending user selection.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
