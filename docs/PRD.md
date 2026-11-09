@@ -205,7 +205,7 @@ Wording self-check: each row uses shall, has one requirement, avoids the listed 
 
 ## Review remediation F-06 project initialization
 
-Status: owner-approved initializer implemented after fresh design reviews and rereviews; local evidence and scoped security verification are recorded in docs/QUALITY_GATES.md. Cross-platform PR CI pending. README positioning remains F-07 scope.
+Status: owner-approved initializer implemented in [PR #27](https://github.com/guventech/ai-project-starter/pull/27) after fresh design reviews and rereviews; local evidence, scoped security verification and implementation CI are recorded in docs/QUALITY_GATES.md. Require green checks on the PR head before merge. README positioning remains F-07 scope.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|

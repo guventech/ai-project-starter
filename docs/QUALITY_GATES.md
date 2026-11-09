@@ -104,7 +104,7 @@ Scoped security coverage:
 - INIT-SEC-001: confirmed pre-fix Git status could execute a configured clean filter during preview; parent reproduction observed the marker. Fixed current: status is no longer used. A separate fresh read-only verifier (init_security_verification, fork_turns none) checked reachability and correction against source and parent-run red/green evidence; it did not run fixtures itself. No other confirmed finding was reported in this bounded review.
 - Validation/profile boundary: reviewed explicit --project selection; default source requirements and all four existing invariants are retained. No application authentication/production surface exists in this command.
 
-PR CI remains required on both Python 3.12 OS jobs before merge. This is a bounded initializer review, not a claim of host isolation or protection against all filesystem/configuration attacks.
+Implementation CI: [run 42646464439](https://github.com/guventech/ai-project-starter/actions/runs/42646464439) passed both Python 3.12 jobs, `Starter validation (ubuntu-latest)` and `Starter validation (windows-latest)`, for commit `f15c605`. PR #27 includes this evidence follow-up and a regenerated baseline; both jobs remain required on its head before merge. This is a bounded initializer review, not a claim of host isolation or protection against all filesystem/configuration attacks.
 
 ## F-14 contribution basics verification (2026-11-09)
 
