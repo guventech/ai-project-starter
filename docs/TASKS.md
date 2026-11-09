@@ -83,6 +83,14 @@ Owner: repository maintainer. Scope: align docs/evidence with the nine-skill / e
 - [x] Run both starter gates locally (validator + 10 unittests, 1 symlink skip) and record results; open PR after CI.
 - [x] Merge through protected-branch PR workflow after green checks ([PR #9](https://github.com/guventech/ai-project-starter/pull/9); CI [42589919473](https://github.com/guventech/ai-project-starter/actions/runs/42589919473)).
 
+## Inventory and upgrade hardening (HARD-001 / HARD-002)
+
+Owner: repository maintainer. Acceptance criteria: HARD-001–HARD-002 in docs/PRD.md. Agreed with Codex CLI brainstorm; items 3–5 deferred/blocked.
+
+- [x] Refuse non-forced upgrades when the installer manifest is incomplete or has invalid digests; add regression tests.
+- [x] Reject unregistered `.cursor/skills` directories; assert required skill names in AGENTS.md.
+- [x] Run both starter gates and record evidence (PR when requested).
+
 ## Application adoption checklist
 
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.

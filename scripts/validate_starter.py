@@ -38,6 +38,8 @@ def validate(root):
         paths = list((root / folder).glob(pattern))
         names = {p.parent.name if p.name == 'SKILL.md' else p.stem for p in paths}
         errors.extend(f'missing {folder}/{n}' for n in sorted(expected - names))
+        if folder == '.cursor/skills':
+            errors.extend(f'unexpected {folder}/{n}' for n in sorted(names - expected))
         for p in paths:
             try:
                 data = metadata(p)

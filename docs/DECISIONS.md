@@ -67,8 +67,8 @@ Related paths: .cursor/skills/prior-art/, .cursor/skills/project-helper/, .curso
 Date: 2026-11-09. Status: accepted; Phase B plan with backups approved by the user.
 Context: Global `/project-helper` installs went stale because the installer refused all occupied destinations.
 Options: document manual delete only; `--upgrade` that always overwrites managed files; manifest-checked `--upgrade` plus `--upgrade --force` with backups.
-Decision: write `.installer-manifest.json` on install; allow `--upgrade` only for symlink-free packages with no extras and manifest-matching managed files; require `--upgrade --force` for missing manifests or customized managed files; before force overwrite, copy differing managed files to a sibling `project-helper.bak-<timestamp>/` directory.
-Consequences: clean upgrades are one command; pre-Phase-B installs need one forced upgrade; extras still require manual relocation; force can replace customizations after backup.
+Decision: write `.installer-manifest.json` on install; allow `--upgrade` only for symlink-free packages with no extras and an exact planned-path manifest whose digests are valid SHA-256 values matching managed files; require `--upgrade --force` for missing/incomplete/malformed manifests or customized managed files; before force overwrite, copy differing managed files to a sibling `project-helper.bak-<timestamp>/` directory.
+Consequences: clean upgrades are one command; pre-Phase-B installs and incomplete manifests need one forced upgrade; extras still require manual relocation; force can replace customizations after backup.
 Rollback: revert the installer/docs/test changes; leave existing user packages and any `.bak-*` folders untouched.
 Related paths: scripts/install_chat_command.py, tests/test_install_chat_command.py, README.md, AGENTS.md, docs/CONFIGURATION.md, docs/PRD.md, docs/QUALITY_GATES.md.
 
@@ -87,8 +87,8 @@ Related paths: docs/superpowers/specs/2026-11-09-maint-002-permission-probe-desi
 Date: 2026-11-09. Status: accepted; Phase A integrity plan approved by the user.
 Context: After prior-art landed, PRD/QUALITY_GATES/CONFIGURATION/SETUP still said seven skills or omitted prior-art while the validator required nine.
 Options: edit docs once without tests; add inventory assertions without sharing constants; centralize WORKFLOWS/REQUIRED_SKILLS and test CONFIGURATION/README coverage.
-Decision: add `scripts/skill_inventory.py`, import it from the validator and installer, and fail tests when CONFIGURATION or README omit a required skill name.
-Consequences: skill-count drift is caught by CI; docs must list every required skill by exact name. Installer overwrite/upgrade behavior stays unchanged until Phase B.
+Decision: add `scripts/skill_inventory.py`, import it from the validator and installer, fail validation on unexpected local skill directories, and fail tests when CONFIGURATION, README or AGENTS omit a required skill name.
+Consequences: skill-count drift and unregistered skill folders are caught by CI; docs must list every required skill by exact name.
 Rollback: revert the inventory module and doc/test changes on the feature branch or PR.
 Related paths: scripts/skill_inventory.py, scripts/validate_starter.py, scripts/install_chat_command.py, tests/test_starter.py, docs/CONFIGURATION.md, docs/PRD.md, docs/QUALITY_GATES.md, docs/SETUP.md.
 

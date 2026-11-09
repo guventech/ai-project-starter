@@ -56,8 +56,14 @@ Evidence is a test name, a screenshot, or a short note.
 | PRIOR-005 | test | Installer `WORKFLOWS` includes `prior-art`; installer tests expect `references/prior-art.md`; README/AGENTS list `/prior-art`. |
 | UPGR-001 | test | Fresh install writes `.installer-manifest.json` with digests for managed content paths including `references/prior-art.md`. |
 | UPGR-002 | test | Occupied destination and modified-command cases still refuse default install without changing user content. |
-| UPGR-003 | test | `--upgrade` replaces a manifest-matching stock package; refuses extras, customized managed files, missing manifests and (when links work) symlinks. |
+| UPGR-003 | test | `--upgrade` replaces a manifest-matching stock package; refuses extras, customized managed files, missing/incomplete/malformed manifests and (when links work) symlinks. |
 | UPGR-004 | test | `--upgrade --force` backs up differing `SKILL.md` under `project-helper.bak-*` then restores planned content; extras and bare `--force` refuse. |
+| HARD-001 | test | `test_upgrade_refuses_incomplete_manifest` and `test_upgrade_refuses_malformed_manifest_digest` refuse without changing files; clean/force upgrade regressions remain green. |
+| HARD-002 | test | `test_unregistered_skill_detected` fails validation for an extra skill folder; `test_skill_inventory_sources_agree` requires each required skill in README, CONFIGURATION and AGENTS. |
+
+## Inventory and upgrade hardening verification
+
+Scope: exact-path/digest manifest checks for non-forced upgrades; reject unregistered local skills; AGENTS inventory coverage. Observed red: incomplete-manifest upgrade returned 0 and would overwrite a customized omitted path; unregistered-skill and AGENTS assertions added with the implementation. After green: `python scripts/validate_starter.py` passed; `python -m unittest discover -s tests -v` passed (21 methods, 2 symlink skips); `git diff --check` passed. PR CI not run in this session.
 
 ## Phase B installer upgrade verification
 

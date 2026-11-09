@@ -31,8 +31,8 @@ The package has one discoverable SKILL.md, the MIT license, ten adjacent referen
 
 | Situation | Command |
 |-----------|---------|
-| Clean stock package (manifest matches managed files) | `python scripts/install_chat_command.py --upgrade` |
-| Pre-manifest install, or edited managed files | `python scripts/install_chat_command.py --upgrade --force` |
+| Clean stock package (manifest matches managed files exactly) | `python scripts/install_chat_command.py --upgrade` |
+| Pre-manifest install, incomplete/malformed manifest, or edited managed files | `python scripts/install_chat_command.py --upgrade --force` |
 | Extra files beside the managed set (notes, scripts) | Move extras out, then upgrade; `--force` still refuses extras |
 | Customized managed files you want to keep | Copy the folder aside first; `--force` backs up differing managed files to `project-helper.bak-<timestamp>/` then overwrites them |
 
