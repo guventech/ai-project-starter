@@ -14,3 +14,24 @@
 - Run the checks recorded in docs/QUALITY_GATES.md. Report actual results and skipped checks.
 - Update docs when behavior or decisions change. Record material tradeoffs in docs/DECISIONS.md.
 - Finish with the outcome, verification evidence and any remaining limitations. Never invent success.
+
+## Recommended skills
+
+Local skills in `.cursor/skills/` use explicit invocation. Use `/project-planning` for requirements and approved steps, `/grill-me` to resolve open decisions, `/design-review` for a new system or material design change, `/tdd` for behavior changes, `/systematic-debugging` for failures, `/security-audit` for scoped audits or sensitive boundaries, and `/release-check` before release. Fresh-context review requires new agents without inherited conversation; report unavailable isolation as unverified.
+
+Optional external packs (documentation only; choose skills and Cursor in the installer):
+
+```sh
+npx skills add mattpocock/skills
+npx skills add addyosmani/agent-skills
+npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit
+npx skills add google/elephant-goldfish-model
+```
+
+Read [README.md](README.md#recommended-additional-skills) for upstream references, prerequisites, name collisions and full-plugin limitations before installing.
+
+## Maintaining this starter
+
+- When adding a local skill, include its name in `scripts/validate_starter.py` and the removal regression test in `tests/test_starter.py`; update the README skill list and configuration smoke-check instructions.
+- Record procedure inspection apart from live Cursor execution. Keep requirements, task status and quality-gate evidence aligned with the scope being delivered.
+- When adopting the template for an application, replace the starter enhancement requirements and evidence with the project's requirements; retain relevant decisions and verification limits.

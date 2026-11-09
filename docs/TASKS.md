@@ -1,5 +1,17 @@
 # Project tasks
 
+## Starter workflow enhancement (2026-11-09)
+
+Owner: repository maintainer. Scope and acceptance criteria: docs/PRD.md, REQ-001–REQ-009.
+
+- [x] Define measurable requirements and obtain plan approval.
+- [x] Add four skills and strengthen planning, release checks and both reviewers.
+- [x] Document optional upstream installation, review gates and runtime limits.
+- [x] Verify required-skill removal detection through observed red/green results.
+- [x] Run configured starter commands and record evidence in docs/QUALITY_GATES.md.
+
+## Application adoption checklist
+
 - [ ] Define each requirement in the PRD table with a measurable check and a verification method.
 - [ ] Review architecture and approve the implementation plan.
 - [ ] Select stack and record actual commands in QUALITY_GATES.md.

@@ -7,9 +7,9 @@ No application framework, credentials or third-party integrations are preinstall
 
 1. Use this repository as a GitHub template, then open your copy in Cursor.
 2. Read AGENTS.md and fill in docs/PRD.md.
-3. Invoke `/project-planning` and ask the architect subagent to review the proposed design.
+3. Invoke `/project-planning`. Use `/grill-me` for unresolved decisions and `/design-review` for a new system or material design change; the architect reviews requirements and the verifier can review with fresh context.
 4. Approve the implementation plan, then implement in small increments.
-5. Run the project checks and ask the verifier to inspect the diff against acceptance criteria.
+5. Build behavior changes with `/tdd`, run the project checks and ask the verifier to inspect the diff against acceptance criteria. Use `/security-audit` for sensitive boundaries and `/release-check` to assess release evidence.
 
 Suggested first prompt:
 
@@ -19,13 +19,43 @@ Suggested first prompt:
 
 - AGENTS.md: concise shared operating instructions.
 - .cursor/rules/: architecture, testing and security rules scoped by file patterns.
-- .cursor/skills/: project-planning, systematic-debugging and release-check workflows.
+- .cursor/skills/: seven concise workflows for planning, interviewing, design review, TDD, debugging, security audit and release checks.
 - .cursor/agents/: read-only architect and verifier definitions.
 - docs/: requirements, architecture, decisions, tasks, quality gates and integrations.
 - LICENSE: MIT license, copyright Guven Bircan 2026.
 - .env.example: placeholder values only. Copy it to .env for local secrets.
 - .github/workflows/ci.yml: starter validation on Linux and Windows.
 - publish-to-github.py and .sh: explicit public GitHub template publishing.
+
+## Local skill workflow
+
+- `/project-planning`: requirements, small steps, verification and approval.
+- `/grill-me`: one decision at a time until no implementation-blocking questions remain.
+- `/design-review`: draft with project context, challenge with at least two fresh-context reviewers, resolve findings and obtain human approval.
+- `/tdd`: observe a failing behavior test, implement one vertical slice, then refactor after green.
+- `/systematic-debugging`: reproduce, test a hypothesis and verify a focused fix.
+- `/security-audit`: map boundaries, track coverage, hunt, verify findings with fresh agents and report dispositions.
+- `/release-check`: map requirements to current evidence and report release blockers, skipped gates and rollback readiness.
+
+Skills require explicit invocation to keep ambient context small. A selected planning or review workflow can read the relevant sibling procedure; this does not make other skills ambient. Review agents remain read-only. Fresh-context isolation is a host capability, not a guarantee supplied by a Markdown file. See [configuration limits](docs/CONFIGURATION.md) and [quality gates](docs/QUALITY_GATES.md).
+
+## Recommended Additional Skills
+
+These local files are original, reduced workflows informed by the packs below; they do not vendor the full packs or provide their complete tooling. Optional installation commands:
+
+```sh
+npx skills add mattpocock/skills
+npx skills add addyosmani/agent-skills
+npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit
+npx skills add google/elephant-goldfish-model
+```
+
+- [Matt Pocock's skills](https://github.com/mattpocock/skills): requirements interviews, specifications, TDD and rigorous code reviews.
+- [Addy Osmani's agent skills](https://github.com/addyosmani/agent-skills): development lifecycle workflows with phase exit criteria.
+- [Cloudflare's security audit skill](https://github.com/cloudflare/security-audit-skill): a larger audit workflow with coverage ledgers, independent verification and report validators.
+- [Google's Elephant-Goldfish Model](https://github.com/google/elephant-goldfish-model): context-rich drafting and fresh-context design review. Upstream recommends the complete plugin so reviewer prompts and document standards are available; a skills-only install does not establish full-plugin compatibility.
+
+The [Skills CLI](https://github.com/vercel-labs/skills) requires Node.js 22.20 or later at the time of this update. Node.js is optional for this template; its checks use only Python. Run installation from your project, choose Cursor and select skills; add `--list` to browse or `--skill <name> --agent cursor` to select a skill and agent. Inspect proposed changes before accepting an overwrite: names such as `grill-me`, `tdd` and `security-audit` overlap this starter. Retain one intended implementation per name and review the resulting diff. External packs can require shared references, tools or subagent capabilities; follow their upstream setup instructions. No pack installation or live CLI compatibility test is part of this update. Note-taking packs are outside this starter's scope.
 
 ## Validate this template
 
@@ -37,6 +67,19 @@ python -m unittest discover -s tests -v
 ```
 
 These checks validate the template structure and metadata. They do not lint, build, secure or test an application. Configure actual application checks after choosing the stack; see docs/QUALITY_GATES.md.
+
+## Adoption and remaining setup
+
+The current PRD, completed task list and verification record describe this starter's skill enhancement. When creating an application from the template, replace those requirements and evidence with your application's scope; keep the requirement wording rules and relevant decisions.
+
+Before relying on the workflows in your installed Cursor version:
+
+1. Confirm discovery of all seven skills and both agents, then invoke the new skills and verify the expected procedures load.
+2. Confirm review agents remain read-only and goldfish reviewers receive no inherited conversation. Record the Cursor version and observed results in `docs/QUALITY_GATES.md`.
+3. Check the GitHub Actions results for Python 3.12 on Windows and Linux. Configure required status checks through GitHub repository settings if you want merges gated on CI.
+4. After choosing an application stack, configure its formatting, linting, tests, build and relevant security/accessibility checks. Optional external skill packs can be installed when needed; the local workflows do not require them.
+
+Local enhancement checks passed on Windows with Python 3.13.14. Live Cursor execution and external-pack installation have not been tested. See [the verification record](docs/QUALITY_GATES.md#enhancement-verification-record-2026-11-09) for the exact scope and limitations.
 
 ## Publish an extracted copy
 

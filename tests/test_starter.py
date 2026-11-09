@@ -19,6 +19,19 @@ class StarterTests(unittest.TestCase):
         (self.root / 'AGENTS.md').unlink()
         self.assertIn('missing AGENTS.md', validate(self.root))
 
+    def test_each_required_skill_removal_detected(self):
+        skills = ('project-planning', 'systematic-debugging', 'release-check',
+                  'grill-me', 'tdd', 'design-review', 'security-audit')
+        for name in skills:
+            with self.subTest(skill=name):
+                path = self.root / '.cursor/skills' / name / 'SKILL.md'
+                content = path.read_bytes()
+                path.unlink()
+                try:
+                    self.assertIn(f'missing .cursor/skills/{name}', validate(self.root))
+                finally:
+                    path.write_bytes(content)
+
     def test_writable_reviewer_detected(self):
         path = self.root / '.cursor/agents/verifier.md'
         path.write_text(path.read_text().replace('readonly: true', 'readonly: false'))

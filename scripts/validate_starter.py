@@ -27,7 +27,8 @@ def validate(root):
     errors = [f'missing {p}' for p in REQUIRED if not (root / p).is_file()]
     groups = [('.cursor/rules', '*.mdc', {'architecture', 'testing', 'security'}),
               ('.cursor/agents', '*.md', {'architect', 'verifier'}),
-              ('.cursor/skills', '*/SKILL.md', {'project-planning', 'systematic-debugging', 'release-check'})]
+              ('.cursor/skills', '*/SKILL.md', {'project-planning', 'systematic-debugging', 'release-check',
+                                               'grill-me', 'tdd', 'design-review', 'security-audit'})]
     for folder, pattern, expected in groups:
         paths = list((root / folder).glob(pattern))
         names = {p.parent.name if p.name == 'SKILL.md' else p.stem for p in paths}
