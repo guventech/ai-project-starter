@@ -17,7 +17,7 @@ Use branches and pull requests for subsequent changes. This protection belongs t
 
 ## Optional user-level packages
 
-Packages were installed as upstream Git checkouts outside the starter. Full source layouts preserve shared references; the seven project skills were not overwritten. Node.js v24.22.2 and Skills CLI 1.7.6 were available; all four sources were listed with the CLI before installation.
+Packages were installed as upstream Git checkouts outside the starter. Full source layouts preserve shared references; the nine project skills were not overwritten. Node.js v24.22.2 and Skills CLI 1.7.6 were available; all four sources were listed with the CLI before installation.
 
 - Matt Pocock: `~/.cursor/skills/optional/mattpocock-skills`, revision `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d`. Sparse checkout includes `skills/engineering` and `skills/productivity`: 27 stable skills. General and in-progress experiments were excluded; the CLI reported malformed YAML in an in-progress skill during discovery.
 - Addy Osmani: `~/.cursor/skills/optional/addyosmani-agent-skills`, revision `301b02b12bff98e4688e6984af6556802322bbde`. All 25 skills and repository-level references are present.
@@ -56,7 +56,7 @@ Application-specific build, lint, security, browser and accessibility gates rema
 
 ## One-command project helper
 
-The approved `/project-helper` command is installed at `~/.cursor/skills/project-helper`. It has one SKILL.md, seven workflow reference documents and two reviewer reference documents. No source checkout path or upstream package is needed at invocation time. The installed entry file matches the repository version (SHA256 `a7690dc1042b6e7411b05f896a57429c25857b20faea7742a5cbc64511bdeb7c`). Snapshots are not auto-updated.
+The approved `/project-helper` command is installed at `~/.cursor/skills/project-helper`. It has one SKILL.md, eight workflow reference documents and two reviewer reference documents (ten reference files total). No source checkout path or upstream package is needed at invocation time. The installed entry file matches the repository version (SHA256 `419b1b802763e54475b1ac4c0db50744f7fce01efaefe694b6939012a452c091`). Snapshots are not auto-updated.
 
 Authenticated CLI trials used isolated temporary workspaces outside this repository:
 
@@ -68,4 +68,4 @@ Authenticated CLI trials used isolated temporary workspaces outside this reposit
 
 After the trials, the new-project folder was still empty and the existing-project folder still contained only its three original fixture files. These trials ran in CLI Ask mode: they verify discovery, source selection and conversational boundaries, not end-to-end app implementation or host-enforced write denial. Building/applying fixes needs Cursor Agent mode and the target project's approved implementation plan. No other user project was modified.
 
-Installer validation: nine unittest methods run on Windows, with eight passing and the symlink creation case skipped because this host lacks permission to create links. Occupied destination and repeat-install tests preserved user contents. Linux PR CI runs the symlink case. A partial new installation can remain on an I/O failure; the installer reports that and never removes or replaces an existing package.
+Installer validation: ten unittest methods run on Windows after the inventory-alignment change, with nine passing and the symlink creation case skipped because this host lacks permission to create links. Occupied destination and repeat-install tests preserved user contents. Linux PR CI runs the symlink case. A partial new installation can remain on an I/O failure; the installer reports that and never removes or replaces an existing package.
