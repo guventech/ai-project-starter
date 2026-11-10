@@ -50,6 +50,18 @@ Skill-table `weight` values (`light` / `standard` / `strict`) remain per-skill c
 | **Standard** | Normal features and the default helper path when markers do not force Lite or Strict | Current project-helper workflow, including plan approval before nontrivial edits | None of the default gates without an explicit recorded reason |
 | **Strict** | Payments, authentication, secrets/credentials, or destructive operations | Plan approval before edits; design-review for material design changes; trust-boundary-audit when sensitive boundaries are in scope | Cannot skip design-review or trust-boundary-audit when those triggers apply |
 
+### Model cost guidance
+
+Process weight sets ceremony; model cost is a separate choice. Keep every applicable project gate regardless of model price.
+
+- **Lite:** start brainstorming, exploration and bounded documentation edits with a free or cheap model when its output meets the criteria.
+- **Standard:** use free or cheap models for brainstorming and exploration; prefer a stronger model, including a paid option, for implementation or review when quality risk is high.
+- **Strict:** prefer a stronger model for implementation and review; free or cheap exploration does not replace the required approvals, design review or boundary audit.
+
+Escalate to a stronger model when evidence is weak, constraints are missed or checks fail; inspect the cause and rerun the affected checks. Price alone does not establish quality. Free-model quality, availability and rate limits vary.
+
+This starter's Markdown cannot switch the active chat model mid-chat or enforce routing. Manual model selection, Cursor's own Auto/Router features and optional external routers are separate mechanisms. See [optional model routing](INTEGRATIONS.md#optional-model-routing) for candidates and verification limits. No savings or effectiveness have been measured here.
+
 ## Notes
 
 - Deterministic goal markers live in `scripts/process_weight.py` and are mirrored in `/project-helper`.

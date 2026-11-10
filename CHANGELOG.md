@@ -7,6 +7,12 @@ are recorded on the repository's GitHub Releases page.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Model-cost guidance alongside process weights, with escalation triggers and optional external-router references; no built-in router or measured savings claim.
+
 ## [0.1.0] - 2026-11-10
 
 ### Added

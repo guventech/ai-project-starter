@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-029: Model-cost guidance without a starter router
+
+Date: 2026-11-10. Status: accepted; Cursor and Codex agreed on the user-approved Lite docs plan.
+Context: process weights govern ceremony, while users also need guidance on model cost and quality risk.
+Options: guidance only; guidance plus optional external-router references; build a starter router/proxy.
+Decision: combine guidance with dated optional OpenRouter and llm-router references. Recommend free/cheap brainstorming and stronger models for implementation/review when quality risk is high; escalate for weak evidence, missed constraints or failed checks. Keep all applicable gates. State Markdown's model-switching limits and separate manual selection, Cursor Auto/Router and external routing. Treat Cursor compatibility as upstream-claimed until demonstrated.
+Consequences: no router code, dependencies, credentials, auto-install, API-key templates or measured savings/effectiveness claim. Adoption of a named external candidate needs separate explicit approval. F-02 runner, F-11, F-12 and MAINT-003 remain deferred. Global install refresh is outside this slice.
+Rollback: revert this documentation/generator change and regenerate the guide and initialization baseline.
+Related paths: .cursor/skills/project-helper/SKILL.md, scripts/generate_skills_guide.py, docs/SKILLS.md, docs/INTEGRATIONS.md, docs/PRD.md, docs/TASKS.md, docs/QUALITY_GATES.md.
+
 ## ADR-028: First tagged starter prerelease after Cursor agreement
 
 Date: 2026-11-10. Status: accepted; owner authorized proceeding when both agents agree.
