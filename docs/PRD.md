@@ -169,7 +169,7 @@ Wording self-check: each row uses shall, contains one requirement, avoids the li
 
 ## Review remediation F-13 read-only installer check
 
-Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-project-starter/pull/24); local verification and implementation-commit CI recorded in docs/QUALITY_GATES.md. Versioning and diff slices follow below; tags and GitHub Releases remain deferred.
+Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-project-starter/pull/24); local verification and implementation-commit CI recorded in docs/QUALITY_GATES.md. Versioning, diff and first-prerelease continuations follow below.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
@@ -179,11 +179,11 @@ Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-p
 
 ## Review remediation F-13 version metadata slice
 
-Status: merged via PR #32; diff continuation follows below; published releases remain deferred.
+Status: merged via PR #32; diff and first-prerelease continuations follow below.
 
 ## Review remediation F-15 changelog consistency
 
-Status: merged via PR #34; PR-metadata generation and GitHub Releases remain deferred.
+Status: merged via PR #34; PR-metadata generation remains deferred; first-prerelease continuation follows below.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
@@ -195,11 +195,11 @@ Wording self-check: each shall row is one requirement, avoids the listed vague w
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
-| VER-001 | The repository shall publish a VERSION file and CHANGELOG.md that identify the current starter package revision. | Installers and readers need a local revision marker without implying a GitHub Release. | VERSION contains `0.1.0`; CHANGELOG.md records the 0.1.0 entry and states that tagged releases remain deferred. | inspection |
+| VER-001 | The repository shall publish a VERSION file and CHANGELOG.md that identify the current starter package revision. | Installers and readers need a local revision marker distinct from publication status. | VERSION contains `0.1.0`; CHANGELOG.md records the 0.1.0 entry and directs readers to GitHub for tagged publication status. | inspection |
 | VER-002 | The installer shall report the VERSION value through --version without writing files. | Operators need the packaged revision before changing an install. | `--version` prints the VERSION text and exits 0; combining it with `--check`, `--upgrade` or `--force` exits 2 without writes. | test |
 | VER-003 | Successful install and upgrade shall ship VERSION inside the package and print that package version. | Installed snapshots must carry the revision they were built from. | Planned files include VERSION matching the source file; install stdout includes `Package version:` with that value. | test |
 
-Wording self-check: each shall row is one requirement, avoids the listed vague words, and has a measurable criterion plus verification method. Approved scope: add VERSION/CHANGELOG, wire `--version` and install/upgrade version printing, package VERSION, update docs/tests/gates, regenerate the initialization baseline so VERSION/CHANGELOG are removed from application copies. Risk: changelog text can over-claim shipping; keep explicit “not a published GitHub Release” language.
+Wording self-check: each shall row is one requirement, avoids the listed vague words, and has a measurable criterion plus verification method. Approved scope: add VERSION/CHANGELOG, wire `--version` and install/upgrade version printing, package VERSION, update docs/tests/gates, regenerate the initialization baseline so VERSION/CHANGELOG are removed from application copies. Risk: changelog text can over-claim shipping; distinguish revision metadata from GitHub publication status (updated for the first-prerelease continuation).
 
 Wording self-check: each shall row has one requirement, a measurable acceptance criterion and a test method; none uses the listed vague words. Approved plan: add check dispatch, fixture-based red/green tests and install documentation, then run both starter gates and PR CI. Risk: confusing manifest integrity with current-source freshness; test those comparisons apart. The manifest detects accidental edits, not tampering. No new dependencies or skills. Rollback: revert this slice's PR; check mode does not change installations.
 
@@ -291,6 +291,18 @@ Status: bounded continuation approved by the owner on 2026-11-10 and implemented
 | DIFF-003 | The diff command shall return the documented inspection exit codes. | Scripts need stable outcomes. | Exit 0 means current; exit 1 means differences, absent installation or absent manifest; exit 2 means invalid input or inspection error; combining --diff with --check, --version, --upgrade or --force exits 2 without writes. | test |
 
 Wording self-check: one shall requirement per row, none of the listed vague words, and observable acceptance criteria with test methods. Approved plan: extend the existing inspection path with stdlib unified diffs, test changed/missing/extra/manifest-only and refusal cases, document output and confidentiality limits, update changelog/tasks/evidence and regenerate the initialization baseline. Compare installed text to this checkout, normalize line endings as existing checks do, and mark missing final newlines. Diff is an inspection snapshot rather than an executable patch or upgrade authorization. No new dependency, package format or installation behavior. Bounded design gate: not applicable; retain the existing installer/check architecture. Risk: opt-in output exposes managed-file customizations; extra-file contents are excluded. Rollback: revert the feature changes; installations are untouched.
+
+## First tagged prerelease (authorized continuation)
+
+Status: owner authorized publication after Cursor and Codex agree. On 2026-11-10, Cursor CLI Ask-mode review returned AGREE to `v0.1.0` as a GitHub prerelease after documentation alignment and green release checks; Codex agreed. Preparation evidence is recorded here; final publication and tag state are recorded on [GitHub Releases](https://github.com/guventech/ai-project-starter/releases/tag/v0.1.0) after the preparation revision merges.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| REL-001 | The repository shall publish an annotated v0.1.0 tag and GitHub prerelease at the checked main revision. | Consumers need a fixed starter snapshot. | Tag resolves to the selected merged main commit; both configured Windows/Linux Python 3.12 jobs pass for that revision; GitHub reports tag v0.1.0, draft false and prerelease true. | demonstration |
+| REL-002 | The release notes shall state the packaged scope and evidence limits. | Starter checks do not establish application readiness or measured workflow benefit. | Notes derive from the VERSION-matching changelog section and identify starter/template scope, partial/blocked F-02 evidence, unverified native isolation and universal enforcement, and deferred F-11 packaging. | inspection |
+| REL-003 | The release record shall report current installation and initialization verification. | Publication must retain evidence for the two consumer entry paths. | Both configured starter commands and changelog consistency check pass; named fixture tests cover fresh install, clean/forced upgrade, refusal/backup, initialization preview/apply and recovery; skipped checks and host limits are recorded. | test |
+
+Wording self-check: each row has one shall requirement, no listed vague word, measurable criteria and an inspection, demonstration or test method. Approved plan: align publication wording and changelog date, record ADR-028 and verification, regenerate the initialization baseline, run the configured checks, merge the documentation PR through protected CI, check both jobs on the merged main revision, then create the annotated tag and publish a prerelease with extracted notes. No application, dependency, installer behavior, global configuration, F-02 runner or F-11 work is included. Design/security gates: no new architecture or runtime trust boundary; publication scope and notes receive a bounded read-only review. Risks: confusing prerelease scope with effectiveness, stale evidence, wrong tag target, or changing published history. Verify the exact SHA before and after publication; retain published tags and supersede a defective version rather than moving it.
 
 ## To be resolved (TBR)
 

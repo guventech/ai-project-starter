@@ -151,7 +151,7 @@ Owner: repository maintainer. Acceptance criteria: SEARCH-001–SEARCH-004 in do
 
 ## Review F-13 read-only installer check (approved slice)
 
-Owner: repository maintainer. Acceptance criteria: CHECK-001–CHECK-003 in docs/PRD.md. Versioning and diff continuations are recorded below; release publication remains deferred.
+Owner: repository maintainer. Acceptance criteria: CHECK-001–CHECK-003 in docs/PRD.md. Versioning, diff and first-prerelease continuations are recorded below.
 
 - [x] Record requirements, exit-code decisions and wording self-check.
 - [x] Observe focused red/green checks for status reporting and manifest validation.
@@ -223,7 +223,7 @@ Owner: repository maintainer. Acceptance criteria: LOG-001–LOG-003 in docs/PRD
 
 ## Review F-13 version metadata (authorized continuation)
 
-Owner: repository maintainer. Acceptance criteria: VER-001–VER-003 in docs/PRD.md. Cursor + Codex: prefer reversible release hygiene; diff continuation is recorded below; defer releases and remaining F-02/F-11/F-12.
+Owner: repository maintainer. Acceptance criteria: VER-001–VER-003 in docs/PRD.md. Cursor + Codex: diff and first-prerelease continuations are recorded below; remaining F-02/F-11/F-12 stay deferred.
 
 - [x] Record measurable requirements and wording self-check.
 - [x] Add VERSION `0.1.0`, CHANGELOG.md and installer `--version` / package-version printing.
@@ -248,6 +248,19 @@ Owner: repository maintainer. Acceptance criteria: DIFF-001–DIFF-003 in docs/P
 - [x] Cover drift summaries, extra-content exclusion, inspection errors, conflicting flags and no-write snapshots.
 - [x] Complete diff review, resolve output-encoding finding, run source checks (90 tests; six host symlink skips) and regenerate the initialization baseline.
 - [x] Submit [PR #36](https://github.com/guventech/ai-project-starter/pull/36); implementation commit passed both OS jobs in [run 42783168886](https://github.com/guventech/ai-project-starter/actions/runs/42783168886). Both jobs remain required on the PR head before merge.
+
+## First tagged prerelease (Cursor + Codex agreement)
+
+Owner: repository maintainer. Acceptance criteria: REL-001–REL-003 in docs/PRD.md.
+
+- [x] Obtain Cursor's read-only decision review and Codex agreement; record conditional owner authorization, scope and ADR-028.
+- [x] Align current publication wording and changelog date; retain evidence limitations and deferred scope.
+- [x] Run configured gates (90 tests; six host symlink skips), review notes/installation evidence and regenerate baseline; fresh read-only review reported no concrete findings.
+- [ ] Merge documentation PR after both required CI jobs pass, then verify merged-main CI.
+- [ ] Publish annotated v0.1.0 tag and GitHub prerelease; verify metadata, notes and exact commit.
+
+The final two actions occur after this preparation revision merges. Their result
+is recorded in the PR and [release metadata](https://github.com/guventech/ai-project-starter/releases/tag/v0.1.0), rather than changing the commit being tagged.
 
 ## Application adoption checklist
 

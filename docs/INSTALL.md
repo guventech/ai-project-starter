@@ -14,7 +14,7 @@ Reload Cursor or start a new chat. The installer writes a self-contained package
 python scripts/install_chat_command.py --version
 ```
 
-Prints the current checkout's `VERSION` and exits without writing files. It cannot be combined with `--check`, `--upgrade` or `--force`. Repository history notes live in [CHANGELOG.md](../CHANGELOG.md); check consistency with `python scripts/changelog_release.py --check` and print the current section with `python scripts/changelog_release.py`. Tagged GitHub Releases remain deferred.
+Prints the current checkout's `VERSION` and exits without writing files. It cannot be combined with `--check`, `--diff`, `--upgrade` or `--force`. Repository history notes live in [CHANGELOG.md](../CHANGELOG.md); check consistency with `python scripts/changelog_release.py --check` and print the current section with `python scripts/changelog_release.py`. Tagged snapshots and publication status appear on [GitHub Releases](https://github.com/guventech/ai-project-starter/releases); `v0.1.0` is designated as a prerelease. Check out the desired tag before installing if you need its exact snapshot. Installations do not update themselves.
 
 ## Check an installation
 

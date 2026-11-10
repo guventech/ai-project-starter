@@ -1,12 +1,13 @@
 # Changelog
 
 All notable changes to this starter are recorded here.
-This file documents repository history; it is not a published GitHub Release.
+This file documents repository history. Publication status and tagged snapshots
+are recorded on the repository's GitHub Releases page.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2026-11-09
+## [0.1.0] - 2026-11-10
 
 ### Added
 
@@ -19,6 +20,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Opt-in project initialization for clean template copies.
 - Contribution basics (`CONTRIBUTING.md` and issue templates).
 - Bounded workflow evidence artifacts under `examples/` and `evals/` (comparative outcomes remain open).
+- First `v0.1.0` GitHub prerelease preparation and publication procedure.
 
 ### Changed
 
@@ -29,6 +31,15 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Deferred
 
-- Tagged releases and GitHub Release publication.
 - Remaining F-02 isolated comparative runner.
 - Multi-host skill packaging (F-11) and optional brand rename (F-12).
+
+### Verification limits
+
+- This is a Cursor starter/template prerelease, not an application release.
+- No controlled comparison establishes workflow superiority; F-02 remains partial
+  and live trials are blocked pending a reviewed isolated runner.
+- Complete native-tool isolation, universal rule enforcement and every host/version
+  remain unverified. Static checks and recorded CLI trials have distinct scopes.
+- F-11 multi-host packaging remains deferred. See `docs/VERIFICATION.md` and
+  `docs/EVIDENCE.md` for the evidence and exclusions.
