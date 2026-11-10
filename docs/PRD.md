@@ -294,7 +294,7 @@ Wording self-check: one shall requirement per row, none of the listed vague word
 
 ## First tagged prerelease (authorized continuation)
 
-Status: owner authorized publication after Cursor and Codex agree. On 2026-11-10, Cursor CLI Ask-mode review returned AGREE to `v0.1.0` as a GitHub prerelease after documentation alignment and green release checks; Codex agreed. Preparation evidence is recorded here; final publication and tag state are recorded on [GitHub Releases](https://github.com/guventech/ai-project-starter/releases/tag/v0.1.0) after the preparation revision merges.
+Status: published. On 2026-11-10, Cursor CLI Ask-mode review returned AGREE to `v0.1.0` as a GitHub prerelease after documentation alignment and green release checks; Codex agreed. Preparation merged in [PR #37](https://github.com/guventech/ai-project-starter/pull/37); annotated tag and [GitHub prerelease](https://github.com/guventech/ai-project-starter/releases/tag/v0.1.0) target `413ae453193c0c069850a4da08a1ca73e76da1a0` with both CI jobs green in [run 42785224680](https://github.com/guventech/ai-project-starter/actions/runs/42785224680).
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
