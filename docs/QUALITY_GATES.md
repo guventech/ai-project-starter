@@ -11,7 +11,7 @@ Scope: DIFF-001–DIFF-003; local --diff continuation, no release publication.
 - `python scripts/validate_starter.py`: passed. `git diff --check`: passed. Initialization baseline regenerated; inventory unchanged, only affected content digests updated. Final documentation/status updates receive refreshed baseline and validation checks.
 - Local `python scripts/install_chat_command.py --diff`: `up to date` for the installed package. The implementation lives in the checkout's installer; packaged workflow content was not changed by this feature.
 - Design gate: not applicable to this bounded inspection extension using the existing installer architecture. Security review scope: inspected shared manifest/link preflight, fixed-path managed reads and extra-content exclusion; no complete security audit or concurrent-filesystem guarantee is claimed.
-- PR, Linux/Python 3.12 and protected-branch CI: not run for this local change; both OS jobs remain required before merge. Rollback is removal/reversion of the feature changes; inspection does not modify installations.
+- [PR #36](https://github.com/guventech/ai-project-starter/pull/36) implementation commit `67eff1c` passed Python 3.12 jobs `Starter validation (windows-latest)` and `Starter validation (ubuntu-latest)` in [run 42783168886](https://github.com/guventech/ai-project-starter/actions/runs/42783168886). Each job passed starter validation and the unittest suite. Both jobs remain required on the final PR head before merge. Rollback is reversion of the feature changes; inspection does not modify installations.
 
 ## Starter checks (configured)
 - `python scripts/validate_starter.py`: required files and Cursor metadata.

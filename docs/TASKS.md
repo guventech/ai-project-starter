@@ -247,7 +247,7 @@ Owner: repository maintainer. Acceptance criteria: DIFF-001–DIFF-003 in docs/P
 - [x] Observe red/green for managed-text preview; verify missing-final-newline rendering.
 - [x] Cover drift summaries, extra-content exclusion, inspection errors, conflicting flags and no-write snapshots.
 - [x] Complete diff review, resolve output-encoding finding, run source checks (90 tests; six host symlink skips) and regenerate the initialization baseline.
-- [ ] Submit through the protected-branch PR workflow when authorized; both OS CI jobs remain required before merge.
+- [x] Submit [PR #36](https://github.com/guventech/ai-project-starter/pull/36); implementation commit passed both OS jobs in [run 42783168886](https://github.com/guventech/ai-project-starter/actions/runs/42783168886). Both jobs remain required on the PR head before merge.
 
 ## Application adoption checklist
 

@@ -282,7 +282,7 @@ Wording self-check: each shall row is one requirement, avoids the listed vague w
 
 ## Review remediation F-13 installer diff
 
-Status: bounded continuation approved by the owner on 2026-11-10 and implemented locally. Tests and independent finding disposition are recorded in docs/QUALITY_GATES.md; PR and cross-OS CI remain pending.
+Status: bounded continuation approved by the owner on 2026-11-10 and implemented in [PR #36](https://github.com/guventech/ai-project-starter/pull/36). Tests, independent finding disposition and implementation-commit Windows/Linux CI are recorded in docs/QUALITY_GATES.md; both protected checks are required on the PR head before merge.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
