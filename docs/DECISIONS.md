@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-028: First tagged starter prerelease after Cursor agreement
+
+Date: 2026-11-10. Status: accepted; owner authorized proceeding when both agents agree.
+Context: VERSION/CHANGELOG and installer check/version/diff are implemented; no tag or GitHub Release exists. Owner asked Cursor and Codex to agree on the next milestone.
+Options: tag the tested starter now; expand multi-host packaging first; wait for a new comparative runner.
+Decision: publish annotated `v0.1.0` as a GitHub prerelease, not latest stable, after a documentation-alignment PR and green Windows/Linux CI on the selected merged main revision. Cursor's new CLI Ask-mode session returned AGREE, conditioned on aligned docs, explicit limits, exact tag targeting and green checks; Codex agreed. This supersedes the publication deferral in ADR-025/026, not their implementation decisions.
+Consequences: consumers gain a fixed revision; no application or workflow-superiority claim. Notes derive from the changelog and retain F-02 partial/blocked status, unverified complete native isolation and universal rule enforcement, and deferred F-11 packaging. Current requirements distinguish version metadata from publication state. No global installation update, dependency or runtime behavior change.
+Rollback: do not move a published version tag; disclose defects in release notes and supersede with a new reviewed version. Revert source changes through protected PRs when required.
+Related paths: CHANGELOG.md, VERSION, MAINTAINING.md, docs/INSTALL.md, docs/PRD.md, docs/TASKS.md, docs/QUALITY_GATES.md.
+
 ## ADR-027: Opt-in installer text preview (F-13)
 
 Date: 2026-11-10. Status: accepted; owner approved the bounded continuation.

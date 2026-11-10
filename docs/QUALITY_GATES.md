@@ -1,5 +1,15 @@
 # Quality gates
 
+## First prerelease preparation (2026-11-10)
+
+Scope: REL-001–REL-003, annotated `v0.1.0` and a GitHub prerelease. This source record covers preparation; final publication status is recorded in [release metadata](https://github.com/guventech/ai-project-starter/releases/tag/v0.1.0) after this revision merges. Cursor CLI Ask-mode decision review returned AGREE to this milestone after documentation alignment and green checks; Codex agreed. Cursor recommended the prerelease flag and explicit scope/evidence limits. Its decision review did not execute tests or publish anything.
+
+- REL-001: publication/tag verification will target the merged documentation revision after both Windows/Linux Python 3.12 jobs pass there. No existing releases or remote tags were found during preparation. Publication requires a new annotated tag, draft false, prerelease true and exact SHA verification.
+- REL-002: VERSION stays `0.1.0`; CHANGELOG date is 2026-11-10. Extracted notes include starter/template scope, F-02 partial/blocked outcome evidence, unverified complete native isolation and universal rule enforcement, and deferred F-11. Notes are reviewed before publishing; no application-readiness or workflow-superiority claim.
+- REL-003: `python scripts/validate_starter.py`, `python scripts/changelog_release.py --check` and `git diff --check` passed. `python -m unittest discover -s tests -v` passed 90 methods on Windows/Python 3.13, with six host symlink skips; temp fixture writes required an outside-sandbox run. Coverage includes `test_installs_self_contained_command_without_duplicate_skill_discovery`, `test_upgrade_replaces_clean_stock_package`, `test_upgrade_force_backs_up_and_overwrites_customization`, `test_upgrade_refuses_extra_files`, `test_preview_lists_actions_without_writes_or_caches`, `test_apply_cleans_records_preserves_workflows_and_validates`, and failure/recovery cases in the same suites. These use disposable fixtures rather than the upstream workspace or existing global install. Extracted notes were inspected; the regenerated initialization inventory has unchanged paths and only affected content digests.
+- Design/security applicability: documentation/publication only; no new runtime architecture, dependency or trust boundary. A fresh read-only verifier reviewed the actual diff, REL requirements, publication wording, exact-SHA/CI plan, notes and initialization treatment; no concrete findings. It observed `git diff --check`, but did not rerun tests or inspect remote release state. This is a bounded release review, not a full application security audit; prior host/isolation limitations remain.
+- Recovery: do not move a published tag. Retain a defective prerelease with a notice and supersede it; source reverts use protected PRs. No existing global installation changes are part of publication.
+
 ## Installer diff verification (2026-11-10)
 
 Scope: DIFF-001–DIFF-003; local --diff continuation, no release publication.
@@ -49,7 +59,7 @@ Evidence is a test name, a screenshot, or a short note.
 | WEIGHT-001 | inspection | docs/SKILLS.md Process weights section names Lite, Standard and Strict with required and skippable columns. |
 | WEIGHT-002 | inspection | project-helper Process weight section requires marker selection, one question when undetermined, Lite ceremony skips and Strict design/security retention. |
 | WEIGHT-003 | test | `tests/test_process_weight.py` maps typo and symbol-rename goals to lite and a payment-feature goal to strict. |
-| VER-001 | inspection | VERSION is `0.1.0`; CHANGELOG.md has a 0.1.0 section and states tagged GitHub Releases remain deferred. |
+| VER-001 | inspection | VERSION is `0.1.0`; CHANGELOG.md has a 0.1.0 section and points to GitHub for tagged publication status; first-prerelease continuation supersedes the earlier deferral. |
 | VER-002 | test | `test_version_reports_source_version_without_writes` and `test_version_rejects_mutating_or_check_flags`. |
 | VER-003 | test | Fresh install packages VERSION and prints `Package version:` matching `package_version()`. |
 | LOG-001 | test | `tests/test_changelog_release.py` covers success, missing, duplicate and malformed heading cases without writes. |
