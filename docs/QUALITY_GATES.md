@@ -1,5 +1,18 @@
 # Quality gates
 
+## Model-cost guidance verification (2026-11-10)
+
+Scope: COST-001–COST-004; approved Lite docs slice and guide-generation text only.
+
+- COST-001: author inspection of `.cursor/skills/project-helper/SKILL.md` and generated `docs/SKILLS.md` confirms Lite/Standard/Strict recommendations, free/cheap brainstorming, stronger-model escalation for weak evidence, missed constraints and failing checks, and retention of applicable gates.
+- COST-002: both documents state that starter Markdown cannot switch the active model mid-chat; manual selection, Cursor Auto/Router and external routing are separate mechanisms.
+- COST-003: `docs/INTEGRATIONS.md` has primary OpenRouter free/Auto and llm-router links checked 2026-11-10. Free-compatible selection differs from Auto's possible paid selection; Cursor compatibility is upstream-claimed and unverified here. No router was installed or exercised.
+- COST-004: diff inspection found documentation, generated-guide text and baseline digests only; no router code, dependency, credential, API-key template, auto-install or deferred backlog change. Baseline inventory/reset/remove classifications are unchanged. Global installations were not refreshed. No savings/effectiveness measurement or claim.
+- `python scripts/validate_starter.py`: passed. `python scripts/changelog_release.py --check`: passed for VERSION 0.1.0. `python scripts/generate_skills_guide.py --check`: passed. `git diff --check`: passed. Guide and initialization baseline regenerated; final evidence edits receive a baseline refresh and validation check before commit.
+- `python -m unittest discover -s tests -v`: passed on Windows/Python 3.13, 90 tests, six host symlink skips. Initial sandbox execution failed with Windows temporary-fixture permission errors; the authorized outside-sandbox rerun passed (55.134 seconds). This is an environment limitation, not an observed behavioral red/green change.
+- Design/security gates: not applicable; no new system, material architecture change, dependency or runtime trust boundary. Documentation verification uses author inspection and template validation, not artificial behavior tests. No independent fresh-context review, live model-switching test, external-router compatibility test or Linux CI result is claimed by this local record. Required Windows/Linux PR checks remain to be observed on the PR head; no merge or release is part of this slice.
+
+
 ## First prerelease publication (2026-11-10)
 
 Scope: REL-001–REL-003. Preparation landed in [PR #37](https://github.com/guventech/ai-project-starter/pull/37); publication completed afterward. Cursor CLI Ask-mode decision review returned AGREE after documentation alignment and green checks; Codex agreed. Cursor recommended the prerelease flag and explicit scope/evidence limits.
@@ -51,6 +64,10 @@ Evidence is a test name, a screenshot, or a short note.
 
 | Requirement | Verification method | Evidence |
 |-------------|---------------------|----------|
+| COST-001 | inspection | Helper and generated guide contain all three weights, cost recommendations, escalation triggers and gate-retention instructions; see model-cost verification above. |
+| COST-002 | inspection | Both guidance sections state Markdown's mid-chat switching limit and separate manual selection, Cursor Auto/Router and external routing. |
+| COST-003 | inspection | INTEGRATIONS primary links checked 2026-11-10; free vs Auto and upstream-claimed/unverified Cursor compatibility recorded. |
+| COST-004 | inspection and test | Scoped diff and baseline inventory inspected; starter, changelog, guide and unittest checks passed as recorded above. |
 | EVAL-001 | test | Authored todo CLI has requirements/plan/delegated authority, three observed red/green slices, six executable CLI boundary tests and fresh read-only verifier findings/dispositions in examples/todo_cli/README.md. Educational scope only. |
 | EVAL-002 | demonstration | Eight frozen paired attempts retained: seven protocol failures and one accepted finish. Two final baseline artifacts pass all named checks, but useful comparative outcome evidence remains open; no superiority or general quality claim. |
 | EVAL-003 | inspection | Published actions/results/final files/diffs, seven allowlisted visible-failure supplements and exact inputs.json hashes inspected by f02_results_review and f02_release_review. No private home paths, session IDs, reasoning or native payload bodies observed in that tree. |

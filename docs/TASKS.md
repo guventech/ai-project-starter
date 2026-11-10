@@ -1,5 +1,15 @@
 # Project tasks
 
+## Model-cost guidance (approved Lite docs slice, 2026-11-10)
+
+Owner: repository maintainer. Acceptance criteria: COST-001–COST-004 in docs/PRD.md. Decision: ADR-029. Evidence: docs/QUALITY_GATES.md.
+
+- [x] Add model-cost recommendations and escalation triggers beside process weights in the helper and generated guide.
+- [x] Document dated optional OpenRouter/llm-router references, free vs Auto and upstream-claimed Cursor compatibility.
+- [x] Record the agreement and scope limits; leave deferred work unchanged.
+- [x] Regenerate the guide/baseline and record configured check results (90 tests; six host symlink skips).
+- [x] Open a docs PR after green local checks ([PR #39](https://github.com/guventech/ai-project-starter/pull/39)); merge remains outside this slice.
+
 ## Starter workflow enhancement (2026-11-09)
 
 Owner: repository maintainer. Scope and acceptance criteria: docs/PRD.md, REQ-001–REQ-009.

@@ -35,6 +35,18 @@ Under **Lite**, skip PRD fill/approval ceremony, prior-art, decision-interview a
 
 Inspection, relevant questions and preparing a proposed plan are already authorized by this command; do not add approval gates merely to read a procedure or outline requirements. Obtain approval of the concrete implementation plan before edits unless the selected weight is Lite. Respect narrower user requests such as review-only or no writes.
 
+### Model cost guidance
+
+Process weight sets ceremony; model cost is a separate choice. Keep every applicable project gate regardless of model price.
+
+- **Lite:** start brainstorming, exploration and bounded documentation edits with a free or cheap model when its output meets the criteria.
+- **Standard:** use free or cheap models for brainstorming and exploration; prefer a stronger model, including a paid option, for implementation or review when quality risk is high.
+- **Strict:** prefer a stronger model for implementation and review; free or cheap exploration does not replace the required approvals, design review or boundary audit.
+
+Escalate to a stronger model when evidence is weak, constraints are missed or checks fail; inspect the cause and rerun the affected checks. Price alone does not establish quality. Free-model quality, availability and rate limits vary.
+
+This starter's Markdown cannot switch the active chat model mid-chat or enforce routing. Manual model selection, Cursor's own Auto/Router features and optional external routers are separate mechanisms. For external-router candidates and their verification limits, see the target project's `docs/INTEGRATIONS.md` when present; an installed snapshot does not bundle that document. No savings or effectiveness have been measured here.
+
 ## Locate your procedures
 
 Resolve paths relative to this skill's **actual attached source**, never relative to the open project by assumption. A user-level installation has adjacent `references/<name>.md` files. In this repository, workflows are at `../<name>/SKILL.md` and reviewer roles at `../../agents/<name>.md`. Read only the relevant files. If neither layout is present, report the missing resource; do not substitute an upstream skill by its slash name.

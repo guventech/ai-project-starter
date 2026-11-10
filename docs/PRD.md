@@ -10,6 +10,19 @@ Status: approved starter enhancement implemented; requirement evidence is record
 - Out of scope: application code, stack selection, note-taking integration and application deployment. Follow-up authorization covers optional pack installation, repository protection and documentation commits.
 - Assumptions: local workflows are independently written instructions informed by the linked packs, not vendored copies. Fresh-context reviews require host support; unavailable review execution must be reported as unverified.
 
+## Model cost guidance (approved Lite docs slice, 2026-11-10)
+
+Scope: the approved Cursor+Codex model-cost plan; guidance and optional integration references only.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| COST-001 | The starter shall describe model-cost choices for Lite, Standard and Strict. | Process weight governs ceremony. | Helper and generated guide cover free/cheap brainstorming and escalation for weak evidence, missed constraints and failing checks; existing gates remain required. | inspection |
+| COST-002 | The starter shall state the limits of its model guidance. | Markdown cannot change the active chat model. | Helper and guide distinguish manual selection, Cursor Auto/Router and external routers, and state that the starter cannot switch models mid-chat. | inspection |
+| COST-003 | The integrations guide shall identify optional external-router candidates with dated primary links. | External services can change. | OpenRouter free and Auto plus llm-router links carry a check date; free-model selection differs from Auto; Cursor compatibility is upstream-claimed and unverified here. | inspection |
+| COST-004 | The model-cost slice shall retain documentation scope. | Runtime routing needs a separate decision. | Diff adds no router code, dependencies, credentials, API-key templates, auto-install or deferred backlog work; generated guide and initialization baseline match their sources; configured starter checks pass. | inspection and test |
+
+Wording self-check: one obligation per row; no banned vague words in statements; every row has acceptance criteria and a verification method. Existing plan approval covers this scope. Risks: variable model quality and rate limits, non-reproducible free-router selection and upstream drift. No savings or effectiveness claim. Verification evidence: docs/QUALITY_GATES.md.
+
 ## Requirement wording
 
 shall means a requirement, will means a fact, and should means a goal.
