@@ -256,11 +256,10 @@ Owner: repository maintainer. Acceptance criteria: REL-001–REL-003 in docs/PRD
 - [x] Obtain Cursor's read-only decision review and Codex agreement; record conditional owner authorization, scope and ADR-028.
 - [x] Align current publication wording and changelog date; retain evidence limitations and deferred scope.
 - [x] Run configured gates (90 tests; six host symlink skips), review notes/installation evidence and regenerate baseline; fresh read-only review reported no concrete findings.
-- [ ] Merge documentation PR after both required CI jobs pass, then verify merged-main CI.
-- [ ] Publish annotated v0.1.0 tag and GitHub prerelease; verify metadata, notes and exact commit.
+- [x] Merge [PR #37](https://github.com/guventech/ai-project-starter/pull/37); both required jobs passed on merged main in [run 42785224680](https://github.com/guventech/ai-project-starter/actions/runs/42785224680).
+- [x] Publish annotated `v0.1.0` and GitHub prerelease at `413ae453193c0c069850a4da08a1ca73e76da1a0`; verify draft false, prerelease true, notes and exact commit on [release metadata](https://github.com/guventech/ai-project-starter/releases/tag/v0.1.0).
 
-The final two actions occur after this preparation revision merges. Their result
-is recorded in the PR and [release metadata](https://github.com/guventech/ai-project-starter/releases/tag/v0.1.0), rather than changing the commit being tagged.
+Publication was recorded on the release and in follow-up docs after the tagged preparation revision, so the tag target itself did not need to change.
 
 ## Application adoption checklist
 
