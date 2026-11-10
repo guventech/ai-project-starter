@@ -15,6 +15,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Third-party attribution notice and installer packaging of `THIRD_PARTY.md`.
 - Installer `--check` read-only snapshot status and `--version` reporting from `VERSION`.
 - Changelog/VERSION consistency check and release-note extraction (`scripts/changelog_release.py`).
+- Installer `--diff` read-only managed-text preview with extra-file and manifest-drift reporting.
 - Opt-in project initialization for clean template copies.
 - Contribution basics (`CONTRIBUTING.md` and issue templates).
 - Bounded workflow evidence artifacts under `examples/` and `evals/` (comparative outcomes remain open).
@@ -28,6 +29,6 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Deferred
 
-- Installer `--diff`, tagged releases and GitHub Release publication.
+- Tagged releases and GitHub Release publication.
 - Remaining F-02 isolated comparative runner.
 - Multi-host skill packaging (F-11) and optional brand rename (F-12).

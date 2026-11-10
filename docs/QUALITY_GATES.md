@@ -1,5 +1,18 @@
 # Quality gates
 
+## Installer diff verification (2026-11-10)
+
+Scope: DIFF-001–DIFF-003; local --diff continuation, no release publication.
+
+- DIFF-001: `test_diff_previews_changed_and_missing_managed_text_without_writes` observed red (unrecognized --diff, exit 2), then green with installed-to-checkout text and missing-final-newline markers. Fixture bytes, mtimes and directory entries are compared; newline-only changes have a separate case.
+- DIFF-002: extra/obsolete names and manifest-only drift are tested without reading extra contents (including a non-UTF-8 extra file). Absent installation/manifest, malformed/path-invalid manifests and unreadable managed text retain inspection outcomes. Existing link tests also invoke --diff; symlink execution is skipped on this Windows host.
+- DIFF-003: current/drift/error statuses and all conflicting modes are tested. A fresh read-only verifier (no inherited author conversation) found one output-encoding error: printing outside the handler caused an ASCII-output Unicode customization to exit 1 with a traceback. A subprocess regression observed that red result, then green exit 2 with no traceback after moving output into the handler. The verifier inspected the fix and marked the finding resolved; no other concrete finding was reported. Test execution was performed by the author, not independently rerun by the verifier.
+- `python -m unittest discover -s tests -v`: passed, 90 methods, six host symlink skips, Windows/Python 3.13. Fixture writes required an outside-sandbox run because Windows temporary-directory writes are blocked in the sandbox.
+- `python scripts/validate_starter.py`: passed. `git diff --check`: passed. Initialization baseline regenerated; inventory unchanged, only affected content digests updated. Final documentation/status updates receive refreshed baseline and validation checks.
+- Local `python scripts/install_chat_command.py --diff`: `up to date` for the installed package. The implementation lives in the checkout's installer; packaged workflow content was not changed by this feature.
+- Design gate: not applicable to this bounded inspection extension using the existing installer architecture. Security review scope: inspected shared manifest/link preflight, fixed-path managed reads and extra-content exclusion; no complete security audit or concurrent-filesystem guarantee is claimed.
+- PR, Linux/Python 3.12 and protected-branch CI: not run for this local change; both OS jobs remain required before merge. Rollback is removal/reversion of the feature changes; inspection does not modify installations.
+
 ## Starter checks (configured)
 - `python scripts/validate_starter.py`: required files and Cursor metadata.
 - `python -m unittest discover -s tests -v`: validator failure detection and chat-command installation/overwrite protection.

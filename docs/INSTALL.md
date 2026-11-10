@@ -49,6 +49,28 @@ changes to the installation.
 
 ## Upgrade
 
+### Preview text changes
+
+```sh
+python scripts/install_chat_command.py --diff
+```
+
+This opt-in inspection prints unified diffs from `installed/` to `checkout/`
+for changed or missing managed text files. It marks missing final newlines.
+Extra and obsolete files appear by relative name with their contents omitted;
+manifest-only digest drift appears as `Manifest digest differs: <path>`.
+The comparison uses this checkout and normalizes line endings like `--check`.
+The output is an inspection snapshot, not an executable patch or a guarantee
+that an upgrade will succeed. Managed-file customizations appear in the output;
+review it before sharing logs.
+
+Exit codes and manifest/link/read-error handling match `--check`: 0 for current,
+1 for differences or absent installation/manifest, 2 for invalid input or an
+inspection error. Absent or invalid manifests stop content previews. `--diff`
+cannot be combined with `--check`, `--version`, `--upgrade` or `--force`.
+It writes no installation files, backups or staging directories. Use
+`--destination <folder>/project-helper` to inspect another package.
+
 | Situation | Command |
 |-----------|---------|
 | Clean stock package (manifest matches managed files) | `python scripts/install_chat_command.py --upgrade` |

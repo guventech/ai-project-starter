@@ -169,7 +169,7 @@ Wording self-check: each row uses shall, contains one requirement, avoids the li
 
 ## Review remediation F-13 read-only installer check
 
-Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-project-starter/pull/24); local verification and implementation-commit CI recorded in docs/QUALITY_GATES.md. Versioning slice follows below; `--diff`, tags and GitHub Releases remain deferred.
+Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-project-starter/pull/24); local verification and implementation-commit CI recorded in docs/QUALITY_GATES.md. Versioning and diff slices follow below; tags and GitHub Releases remain deferred.
 
 | ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
 |----|-------------------|-------------------------|----------------------|---------------------|
@@ -179,7 +179,7 @@ Status: approved slice implemented in [PR #24](https://github.com/guventech/ai-p
 
 ## Review remediation F-13 version metadata slice
 
-Status: merged via PR #32; `--diff` and published releases remain deferred.
+Status: merged via PR #32; diff continuation follows below; published releases remain deferred.
 
 ## Review remediation F-15 changelog consistency
 
@@ -279,6 +279,18 @@ Status: merged via PR #30.
 | WEIGHT-003 | The repository shall classify a typo or symbol-rename goal as Lite and a payment-feature goal as Strict through an executable check. | Weight selection must be regression-tested without claiming live IDE routing. | `infer_process_weight` returns lite for typo and symbol-rename goals and strict for a payment-feature goal. | test |
 
 Wording self-check: each shall row is one requirement, avoids the listed vague words, and has a measurable criterion plus verification method. Approved scope: document weights in the generated skill guide, teach project-helper the selection rules, add `scripts/process_weight.py` with unit tests, run starter gates, and submit one PR. No new workflow skill, dependency, branding change or F-02 runner work. Risk: keyword markers can mis-classify; keep an ask-once fallback when undetermined and prefer Strict when Strict markers are present.
+
+## Review remediation F-13 installer diff
+
+Status: bounded continuation approved by the owner on 2026-11-10 and implemented locally. Tests and independent finding disposition are recorded in docs/QUALITY_GATES.md; PR and cross-OS CI remain pending.
+
+| ID | Statement (shall) | Rationale or assumption | Acceptance criterion | Verification method |
+|----|-------------------|-------------------------|----------------------|---------------------|
+| DIFF-001 | The installer shall preview managed text changes through --diff without writing files. | Users need to inspect changes before selecting an upgrade. | Changed and missing managed files show unified installed-to-checkout diffs; current packages report up to date; fixture bytes, modification times and directory entries remain unchanged. | test |
+| DIFF-002 | The preview shall identify non-content package drift. | Extra files and manifest digests can prevent upgrades. | Extra and obsolete files appear by relative name without their contents; manifest-only digest drift is identified; absent installation, absent/invalid manifest, linked entries and unreadable text retain check-mode status handling. | test |
+| DIFF-003 | The diff command shall return the documented inspection exit codes. | Scripts need stable outcomes. | Exit 0 means current; exit 1 means differences, absent installation or absent manifest; exit 2 means invalid input or inspection error; combining --diff with --check, --version, --upgrade or --force exits 2 without writes. | test |
+
+Wording self-check: one shall requirement per row, none of the listed vague words, and observable acceptance criteria with test methods. Approved plan: extend the existing inspection path with stdlib unified diffs, test changed/missing/extra/manifest-only and refusal cases, document output and confidentiality limits, update changelog/tasks/evidence and regenerate the initialization baseline. Compare installed text to this checkout, normalize line endings as existing checks do, and mark missing final newlines. Diff is an inspection snapshot rather than an executable patch or upgrade authorization. No new dependency, package format or installation behavior. Bounded design gate: not applicable; retain the existing installer/check architecture. Risk: opt-in output exposes managed-file customizations; extra-file contents are excluded. Rollback: revert the feature changes; installations are untouched.
 
 ## To be resolved (TBR)
 
