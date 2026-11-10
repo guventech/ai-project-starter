@@ -8,7 +8,7 @@ Owner: repository maintainer. Acceptance criteria: COST-001–COST-004 in docs/P
 - [x] Document dated optional OpenRouter/llm-router references, free vs Auto and upstream-claimed Cursor compatibility.
 - [x] Record the agreement and scope limits; leave deferred work unchanged.
 - [x] Regenerate the guide/baseline and record configured check results (90 tests; six host symlink skips).
-- [ ] Open a docs PR after green local checks.
+- [x] Open a docs PR after green local checks ([PR #39](https://github.com/guventech/ai-project-starter/pull/39)); merge remains outside this slice.
 
 ## Starter workflow enhancement (2026-11-09)
 
