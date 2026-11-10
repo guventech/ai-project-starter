@@ -1,5 +1,15 @@
 # Decision log
 
+## ADR-027: Opt-in installer text preview (F-13)
+
+Date: 2026-11-10. Status: accepted; owner approved the bounded continuation.
+Context: --check counts drift but users cannot inspect changes before choosing an upgrade.
+Options: path-only reporting; a standalone patch/export format; stdlib unified text diffs through the existing inspection path.
+Decision: add --diff using Python's difflib.unified_diff after existing package/manifest validation. Show installed-to-checkout managed text, missing managed paths, extra/obsolete names and manifest-only drift. Preserve inspection exit codes and reject other modes. Do not open extra-file contents or use manifest keys as paths.
+Consequences: no dependency or installation-format change; opt-in output can disclose local managed-file customizations. Line endings are normalized; missing final newlines are marked. This is a snapshot for inspection, not an executable patch. Missing/invalid manifests stop content previews; concurrent filesystem changes remain outside the guarantee.
+Rollback: revert this feature; installed packages are unchanged by inspection.
+Related paths: scripts/install_chat_command.py, tests/test_install_chat_command.py, docs/INSTALL.md, docs/PRD.md, docs/TASKS.md, docs/QUALITY_GATES.md, CHANGELOG.md.
+
 ## ADR-026: Changelog consistency check without release publishing (F-15 slice)
 
 Date: 2026-11-09. Status: accepted; Cursor + Codex chose reversible changelog hygiene next.

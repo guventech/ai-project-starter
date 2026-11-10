@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -19,10 +20,10 @@ class InstallCommandTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.destination = self.root / 'skills/project-helper'
 
-    def run_installer(self, *extra_args):
+    def run_installer(self, *extra_args, env=None):
         return subprocess.run(
             [sys.executable, str(INSTALLER), '--destination', str(self.destination), *extra_args],
-            capture_output=True, text=True, check=False)
+            capture_output=True, text=True, check=False, env=env)
 
     def test_installs_self_contained_command_without_duplicate_skill_discovery(self):
         result = self.run_installer()
@@ -70,7 +71,7 @@ class InstallCommandTests(unittest.TestCase):
         self.assertEqual(skill.read_text(encoding='utf-8'), expected)
         self.assertNotIn('# stale marker', skill.read_text(encoding='utf-8'))
 
-    def check_without_writes(self, expected_code, expected_message, *extra_args):
+    def check_without_writes(self, expected_code, expected_message, *extra_args, mode='--check'):
         def snapshot():
             return {
                 path.relative_to(self.root).as_posix(): (
@@ -80,14 +81,81 @@ class InstallCommandTests(unittest.TestCase):
                 for path in [self.root, *self.root.rglob('*')]
             }
         before = snapshot()
-        result = self.run_installer('--check', *extra_args)
+        result = self.run_installer(mode, *extra_args)
         self.assertEqual(snapshot(), before, 'check modified the installation or its parent')
         self.assertEqual(result.returncode, expected_code, result.stdout + result.stderr)
         self.assertIn(expected_message, result.stdout + result.stderr)
+        return result
 
     def test_check_reports_current_package_without_writes(self):
         self.assertEqual(self.run_installer().returncode, 0)
         self.check_without_writes(0, 'up to date')
+
+    def test_diff_previews_changed_and_missing_managed_text_without_writes(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        (self.destination / 'VERSION').write_text('old version', encoding='utf-8')
+        (self.destination / 'LICENSE').unlink()
+        result = self.check_without_writes(1, '2 files differ', mode='--diff')
+        self.assertIn('--- installed/VERSION', result.stdout)
+        self.assertIn('+++ checkout/VERSION', result.stdout)
+        self.assertIn('-old version\n\\ No newline at end of file', result.stdout)
+        self.assertIn('+0.1.0', result.stdout)
+        self.assertIn('Missing managed file: LICENSE', result.stdout)
+        self.assertIn('+MIT License', result.stdout)
+
+    def test_diff_names_extras_and_manifest_drift_without_exposing_extra_content(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        from scripts import install_chat_command as installer
+        path = self.destination / installer.MANIFEST_NAME
+        manifest = json.loads(path.read_text(encoding='utf-8'))
+        manifest['files']['SKILL.md'] = '0' * 64
+        path.write_text(json.dumps(manifest), encoding='utf-8')
+        (self.destination / 'notes.txt').write_bytes(b'private extra content\xff')
+        (self.destination / 'references/grill-me.md').write_text('old private content', encoding='utf-8')
+        result = self.check_without_writes(1, '3 files differ', mode='--diff')
+        self.assertIn('Manifest digest differs: SKILL.md', result.stdout)
+        self.assertIn('Extra file (contents omitted): "notes.txt"', result.stdout)
+        self.assertIn('Obsolete file (contents omitted): "references/grill-me.md"', result.stdout)
+        self.assertNotIn('private', result.stdout)
+        self.assertNotIn('--- installed/SKILL.md', result.stdout)
+
+    def test_diff_preserves_inspection_statuses_and_rejects_unreadable_text(self):
+        self.check_without_writes(1, 'not installed', mode='--diff')
+        self.assertEqual(self.run_installer().returncode, 0)
+        self.check_without_writes(0, 'up to date', mode='--diff')
+        path = self.destination / '.installer-manifest.json'
+        original = path.read_bytes()
+        path.unlink()
+        self.check_without_writes(1, 'manifest missing', mode='--diff')
+        for invalid in ['{', 'null', '{"files": {"../../outside": "bad"}}']:
+            path.write_text(invalid, encoding='utf-8')
+            result = self.check_without_writes(2, 'manifest invalid', mode='--diff')
+            self.assertNotIn('--- installed/', result.stdout)
+        path.write_bytes(original)
+        (self.destination / 'VERSION').write_bytes(b'\xff')
+        self.check_without_writes(2, 'Diff stopped:', mode='--diff')
+
+    def test_diff_rejects_other_modes_without_writes(self):
+        for flag in ['--check', '--version', '--upgrade', '--force']:
+            with self.subTest(flag=flag):
+                self.check_without_writes(2, 'cannot be combined', flag, mode='--diff')
+
+    def test_diff_detects_final_newline_only_change(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        (self.destination / 'VERSION').write_text('0.1.0', encoding='utf-8')
+        result = self.check_without_writes(1, '1 files differ', mode='--diff')
+        self.assertIn('-0.1.0\n\\ No newline at end of file\n+0.1.0\n', result.stdout)
+
+    def test_diff_reports_output_encoding_error_without_traceback(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        path = self.destination / 'VERSION'
+        original = '\U0001f600\n'.encode('utf-8')
+        path.write_bytes(original)
+        result = self.run_installer('--diff', env={**os.environ, 'PYTHONIOENCODING': 'ascii'})
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertIn('Diff stopped:', result.stderr)
+        self.assertNotIn('Traceback', result.stderr)
+        self.assertEqual(path.read_bytes(), original)
 
     def test_check_reports_changed_missing_extra_and_obsolete_files(self):
         self.assertEqual(self.run_installer().returncode, 0)
@@ -186,6 +254,7 @@ class InstallCommandTests(unittest.TestCase):
         except OSError:
             self.skipTest('Creating symlinks is not permitted on this host')
         self.check_without_writes(2, 'linked entry')
+        self.check_without_writes(2, 'linked entry', mode='--diff')
 
     def test_check_rejects_symlink_destination(self):
         self.destination.parent.mkdir(parents=True)
@@ -195,6 +264,7 @@ class InstallCommandTests(unittest.TestCase):
         except OSError:
             self.skipTest('Creating symlinks is not permitted on this host')
         self.check_without_writes(2, 'linked destination')
+        self.check_without_writes(2, 'linked destination', mode='--diff')
 
     def test_upgrade_refuses_extra_files(self):
         self.assertEqual(self.run_installer().returncode, 0)

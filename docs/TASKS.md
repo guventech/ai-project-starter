@@ -151,7 +151,7 @@ Owner: repository maintainer. Acceptance criteria: SEARCH-001–SEARCH-004 in do
 
 ## Review F-13 read-only installer check (approved slice)
 
-Owner: repository maintainer. Acceptance criteria: CHECK-001–CHECK-003 in docs/PRD.md. Remaining F-13 versioning, release and --diff scope is deferred.
+Owner: repository maintainer. Acceptance criteria: CHECK-001–CHECK-003 in docs/PRD.md. Versioning and diff continuations are recorded below; release publication remains deferred.
 
 - [x] Record requirements, exit-code decisions and wording self-check.
 - [x] Observe focused red/green checks for status reporting and manifest validation.
@@ -223,7 +223,7 @@ Owner: repository maintainer. Acceptance criteria: LOG-001–LOG-003 in docs/PRD
 
 ## Review F-13 version metadata (authorized continuation)
 
-Owner: repository maintainer. Acceptance criteria: VER-001–VER-003 in docs/PRD.md. Cursor + Codex: prefer reversible release hygiene; defer `--diff`/releases and F-02/F-11/F-12.
+Owner: repository maintainer. Acceptance criteria: VER-001–VER-003 in docs/PRD.md. Cursor + Codex: prefer reversible release hygiene; diff continuation is recorded below; defer releases and remaining F-02/F-11/F-12.
 
 - [x] Record measurable requirements and wording self-check.
 - [x] Add VERSION `0.1.0`, CHANGELOG.md and installer `--version` / package-version printing.
@@ -238,6 +238,16 @@ Owner: repository maintainer. Acceptance criteria: WEIGHT-001–WEIGHT-003 in do
 - [x] Define Lite/Standard/Strict in the generated skill guide; update project-helper selection rules.
 - [x] Add `scripts/process_weight.py` with typo/rename → Lite and payment → Strict checks.
 - [x] Run starter gates and merge protected-branch PR after both OS CI jobs ([PR #30](https://github.com/guventech/ai-project-starter/pull/30)).
+
+## Review F-13 installer diff (authorized continuation)
+
+Owner: repository maintainer. Acceptance criteria: DIFF-001–DIFF-003 in docs/PRD.md.
+
+- [x] Record measurable requirements, plan, wording check and ADR-027.
+- [x] Observe red/green for managed-text preview; verify missing-final-newline rendering.
+- [x] Cover drift summaries, extra-content exclusion, inspection errors, conflicting flags and no-write snapshots.
+- [x] Complete diff review, resolve output-encoding finding, run source checks (90 tests; six host symlink skips) and regenerate the initialization baseline.
+- [x] Submit [PR #36](https://github.com/guventech/ai-project-starter/pull/36); implementation commit passed both OS jobs in [run 42783168886](https://github.com/guventech/ai-project-starter/actions/runs/42783168886). Both jobs remain required on the PR head before merge.
 
 ## Application adoption checklist
 

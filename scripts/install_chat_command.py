@@ -1,6 +1,7 @@
 """Install the project-helper command for Cursor without third-party packages."""
 import argparse
 from datetime import datetime, timezone
+import difflib
 import hashlib
 import json
 from pathlib import Path
@@ -258,7 +259,34 @@ def install(destination, upgrade=False, force=False, fail_after=None):
     return destination, backup_root, True
 
 
-def check_package(destination):
+def package_diff(destination, planned, current, manifest, actual):
+    """Render only known managed text; extra files are named, never opened."""
+    output = []
+    for relative in sorted(set(planned) | actual):
+        if relative not in planned:
+            kind = 'Obsolete' if relative in OBSOLETE_REFERENCE_PATHS else 'Extra'
+            output.append(f'{kind} file (contents omitted): {json.dumps(relative)}\n')
+            continue
+        expected = planned[relative]
+        if relative not in actual:
+            output.append(f'Missing managed file: {relative}\n')
+            installed = ''
+        elif current[relative] != digest_text(expected):
+            installed = (destination / relative).read_text(encoding='utf-8')
+        else:
+            if current[relative] != manifest[relative].lower():
+                output.append(f'Manifest digest differs: {relative}\n')
+            continue
+        for line in difflib.unified_diff(
+                installed.splitlines(keepends=True), expected.splitlines(keepends=True),
+                fromfile=f'installed/{relative}', tofile=f'checkout/{relative}'):
+            output.append(line)
+            if not line.endswith('\n'):
+                output.append('\n\\ No newline at end of file\n')
+    return ''.join(output).rstrip('\n')
+
+
+def check_package(destination, include_diff=False):
     """Compare a snapshot with this checkout without changing the destination."""
     destination = Path(destination).expanduser().absolute()
     if destination.name != 'project-helper':
@@ -309,7 +337,10 @@ def check_package(destination):
             or current.get(relative) != manifest[relative].lower())
     }
     if different:
-        return 1, f'{len(different)} files differ'
+        message = f'{len(different)} files differ'
+        if include_diff:
+            message += '\n' + package_diff(destination, planned, current, manifest, actual)
+        return 1, message
     return 0, 'up to date'
 
 
@@ -324,27 +355,31 @@ def main():
                         help='With --upgrade, overwrite managed files after backing up diffs.')
     parser.add_argument('--check', action='store_true',
                         help='Report snapshot status against this checkout without writing files.')
+    parser.add_argument('--diff', action='store_true',
+                        help='Preview installed-to-checkout text changes without writing files.')
     parser.add_argument('--version', action='store_true',
                         help='Print the package version from VERSION and exit without writing files.')
     args = parser.parse_args()
     if args.version:
-        if args.upgrade or args.force or args.check:
-            parser.error('--version cannot be combined with --upgrade, --force or --check')
+        if args.upgrade or args.force or args.check or args.diff:
+            parser.error('--version cannot be combined with --upgrade, --force, --check or --diff')
         try:
             print(package_version())
         except (OSError, ValueError) as exc:
             print(f'Version stopped: {exc}', file=sys.stderr)
             return 2
         return 0
-    if args.check:
-        if args.upgrade or args.force:
-            parser.error('--check cannot be combined with --upgrade or --force')
+    if args.check or args.diff:
+        mode = '--diff' if args.diff else '--check'
+        if args.upgrade or args.force or (args.check and args.diff):
+            parser.error(f'{mode} cannot be combined with --upgrade, --force or another inspection mode')
         try:
-            code, message = check_package(args.destination)
+            code, message = check_package(args.destination, include_diff=args.diff)
+            print(message)
         except (OSError, ValueError) as exc:
-            print(f'Check stopped: {exc}', file=sys.stderr)
+            label = 'Diff' if args.diff else 'Check'
+            print(f'{label} stopped: {exc}', file=sys.stderr)
             return 2
-        print(message)
         return code
     try:
         version = package_version()
